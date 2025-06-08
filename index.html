@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teacher Swaps Kenya</title>
+  <style>
+    /* ... Your existing styles unchanged ... */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .blurred {
+      filter: blur(5px);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    .blurred:hover {
+      filter: none; /* Hint at visibility after payment */
+    }
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    nav ul li {
+      display: inline;
+      margin: 0 10px;
+    }
+    main {
+      padding: 20px;
+    }
+    footer {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+    form {
+      max-width: 400px;
+      margin: auto;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input,
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table,
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    /* Payment Modal Styles */
+    #paymentModal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 10000;
+    }
+    #paymentModal .modal-content {
+      margin: 15% auto;
+      padding: 20px;
+      background: white;
+      width: 80%;
+      max-width: 400px;
+      text-align: center;
+      border-radius: 8px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Alert Styling */
+    .alert {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px;
+      border-radius: 5px;
+      text-align: center;
+      z-index: 1000;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to Teacher Swaps Kenya</h1>
+    <nav>
+      <ul>
+        <li><a href="#" onclick="showPage('home')">Home</a></li>
+        <li><a href="#" onclick="showPage('register')">Register</a></li>
+        <li><a href="#" onclick="showPage('login')">Login</a></li>
+        <li><a href="#" onclick="showPage('swaps')">View Swaps</a></li>
+        <li><a href="#" onclick="showPage('contact')">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="content">
+    <div id="home" class="page">
+      <h2>Connect with Other Teachers</h2>
+      <p>This platform allows teachers to find swap opportunities across Kenya. Sign up to get started!</p>
+    </div>
+    <div id="register" class="page" style="display:none;">
+      <h2>Register</h2>
+      <form id="registerForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required />
+        <label for="email">Email:</label>
+        <input type="email" id="email" required />
+        <label for="password">Password:</label>
+        <input type="password" id="password" required />
+        <button type="submit">Register</button>
+      </form>
+    </div>
+    <div id="login" class="page" style="display:none;">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <label for="loginEmail">Email:</label>
+        <input type="email" id="loginEmail" required />
+        <label for="loginPassword">Password:</label>
+        <input type="password" id="loginPassword" required />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+    <div id="swaps" class="page" style="display:none;">
+      <h2>Swap Listings</h2>
+      <form id="swapForm">
+        <label for="teacherName">Teacher's Name:</label>
+        <input type="text" id="teacherName" required />
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" required />
+        <label for="subjectCombination">Subject Combination:</label>
+        <input type="text" id="subjectCombination" required />
+        <label for="county">County:</label>
+        <select id="county" required></select>
+        <label for="swapCounty">Swap County To:</label>
+        <select id="swapCounty" required></select>
+        <label for="category">Category:</label>
+        <select id="category" required>
+          <option value="">Select Category</option>
+          <option value="Primary School">Primary School Swaps</option>
+          <option value="Junior Secondary">Junior Secondary Swaps</option>
+          <option value="Senior Secondary">Senior Secondary Swaps</option>
+        </select>
+        <label for="hardship">Hardship:</label>
+        <select id="hardship" required>
+          <option value="Without Hardship">Without Hardship</option>
+          <option value="With Hardship">With Hardship</option>
+        </select>
+        <button type="submit">Add Swap</button>
+      </form>
+
+      <h3>Filter Swaps</h3>
+      <label for="filterCategory">Category:</label>
+      <select id="filterCategory">
+        <option value="">All</option>
+        <option value="Primary School">Primary School Swaps</option>
+        <option value="Junior Secondary">Junior Secondary Swaps</option>
+        <option value="Senior Secondary">Senior Secondary Swaps</option>
+      </select>
+      <label for="filterSwapCounty">Swap County To:</label>
+      <select id="filterSwapCounty"></select>
+      <button onclick="filterSwaps()">Filter Swaps</button>
+
+      <h3>Registered Swaps</h3>
+      <table id="swapTable">
+        <thead>
+          <tr>
+            <th>Teacher's Name</th>
+            <th>County</th>
+            <th>Phone Number</th>
+            <th>Subject Combination</th>
+            <th>Swap County To</th>
+            <th>Category</th>
+            <th>Hardship</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Swap entries will be dynamically added here -->
+        </tbody>
+      </table>
+    </div>
+    <div id="contact" class="page" style="display:none;">
+      <h2>Contact Us</h2>
+      <p>Email: support@teacherswapskenya.com</p>
+      <p>Phone: +254 700 000 000</p>
+      <p>Phone: +254 792 755 676</p>
+      <p>Phone: +254 795 854 571</p>
+      <p>Facebook: <a href="#">Link</a></p>
+      <p>YouTube: <a href="#">Link</a></p>
+      <p>Telegram: <a href="#">Link</a></p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Teacher Swaps Kenya</p>
+  </footer>
+
+  <div id="paymentModal" style="display: none;">
+    <div class="modal-content">
+      <p>Please pay Ksh 100 to M-Pesa number 0792755676.</p>
+      <p>Your Payment Reference: <strong id="paymentRef"></strong></p>
+      <button onclick="confirmPayment()">I Have Paid</button>
+      <button style="background-color: #e74c3c;" onclick="closePaymentModal()">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+  <script>
+    // Your Firebase config - replace with your own Firebase project config
+  const firebaseConfig = {
+  apiKey: "AIzaSyD7qfXm0hmz4oyvKzICwFQ2xQR1_RkLNYg",
+  authDomain: "rowan-494f7.firebaseapp.com",
+  databaseURL: "https://rowan-494f7-default-rtdb.firebaseio.com",
+  projectId: "rowan-494f7",
+  storageBucket: "rowan-494f7.firebasestorage.app",
+  messagingSenderId: "158143387761",
+  appId: "1:158143387761:web:2606fa93a3c812bddd23d0",
+  measurementId: "G-V9Q98Q09F2"
+};
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Global state
+    let isLoggedIn = false;
+    let hasPaid = false;
+    let currentUser = null;
+
+    // Counties array
+    const counties = [
+      "Mombasa", "Kwale", "Kilifi", "Tana River", "Lamu", "Taita/Taveta",
+      "Garissa", "Wajir", "Mandera", "Marsabit", "Isiolo", "Meru",
+      "Tharaka-Nithi", "Embu", "Kitui", "Machakos", "Makueni", "Nyandarua",
+      "Nyeri", "Kirinyaga", "Murang'a", "Kiambu", "Turkana", "West Pokot",
+      "Samburu", "Trans Nzoia", "Uasin Gishu", "Elgeyo/Marakwet", "Nandi",
+      "Baringo", "Laikipia", "Nakuru", "Narok", "Kajiado", "Kericho",
+      "Bomet", "Kakamega", "Vihiga", "Bungoma", "Busia", "Siaya",
+      "Kisumu", "Homa Bay", "Migori", "Kisii", "Nyamira", "Nairobi City"
+    ];
+
+    function populateCounties(selectElementId) {
+      const selectElement = document.getElementById(selectElementId);
+      selectElement.innerHTML = "";
+      const defaultOption = document.createElement("option");
+      defaultOption.value = "";
+      defaultOption.textContent = "Select County";
+      selectElement.appendChild(defaultOption);
+
+      counties.forEach(county => {
+        const option = document.createElement("option");
+        option.value = county;
+        option.textContent = county;
+        selectElement.appendChild(option);
+      });
+    }
+
+    // Populate all county selects on page load
+    ["county", "swapCounty", "filterSwapCounty"].forEach(populateCounties);
+
+    // Page navigation
+    function showPage(pageId) {
+      document.querySelectorAll(".page").forEach(page => {
+        page.style.display = "none";
+      });
+      const page = document.getElementById(pageId);
+      if (page) page.style.display = "block";
+
+      if (pageId === "swaps" && isLoggedIn) {
+        loadSwaps();
+      }
+    }
+
+    // Registration handler
+    document.getElementById("registerForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      try {
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        currentUser = userCredential.user;
+        await currentUser.updateProfile({ displayName: name });
+        alert("Registration successful! Please login.");
+        showPage("login");
+        document.getElementById("registerForm").reset();
+      } catch (error) {
+        alert("Error: " + error.message);
+      }
+    });
+
+    // Login handler
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value;
+
+      try {
+        const userCredential = await auth.signInWithEmailAndPassword(email, password);
+        currentUser = userCredential.user;
+        isLoggedIn = true;
+        alert(`Welcome ${currentUser.displayName || currentUser.email}!`);
+        showPage("swaps");
+        document.getElementById("loginForm").reset();
+        loadSwaps();
+      } catch (error) {
+        alert("Login failed: " + error.message);
+      }
+    });
+
+    // Logout helper (optional)
+    function logout() {
+      auth.signOut();
+      isLoggedIn = false;
+      currentUser = null;
+      alert("Logged out.");
+      showPage("home");
+    }
+
+    // Generate a unique payment reference code
+    function generatePaymentRef() {
+      return "TSK-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+    }
+
+    // Show payment modal for first swap add
+    let currentSwapToAdd = null; // store swap data temporarily
+
+ // Add swap form submit handler
+document.getElementById("swapForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (!isLoggedIn) {
+    alert("You must be logged in to add a swap.");
+    showPage("login");
+    return;
+  }
+
+  const teacherName = document.getElementById("teacherName").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const subjectCombination = document.getElementById("subjectCombination").value.trim();
+  const county = document.getElementById("county").value;
+  const swapCounty = document.getElementById("swapCounty").value;
+  const category = document.getElementById("category").value;
+  const hardship = document.getElementById("hardship").value;
+
+  if (!teacherName || !phone || !subjectCombination || !county || !swapCounty || !category || !hardship) {
+    alert("Please fill all fields.");
+    return;
+  }
+
+  const swapData = { teacherName, phone, subjectCombination, county, swapCounty, category, hardship };
+
+  // Directly save swap without payment validation
+  saveSwap(swapData);
+});
+
+// Save swap data to Firestore
+async function saveSwap(swap) {
+  try {
+    await db.collection("teacherSwaps").add({
+      ...swap,
+      userId: currentUser.uid,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    alert("Swap added successfully!");
+    document.getElementById("swapForm").reset();
+    loadSwaps();
+  } catch (error) {
+    alert("Error saving swap: " + error.message);
+  }
+}
+
+
+    // Load swaps from Firestore and display in table
+    async function loadSwaps() {
+      const tbody = document.querySelector("#swapTable tbody");
+      tbody.innerHTML = "";
+
+      let query = db.collection("teacherSwaps").orderBy("timestamp", "desc");
+
+      // Apply filters if any
+      const filterCategory = document.getElementById("filterCategory").value;
+      const filterSwapCounty = document.getElementById("filterSwapCounty").value;
+
+      if (filterCategory) query = query.where("category", "==", filterCategory);
+      if (filterSwapCounty) query = query.where("swapCounty", "==", filterSwapCounty);
+
+      try {
+        const snapshot = await query.get();
+
+        if (snapshot.empty) {
+          const tr = document.createElement("tr");
+          const td = document.createElement("td");
+          td.colSpan = 7;
+          td.textContent = "No swaps found.";
+          tr.appendChild(td);
+          tbody.appendChild(tr);
+          return;
+        }
+
+        snapshot.forEach(doc => {
+          const swap = doc.data();
+          const tr = document.createElement("tr");
+
+          // If user hasn't paid, blur the phone and subject columns
+          const blurData = !hasPaid;
+
+          tr.innerHTML = `
+            <td>${swap.teacherName}</td>
+            <td>${swap.county}</td>
+            <td class="${blurData ? 'blurred' : ''}">${swap.phone}</td>
+            <td class="${blurData ? 'blurred' : ''}">${swap.subjectCombination}</td>
+            <td>${swap.swapCounty}</td>
+            <td>${swap.category}</td>
+            <td>${swap.hardship}</td>
+          `;
+
+          // Clicking blurred phone or subject should prompt payment modal
+          if (blurData) {
+            tr.querySelectorAll(".blurred").forEach(cell => {
+              cell.style.cursor = "pointer";
+              cell.title = "Click to unlock by payment";
+              cell.onclick = () => {
+                showPaymentModal();
+              };
+            });
+          }
+
+          tbody.appendChild(tr);
+        });
+      } catch (error) {
+        alert("Error loading swaps: " + error.message);
+      }
+    }
+
+    // Filter swaps button handler
+    function filterSwaps() {
+      if (!isLoggedIn) {
+        alert("Please login to filter swaps.");
+        showPage("login");
+        return;
+      }
+      loadSwaps();
+    }
+
+    // On page load, show home page
+    showPage("home");
+
+    // Optional: Monitor auth state changes
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        currentUser = user;
+        isLoggedIn = true;
+        // Load swaps if on swaps page
+        if (document.getElementById("swaps").style.display === "block") {
+          loadSwaps();
+        }
+      } else {
+        currentUser = null;
+        isLoggedIn = false;
+        hasPaid = false;
+        // Possibly redirect to home or login page
+        showPage("home");
+      }
+    });
+
+function showPaymentModal() {
+  const paymentModal = document.createElement("div");
+  paymentModal.innerHTML = `
+    <div class="modal">
+      <div class="modal-content">
+        <h2>Unlock Numbers</h2>
+        <p>To unlock all numbers, please send Ksh 100 to <strong>0741236547</strong>.</p>
+        <p>After payment, click the "Confirm Payment" button below and enter the transaction reference.</p>
+        <input type="text" id="transactionReference" placeholder="Enter Transaction Reference" />
+        <button id="confirmPayment">Confirm Payment</button>
+        <button id="closeModal">Cancel</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(paymentModal);
+
+  // Style the modal
+  const style = document.createElement("style");
+  style.textContent = `
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+    .modal-content button {
+      margin: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+    }
+    .modal-content button:hover {
+      background-color: #0056b3;
+    }
+    #closeModal {
+      background-color: #6c757d;
+    }
+    #closeModal:hover {
+      background-color: #5a6268;
+    }
+    #transactionReference {
+      width: 80%;
+      margin: 10px 0;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Handle payment confirmation
+document.getElementById("confirmPayment").onclick = async () => {
+  const transactionReference = document.getElementById("transactionReference").value;
+
+  if (!transactionReference) {
+    alert("Please enter a transaction reference.");
+    return;
+  }
+
+  try {
+    const response = await fetch("http://localhost:3000/verify-payment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ transactionReference }),
+    });
+
+    const result = await response.json();
+
+    if (result.paymentConfirmed) {
+      alert("Payment confirmed! You can now view all numbers.");
+      hasPaid = true;
+      loadSwaps();
+    } else {
+      alert("Payment not confirmed. Please try again.");
+    }
+  } catch (error) {
+    alert("Error verifying payment: " + error.message);
+  }
+};
+
+
+  // Handle modal close
+  document.getElementById("closeModal").onclick = () => {
+    document.body.removeChild(paymentModal);
+  };
+}
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const axios = require("axios");
+
+const app = express();
+app.use(bodyParser.json());
+app.use(cors());
+
+// M-Pesa credentials
+const consumerKey = "  kXmNZSCVtFAo1yX7HxpShAZG7Gpdp3n6qvPFl0x4Cx9C7IWj"; // Replace with your Consumer Key
+const consumerSecret = "  snRsVAG1ne0NcgPhr1F6tDYaxNBia3llIopy4VCmMY5W7ILd8P4TqGg4Wz3WoiMm"; // Replace with your Consumer Secret
+const shortCode = "YOUR_SHORTCODE"; // Replace with your Shortcode
+const passkey = "YOUR_PASSKEY"; // Replace with your Lipa na M-Pesa passkey
+
+// Function to get access token
+async function getAccessToken() {
+  const auth = Buffer.from(`${consumerKey}:${consumerSecret}`).toString("base64");
+  const url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials";
+
+  try {
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: `Basic ${auth}`,
+      },
+    });
+    return response.data.access_token;
+  } catch (error) {
+    throw new Error("Failed to fetch access token");
+  }
+}
+
+// Function to verify payment
+async function verifyPayment(transactionReference) {
+  const accessToken = await getAccessToken();
+  const url = "https://sandbox.safaricom.co.ke/mpesa/transactionstatus/v1/query";
+
+  const requestPayload = {
+    Initiator: "YOUR_INITIATOR_NAME", // Replace with your initiator name
+    SecurityCredential: " ovN6jtG+3V4WyGYntil5atvfLjIH2cMu2ybzhb7+KKhp+vd4pDhjbjzg1/kznxFGABDXYVZKRks/uDiCQroGSJ7atmmSSHOmrgSWw/SGuN22u9QsSUtEODxSLN+sp7zA0vLOspKgYY/ArLJVHeYj7U5QNmcLsEsjER2sk//EUdbQn1Feal5nzVY7iabW4iNPNyI/kVHS7HuyXq9zo/XRGLgN+fbSSoNcs0WmeWsd1KkPt1+kJdYAhHXRL2JIluRYH04m704vY59IJEjcoqz4ujpRaCHTJFuvTZJ1Bs3iwH8B5BvOOpy6hI1wrBIVsX1iYlUaMp8hVsDL7ePtfdX26w==", // Replace with the security credential from Safaricom
+    CommandID: "TransactionStatusQuery",
+    TransactionID: transactionReference, // Transaction Reference
+    PartyA: shortCode, // Shortcode sending the request
+    IdentifierType: "4",
+    ResultURL: "https://your-backend-url/result", // Your callback URL
+    QueueTimeOutURL: "https://your-backend-url/timeout", // Your timeout URL
+    Remarks: "Payment verification",
+    Occasion: "PaymentUnlock",
+  };
+
+  try {
+    const response = await axios.post(url, requestPayload, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to verify payment");
+  }
+}
+
+// Verify payment endpoint
+app.post("/verify-payment", async (req, res) => {
+  const { transactionReference } = req.body;
+
+  try {
+    const result = await verifyPayment(transactionReference);
+    const status = result.ResponseDescription || "Unknown";
+
+    // Check if the payment was successful
+    if (status.includes("Success")) {
+      res.status(200).json({ paymentConfirmed: true });
+    } else {
+      res.status(400).json({ paymentConfirmed: false, message: status });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Start the server
+const PORT = 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
+  </script>
+</body>
+</html>
