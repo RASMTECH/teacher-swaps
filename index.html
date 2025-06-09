@@ -234,7 +234,9 @@
       <p>Telegram: <a href="#">Link</a></p>
     </div>
   </main>
-
+<div id="customAlert" style="display: none; background-color: red; color: white; padding: 10px; margin: 10px 0; border-radius: 5px;">
+  You must be logged in to add a swap.
+</div>
   <footer>
     <p>&copy; 2024 Teacher Swaps Kenya</p>
   </footer>
@@ -288,100 +290,112 @@
       "Kisumu", "Homa Bay", "Migori", "Kisii", "Nyamira", "Nairobi City"
     ];
 
-    function populateCounties(selectElementId) {
-      const selectElement = document.getElementById(selectElementId);
-      selectElement.innerHTML = "";
-      const defaultOption = document.createElement("option");
-      defaultOption.value = "";
-      defaultOption.textContent = "Select County";
-      selectElement.appendChild(defaultOption);
+ function populateCounties(selectElementId) {
+  const selectElement = document.getElementById(selectElementId);
+  selectElement.innerHTML = "";
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.textContent = "Select County";
+  selectElement.appendChild(defaultOption);
 
-      counties.forEach(county => {
-        const option = document.createElement("option");
-        option.value = county;
-        option.textContent = county;
-        selectElement.appendChild(option);
-      });
-    }
+  counties.forEach(county => {
+    const option = document.createElement("option");
+    option.value = county;
+    option.textContent = county;
+    selectElement.appendChild(option);
+  });
+}
 
-    // Populate all county selects on page load
-    ["county", "swapCounty", "filterSwapCounty"].forEach(populateCounties);
+// Populate all county selects on page load
+["county", "swapCounty", "filterSwapCounty"].forEach(populateCounties);
 
-    // Page navigation
-    function showPage(pageId) {
-      document.querySelectorAll(".page").forEach(page => {
-        page.style.display = "none";
-      });
-      const page = document.getElementById(pageId);
-      if (page) page.style.display = "block";
-
-      if (pageId === "swaps" && isLoggedIn) {
-        loadSwaps();
-      }
-    }
-
-    // Registration handler
-    document.getElementById("registerForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
-
-      try {
-        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-        currentUser = userCredential.user;
-        await currentUser.updateProfile({ displayName: name });
-        alert("Registration successful! Please login.");
-        showPage("login");
-        document.getElementById("registerForm").reset();
-      } catch (error) {
-        alert("Error: " + error.message);
-      }
-    });
-
-    // Login handler
-    document.getElementById("loginForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const email = document.getElementById("loginEmail").value.trim();
-      const password = document.getElementById("loginPassword").value;
-
-      try {
-        const userCredential = await auth.signInWithEmailAndPassword(email, password);
-        currentUser = userCredential.user;
-        isLoggedIn = true;
-        alert(`Welcome ${currentUser.displayName || currentUser.email}!`);
-        showPage("swaps");
-        document.getElementById("loginForm").reset();
-        loadSwaps();
-      } catch (error) {
-        alert("Login failed: " + error.message);
-      }
-    });
-
-    // Logout helper (optional)
-    function logout() {
-      auth.signOut();
-      isLoggedIn = false;
-      currentUser = null;
-      alert("Logged out.");
-      showPage("home");
-    }
-
-    // Generate a unique payment reference code
-    function generatePaymentRef() {
-      return "TSK-" + Math.random().toString(36).substr(2, 9).toUpperCase();
-    }
-
-    // Show payment modal for first swap add
-    let currentSwapToAdd = null; // store swap data temporarily
-
- // Add swap form submit handler
-document.getElementById("swapForm").addEventListener("submit", (e) => {
-  e.preventDefault();
-  if (!isLoggedIn) {
-    alert("You must be logged in to add a swap.");
+function showPage(pageId) {
+  if (pageId === "swaps" && !isLoggedIn) {
+    alert("You must be logged in to view swaps.");
     showPage("login");
     return;
+  }
+
+  document.querySelectorAll(".page").forEach(page => {
+    page.style.display = "none";
+  });
+  const page = document.getElementById(pageId);
+  if (page) page.style.display = "block";
+
+  if (pageId === "swaps" && isLoggedIn) {
+    loadSwaps();
+  }
+}
+
+
+
+// Registration handler
+document.getElementById("registerForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+
+  try {
+    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+    currentUser = userCredential.user;
+    await currentUser.updateProfile({ displayName: name });
+    showCustomAlert("Registration successful! Please login.", "success");
+    showPage("login");
+    document.getElementById("registerForm").reset();
+  } catch (error) {
+    showCustomAlert("Error: " + error.message, "error");
+  }
+});
+
+// Login handler
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = document.getElementById("loginEmail").value.trim();
+  const password = document.getElementById("loginPassword").value;
+
+  try {
+    const userCredential = await auth.signInWithEmailAndPassword(email, password);
+    currentUser = userCredential.user;
+    isLoggedIn = true;
+    showCustomAlert(`Welcome ${currentUser.displayName || currentUser.email}!`, "success");
+    showPage("swaps");
+    document.getElementById("loginForm").reset();
+    loadSwaps();
+  } catch (error) {
+    showCustomAlert("Login failed: " + error.message, "error");
+  }
+});
+
+// Logout helper (optional)
+function logout() {
+  auth.signOut();
+  isLoggedIn = false;
+  currentUser = null;
+  alert("Logged out.");
+  showPage("home");
+}
+
+// Generate a unique payment reference code
+function generatePaymentRef() {
+  return "TSK-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+}
+ document.getElementById("swapForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const customAlert = document.getElementById("customAlert");
+
+    if (!isLoggedIn || !currentUser) {
+      // Display the custom alert
+      customAlert.style.display = "block";
+
+      // Optionally hide the alert after a few seconds
+      setTimeout(() => {
+        customAlert.style.display = "none";
+      }, 3000); // 3 seconds
+
+      showPage("login");
+      return;
   }
 
   const teacherName = document.getElementById("teacherName").value.trim();
@@ -411,107 +425,106 @@ async function saveSwap(swap) {
       userId: currentUser.uid,
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
     });
-    alert("Swap added successfully!");
+    showCustomAlert("Swap added successfully!", "success");
     document.getElementById("swapForm").reset();
     loadSwaps();
   } catch (error) {
-    alert("Error saving swap: " + error.message);
+    showCustomAlert("Error saving swap: " + error.message, "error");
   }
 }
 
+// Load swaps from Firestore and display in table
+async function loadSwaps() {
+  const tbody = document.querySelector("#swapTable tbody");
+  tbody.innerHTML = "";
 
-    // Load swaps from Firestore and display in table
-    async function loadSwaps() {
-      const tbody = document.querySelector("#swapTable tbody");
-      tbody.innerHTML = "";
+  let query = db.collection("teacherSwaps").orderBy("timestamp", "desc");
 
-      let query = db.collection("teacherSwaps").orderBy("timestamp", "desc");
+  // Apply filters if any
+  const filterCategory = document.getElementById("filterCategory").value;
+  const filterSwapCounty = document.getElementById("filterSwapCounty").value;
 
-      // Apply filters if any
-      const filterCategory = document.getElementById("filterCategory").value;
-      const filterSwapCounty = document.getElementById("filterSwapCounty").value;
+  if (filterCategory) query = query.where("category", "==", filterCategory);
+  if (filterSwapCounty) query = query.where("swapCounty", "==", filterSwapCounty);
 
-      if (filterCategory) query = query.where("category", "==", filterCategory);
-      if (filterSwapCounty) query = query.where("swapCounty", "==", filterSwapCounty);
+  try {
+    const snapshot = await query.get();
 
-      try {
-        const snapshot = await query.get();
-
-        if (snapshot.empty) {
-          const tr = document.createElement("tr");
-          const td = document.createElement("td");
-          td.colSpan = 7;
-          td.textContent = "No swaps found.";
-          tr.appendChild(td);
-          tbody.appendChild(tr);
-          return;
-        }
-
-        snapshot.forEach(doc => {
-          const swap = doc.data();
-          const tr = document.createElement("tr");
-
-          // If user hasn't paid, blur the phone and subject columns
-          const blurData = !hasPaid;
-
-          tr.innerHTML = `
-            <td>${swap.teacherName}</td>
-            <td>${swap.county}</td>
-            <td class="${blurData ? 'blurred' : ''}">${swap.phone}</td>
-            <td class="${blurData ? 'blurred' : ''}">${swap.subjectCombination}</td>
-            <td>${swap.swapCounty}</td>
-            <td>${swap.category}</td>
-            <td>${swap.hardship}</td>
-          `;
-
-          // Clicking blurred phone or subject should prompt payment modal
-          if (blurData) {
-            tr.querySelectorAll(".blurred").forEach(cell => {
-              cell.style.cursor = "pointer";
-              cell.title = "Click to unlock by payment";
-              cell.onclick = () => {
-                showPaymentModal();
-              };
-            });
-          }
-
-          tbody.appendChild(tr);
-        });
-      } catch (error) {
-        alert("Error loading swaps: " + error.message);
-      }
+    if (snapshot.empty) {
+      const tr = document.createElement("tr");
+      const td = document.createElement("td");
+      td.colSpan = 7;
+      td.textContent = "No swaps found.";
+      tr.appendChild(td);
+      tbody.appendChild(tr);
+      return;
     }
 
-    // Filter swaps button handler
-    function filterSwaps() {
-      if (!isLoggedIn) {
-        alert("Please login to filter swaps.");
-        showPage("login");
-        return;
+    snapshot.forEach(doc => {
+      const swap = doc.data();
+      const tr = document.createElement("tr");
+
+      // If user hasn't paid, blur the phone and subject columns
+      const blurData = !hasPaid;
+
+      tr.innerHTML = `
+        <td>${swap.teacherName}</td>
+        <td>${swap.county}</td>
+        <td class="${blurData ? 'blurred' : ''}">${swap.phone}</td>
+        <td class="${blurData ? 'blurred' : ''}">${swap.subjectCombination}</td>
+        <td>${swap.swapCounty}</td>
+        <td>${swap.category}</td>
+        <td>${swap.hardship}</td>
+      `;
+
+      // Clicking blurred phone or subject should prompt payment modal
+      if (blurData) {
+        tr.querySelectorAll(".blurred").forEach(cell => {
+          cell.style.cursor = "pointer";
+          cell.title = "Click to unlock by payment";
+          cell.onclick = () => {
+            showPaymentModal();
+          };
+        });
       }
+
+      tbody.appendChild(tr);
+    });
+  } catch (error) {
+    alert("Error loading swaps: " + error.message);
+  }
+}
+
+// Filter swaps button handler
+function filterSwaps() {
+  if (!isLoggedIn) {
+    alert("Please login to filter swaps.");
+    showPage("login");
+    return;
+  }
+  loadSwaps();
+}
+
+// On page load, show home page
+showPage("home");
+
+// Optional: Monitor auth state changes
+auth.onAuthStateChanged(user => {
+  if (user) {
+    currentUser = user;
+    isLoggedIn = true;
+    // Load swaps if on swaps page
+    if (document.getElementById("swaps").style.display === "block") {
       loadSwaps();
     }
-
-    // On page load, show home page
+  } else {
+    currentUser = null;
+    isLoggedIn = false;
+    hasPaid = false;
     showPage("home");
+  }
+});
 
-    // Optional: Monitor auth state changes
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        currentUser = user;
-        isLoggedIn = true;
-        // Load swaps if on swaps page
-        if (document.getElementById("swaps").style.display === "block") {
-          loadSwaps();
-        }
-      } else {
-        currentUser = null;
-        isLoggedIn = false;
-        hasPaid = false;
-        // Possibly redirect to home or login page
-        showPage("home");
-      }
-    });
 
 function showPaymentModal() {
   const paymentModal = document.createElement("div");
@@ -519,8 +532,8 @@ function showPaymentModal() {
     <div class="modal">
       <div class="modal-content">
         <h2>Unlock Numbers</h2>
-        <p>To unlock all numbers, please send Ksh 100 to <strong>0741236547</strong>.</p>
-        <p>After payment, click the "Confirm Payment" button below and enter the transaction reference.</p>
+        <p>To unlock all numbers, please send <span style="color: green; font-weight: bold;">Ksh 100</span> to <strong style="color: green;">0741236547</strong>.</p>
+        <p style="color: red;">After payment, click the "Confirm Payment" button below and enter the transaction reference.</p>
         <input type="text" id="transactionReference" placeholder="Enter Transaction Reference" />
         <button id="confirmPayment">Confirm Payment</button>
         <button id="closeModal">Cancel</button>
@@ -569,7 +582,8 @@ function showPaymentModal() {
     }
     #closeModal:hover {
       background-color: #5a6268;
-    }
+  
+      }
     #transactionReference {
       width: 80%;
       margin: 10px 0;
@@ -580,39 +594,37 @@ function showPaymentModal() {
   `;
   document.head.appendChild(style);
 
-  // Handle payment confirmation
+// Handle payment confirmation
 document.getElementById("confirmPayment").onclick = async () => {
-  const transactionReference = document.getElementById("transactionReference").value;
+    const transactionReference = document.getElementById("transactionReference").value;
 
-  if (!transactionReference) {
-    alert("Please enter a transaction reference.");
-    return;
-  }
-
-  try {
-    const response = await fetch("http://localhost:3000/verify-payment", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ transactionReference }),
-    });
-
-    const result = await response.json();
-
-    if (result.paymentConfirmed) {
-      alert("Payment confirmed! You can now view all numbers.");
-      hasPaid = true;
-      loadSwaps();
-    } else {
-      alert("Payment not confirmed. Please try again.");
+    if (!transactionReference) {
+        showCustomAlert("Please enter a transaction reference.", "error");
+        return;
     }
-  } catch (error) {
-    alert("Error verifying payment: " + error.message);
-  }
+
+    try {
+        const response = await fetch("http://localhost:3000/verify-payment", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ transactionReference }),
+        });
+
+        const result = await response.json();
+
+        if (result.paymentConfirmed) {
+            showCustomAlert("Payment confirmed! You can now view all numbers.", "success");
+            hasPaid = true;
+            loadSwaps();
+        } else {
+            showCustomAlert("Payment not confirmed. Please try again.", "error");
+        }
+    } catch (error) {
+        showCustomAlert("Error verifying payment: " + error.message, "error");
+    }
 };
-
-
   // Handle modal close
   document.getElementById("closeModal").onclick = () => {
     document.body.removeChild(paymentModal);
@@ -703,6 +715,35 @@ app.post("/verify-payment", async (req, res) => {
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
+
+function showCustomAlert(message, type) {
+    const alertBox = document.createElement("div");
+    alertBox.innerText = message;
+
+    alertBox.style.position = "fixed";
+    alertBox.style.top = "50%";
+    alertBox.style.left = "50%";
+    alertBox.style.transform = "translate(-50%, -50%)";
+    alertBox.style.padding = "20px";
+    alertBox.style.borderRadius = "8px";
+    alertBox.style.color = "white";
+    alertBox.style.zIndex = "1000";
+    alertBox.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+    alertBox.style.fontSize = "16px";
+    alertBox.style.textAlign = "center";
+
+    if (type === "success") {
+        alertBox.style.backgroundColor = "#4caf50"; // Green for success
+    } else if (type === "error") {
+        alertBox.style.backgroundColor = "#f44336"; // Red for error
+    }
+
+    document.body.appendChild(alertBox);
+
+    setTimeout(() => {
+        alertBox.remove();
+    }, 3000); // Automatically remove alert after 3 seconds
+}
 
   </script>
 </body>
