@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <title>Teacher Swaps Kenya</title>
   <style>
     /* ... Your existing styles unchanged ... */
@@ -122,27 +124,452 @@
       z-index: 1000;
       box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     }
-  </style>
+  #matchesModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 70%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+  }
+  .modal-content button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #4CAF50; /* Green */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+  background-color: #45a049; /* Slightly darker green for hover */
+}
+
+  #registerForm input {
+    background-color: #e6f7ff; /* Light blue background */
+    border: 2px solid #3399ff; /* Blue border */
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+
+  #registerForm input:focus {
+    background-color: #d0f0ff; /* Slightly brighter on focus */
+    outline: none;
+    border-color: #007acc;
+  }
+
+  #registerForm label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  #registerForm button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #3399ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  #registerForm button:hover {
+    background-color: #007acc;
+  }
+  /* Common input/select styling */
+  form input,
+  form select {
+    background-color: #e6f7ff;
+    border: 2px solid #3399ff;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+
+  form input:focus,
+  form select:focus {
+    background-color: #d0f0ff;
+    outline: none;
+    border-color: #007acc;
+  }
+
+  form label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  form button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #3399ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  form button:hover {
+    background-color: #007acc;
+  }
+  /* Styled input and select fields */
+  form input,
+  form select,
+  select {
+    background-color: #e6f7ff;
+    border: 2px solid #3399ff;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+
+  form input:focus,
+  form select:focus,
+  select:focus {
+    background-color: #d0f0ff;
+    outline: none;
+    border-color: #007acc;
+  }
+
+  /* Labels */
+  label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  /* Buttons */
+  button {
+    margin: 8px 5px 15px 0;
+    padding: 10px 16px;
+    background-color: #3399ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #007acc;
+  }
+
+  .trigger-button {
+    background-color: #33cc99;
+  }
+
+  .trigger-button:hover {
+    background-color: #29a37d;
+  }
+ #register {
+    display: none;
+    background-image: url('https://i.imgur.com/WKwJ73A.jpeg');
+    background-size: cover;
+    background-position: center;
+    padding: 40px;
+    border-radius: 12px;
+    color: white;
+    min-height: 100vh; /* full viewport height */
+  }
+
+  #register h2,
+  #register label {
+    color: white;
+    text-shadow: 1px 1px 3px #000;
+  }
+
+  #registerForm {
+    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent form background */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    margin: auto;
+  }
+
+  #registerForm input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 5px;
+  }
+
+  #registerForm button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  #registerForm button:hover {
+    background-color: #45a049;
+  }
+
+ #login {
+    display: none;
+    background-image: url('  https://i.imgur.com/iqBwsWm.png           ');
+    background-size: cover;
+    background-position: center;
+    padding: 40px;
+    border-radius: 12px;
+    color: white;
+    min-height: 100vh;
+  }
+
+  #login h2,
+  #login label {
+    color: white;
+    text-shadow: 1px 1px 3px #000;
+  }
+
+  #loginForm {
+    background-color: rgba(0, 0, 0, 0.5); /* transparent dark background for form */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    margin: auto;
+  }
+
+  #loginForm input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 5px;
+  }
+
+  #loginForm button {
+    width: 100%;
+    padding: 10px;
+    background-color: #2196F3;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  #loginForm button:hover {
+    background-color: #1976D2;
+  }
+
+ #swaps {
+    display: none;
+    background-image: url('  https://i.imgur.com/iqBwsWm.png     ');
+    background-size: cover;
+    background-position: center;
+    padding: 40px;
+    border-radius: 12px;
+    color: white;
+    min-height: 100vh;
+  }
+
+  #swaps h2,
+  #swaps label {
+    color: white;
+    text-shadow: 1px 1px 3px #000;
+  }
+
+  #swapForm {
+    background-color: rgba(0, 0, 0, 0.5); /* dark translucent form bg */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: auto;
+  }
+
+  #swapForm input,
+  #swapForm select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 5px;
+  }
+
+  #swapForm button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff9800;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  #swapForm button:hover {
+    background-color: #f57c00;
+  }
+#swapTable th,
+#swapTable td {
+  color: black !important;        /* Make table text black */
+  border: 2px solid black !important;  /* Make borders thick and black */
+}
+
+#swapTable {
+  border: 2px solid black;        /* Outer border */
+  border-collapse: collapse;
+  background-color: white;        /* Optional: white background for clarity */
+}
+
+#swapTable th {
+  background-color: #f2f2f2;      /* Optional: grey header for contrast */
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #fff0f6, #ffe6f0);
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 350px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  font-family: 'Arial', sans-serif;
+}
+
+.modal-body p {
+  margin: 10px 0;
+  color: #444;
+  font-size: 15px;
+}
+
+.close {
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  color: #f44336;
+  cursor: pointer;
+}
+</style>
 </head>
 <body>
   <header>
     <h1>Welcome to Teacher Swaps Kenya</h1>
     <nav>
       <ul>
-        <li><a href="#" onclick="showPage('home')">Home</a></li>
-        <li><a href="#" onclick="showPage('register')">Register</a></li>
-        <li><a href="#" onclick="showPage('login')">Login</a></li>
-        <li><a href="#" onclick="showPage('swaps')">View Swaps</a></li>
-        <li><a href="#" onclick="showPage('contact')">Contact Us</a></li>
+        <li>
+          <a href="#" onclick="showPage('home')">
+            <i class="fas fa-house" style="color:#1e90ff;"></i> Home
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="showPage('register')">
+            <i class="fas fa-user-plus" style="color:#28a745;"></i> Register
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="showPage('login')">
+            <i class="fas fa-sign-in-alt" style="color:#17a2b8;"></i> Login
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="showPage('swaps')">
+            <i class="fas fa-exchange-alt" style="color:#ffc107;"></i> View Swaps
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="showPage('bomJobs')">
+            <i class="fas fa-briefcase" style="color:#6f42c1;"></i> BOM Jobs
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="showPage('resources')">
+            <i class="fas fa-book" style="color:#ff5722;"></i> Teaching Resources
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="showPage('soulmates')">
+            <i class="fas fa-heart" style="color:#e91e63;"></i> Find Soulmate
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="showPage('contact')">
+            <i class="fas fa-envelope" style="color:#dc3545;"></i> Contact Us
+          </a>
+        </li>
       </ul>
+<li>
+  <a href="#" onclick="showPage('notifications')">
+    <i class="fas fa-bell" style="color:#ff9800;"></i> Notifications
+  </a>
+</li>
+
     </nav>
   </header>
+
+
 
   <main id="content">
     <div id="home" class="page">
       <h2>Connect with Other Teachers</h2>
+   <img src=" https://i.imgur.com/jixmLF9.jpeg" alt="School Logo" class="logo-img" style="width: 200px;">
+     <img src="  https://i.imgur.com/bbHniIi.jpeg            " alt="School Logo" class="logo-img" style="width: 200px;">
+    <img src="   https://i.imgur.com/qnmK7CR.jpeg                 " alt="School Logo" class="logo-img" style="width: 200px;">    
+    <img src="     https://i.imgur.com/WKwJ73A.jpeg               " alt="School Logo" class="logo-img" style="width: 200px;">
+   <img src="       https://i.imgur.com/qBK4WK8.jpeg             " alt="School Logo" class="logo-img" style="width: 200px;">
+    <img src="      https://sdmntprwestus2.oaiusercontent.com/files/00000000-cb7c-61f8-9636-966b2012fefe/raw?se=2025-06-27T20%3A01%3A50Z&sp=r&sv=2024-08-04&sr=b&scid=f0b8e107-113c-510b-91fa-762fdb3b8fcd&skoid=f28c0102-4d9d-4950-baf0-4a8e5f6cf9d4&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-06-27T18%3A54%3A35Z&ske=2025-06-28T18%3A54%3A35Z&sks=b&skv=2024-08-04&sig=wh%2BFGPQsFMuNCPZgYdsmr1g332RqHjxhxwedpu9rNyE%3D              " alt="School Logo" class="logo-img" style="width: 200px;">
+    <img src="          https://i.imgur.com/iqBwsWm.png          " alt="School Logo" class="logo-img" style="width: 200px;">
+
+<!-- Open Graph Meta Tags for social sharing -->
+<meta property="og:title" content="Teacher Swaps Kenya" />
+<meta property="og:description" content="Find your perfect teacher swap match across Kenya!" />
+<meta property="og:image" content="https://i.imgur.com/WKwJ73A.jpeg" />
+<meta property="og:url" content="https://rasmtech.github.io/Kenya-Nairobi-teachers-swaps/" />
+<meta property="og:type" content="website" />
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Teacher Swaps Kenya" />
+<meta name="twitter:description" content="Find your perfect teacher swap match across Kenya!" />
+<meta name="twitter:image" content="https://i.imgur.com/WKwJ73A.jpeg" />
+
       <p>This platform allows teachers to find swap opportunities across Kenya. Sign up to get started!</p>
-    </div>
+   </div>
     <div id="register" class="page" style="display:none;">
       <h2>Register</h2>
       <form id="registerForm">
@@ -152,7 +579,10 @@
         <input type="email" id="email" required />
         <label for="password">Password:</label>
         <input type="password" id="password" required />
-        <button type="submit">Register</button>
+ <button type="submit">
+  <i class="fas fa-user-plus" style="margin-right: 6px; color: #ffffff;"></i> Register
+</button>
+
       </form>
     </div>
     <div id="login" class="page" style="display:none;">
@@ -162,11 +592,14 @@
         <input type="email" id="loginEmail" required />
         <label for="loginPassword">Password:</label>
         <input type="password" id="loginPassword" required />
-        <button type="submit">Login</button>
+ <button type="submit">
+  <i class="fas fa-sign-in-alt" style="margin-right: 6px; color: #ffffff;"></i> Login
+</button>
+
       </form>
     </div>
     <div id="swaps" class="page" style="display:none;">
-      <h2>Swap Listings</h2>
+      <h2>Register Your Swap Here</h2>
       <form id="swapForm">
         <label for="teacherName">Teacher's Name:</label>
         <input type="text" id="teacherName" required />
@@ -174,7 +607,7 @@
         <input type="tel" id="phone" required />
         <label for="subjectCombination">Subject Combination:</label>
         <input type="text" id="subjectCombination" required />
-        <label for="county">County:</label>
+        <label for="county">Current County:</label>
         <select id="county" required></select>
         <label for="swapCounty">Swap County To:</label>
         <select id="swapCounty" required></select>
@@ -190,7 +623,10 @@
           <option value="Without Hardship">Without Hardship</option>
           <option value="With Hardship">With Hardship</option>
         </select>
-        <button type="submit">Add Swap</button>
+ <button type="submit">
+  <i class="fas fa-plus-circle" style="margin-right: 6px; color: #ffffff;"></i> Add Swap
+</button>
+
       </form>
 
       <h3>Filter Swaps</h3>
@@ -203,19 +639,33 @@
       </select>
       <label for="filterSwapCounty">Swap County To:</label>
       <select id="filterSwapCounty"></select>
-      <button onclick="filterSwaps()">Filter Swaps</button>
+
+<!-- Buttons with icons -->
+<button onclick="filterSwaps()">
+  <i class="fas fa-filter" style="margin-right: 6px; color: #ffffff;"></i> Filter Swaps
+</button>
+
+<button onclick="findMatchingSwaps()">
+  <i class="fas fa-handshake" style="margin-right: 6px; color: #ffffff;"></i> Find Matching Swaps
+</button>
+
+<button id="showTriangularSwap" class="trigger-button">
+  <i class="fas fa-project-diagram" style="margin-right: 6px; color: #ffffff;"></i> Find Triangular Swap
+</button>
 
       <h3>Registered Swaps</h3>
       <table id="swapTable">
         <thead>
           <tr>
             <th>Teacher's Name</th>
-            <th>County</th>
+            <th> Current County</th>
             <th>Phone Number</th>
             <th>Subject Combination</th>
             <th>Swap County To</th>
             <th>Category</th>
-            <th>Hardship</th>
+  <th>Hardship</th>
+<th>Actions</th>
+
           </tr>
         </thead>
         <tbody>
@@ -223,6 +673,199 @@
         </tbody>
       </table>
     </div>
+
+<div id="bomJobs" class="page" style="display:none;">
+  <h2>Post BOM Job Opportunity</h2>
+  <form id="bomJobForm">
+    <label for="bomSubjects">Subject(s):</label>
+    <input type="text" id="bomSubjects" required />
+    
+    <label for="bomCounty">County:</label>
+    <select id="bomCounty" required></select>
+
+    <label for="bomSubCounty">Sub-county:</label>
+    <input type="text" id="bomSubCounty" required />
+
+    <label for="bomSchool">School Name:</label>
+    <input type="text" id="bomSchool" required />
+
+    <label for="bomSalary">Salary (Ksh):</label>
+    <input type="number" id="bomSalary" required />
+
+    <label for="bomPhone">Phone Number:</label>
+    <input type="tel" id="bomPhone" required />
+
+    <button type="submit">
+      <i class="fas fa-briefcase" style="margin-right: 6px; color: #ffffff;"></i> Post BOM Job
+    </button>
+  </form>
+<!-- Filter Inputs -->
+<div style="margin-bottom: 10px;">
+  <input type="text" id="filterSubject" placeholder="Filter by subject">
+  <select id="filterCounty"></select>
+  <input type="number" id="filterSalary" placeholder="Min Salary (Ksh)">
+  <button onclick="applyBOMFilters()">Apply Filters</button>
+</div>
+
+<!-- Confirm Delete Modal -->
+<div id="confirmDeleteModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:9999;">
+  <div style="background:white; padding:20px; border-radius:8px; text-align:center;">
+    <p>Are you sure you want to delete this BOM job?</p>
+    <button id="confirmDeleteBtn" style="margin: 5px;">Yes, Delete</button>
+    <button onclick="closeDeleteModal()" style="margin: 5px;">Cancel</button>
+  </div>
+</div>
+
+  <h3>Available BOM Jobs</h3>
+  <table id="bomJobsTable">
+    <thead>
+      <tr>
+        <th>Subject</th>
+        <th>County</th>
+        <th>Sub-county</th>
+        <th>School</th>
+        <th>Salary</th>
+        <th>Phone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- BOM job listings go here -->
+    </tbody>
+  </table>
+</div>
+<div id="resources" class="page" style="display:none;">
+  <h2>Upload Teaching Resources</h2>
+  <form id="resourceForm">
+    <label for="resourceTitle">Title:</label>
+    <input type="text" id="resourceTitle" required />
+
+    <label for="resourcePrice">Price (Ksh):</label>
+    <input type="number" id="resourcePrice" required />
+
+    <label for="resourceFile">Upload File:</label>
+    <input type="file" id="resourceFile" accept=".pdf,.doc,.docx,.ppt,.pptx" required />
+
+    <button type="submit">
+      <i class="fas fa-upload" style="margin-right:6px; color: #fff;"></i> Upload Resource
+    </button>
+  </form>
+
+  <h3>Available Resources</h3>
+  <table id="resourcesTable">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Price (Ksh)</th>
+        <th>Download</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+<div id="soulmates" class="page" style="display:none;">
+  <h2>Find Your Soulmate</h2>
+  <form id="soulmateForm">
+    <label for="smName">Your Name:</label>
+    <input type="text" id="smName" required />
+
+    <label for="smCounty">Home County:</label>
+    <select id="smCounty" required></select>
+
+    <label for="smAge">Age:</label>
+    <input type="number" id="smAge" required />
+
+    <label for="smTribe">Tribe:</label>
+    <input type="text" id="smTribe" required />
+
+    <label for="smSex">Sex:</label>
+    <select id="smSex" required>
+      <option value="">Select Sex</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <label for="smOccupation">Occupation:</label>
+    <input type="text" id="smOccupation" required />
+
+    <label for="smWorkCounty">Work County:</label>
+    <select id="smWorkCounty" required></select>
+<label for="smPhone">Phone Number:</label>
+<input type="tel" id="smPhone" required />
+<label for="smStatus">Marital Status:</label>
+<select id="smStatus" required>
+  <option value="">Select Status</option>
+  <option value="Single">Single</option>
+  <option value="Married">Married</option>
+  <option value="Divorced">Divorced</option>
+  <option value="Widowed">Widowed</option>
+</select>
+
+<label for="smKids">Do you have kids?</label>
+<select id="smKids" required>
+  <option value="">Select</option>
+  <option value="Yes">Yes</option>
+  <option value="No">No</option>
+</select>
+
+    <button type="submit">
+      <i class="fas fa-heart" style="margin-right:6px;"></i> Submit Profile
+    </button>
+  </form>
+<label for="ageFilter">Filter by Age:</label>
+<select id="ageFilter" onchange="filterSoulmatesByAge()">
+  <option value="">All</option>
+  <option value="20-29">20–29</option>
+  <option value="30-39">30–39</option>
+  <option value="40-49">40–49</option>
+  <option value="50+">50+</option>
+</select>
+<label for="smPhoto">Upload Photo:</label>
+<input type="file" id="smPhoto" accept="image/*" required />
+
+  <h3>Available Soulmates</h3>
+  <table id="soulmateTable">
+    <thead>
+      <tr>
+        <th>Photo</th>
+    <th>Name</th>
+    <th>County</th>
+    <th>Age</th>
+    <th>Tribe</th>
+    <th>Sex</th>
+    <th>Occupation</th>
+    <th>Work County</th>
+    <th>Phone</th>
+    <th>Status</th>
+    <th>Kids</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+<div id="soulmateModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close" onclick="closeSoulmateModal()">&times;</span>
+    <h3>Soulmate Profile</h3>
+    <div id="soulmateDetails">
+      <!-- Details will be injected here -->
+    </div>
+  </div>
+</div>
+<div id="chatBox" class="modal" style="display:none;">
+  <div class="modal-content" style="max-width:400px;">
+    <span class="close" onclick="closeChat()">&times;</span>
+    <h4>Chat with <span id="chatWith"></span></h4>
+    <div id="chatMessages" style="max-height:250px; overflow-y:auto;"></div>
+    <input type="text" id="chatInput" placeholder="Type a message..." />
+    <button onclick="sendChatMessage()">Send</button>
+  </div>
+</div>
+<div id="notifications" class="page" style="display:none;">
+  <h2>🔔 My Notifications</h2>
+  <ul id="notificationList"></ul>
+</div>
+
     <div id="contact" class="page" style="display:none;">
       <h2>Contact Us</h2>
       <p>Email: support@teacherswapskenya.com</p>
@@ -233,13 +876,61 @@
       <p>YouTube: <a href="#">Link</a></p>
       <p>Telegram: <a href="#">Link</a></p>
     </div>
-  </main>
-<div id="customAlert" style="display: none; background-color: red; color: white; padding: 10px; margin: 10px 0; border-radius: 5px;">
-  You must be logged in to add a swap.
+<div style="text-align: center; margin-top: 20px;">
+  <a href="https://wa.me/254792755676" target="_blank" style="text-decoration: none;">
+    <button style="background-color: #25D366; color: white; padding: 12px 25px; border: none; border-radius: 6px; font-size: 16px; cursor: pointer;">
+      <i class="fab fa-whatsapp" style="margin-right: 8px;"></i> Chat with Us on WhatsApp
+    </button>
+  </a>
 </div>
-  <footer>
-    <p>&copy; 2024 Teacher Swaps Kenya</p>
-  </footer>
+<!-- Floating WhatsApp Chat Button -->
+<a href="https://wa.me/254792755676?text=Hi%2C%20I%20need%20help%20with%20Teacher%20Swaps%20Kenya" 
+   target="_blank" 
+   style="position: fixed; bottom: 20px; right: 20px; background-color: #25D366; color: white; 
+          border-radius: 50px; padding: 14px 20px; text-decoration: none; font-size: 16px; 
+          display: flex; align-items: center; box-shadow: 0 4px 8px rgba(0,0,0,0.2); z-index: 9999;">
+  <i class="fab fa-whatsapp" style="font-size: 20px; margin-right: 8px;"></i> Chat with Us
+</a>
+<!-- Floating Email Button -->
+<a href="mailto:support@teacherswapskenya.com?subject=Help Needed&body=Hi, I need help with Teacher Swaps Kenya." 
+   style="position: fixed; bottom: 80px; right: 20px; background-color: #007bff; color: white; 
+          border-radius: 50px; padding: 14px 20px; text-decoration: none; font-size: 16px; 
+          display: flex; align-items: center; box-shadow: 0 4px 8px rgba(0,0,0,0.2); z-index: 9999;">
+  <i class="fas fa-envelope" style="font-size: 20px; margin-right: 8px;"></i> Email Us
+</a>
+
+<!-- Floating WhatsApp Chat Button -->
+<a href="https://wa.me/254792755676?text=Hi%2C%20I%20need%20help%20with%20Teacher%20Swaps%20Kenya" 
+   target="_blank" 
+   style="position: fixed; bottom: 20px; right: 20px; background-color: #25D366; color: white; 
+          border-radius: 50px; padding: 14px 20px; text-decoration: none; font-size: 16px; 
+          display: flex; align-items: center; box-shadow: 0 4px 8px rgba(0,0,0,0.2); z-index: 9999;">
+  <i class="fab fa-whatsapp" style="font-size: 20px; margin-right: 8px;"></i> Chat with Us
+</a>
+<!-- Floating Call Button -->
+<a href="tel:+254792755676" 
+   style="position: fixed; bottom: 140px; right: 20px; background-color: #e74c3c; color: white; 
+          border-radius: 50px; padding: 14px 20px; text-decoration: none; font-size: 16px; 
+          display: flex; align-items: center; box-shadow: 0 4px 8px rgba(0,0,0,0.2); z-index: 9999;">
+  <i class="fas fa-phone-alt" style="font-size: 20px; margin-right: 8px;"></i> Call Us
+</a>
+  </main>
+<!-- Triangular Swaps Modal -->
+<div id="triangularSwapsModal" style="display: none; justify-content: center; align-items: center; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000;">
+  <div style="background: #fff; padding: 20px; border-radius: 8px; max-width: 500px; width: 100%; text-align: center;">
+    <h2>Triangular Swaps</h2>
+    <div id="triangularSwapsList" style="margin-top: 20px;"></div>
+    <button id="closeTriangularSwapsModal" style="margin-top: 20px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+      Close
+    </button>
+  </div>
+</div>
+
+<footer>
+  <h3 style="text-align: center; color: #333; padding: 20px;">
+          Teachers Swaps Kenya,  Empowering Teachers Through Seamless Swaps .Connect, Collaborate, and Relocate with Confidence
+  </h3>
+</footer>
 
   <div id="paymentModal" style="display: none;">
     <div class="modal-content">
@@ -249,282 +940,726 @@
       <button style="background-color: #e74c3c;" onclick="closePaymentModal()">Cancel</button>
     </div>
   </div>
+<div id="matchesModal" style="display: none;">
+  <div class="modal-content">
+    <h3>Matching Swaps</h3>
+    <div id="matchesList">
+      <!-- Matching swaps will be dynamically inserted here -->
+    </div>
+    <button onclick="closeMatchesModal()">Close</button>
+  </div>
+</div>
+<!-- Toast Container -->
+<div id="toastContainer" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;"></div>
+<!-- Confirm Delete Modal -->
+<div id="confirmDeleteModal" style="display:none; position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000;
+  justify-content: center; align-items: center;">
+  <div style="background: white; padding: 20px 25px; border-radius: 10px; box-shadow: 0 6px 12px rgba(0,0,0,0.3); width: 90%; max-width: 400px; text-align: center; position: relative;">
+    <h3 style="margin-bottom: 10px; color: #dc3545;">Confirm Deletion</h3>
+    <p style="font-size: 16px;">Are you sure you want to delete this swap?</p>
 
+    <!-- Progress Bar -->
+    <div style="height: 8px; background: #eee; border-radius: 5px; margin-top: 15px;">
+      <div id="confirmProgressBar" style="width: 100%; height: 8px; background-color: #28a745; border-radius: 5px;"></div>
+    </div>
+
+    <div style="margin-top: 20px;">
+      <button id="confirmYes" style="background-color: #dc3545; color: white; padding: 10px 20px; border: none; border-radius: 6px; margin-right: 10px; cursor: pointer;">Yes, Delete</button>
+      <button id="confirmNo" style="background-color: #6c757d; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer;">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="toastContainer" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;"></div>
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+
+
 
   <script>
-    // Your Firebase config - replace with your own Firebase project config
+  // ✅ Firebase Config
   const firebaseConfig = {
-  apiKey: "AIzaSyD7qfXm0hmz4oyvKzICwFQ2xQR1_RkLNYg",
-  authDomain: "rowan-494f7.firebaseapp.com",
-  databaseURL: "https://rowan-494f7-default-rtdb.firebaseio.com",
-  projectId: "rowan-494f7",
-  storageBucket: "rowan-494f7.firebasestorage.app",
-  messagingSenderId: "158143387761",
-  appId: "1:158143387761:web:2606fa93a3c812bddd23d0",
-  measurementId: "G-V9Q98Q09F2"
-};
+    apiKey: "AIzaSyD7qfXm0hmz4oyvKzICwFQ2xQR1_RkLNYg",
+    authDomain: "rowan-494f7.firebaseapp.com",
+    databaseURL: "https://rowan-494f7-default-rtdb.firebaseio.com",
+    projectId: "rowan-494f7",
+    storageBucket: "rowan-494f7.firebasestorage.app",
+    messagingSenderId: "158143387761",
+    appId: "1:158143387761:web:2606fa93a3c812bddd23d0",
+    measurementId: "G-V9Q98Q09F2"
+  };
 
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
+  // ✅ Firebase Init
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+const storage = firebase.storage();  // ✅ This line is missing!
+  const bomRef = db.collection("bomJobs");
+const soulmateRef = db.collection("soulmates");
+const resourceRef = db.collection("teachingResources");
 
-    // Global state
-    let isLoggedIn = false;
-    let hasPaid = false;
-    let currentUser = null;
+  // ✅ Global State
+  let isLoggedIn = false;
+  let hasPaid = false;
+  let currentUser = null;
+  let isAdmin = false;
 
-    // Counties array
-    const counties = [
-      "Mombasa", "Kwale", "Kilifi", "Tana River", "Lamu", "Taita/Taveta",
-      "Garissa", "Wajir", "Mandera", "Marsabit", "Isiolo", "Meru",
-      "Tharaka-Nithi", "Embu", "Kitui", "Machakos", "Makueni", "Nyandarua",
-      "Nyeri", "Kirinyaga", "Murang'a", "Kiambu", "Turkana", "West Pokot",
-      "Samburu", "Trans Nzoia", "Uasin Gishu", "Elgeyo/Marakwet", "Nandi",
-      "Baringo", "Laikipia", "Nakuru", "Narok", "Kajiado", "Kericho",
-      "Bomet", "Kakamega", "Vihiga", "Bungoma", "Busia", "Siaya",
-      "Kisumu", "Homa Bay", "Migori", "Kisii", "Nyamira", "Nairobi City"
-    ];
+  // ✅ Monitor Auth State
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      currentUser = user;
+      isLoggedIn = true;
 
- function populateCounties(selectElementId) {
-  const selectElement = document.getElementById(selectElementId);
-  selectElement.innerHTML = "";
-  const defaultOption = document.createElement("option");
-  defaultOption.value = "";
-  defaultOption.textContent = "Select County";
-  selectElement.appendChild(defaultOption);
 
-  counties.forEach(county => {
-    const option = document.createElement("option");
-    option.value = county;
-    option.textContent = county;
-    selectElement.appendChild(option);
+      const adminEmails = [
+        "mashabiki@teacherswapskenya.com",
+        "sironga@teacherswapskenya.com",
+         "sironga1@teacherswapskenya.com",
+        "admin@teacherswapskenya.com"
+      ];
+      isAdmin = adminEmails.includes(user.email);
+
+      if (document.getElementById("swaps").style.display === "block") loadSwaps();
+      if (document.getElementById("bomJobs").style.display === "block") loadBOMJobs();
+    } else {
+      isLoggedIn = false;
+      currentUser = null;
+      isAdmin = false;
+      hasPaid = false;
+      showPage("home");
+    }
   });
-}
 
-// Populate all county selects on page load
-["county", "swapCounty", "filterSwapCounty"].forEach(populateCounties);
+  // ✅ Counties
+  const counties = [
+    "Mombasa", "Kwale", "Kilifi", "Tana River", "Lamu", "Taita/Taveta",
+    "Garissa", "Wajir", "Mandera", "Marsabit", "Isiolo", "Meru",
+    "Tharaka-Nithi", "Embu", "Kitui", "Machakos", "Makueni", "Nyandarua",
+    "Nyeri", "Kirinyaga", "Murang'a", "Kiambu", "Turkana", "West Pokot",
+    "Samburu", "Trans Nzoia", "Uasin Gishu", "Elgeyo/Marakwet", "Nandi",
+    "Baringo", "Laikipia", "Nakuru", "Narok", "Kajiado", "Kericho",
+    "Bomet", "Kakamega", "Vihiga", "Bungoma", "Busia", "Siaya",
+    "Kisumu", "Homa Bay", "Migori", "Kisii", "Nyamira", "Nairobi City"
+  ];
+  function populateCounties(id) {
+    const el = document.getElementById(id);
+    el.innerHTML = `<option value="">Select County</option>`;
+    counties.forEach(c => {
+      const option = document.createElement("option");
+      option.value = option.textContent = c;
+      el.appendChild(option);
+    });
+  }
+  ["county", "swapCounty", "filterSwapCounty", "bomCounty"].forEach(populateCounties);
 
-function showPage(pageId) {
+// ✅ Show Page
+async function showPage(pageId) {
   if (pageId === "swaps" && !isLoggedIn) {
-    alert("You must be logged in to view swaps.");
+    showCustomAlert("You must be logged in to view swaps.", "error");
     showPage("login");
     return;
   }
 
-  document.querySelectorAll(".page").forEach(page => {
-    page.style.display = "none";
-  });
+  if (pageId === "resources" && !isLoggedIn) {
+    showCustomAlert("Please login to view resources.", "error");
+    showPage("login");
+    return;
+  }
+
+  if (pageId === "soulmates" && !isLoggedIn) {
+    showCustomAlert("Please login to view or post soulmate profiles.", "error");
+    showPage("login");
+    return;
+  }
+
+  // Hide all pages
+  document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+
+  // Show requested page
   const page = document.getElementById(pageId);
   if (page) page.style.display = "block";
 
-  if (pageId === "swaps" && isLoggedIn) {
-    loadSwaps();
+  // Page-specific logic
+  if (pageId === "swaps" && isLoggedIn) loadSwaps();
+  if (pageId === "bomJobs") loadBOMJobs();
+  if (pageId === "resources") {
+    await checkPaymentStatus(); // Check if user paid before showing download links
+    loadResources();
   }
+  if (pageId === "soulmates") loadSoulmates();
 }
 
 
 
-// Registration handler
-document.getElementById("registerForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
-
-  try {
-    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-    currentUser = userCredential.user;
-    await currentUser.updateProfile({ displayName: name });
-    showCustomAlert("Registration successful! Please login.", "success");
-    showPage("login");
-    document.getElementById("registerForm").reset();
-  } catch (error) {
-    showCustomAlert("Error: " + error.message, "error");
-  }
-});
-
-// Login handler
-document.getElementById("loginForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const email = document.getElementById("loginEmail").value.trim();
-  const password = document.getElementById("loginPassword").value;
-
-  try {
-    const userCredential = await auth.signInWithEmailAndPassword(email, password);
-    currentUser = userCredential.user;
-    isLoggedIn = true;
-    showCustomAlert(`Welcome ${currentUser.displayName || currentUser.email}!`, "success");
-    showPage("swaps");
-    document.getElementById("loginForm").reset();
-    loadSwaps();
-  } catch (error) {
-    showCustomAlert("Login failed: " + error.message, "error");
-  }
-});
-
-// Logout helper (optional)
-function logout() {
-  auth.signOut();
-  isLoggedIn = false;
-  currentUser = null;
-  alert("Logged out.");
-  showPage("home");
-}
-
-// Generate a unique payment reference code
-function generatePaymentRef() {
-  return "TSK-" + Math.random().toString(36).substr(2, 9).toUpperCase();
-}
- document.getElementById("swapForm").addEventListener("submit", (e) => {
+  // ✅ Register
+  document.getElementById("registerForm").addEventListener("submit", async e => {
     e.preventDefault();
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
-    const customAlert = document.getElementById("customAlert");
-
-    if (!isLoggedIn || !currentUser) {
-      // Display the custom alert
-      customAlert.style.display = "block";
-
-      // Optionally hide the alert after a few seconds
-      setTimeout(() => {
-        customAlert.style.display = "none";
-      }, 3000); // 3 seconds
-
+    try {
+      const userCred = await auth.createUserWithEmailAndPassword(email, password);
+      currentUser = userCred.user;
+      await currentUser.updateProfile({ displayName: name });
+      showCustomAlert("Registration successful! Please login.", "success");
       showPage("login");
-      return;
+      e.target.reset();
+    } catch (err) {
+      showCustomAlert("Error: " + err.message, "error");
+    }
+  });
+
+  // ✅ Login
+  document.getElementById("loginForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value;
+
+    try {
+      const userCred = await auth.signInWithEmailAndPassword(email, password);
+      currentUser = userCred.user;
+      isLoggedIn = true;
+
+      const welcome = `Welcome ${currentUser.displayName || currentUser.email}!`;
+      showCustomAlert(isAdmin ? `Admin Access: ${welcome}` : welcome, "success");
+
+      showPage("swaps");
+      e.target.reset();
+    } catch (err) {
+      showCustomAlert("Login failed: " + err.message, "error");
+    }
+  });
+
+  // ✅ Logout
+  function logout() {
+    auth.signOut();
+    isLoggedIn = false;
+    currentUser = null;
+    showPage("home");
+    alert("Logged out.");
   }
 
-  const teacherName = document.getElementById("teacherName").value.trim();
-  const phone = document.getElementById("phone").value.trim();
-  const subjectCombination = document.getElementById("subjectCombination").value.trim();
-  const county = document.getElementById("county").value;
-  const swapCounty = document.getElementById("swapCounty").value;
-  const category = document.getElementById("category").value;
-  const hardship = document.getElementById("hardship").value;
-
-  if (!teacherName || !phone || !subjectCombination || !county || !swapCounty || !category || !hardship) {
-    alert("Please fill all fields.");
-    return;
-  }
-
-  const swapData = { teacherName, phone, subjectCombination, county, swapCounty, category, hardship };
-
-  // Directly save swap without payment validation
-  saveSwap(swapData);
-});
-
-// Save swap data to Firestore
-async function saveSwap(swap) {
-  try {
-    await db.collection("teacherSwaps").add({
-      ...swap,
-      userId: currentUser.uid,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    showCustomAlert("Swap added successfully!", "success");
-    document.getElementById("swapForm").reset();
-    loadSwaps();
-  } catch (error) {
-    showCustomAlert("Error saving swap: " + error.message, "error");
-  }
-}
-
-// Load swaps from Firestore and display in table
-async function loadSwaps() {
-  const tbody = document.querySelector("#swapTable tbody");
-  tbody.innerHTML = "";
-
-  let query = db.collection("teacherSwaps").orderBy("timestamp", "desc");
-
-  // Apply filters if any
-  const filterCategory = document.getElementById("filterCategory").value;
-  const filterSwapCounty = document.getElementById("filterSwapCounty").value;
-
-  if (filterCategory) query = query.where("category", "==", filterCategory);
-  if (filterSwapCounty) query = query.where("swapCounty", "==", filterSwapCounty);
-
-  try {
-    const snapshot = await query.get();
-
-    if (snapshot.empty) {
-      const tr = document.createElement("tr");
-      const td = document.createElement("td");
-      td.colSpan = 7;
-      td.textContent = "No swaps found.";
-      tr.appendChild(td);
-      tbody.appendChild(tr);
-      return;
+  // ✅ Swap Form Submit
+  document.getElementById("swapForm").addEventListener("submit", e => {
+    e.preventDefault();
+    if (!isLoggedIn || !currentUser) {
+      showPage("login");
+      return alert("You must be logged in.");
     }
 
-    snapshot.forEach(doc => {
-      const swap = doc.data();
-      const tr = document.createElement("tr");
+    const data = {
+      teacherName: document.getElementById("teacherName").value.trim(),
+      phone: document.getElementById("phone").value.trim(),
+      subjectCombination: document.getElementById("subjectCombination").value.trim(),
+      county: document.getElementById("county").value,
+      swapCounty: document.getElementById("swapCounty").value,
+      category: document.getElementById("category").value,
+      hardship: document.getElementById("hardship").value
+    };
 
-      // If user hasn't paid, blur the phone and subject columns
-      const blurData = !hasPaid;
+    if (Object.values(data).some(v => !v)) {
+      return alert("Please fill all fields.");
+    }
 
-      tr.innerHTML = `
-        <td>${swap.teacherName}</td>
-        <td>${swap.county}</td>
-        <td class="${blurData ? 'blurred' : ''}">${swap.phone}</td>
-        <td class="${blurData ? 'blurred' : ''}">${swap.subjectCombination}</td>
-        <td>${swap.swapCounty}</td>
-        <td>${swap.category}</td>
-        <td>${swap.hardship}</td>
-      `;
+    saveSwap(data);
+  });
 
-      // Clicking blurred phone or subject should prompt payment modal
-      if (blurData) {
-        tr.querySelectorAll(".blurred").forEach(cell => {
-          cell.style.cursor = "pointer";
-          cell.title = "Click to unlock by payment";
-          cell.onclick = () => {
-            showPaymentModal();
-          };
-        });
+  async function saveSwap(swap) {
+    try {
+      await db.collection("teacherSwaps").add({
+        ...swap,
+        userId: currentUser.uid,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      showCustomAlert("Swap added successfully!", "success");
+      document.getElementById("swapForm").reset();
+      loadSwaps();
+    } catch (err) {
+      showCustomAlert("Error saving swap: " + err.message, "error");
+    }
+  }
+
+  async function loadSwaps() {
+    const tbody = document.querySelector("#swapTable tbody");
+    tbody.innerHTML = "";
+
+    try {
+      const snapshot = await db.collection("teacherSwaps").orderBy("timestamp", "desc").get();
+      if (snapshot.empty) {
+        tbody.innerHTML = `<tr><td colspan="7">No swaps found.</td></tr>`;
+        return;
       }
 
-      tbody.appendChild(tr);
-    });
-  } catch (error) {
-    alert("Error loading swaps: " + error.message);
+      snapshot.forEach(doc => {
+        const s = doc.data();
+        const blur = !hasPaid && !isAdmin;
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${s.teacherName}</td>
+          <td>${s.county}</td>
+          <td class="${blur ? 'blurred' : ''}">${blur ? 'Hidden' : s.phone}</td>
+          <td class="${blur ? 'blurred' : ''}">${blur ? 'Hidden' : s.subjectCombination}</td>
+          <td>${s.swapCounty}</td>
+          <td>${s.category}</td>
+          <td>${s.hardship}</td>`;
+        if (blur) {
+          tr.querySelectorAll(".blurred").forEach(cell => {
+            cell.style.cursor = "pointer";
+            cell.title = "Click to unlock by payment";
+            cell.onclick = showPaymentModal;
+          });
+        }
+        tbody.appendChild(tr);
+      });
+    } catch (err) {
+      console.error("Error loading swaps:", err);
+      showCustomAlert("Error loading swaps: " + err.message, "error");
+    }
+  }
+
+  // ✅ BOM Job Submit
+  document.getElementById("bomJobForm").addEventListener("submit", async e => {
+    e.preventDefault();
+
+    if (!currentUser) {
+      return showCustomAlert("Please login to post a BOM job.", "error");
+    }
+
+    const job = {
+      subjects: document.getElementById("bomSubjects").value.trim(),
+      county: document.getElementById("bomCounty").value,
+      subcounty: document.getElementById("bomSubCounty").value.trim(),
+      school: document.getElementById("bomSchool").value.trim(),
+      salary: document.getElementById("bomSalary").value.trim(),
+      phone: document.getElementById("bomPhone").value.trim(),
+      postedBy: currentUser.uid,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    };
+
+    try {
+      await bomRef.add(job);
+      showCustomAlert("✅ BOM job posted successfully!", "success");
+      document.getElementById("bomJobForm").reset();
+      loadBOMJobs();
+    } catch (err) {
+      showCustomAlert("❌ Error posting job: " + err.message, "error");
+    }
+  });
+
+let bomJobsCache = [];
+let jobToDeleteId = null;
+
+// ✅ Load BOM Jobs
+async function loadBOMJobs() {
+  const tbody = document.querySelector("#bomJobsTable tbody");
+  tbody.innerHTML = "";
+
+  try {
+    const snapshot = await bomRef.orderBy("timestamp", "desc").get();
+    bomJobsCache = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    renderBOMJobs(bomJobsCache);
+  } catch (err) {
+    showCustomAlert("❌ Failed to load BOM jobs: " + err.message, "error");
   }
 }
 
-// Filter swaps button handler
-function filterSwaps() {
-  if (!isLoggedIn) {
-    alert("Please login to filter swaps.");
-    showPage("login");
+// ✅ Render BOM Jobs with optional admin buttons
+function renderBOMJobs(jobs) {
+  const tbody = document.querySelector("#bomJobsTable tbody");
+  tbody.innerHTML = "";
+
+  if (!jobs.length) {
+    tbody.innerHTML = `<tr><td colspan="7">No BOM jobs found.</td></tr>`;
     return;
   }
-  loadSwaps();
+
+  jobs.forEach(job => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${job.subjects}</td>
+      <td>${job.county}</td>
+      <td>${job.subcounty}</td>
+      <td>${job.school}</td>
+      <td>${job.salary}</td>
+      <td>
+        <a href="tel:${job.phone}" style="color:green;">Call</a><br>
+        <a href="https://wa.me/254${job.phone.replace(/^0/, '')}" target="_blank" style="color:#25D366;">WhatsApp</a>
+      </td>
+      ${isAdmin ? `<td><button onclick="confirmDeleteBOMJob('${job.id}')">🗑️ Delete</button></td>` : ''}
+    `;
+    tbody.appendChild(tr);
+  });
 }
 
-// On page load, show home page
-showPage("home");
+// ✅ Apply BOM Filters
+function applyBOMFilters() {
+  const subject = document.getElementById("filterSubject").value.toLowerCase();
+  const county = document.getElementById("filterCounty").value;
+  const minSalary = parseInt(document.getElementById("filterSalary").value) || 0;
 
-// Optional: Monitor auth state changes
-auth.onAuthStateChanged(user => {
-  if (user) {
-    currentUser = user;
-    isLoggedIn = true;
-    // Load swaps if on swaps page
-    if (document.getElementById("swaps").style.display === "block") {
-      loadSwaps();
-    }
-  } else {
-    currentUser = null;
-    isLoggedIn = false;
-    hasPaid = false;
-    showPage("home");
+  const filtered = bomJobsCache.filter(job => {
+    return (
+      (!subject || job.subjects.toLowerCase().includes(subject)) &&
+      (!county || job.county === county) &&
+      (!minSalary || parseInt(job.salary) >= minSalary)
+    );
+  });
+
+  renderBOMJobs(filtered);
+}
+
+// ✅ Delete BOM job logic
+function confirmDeleteBOMJob(jobId) {
+  jobToDeleteId = jobId;
+  document.getElementById("confirmDeleteModal").style.display = "flex";
+}
+
+function closeDeleteModal() {
+  jobToDeleteId = null;
+  document.getElementById("confirmDeleteModal").style.display = "none";
+}
+
+document.getElementById("confirmDeleteBtn").onclick = async () => {
+  if (!jobToDeleteId) return;
+
+  try {
+    await bomRef.doc(jobToDeleteId).delete();
+    showCustomAlert("🗑️ BOM job deleted successfully!", "success");
+    closeDeleteModal();
+    loadBOMJobs();
+  } catch (err) {
+    showCustomAlert("❌ Failed to delete: " + err.message, "error");
+  }
+};
+
+
+  // ✅ Alert Helper
+  function showCustomAlert(msg, type = "info") {
+    const el = document.createElement("div");
+    el.className = "alert";
+    el.style.backgroundColor = type === "error" ? "#f44336" : "#4CAF50";
+    el.textContent = msg;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 3000);
+  }
+
+  // ✅ Load home page first
+  showPage("home");
+ // ✅ Alert Utility
+  function showCustomAlert(msg, type = "info") {
+    const el = document.createElement("div");
+    el.className = "alert";
+    el.style.backgroundColor = type === "error" ? "#f44336" : "#4CAF50";
+    el.textContent = msg;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 3000);
+  }
+document.getElementById("resourceForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  if (!isLoggedIn) return showCustomAlert("Please login to upload resources.", "error");
+
+  const file = document.getElementById("resourceFile").files[0];
+  const title = document.getElementById("resourceTitle").value.trim();
+  const price = document.getElementById("resourcePrice").value.trim();
+
+  if (!file || !title || !price) return showCustomAlert("All fields required.", "error");
+
+  const filePath = `resources/${Date.now()}_${file.name}`;
+  const uploadTask = await storage.ref(filePath).put(file);
+  const downloadURL = await uploadTask.ref.getDownloadURL();
+
+  await resourceRef.add({
+    title,
+    price,
+    downloadURL,
+    filePath,
+    uploadedBy: currentUser.uid,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+  });
+
+  showCustomAlert("✅ Resource uploaded!", "success");
+  document.getElementById("resourceForm").reset();
+  loadResources();
+});
+async function loadResources() {
+  const tbody = document.querySelector("#resourcesTable tbody");
+  tbody.innerHTML = "";
+
+  const snapshot = await resourceRef.orderBy("timestamp", "desc").get();
+  if (snapshot.empty) {
+    tbody.innerHTML = `<tr><td colspan="3">No resources yet.</td></tr>`;
+    return;
+  }
+
+  snapshot.forEach(doc => {
+    const data = doc.data();
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${data.title}</td>
+      <td>${data.price}</td>
+ <td>
+  ${isAdmin ? `<a href="${data.downloadURL}" target="_blank">Download</a>` :
+    hasPaid ? `<a href="${data.downloadURL}" target="_blank">Download</a>` :
+    `<button onclick="showPaymentModal()">Pay to Download</button>`}
+</td>
+`;
+    tbody.appendChild(tr);
+  });
+}
+
+// Populate counties for soulmate form
+["smCounty", "smWorkCounty"].forEach(populateCounties);
+
+// Submit soulmate profile
+document.getElementById("soulmateForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  if (!currentUser) {
+    showCustomAlert("Please login to post your profile.", "error");
+    return;
+  }
+
+  const photoFile = document.getElementById("smPhoto").files[0];
+
+  if (!photoFile) {
+    showCustomAlert("Please upload a photo.", "error");
+    return;
+  }
+
+  try {
+    // Upload photo to Firebase Storage
+    const photoPath = `soulmatePhotos/${Date.now()}_${photoFile.name}`;
+    const photoSnap = await storage.ref(photoPath).put(photoFile);
+    const photoURL = await photoSnap.ref.getDownloadURL();
+
+    const data = {
+      name: document.getElementById("smName").value.trim(),
+      county: document.getElementById("smCounty").value,
+      age: document.getElementById("smAge").value.trim(),
+      tribe: document.getElementById("smTribe").value.trim(),
+      sex: document.getElementById("smSex").value,
+      occupation: document.getElementById("smOccupation").value.trim(),
+      workCounty: document.getElementById("smWorkCounty").value,
+      phone: document.getElementById("smPhone").value.trim(),
+      status: document.getElementById("smStatus").value,
+      kids: document.getElementById("smKids").value,
+      photoURL, // ✅ Save the photo URL
+      postedBy: currentUser.uid,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    };
+
+    await soulmateRef.add(data);
+    showCustomAlert("✅ Profile submitted!", "success");
+    document.getElementById("soulmateForm").reset();
+    loadSoulmates();
+  } catch (err) {
+    console.error("Error uploading soulmate:", err);
+    showCustomAlert("Error saving profile: " + err.message, "error");
   }
 });
 
+
+// Load all soulmate profiles
+async function loadSoulmates() {
+  const tbody = document.querySelector("#soulmateTable tbody");
+  tbody.innerHTML = "";
+
+  const snapshot = await soulmateRef.orderBy("timestamp", "desc").get();
+  if (snapshot.empty) {
+    tbody.innerHTML = `<tr><td colspan="7">No soulmate profiles found.</td></tr>`;
+    return;
+  }
+
+ snapshot.forEach(doc => {
+  const d = doc.data();
+  const tr = document.createElement("tr");
+
+  // Safely encode data for use in onclick
+  const safeData = encodeURIComponent(JSON.stringify(d));
+
+  tr.innerHTML = `
+    <td>
+      <img src="${d.photoURL || 'default.jpg'}" alt="Photo" 
+           style="width:40px; height:40px; border-radius:50%; object-fit:cover;" />
+    </td>
+    <td>
+      <a href="#" onclick='showSoulmateModal(JSON.parse(decodeURIComponent("${safeData}")))'
+         style="color:#2196f3;">${d.name}</a>
+    </td>
+    <td>${d.county}</td>
+    <td>${d.age}</td>
+    <td>${d.tribe}</td>
+    <td>${d.sex}</td>
+    <td>${d.occupation}</td>
+    <td>${d.workCounty}</td>
+    <td>
+      <a href="tel:${d.phone}" style="color:green;">Call</a><br>
+      <a href="https://wa.me/254${d.phone.replace(/^0/, '')}" target="_blank" style="color:#25D366;">WhatsApp</a>
+    </td>
+    <td>${d.status || '—'}</td>
+    <td>${d.kids || '—'}</td>
+  `;
+  tbody.appendChild(tr);
+});
+
+}
+
+function showSoulmateModal(data) {
+  const photo = data.photoURL || 'default.jpg';
+
+  // 👀 Conditionally show phone only if paid
+  const phoneSection = hasPaid || isAdmin ? `
+    <p><strong>Phone:</strong> 
+      <a href="tel:${data.phone}" style="color:green;">${data.phone}</a><br>
+      <a href="https://wa.me/254${data.phone.replace(/^0/, '')}" target="_blank" style="color:#25D366;">WhatsApp</a>
+    </p>
+  ` : `
+    <p><strong>Phone:</strong> <span style="color:crimson;">Locked — <a href="#" onclick="showPaymentModal()">Unlock Now</a></span></p>
+  `;
+
+  const detailHTML = `
+    <p style="text-align:center;">
+      <img src="${photo}" alt="Photo of ${data.name}" 
+           style="max-width:120px; height:120px; border-radius:50%; object-fit:cover; border:4px solid #e91e63; box-shadow: 0 0 8px #e91e63;">
+    </p>
+    <p><strong>Name:</strong> ${data.name}</p>
+    <p><strong>County:</strong> ${data.county}</p>
+    <p><strong>Age:</strong> ${data.age}</p>
+    <p><strong>Tribe:</strong> ${data.tribe}</p>
+    <p><strong>Sex:</strong> ${data.sex}</p>
+    <p><strong>Occupation:</strong> ${data.occupation}</p>
+    <p><strong>Work County:</strong> ${data.workCounty}</p>
+    <p><strong>Marital Status:</strong> ${data.status || 'Not specified'}</p>
+    <p><strong>Has Kids:</strong> ${data.kids || 'Not specified'}</p>
+    ${phoneSection}
+    <div style="text-align:center; margin-top:10px;">
+      <button onclick="sendInterest('${data.name}')" style="padding:8px 14px; background:#ff4081; border:none; border-radius:5px; color:#fff; cursor:pointer;">
+        ❤️ Send Interest
+      </button>
+    </div>
+  `;
+
+  document.getElementById("soulmateDetails").innerHTML = detailHTML;
+  document.getElementById("soulmateModal").style.display = "block";
+}
+async function sendInterest(toName) {
+  if (!isLoggedIn || !currentUser) {
+    showCustomAlert("Please login to send interest.", "error");
+    return;
+  }
+
+  try {
+    await db.collection("soulmateInterests").add({
+      fromUserId: currentUser.uid,
+      fromName: currentUser.displayName || currentUser.email,
+      toName,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    showCustomAlert(`❤️ Interest sent to ${toName}!`, "success");
+  } catch (err) {
+    showCustomAlert("Error sending interest: " + err.message, "error");
+  }
+}
+async function isMutualMatch(name) {
+  const myName = currentUser.displayName || currentUser.email;
+
+  const sent = await db.collection("soulmateInterests")
+    .where("fromUserId", "==", currentUser.uid)
+    .where("toName", "==", name).get();
+
+  const received = await db.collection("soulmateInterests")
+    .where("fromName", "==", name)
+    .where("toName", "==", myName).get();
+
+  return !sent.empty && !received.empty;
+}
+let chatPartner = '';
+let chatConversationId = '';
+
+function openChatModal(partnerName) {
+  document.getElementById("chatWith").textContent = partnerName;
+  document.getElementById("chatBox").style.display = "block";
+
+  const myName = currentUser.displayName || currentUser.email;
+  chatPartner = partnerName;
+  chatConversationId = [myName, partnerName].sort().join("_");
+
+  listenForMessages();
+}
+
+function closeChat() {
+  document.getElementById("chatBox").style.display = "none";
+  document.getElementById("chatMessages").innerHTML = '';
+  chatConversationId = '';
+}
+
+function sendChatMessage() {
+  const msg = document.getElementById("chatInput").value.trim();
+  if (!msg || !chatConversationId) return;
+
+  db.collection("messages").doc(chatConversationId).collection("chats").add({
+    from: currentUser.displayName || currentUser.email,
+    to: chatPartner,
+    content: msg,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+  });
+
+  document.getElementById("chatInput").value = '';
+}
+
+function listenForMessages() {
+  const container = document.getElementById("chatMessages");
+  db.collection("messages").doc(chatConversationId).collection("chats")
+    .orderBy("timestamp")
+    .onSnapshot(snapshot => {
+      container.innerHTML = '';
+      snapshot.forEach(doc => {
+        const d = doc.data();
+        container.innerHTML += `<div><strong>${d.from}:</strong> ${d.content}</div>`;
+      });
+      container.scrollTop = container.scrollHeight;
+    });
+}
+
+isMutualMatch(data.name).then(isMatch => {
+  if (isMatch) {
+    document.getElementById("soulmateDetails").innerHTML += `
+      <div style="text-align:center; margin-top:10px;">
+        <button onclick="openChatModal('${data.name}')" style="padding:8px 14px; background:#673ab7; color:#fff; border:none; border-radius:5px;">
+          💬 Open Chat
+        </button>
+      </div>
+    `;
+  }
+});
+
+
+function closeSoulmateModal() {
+  document.getElementById("soulmateModal").style.display = "none";
+}
+function filterSoulmatesByAge() {
+  const range = document.getElementById("ageFilter").value;
+  const rows = document.querySelectorAll("#soulmateTable tbody tr");
+
+  rows.forEach(row => {
+    const age = parseInt(row.children[2].innerText); // Age column
+    let show = true;
+
+    if (range === "20-29") show = age >= 20 && age <= 29;
+    else if (range === "30-39") show = age >= 30 && age <= 39;
+    else if (range === "40-49") show = age >= 40 && age <= 49;
+    else if (range === "50+") show = age >= 50;
+
+    row.style.display = show ? "" : "none";
+  });
+}
 
 function showPaymentModal() {
   const paymentModal = document.createElement("div");
@@ -532,7 +1667,7 @@ function showPaymentModal() {
     <div class="modal">
       <div class="modal-content">
         <h2>Unlock Numbers</h2>
-        <p>To unlock all numbers, please send <span style="color: green; font-weight: bold;">Ksh 100</span> to <strong style="color: green;">0741236547</strong>.</p>
+        <p>To unlock all numbers and swaps, please send <span style="color: green; font-weight: bold;">Ksh 100</span> to <strong style="color: green;">0741236547</strong>.</p>
         <p style="color: red;">After payment, click the "Confirm Payment" button below and enter the transaction reference.</p>
         <input type="text" id="transactionReference" placeholder="Enter Transaction Reference" />
         <button id="confirmPayment">Confirm Payment</button>
@@ -596,40 +1731,55 @@ function showPaymentModal() {
 
 // Handle payment confirmation
 document.getElementById("confirmPayment").onclick = async () => {
-    const transactionReference = document.getElementById("transactionReference").value;
+  const transactionReference = document.getElementById("transactionReference").value;
 
-    if (!transactionReference) {
-        showCustomAlert("Please enter a transaction reference.", "error");
-        return;
+  if (!transactionReference) {
+    showCustomAlert("Please enter a transaction reference.", "error");
+    return;
+  }
+
+  try {
+    const response = await fetch("http://localhost:3000/verify-payment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ transactionReference }),
+    });
+
+    const result = await response.json();
+
+    if (result.paymentConfirmed) {
+      showCustomAlert("✅ Payment confirmed! You can now access premium content.", "success");
+
+      // ✅ Update local state
+      hasPaid = true;
+
+      // ✅ Store payment record in Firestore
+      await db.collection("paymentAccess").doc(currentUser.uid).set({
+        hasPaid: true,
+        verifiedAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+      // ✅ Refresh protected content
+      loadSwaps();
+      loadResources();
+
+    } else {
+      showCustomAlert("❌ Payment not confirmed. Please try again.", "error");
     }
-
-    try {
-        const response = await fetch("http://localhost:3000/verify-payment", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ transactionReference }),
-        });
-
-        const result = await response.json();
-
-        if (result.paymentConfirmed) {
-            showCustomAlert("Payment confirmed! You can now view all numbers.", "success");
-            hasPaid = true;
-            loadSwaps();
-        } else {
-            showCustomAlert("Payment not confirmed. Please try again.", "error");
-        }
-    } catch (error) {
-        showCustomAlert("Error verifying payment: " + error.message, "error");
-    }
+  } catch (error) {
+    console.error("Payment verification error:", error);
+    showCustomAlert("❌ Error verifying payment: " + error.message, "error");
+  }
 };
+
   // Handle modal close
   document.getElementById("closeModal").onclick = () => {
     document.body.removeChild(paymentModal);
   };
 }
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -639,11 +1789,11 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-// M-Pesa credentials
-const consumerKey = "  kXmNZSCVtFAo1yX7HxpShAZG7Gpdp3n6qvPFl0x4Cx9C7IWj"; // Replace with your Consumer Key
-const consumerSecret = "  snRsVAG1ne0NcgPhr1F6tDYaxNBia3llIopy4VCmMY5W7ILd8P4TqGg4Wz3WoiMm"; // Replace with your Consumer Secret
-const shortCode = "YOUR_SHORTCODE"; // Replace with your Shortcode
-const passkey = "YOUR_PASSKEY"; // Replace with your Lipa na M-Pesa passkey
+// M-Pesa credentials for Sandbox
+const consumerKey = "kXmNZSCVtFAo1yX7HxpShAZG7Gpdp3n6qvPFl0x4Cx9C7IWj"; // Sandbox Consumer Key
+const consumerSecret = "snRsVAG1ne0NcgPhr1F6tDYaxNBia3llIopy4VCmMY5W7ILd8P4TqGg4Wz3WoiMm"; // Sandbox Consumer Secret
+const shortCode = "174379"; // Sandbox Shortcode for testing
+const passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2cbfdf6f8b7190e3c1d7c3ebbf4b1b21"; // Sandbox Lipa na M-Pesa passkey
 
 // Function to get access token
 async function getAccessToken() {
@@ -668,8 +1818,8 @@ async function verifyPayment(transactionReference) {
   const url = "https://sandbox.safaricom.co.ke/mpesa/transactionstatus/v1/query";
 
   const requestPayload = {
-    Initiator: "YOUR_INITIATOR_NAME", // Replace with your initiator name
-    SecurityCredential: " ovN6jtG+3V4WyGYntil5atvfLjIH2cMu2ybzhb7+KKhp+vd4pDhjbjzg1/kznxFGABDXYVZKRks/uDiCQroGSJ7atmmSSHOmrgSWw/SGuN22u9QsSUtEODxSLN+sp7zA0vLOspKgYY/ArLJVHeYj7U5QNmcLsEsjER2sk//EUdbQn1Feal5nzVY7iabW4iNPNyI/kVHS7HuyXq9zo/XRGLgN+fbSSoNcs0WmeWsd1KkPt1+kJdYAhHXRL2JIluRYH04m704vY59IJEjcoqz4ujpRaCHTJFuvTZJ1Bs3iwH8B5BvOOpy6hI1wrBIVsX1iYlUaMp8hVsDL7ePtfdX26w==", // Replace with the security credential from Safaricom
+    Initiator: "testapi", // Sandbox Initiator Name
+    SecurityCredential: "bfb279f9aa9bdbcf158e97dd71a467cd2cbfdf6f8b7190e3c1d7c3ebbf4b1b21", // Sandbox security credential (use OpenSSL to generate if needed)
     CommandID: "TransactionStatusQuery",
     TransactionID: transactionReference, // Transaction Reference
     PartyA: shortCode, // Shortcode sending the request
@@ -715,7 +1865,6 @@ app.post("/verify-payment", async (req, res) => {
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
-
 function showCustomAlert(message, type) {
     const alertBox = document.createElement("div");
     alertBox.innerText = message;
@@ -744,6 +1893,305 @@ function showCustomAlert(message, type) {
         alertBox.remove();
     }, 3000); // Automatically remove alert after 3 seconds
 }
+async function findMatchingSwaps() {
+  if (!isLoggedIn || !currentUser) {
+    showCustomAlert("You must be logged in to check swaps.", "error");
+    return;
+  }
+
+  try {
+    const swapsSnapshot = await db.collection("teacherSwaps").get();
+    const swaps = [];
+
+    // Collect all swaps
+    swapsSnapshot.forEach(doc => {
+      swaps.push({ id: doc.id, ...doc.data() });
+    });
+
+    // Check for matches
+    const matches = [];
+    swaps.forEach((swap1, index) => {
+      swaps.forEach((swap2, idx) => {
+        if (
+          index !== idx &&
+          swap1.subjectCombination === swap2.subjectCombination &&
+          swap1.county === swap2.swapCounty &&
+          swap1.swapCounty === swap2.county
+        ) {
+          matches.push(swap1);
+        }
+      });
+    });
+
+    if (matches.length > 0) {
+      populateMatchesModal(matches);
+    } else {
+      showCustomAlert("No matching swaps found.", "info");
+    }
+  } catch (error) {
+    console.error("Error finding matches:", error);
+    showCustomAlert("Error finding matches: " + error.message, "error");
+  }
+}
+
+function populateMatchesModal(matches) {
+  const matchesList = document.getElementById("matchesList");
+  matchesList.innerHTML = ""; // Clear previous entries
+
+  matches.forEach(match => {
+    const matchDiv = document.createElement("div");
+    matchDiv.style.margin = "10px 0";
+    matchDiv.innerHTML = `
+      <p><strong>Name:</strong> ${match.teacherName}</p>
+      <p><strong>Phone:</strong> ${match.phone}</p>
+      <p><strong>Subjects:</strong> ${match.subjectCombination}</p>
+      <p><strong>County:</strong> ${match.county}</p>
+      <p><strong>Wants to Swap to:</strong> ${match.swapCounty}</p>
+      <hr>
+    `;
+    matchesList.appendChild(matchDiv);
+  });
+
+  document.getElementById("matchesModal").style.display = "flex";
+}
+
+function closeMatchesModal() {
+  document.getElementById("matchesModal").style.display = "none";
+}
+async function findTriangularSwaps() {
+  if (!isLoggedIn || !currentUser) {
+    showCustomAlert("You must be logged in to check triangular swaps.", "error");
+    return;
+  }
+
+  try {
+    const swapsSnapshot = await db.collection("teacherSwaps").get();
+    const swaps = [];
+
+    // Collect all swaps
+    swapsSnapshot.forEach(doc => {
+      swaps.push({ id: doc.id, ...doc.data() });
+    });
+
+    // Find triangular swaps
+    const triangularSwaps = [];
+    swaps.forEach((swapA, indexA) => {
+      swaps.forEach((swapB, indexB) => {
+        if (
+          indexA !== indexB &&
+          swapA.swapCounty === swapB.county &&
+          swapA.county !== swapB.swapCounty
+        ) {
+          swaps.forEach((swapC, indexC) => {
+            if (
+              indexB !== indexC &&
+              swapB.swapCounty === swapC.county &&
+              swapC.swapCounty === swapA.county
+            ) {
+              triangularSwaps.push([swapA, swapB, swapC]);
+            }
+          });
+        }
+      });
+    });
+
+    if (triangularSwaps.length > 0) {
+      populateTriangularSwapsModal(triangularSwaps);
+    } else {
+      showCustomAlert("No triangular swaps found.", "info");
+    }
+  } catch (error) {
+    console.error("Error finding triangular swaps:", error);
+    showCustomAlert("Error finding triangular swaps: " + error.message, "error");
+  }
+}
+
+function populateTriangularSwapsModal(triangularSwaps) {
+  const swapsList = document.getElementById("triangularSwapsList");
+  swapsList.innerHTML = ""; // Clear previous entries
+
+  triangularSwaps.forEach(([swapA, swapB, swapC]) => {
+    const swapDiv = document.createElement("div");
+    swapDiv.style.margin = "10px 0";
+    swapDiv.innerHTML = `
+      <div>
+        <p><strong>Teacher A:</strong> ${swapA.teacherName} (${swapA.county} ? ${swapA.swapCounty})</p>
+        <p><strong>Teacher B:</strong> ${swapB.teacherName} (${swapB.county} ? ${swapB.swapCounty})</p>
+        <p><strong>Teacher C:</strong> ${swapC.teacherName} (${swapC.county} ? ${swapC.swapCounty})</p>
+      </div>
+      <hr>
+    `;
+    swapsList.appendChild(swapDiv);
+  });
+
+  document.getElementById("triangularSwapsModal").style.display = "flex";
+}
+
+// Close modal functionality
+document.getElementById("closeTriangularSwapsModal").addEventListener("click", () => {
+  document.getElementById("triangularSwapsModal").style.display = "none";
+});
+
+function showToast(message, type = "info") {
+  const toast = document.createElement("div");
+  toast.textContent = message;
+  toast.style.padding = "12px 18px";
+  toast.style.marginTop = "10px";
+  toast.style.borderRadius = "6px";
+  toast.style.fontSize = "15px";
+  toast.style.color = "white";
+  toast.style.boxShadow = "0 4px 8px rgba(0,0,0,0.1)";
+  toast.style.opacity = "0.95";
+  toast.style.transition = "transform 0.3s ease, opacity 0.3s ease";
+
+  // Color based on type
+  switch (type) {
+    case "success":
+      toast.style.backgroundColor = "#28a745"; // Green
+      break;
+    case "error":
+      toast.style.backgroundColor = "#dc3545"; // Red
+      break;
+    case "warning":
+      toast.style.backgroundColor = "#ffc107"; // Yellow
+      toast.style.color = "#000";
+      break;
+    default:
+      toast.style.backgroundColor = "#007bff"; // Blue
+  }
+
+  // Add to container
+  const container = document.getElementById("toastContainer");
+  container.appendChild(toast);
+
+  // Auto remove
+  setTimeout(() => {
+    toast.style.opacity = "0";
+    toast.style.transform = "translateX(100%)";
+    setTimeout(() => container.removeChild(toast), 400);
+  }, 3000);
+}
+
+
+function confirmDeleteSwap(callback) {
+  const modal = document.getElementById("confirmDeleteModal");
+  const progressBar = document.getElementById("confirmProgressBar");
+  modal.style.display = "flex";
+
+  let duration = 5; // seconds
+  let width = 100;
+  let interval;
+
+  function startCountdown() {
+    interval = setInterval(() => {
+      width -= 100 / (duration * 10);
+      progressBar.style.width = width + "%";
+
+      if (width <= 0) {
+        clearInterval(interval);
+        modal.style.display = "none";
+        callback(false);
+        showToast(" Deletion timed out.", "warning");
+      }
+    }, 100);
+  }
+
+  // Confirm click
+  document.getElementById("confirmYes").onclick = () => {
+    clearInterval(interval);
+    modal.style.display = "none";
+    callback(true);
+  };
+
+  // Cancel click
+  document.getElementById("confirmNo").onclick = () => {
+    clearInterval(interval);
+    modal.style.display = "none";
+    callback(false);
+    showToast(" Deletion cancelled.", "warning");
+  };
+
+  // Reset bar and start
+  progressBar.style.width = "100%";
+  startCountdown();
+}
+
+async function deleteSwap(id) {
+  confirmDeleteSwap(async (confirmed) => {
+    if (!confirmed) {
+      showToast("Deletion cancelled.", "warning");
+      return;
+    }
+
+    try {
+      await db.collection("teacherSwaps").doc(id).delete();
+      showToast("Swap deleted successfully.", "success");
+      loadSwaps(); // Reload updated list
+    } catch (error) {
+      console.error("Delete failed:", error);
+      showToast(" Failed to delete swap: " + error.message, "error");
+    }
+  });
+}
+
+
+function showCustomAlert(message, type = "info") {
+  const alertBox = document.createElement("div");
+  alertBox.innerText = message;
+
+  alertBox.style.position = "fixed";
+  alertBox.style.top = "50%";
+  alertBox.style.left = "50%";
+  alertBox.style.transform = "translate(-50%, -50%)";
+  alertBox.style.padding = "20px";
+  alertBox.style.borderRadius = "8px";
+  alertBox.style.color = "white";
+  alertBox.style.zIndex = "1000";
+  alertBox.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+  alertBox.style.fontSize = "16px";
+  alertBox.style.textAlign = "center";
+
+  if (type === "success") {
+    alertBox.style.backgroundColor = "#4caf50";
+  } else if (type === "error") {
+    alertBox.style.backgroundColor = "#f44336";
+  } else {
+    alertBox.style.backgroundColor = "#007bff";
+  }
+
+  document.body.appendChild(alertBox);
+  setTimeout(() => {
+    alertBox.remove();
+  }, 3000);
+}
+
+
+async function loadNotifications() {
+  const myName = currentUser.displayName || currentUser.email;
+  const ul = document.getElementById("notificationList");
+  ul.innerHTML = "<li>Loading...</li>";
+
+  try {
+    const snapshot = await db.collection("soulmateInterests")
+      .where("toName", "==", myName)
+      .orderBy("timestamp", "desc")
+      .get();
+
+    if (snapshot.empty) {
+      ul.innerHTML = "<li>No notifications yet.</li>";
+      return;
+    }
+
+    ul.innerHTML = "";
+    snapshot.forEach(doc => {
+      const d = doc.data();
+      ul.innerHTML += `<li>💌 <strong>${d.fromName}</strong> liked you!</li>`;
+    });
+  } catch (err) {
+    ul.innerHTML = `<li>Error loading notifications: ${err.message}</li>`;
+  }
+}
+
 
   </script>
 </body>
