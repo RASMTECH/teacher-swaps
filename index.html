@@ -1282,6 +1282,109 @@ nav ul li {
       transform: translateX(100%);
     }
   }
+.scrolling-banner-content:hover {
+  animation-play-state: paused;
+}
+/* 🔄 Spinner Fix (in case Font Awesome didn’t load properly) */
+.fa-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 🎨 Trending Highlight Animation */
+.trending-highlight {
+  background: #fffde7;
+  border: 2px solid #ff9800;
+  border-radius: 10px;
+  padding: 10px;
+  animation: glowPulse 1.8s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(255, 152, 0, 0.4);
+  margin-bottom: 12px;
+}
+
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 152, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 152, 0, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(255, 152, 0, 0.3);
+  }
+}
+.stars-container {
+  display: flex;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.star {
+  font-size: 30px;
+  color: #ddd;
+}
+
+.star:hover {
+  color: gold;
+}
+
+.star.selected {
+  color: gold;
+}
+.photo-container {
+    position: relative;
+    width: 200px;
+    text-align: center;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 320px;
+  }
+
+  .photo-container img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .buy-button {
+    position: relative;
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: auto;
+  }
+
+  .photo-container:hover img {
+    filter: blur(5px);
+  }
+
+  /* Modal Styles */
+  #imageModal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  #buyNowButton {
+    display: block;
+  }
+
+  #downloadButton {
+    display: none; /* Hidden until after payment */
+  }
 </style>
 
 </head>
@@ -1301,8 +1404,7 @@ nav ul li {
   </div>
 </div>
 <div id="loggedInUser" style="position:absolute; top:15px; right:20px; color:white; font-weight:bold;"></div>
-
- <nav>
+<nav>
   <ul>
     <li><a class="menu-box" href="#" onclick="showPage('home')">
       <img src="https://i.imgur.com/lek58ah.jpeg" alt="Home">
@@ -1320,7 +1422,7 @@ nav ul li {
     </li>
 
     <li><a class="menu-box" href="#" onclick="showPage('swaps')">
-      <img src="https://i.imgur.com/6bAPpPi.jpeg" alt="Swaps">
+      <img src="https://i.imgur.com/iqBwsWm.png" alt="Swaps">
       <span>View Swaps</span></a>
     </li>
 
@@ -1335,7 +1437,7 @@ nav ul li {
     </li>
 
     <li><a class="menu-box" href="#" onclick="showPage('soulmates')">
-      <img src="https://i.imgur.com/mUbaq1y.jpeg" alt="Soulmate">
+      <img src="https://i.imgur.com/FJjbSK9.jpeg" alt="Soulmate">
       <span>Soulmate</span></a>
     </li>
 
@@ -1349,18 +1451,18 @@ nav ul li {
       <span>Market</span></a>
     </li>
 
-    <li><a class="menu-box" href="#" onclick="showPage('contact')">
-      <img src="https://i.imgur.com/SPqGvz9.jpeg" alt="Contact">
-      <span>Contact Us</span></a>
+    <li><a class="menu-box" href="#" onclick="showPage('gallery')">
+      <img src="https://i.imgur.com/GavIBlL.jpeg" alt="Gallery">
+      <span> Resources </span></a>
     </li>
 
-    <li><a class="menu-box" href="#" onclick="showPage('trendingSection')">
+    <li><a class="menu-box" href="#" onclick="showPage('trendingSection'); loadTrendingItems();">
       <img src="https://i.imgur.com/DmfP8G0.jpeg" alt="Trending">
       <span>🔥 Trending</span></a>
     </li>
 
     <li><a class="menu-box" href="#" onclick="showPage('usageHelp')">
-      <img src="https://i.imgur.com/6jxOlvw.jpeg" alt="Help">
+      <img src="https://i.imgur.com/tHuRu3z.jpeg" alt="Help">
       <span>📘 How to Use</span></a>
     </li>
 
@@ -1376,11 +1478,153 @@ nav ul li {
       <img src="https://i.imgur.com/6su2d7i.jpeg" alt="My Chats">
       <span>My Chats</span></a>
     </li>
+
+    <li><a class="menu-box" href="#" onclick="showPage('contact')">
+      <img src="https://i.imgur.com/SPqGvz9.jpeg" alt="Contact">
+      <span>Contact Us</span></a>
+    </li>
   </ul>
 </nav>
 
 
 </header>
+
+
+<!-- Gallery Section -->
+<div id="gallery" class="page" style="display:none;">
+<!-- Filter Options -->
+<div id="filterOptions" style="display: flex; justify-content: center; gap: 20px; margin: 20px 0;">
+  <select id="filterGrade" onchange="filterGallery()">
+    <option value="">Select Grade</option>
+    <option value="Grade 1">Grade 1</option>
+    <option value="Grade 2">Grade 2</option>
+    <option value="Grade 3">Grade 3</option>
+    <option value="Grade 4">Grade 4</option>
+    <option value="Grade 5">Grade 5</option>
+    <option value="Grade 6">Grade 6</option>
+    <option value="Grade 7">Grade 7</option>
+    <option value="Grade 8">Grade 8</option>
+    <option value="Grade 9">Grade 9</option>
+    <option value="Grade 10">Grade 10</option>
+    <option value="Grade 11">Grade 11</option>
+    <option value="Grade 12">Grade 12</option>
+  </select>
+
+  <select id="filterSubject" onchange="filterGallery()">
+    <option value="">Select Subject</option>
+    <option value="Math">Math</option>
+    <option value="Science">Science</option>
+    <option value="English">English</option>
+    <option value="Kiswahili">Kiswahili</option>
+    <option value="History">History</option>
+    <option value="Geography">Geography</option>
+    <option value="Biology">Biology</option>
+    <option value="Chemistry">Chemistry</option>
+    <option value="Physics">Physics</option>
+    <option value="CRE">CRE</option>
+    <option value="PPI">PPI</option>
+    <option value="Agriculture">Agriculture</option>
+    <option value="Computer Science">Computer Science</option>
+    <option value="Music">Music</option>
+    <option value="Physical Education">Physical Education</option>
+    <option value="Fine Arts">Fine Arts</option>
+    <option value="Business Studies">Business Studies</option>
+    <option value="Home Science">Home Science</option>
+    <option value="Art & Design">Art & Design</option>
+    <option value="Sports & Recreation">Sports & Recreation</option>
+    <option value="Foreign Languages">Foreign Languages</option>
+    <option value="Theatre & Film">Theatre & Film</option>
+    <option value="Creative Arts">Creative Arts</option>
+    <option value="Social Studies">Social Studies</option> <!-- Added Subject -->
+    <option value="Pretechnical Studies">Pretechnical Studies</option> <!-- Added Subject -->
+  </select>
+
+  <select id="filterTerm" onchange="filterGallery()">
+    <option value="">Select Term</option>
+    <option value="Term 1">Term 1</option>
+    <option value="Term 2">Term 2</option>
+    <option value="Term 3">Term 3</option>
+  </select>
+</div>
+  <h2>Resources</h2>
+  <div id="photoContainer" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 20px 0;">
+    <!-- Image 1 with hardcoded details -->
+    <div class="photo-container" data-grade="Grade 1" data-subject="Math" data-term="Term 1" style="position: relative; width: 200px; text-align: center; background-color: #f8f8f8; border-radius: 10px; padding: 10px; display: flex; flex-direction: column; justify-content: space-between; height: 320px;">
+      <img src="https://i.imgur.com/jixmLF9.jpeg" alt="Rasm" class="logo-img" style="width: 100%; height: 150px; object-fit: cover;" onclick="openModal('https://i.imgur.com/jixmLF9.jpeg', 'Photo 1', 'Grade 1', 'Term 1', 'Math', 'Algebra', 'Linear Equations')">
+      <div class="photo-details" style="margin-top: 10px; font-size: 14px;">
+        <p style="margin: 2px 0; color: #2c3e50;">Title: Lesson Loan</p>
+        <p style="margin: 2px 0; color: #3498db;">Grade: 1</p>
+        <p style="margin: 2px 0; color: #e74c3c;">Term: 1</p>
+        <p style="margin: 2px 0; color: #2ecc71;">Subject: Math</p>
+        <p style="margin: 2px 0; color: #f39c12;">Strand: Algebra</p>
+        <p style="margin: 2px 0; color: #9b59b6;">Substrand: Linear Equations</p>
+      </div>
+      <button class="buy-button" onclick="openModal('https://i.imgur.com/jixmLF9.jpeg', 'Photo 1', 'Grade 1', 'Term 1', 'Math', 'Algebra', 'Linear Equations')" style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: auto;">
+        Buy Now
+      </button>
+    </div>
+
+    <!-- Image 2 with hardcoded details -->
+    <div class="photo-container" data-grade="Grade 2" data-subject="Science" data-term="Term 2" style="position: relative; width: 200px; text-align: center; background-color: #f8f8f8; border-radius: 10px; padding: 10px; display: flex; flex-direction: column; justify-content: space-between; height: 320px;">
+      <img src="https://i.imgur.com/bbHniIi.jpeg" alt="Rasm" class="logo-img" style="width: 100%; height: 150px; object-fit: cover;" onclick="openModal('https://i.imgur.com/bbHniIi.jpeg', 'Photo 2', 'Grade 2', 'Term 2', 'Science', 'Physics', 'Forces')">
+      <div class="photo-details" style="margin-top: 10px; font-size: 14px;">
+        <p style="margin: 2px 0; color: #2c3e50;">Title: Lesson Loan</p>
+        <p style="margin: 2px 0; color: #3498db;">Grade: 2</p>
+        <p style="margin: 2px 0; color: #e74c3c;">Term: 2</p>
+        <p style="margin: 2px 0; color: #2ecc71;">Subject: Science</p>
+        <p style="margin: 2px 0; color: #f39c12;">Strand: Physics</p>
+        <p style="margin: 2px 0; color: #9b59b6;">Substrand: Forces</p>
+      </div>
+      <button class="buy-button" onclick="openModal('https://i.imgur.com/bbHniIi.jpeg', 'Photo 2', 'Grade 2', 'Term 2', 'Science', 'Physics', 'Forces')" style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: auto;">
+        Buy Now
+      </button>
+    </div>
+
+    <!-- Add more images with hardcoded details as needed -->
+  </div>
+</div>
+
+<!-- Modal for Full Image View -->
+<div id="imageModal" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center;">
+  <div style="position: relative; text-align: center;">
+    <img id="modalImage" src="" alt="Full Image" style="max-width: 40%; max-height: 40%; border-radius: 10px;">
+    
+    <!-- Display image details -->
+    <div id="imageDetails" style="margin-top: 20px; color: #fff;">
+      <p id="imageTitle" style="color: #2c3e50;"></p>
+      <p id="imageGrade" style="color: #3498db;"></p>
+      <p id="imageTerm" style="color: #e74c3c;"></p>
+      <p id="imageSubject" style="color: #2ecc71;"></p>
+      <p id="imageStrand" style="color: #f39c12;"></p>
+      <p id="imageSubstrand" style="color: #9b59b6;"></p>
+    </div>
+
+    <button onclick="closeModal()" style="position: absolute; top: 10px; right: 10px; background-color: #ff6347; color: white; border: none; padding: 10px; border-radius: 50%;">X</button>
+    
+    <!-- Buy Now Button inside the Modal -->
+    <div id="buyNowButton" style="margin-top: 20px; display: block;">
+      <button onclick="showPaymentModalFor('photo', 25, 'image123', 'Photo 1')" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; font-size: 16px;">
+        Pay Ksh 25 to Buy
+      </button>
+    </div>
+
+    <!-- Download Button (Initially Hidden) for Admin -->
+    <div id="downloadButton" style="margin-top: 20px; display: none;">
+      <a href="" id="downloadLink" download>
+        <button style="padding: 10px 20px; background-color: #2196F3; color: white; border: none; border-radius: 5px; font-size: 16px;">
+          Download Image
+        </button>
+      </a>
+    </div>
+
+    <!-- Download Button for Admin -->
+    <div id="adminDownloadButton" style="margin-top: 20px; display: none;">
+      <button onclick="downloadImageForAdmin()" style="padding: 10px 20px; background-color: #2196F3; color: white; border: none; border-radius: 5px; font-size: 16px;">
+        Download Image for Free
+      </button>
+    </div>
+  </div>
+  </div>
 <!-- ✅ How to Use the System Section -->
 <div id="usageHelp" class="page" style="display:none; padding: 20px;">
   <h2 style="color:#2196f3; text-align:center;">📘 How to Use the System</h2>
@@ -1395,6 +1639,31 @@ nav ul li {
       <li>🔐 You may need to <strong>pay</strong> via MPESA to unlock contacts.</li>
     </ul>
     <p style="color:#888;font-style:italic;">Need help? Contact admin or check the Notifications tab for updates.</p>
+  </div>
+</div>
+
+
+<!-- ✅ Unified Confirm Delete Modal -->
+<div id="confirmDeleteModal" style="display:none; position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 10000;
+  justify-content: center; align-items: center;">
+  <div style="background: white; padding: 20px 25px; border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3); width: 90%; max-width: 400px; text-align: center; position: relative;">
+
+    <h3 id="confirmDeleteTitle" style="margin-bottom: 10px; color: #dc3545;">Confirm Deletion</h3>
+    <p id="confirmDeleteMessage" style="font-size: 16px;">Are you sure you want to delete this item?</p>
+
+    <!-- Optional Progress Bar -->
+    <div style="height: 8px; background: #eee; border-radius: 5px; margin-top: 15px;">
+      <div id="confirmProgressBar" style="width: 100%; height: 8px; background-color: #28a745; border-radius: 5px;"></div>
+    </div>
+
+    <div id="confirmExtraLabel" style="color:crimson; font-weight:bold; margin-top: 10px; display:none;">🔥 VIP</div>
+
+    <div style="margin-top: 20px;">
+      <button id="confirmYes" style="background-color: #dc3545; color: white; padding: 10px 20px; border: none; border-radius: 6px; margin-right: 10px; cursor: pointer;">Yes, Delete</button>
+      <button onclick="closeDeleteModal()" style="background-color: #6c757d; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer;">Cancel</button>
+    </div>
   </div>
 </div>
 
@@ -1431,9 +1700,12 @@ nav ul li {
   </div>
 </div>
 <section id="trendingSection" style="display: none; padding: 16px;">
-  <h2 style="color: #ff5722; margin-bottom: 16px;">🔥 Trending Boosted Items</h2>
-  <div id="trendingContainer" style="display: flex; flex-wrap: wrap; gap: 16px;"></div>
+  <h2 style="color: #ff5722; margin-bottom: 16px; text-align: center;">🔥 Trending Now</h2>
+  <div id="trendingContainer" style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; align-items: center; width: 100%;">
+    <!-- Trending items (cards) will appear here -->
+  </div>
 </section>
+
 </div>
 </div>
   <main id="content">
@@ -1455,32 +1727,7 @@ nav ul li {
   <img src="https://i.imgur.com/jixmLF9.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
   <img src="https://i.imgur.com/bbHniIi.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
   <img src="https://i.imgur.com/qnmK7CR.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/WKwJ73A.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/4pi7IZ6.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/iqBwsWm.png" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/jgwKwKd.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/1anjN0C.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/J7NB5je.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/JYLKJ2p.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/HBsmybQ.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
- 
-  <img src="https://i.imgur.com/aYh8gq9.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/JXrL3JD.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/kkjlixE.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/fAtmMt4.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/7aWGYXS.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/5v3tav5.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/kEyIuZJ.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/1BJtGew.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/WYA3tbh.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/LFHI6v8.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/95vSNbW.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/WFVirtF.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/R7D2ECX.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/RuNhIix.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/uOQZLxF.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/buIgbl2.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/vtJXjeb.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
+
 </div>
 <!-- Open Graph Meta Tags for social sharing -->
 <meta property="og:title" content="Teacher Swaps Kenya" />
@@ -1583,6 +1830,9 @@ nav ul li {
 </button>
 
  </form>
+
+
+
 <h3><i class="fas fa-filter" style="color:#43a047; margin-right: 8px;"></i> Filter Swaps</h3>
 <!-- ✅ Horizontal Compact Filter Box with Black Labels -->
 <div style="border: 2px solid #c8e6c9; background: #f1f8e9; padding: 12px; border-radius: 10px; margin-bottom: 16px; max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;">
@@ -2627,6 +2877,9 @@ Register To Connect With  Available Soulmates
     <p style="color:#888;font-style:italic;">Need help? Contact admin or check the Notifications tab for updates.</p>
   </div>
 </section>
+<div id="trendingContainer">
+  <div class="spinner">⏳ Loading...</div>
+</div>
 
 <!-- ✅ Toast Container -->
 <div id="toastContainer" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;"></div>
@@ -2635,6 +2888,7 @@ Register To Connect With  Available Soulmates
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+
 
 <script>
   // ✅ Firebase Config
@@ -3009,10 +3263,6 @@ if (missing) {
       showCustomAlert("Error saving swap: " + err.message, "error");
     }
 }
-
-
-let trendingBoostedSwaps = [];
-
 async function loadSwaps() {
   const container = document.querySelector("#swapCardContainer");
   container.innerHTML = "";
@@ -3053,6 +3303,7 @@ async function loadSwaps() {
       });
     }
 
+    // Sort swaps to show boosted ones first
     const orderedSwaps = [...boostedSwaps, ...normalSwaps];
 
     for (const s of orderedSwaps) {
@@ -3109,6 +3360,46 @@ async function loadSwaps() {
       card.setAttribute("data-hardship", s.hardship || "-");
       card.setAttribute("data-subject", (s.subjectCombination || "-").toLowerCase());
 
+      // Boost Button for the poster or admin
+      const boostButton = `
+        <div style="margin-top:10px;">
+          ${isPoster || isAdminUser ? `
+            <button id="boostSwapBtn-${s.id}" onclick="boostSwap('${s.id}')"
+              style="background:#ff9800;color:white;border:none;border-radius:5px;padding:6px 12px;cursor:pointer;">
+              🚀 Boost Swap ${isAdminUser ? "(Free)" : "(Ksh 250)"}
+            </button>
+          ` : ""}
+        </div>
+      `;
+
+      // Swap Closed Button for the poster or admin
+      const closedButton = `
+        ${isPoster || isAdminUser ? `
+          <div style="margin-top:10px;">
+            <button id="closeSwapBtn-${s.id}" onclick="closeSwap('${s.id}')"
+              style="background:#e53935;color:white;border:none;border-radius:5px;padding:6px 12px;cursor:pointer;">
+              ${s.isClosed ? "Swap Closed" : "Mark as Closed"}
+            </button>
+          </div>
+        ` : ""}
+      `;
+
+      // Delete Button for admins only
+      const deleteButton = `
+        ${isAdminUser ? `
+          <button onclick="deleteSwap('${s.id}')"
+            style="background:#e53935;color:white;padding:4px 8px;border:none;border-radius:4px;">🗑️ Delete</button>
+        ` : ""}
+      `;
+
+      // Show Interest Button (Visible to all users)
+      const interestButton = `
+        <button onclick="sendSwapInterest('${s.id}', '${s.teacherName}')"
+          style="background:#1976d2;color:white;border:none;padding:4px 8px;border-radius:4px;flex-grow:1;">
+          💌 Show Interest
+        </button>
+      `;
+
       card.innerHTML = `
         <h3 style="margin:0; color:#1a237e;">${s.teacherName} ${showVerifiedBadge}</h3>
         <div style="margin:4px 0;">${showVIPBadge} ${showBoostedBadge}</div>
@@ -3131,15 +3422,15 @@ async function loadSwaps() {
         </div>
 
         <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:8px;">
-          ${isAdminUser ? `
-            <button onclick="deleteSwap('${s.id}')" style="background:#e53935;color:white;padding:4px 8px;border:none;border-radius:4px;">🗑️ Delete</button>
-            ${vipBtn}
-            <button onclick="boostItem('${s.id}', '${s.teacherName}')" style="background:#ff9800;color:white;border:none;border-radius:4px;padding:4px 8px;">🚀 Boost</button>
-          ` : ""}
-          <button onclick="sendSwapInterest('${s.id}', '${s.teacherName}')" style="background:#1976d2;color:white;border:none;padding:4px 8px;border-radius:4px;flex-grow:1;">💌 Show Interest</button>
+          ${deleteButton}  <!-- Only visible to Admin -->
+          ${vipBtn}        <!-- Only visible to Admin in hot counties -->
+          ${interestButton} <!-- Visible to all users -->
         </div>
-      `;
 
+        ${closedButton} <!-- Swap Closed Button -->
+        ${boostButton}  <!-- Boost Swap Button -->
+      `;
+      
       container.appendChild(card);
       updateAverageRating(s.id);
     }
@@ -3150,6 +3441,61 @@ async function loadSwaps() {
   } catch (err) {
     console.error("Error loading swaps:", err);
     showCustomAlert("Error loading swaps: " + err.message, "error");
+  }
+}
+
+
+
+// Function to close the swap
+async function closeSwap(swapId) {
+  const swapRef = db.collection("teacherSwaps").doc(swapId);
+
+  // Update Firestore document to mark the swap as closed
+  await swapRef.update({
+    isClosed: true
+  });
+
+  // Update button text and disable it
+  const closeButton = document.getElementById(`closeSwapBtn-${swapId}`);
+  closeButton.innerText = "Swap Closed";
+  closeButton.disabled = true;
+}
+
+// Function to boost the swap
+async function boostSwap(swapId) {
+  const currentUser = firebase.auth().currentUser;
+
+  if (!currentUser) {
+    showCustomAlert("You must be logged in to boost swaps.", "error");
+    return;
+  }
+
+  // Check if the current user is an admin
+  const isAdminUser = isAdmin === true;
+
+  if (isAdminUser) {
+    // Admins boost the swap for free
+    await updateSwapBoostStatus(swapId, true);
+    showCustomAlert("✅ The swap has been boosted for free!", "success");
+  } else {
+    // Show the payment modal for boosting (non-admin)
+    showPaymentModalFor('boost', 250, swapId, 'Boost Swap');
+  }
+}
+
+// Helper function to update the swap boost status in Firestore
+async function updateSwapBoostStatus(swapId, isBoosted) {
+  const swapRef = db.collection("teacherSwaps").doc(swapId);
+  await swapRef.update({
+    boosted: isBoosted,
+    boostExpiry: isBoosted ? firebase.firestore.Timestamp.fromDate(new Date()) : null
+  });
+
+  // Optionally, update UI or notify user of success
+  const boostButton = document.getElementById(`boostSwapBtn-${swapId}`);
+  if (boostButton) {
+    boostButton.innerText = "🚀 Boosted (Free)";
+    boostButton.disabled = true;
   }
 }
 
@@ -3164,19 +3510,7 @@ function renderTrendingSectionFromSwapsOnly() {
     container.innerHTML = "<p style='text-align:center;'>No trending swaps at the moment.</p>";
     return;
   }
-
-  trendingBoostedSwaps.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "job-card";
-    card.innerHTML = `
-      <h3>🔥 ${item.title}</h3>
-      <p>${item.description}</p>
-      <p><strong>Phone:</strong> ${item.phone}</p>
-    `;
-    container.appendChild(card);
-  });
 }
-
 
 
 async function sendSwapInterest(swapId, teacherName) {
@@ -3281,11 +3615,10 @@ let bomJobsCache = [];
 let jobToDeleteId = null;
 let trendingBoostedItems = []; // Combined trending (jobs, swaps, etc.)
 
-// ✅ Load BOM Jobs with Boost Logic and Trending Integration
+// ✅ Load BOM Jobs with Boost Logic (No Trending Integration)
 async function loadBOMJobs() {
   const container = document.getElementById("jobContainer");
   container.innerHTML = "";
-  trendingBoostedItems = trendingBoostedItems.filter(item => item.type !== "job"); // Reset job items only
 
   try {
     const snapshot = await bomRef.orderBy("timestamp", "desc").get();
@@ -3303,27 +3636,17 @@ async function loadBOMJobs() {
 
       const job = { id: doc.id, ...data, isBoosted, boostExpiry };
       bomJobsCache.push(job);
-
-      if (isBoosted) {
-        trendingBoostedItems.push({
-          title: job.jobType,
-          description: `${job.organization} – ${job.county}`,
-          phone: job.phone,
-          type: "job"
-        });
-      }
     }
 
     console.log("✅ Loaded BOM Jobs:", bomJobsCache);
-    renderBOMJobs(bomJobsCache);
-    renderTrendingSection(); // ✅ Show all trending
+    renderBOMJobs(bomJobsCache); // ✅ Render only BOM Jobs (without trending section)
 
   } catch (err) {
     showCustomAlert("❌ Failed to load jobs: " + err.message, "error");
   }
 }
 
-// ✅ Render BOM Jobs Normally
+// ✅ Render BOM Jobs (with Boost Logic and Trending Integration)
 function renderBOMJobs(jobs) {
   const container = document.getElementById("jobContainer");
   container.innerHTML = "";
@@ -3333,7 +3656,22 @@ function renderBOMJobs(jobs) {
     return;
   }
 
-  const hasAccess = hasBomJobAccess(); // Check if contacts are unlocked
+  const hasAccess = hasBomJobAccess();
+
+  // ✅ Sort: Boosted first by boostExpiry descending, then by timestamp
+  jobs.sort((a, b) => {
+    const now = new Date();
+    const aBoosted = a.isBoosted && a.boostExpiry?.toDate?.() > now;
+    const bBoosted = b.isBoosted && b.boostExpiry?.toDate?.() > now;
+
+    if (aBoosted && bBoosted) {
+      return (b.boostExpiry?.toDate?.() || 0) - (a.boostExpiry?.toDate?.() || 0);
+    }
+    if (aBoosted && !bBoosted) return -1;
+    if (!aBoosted && bBoosted) return 1;
+
+    return (b.timestamp?.toDate?.() || 0) - (a.timestamp?.toDate?.() || 0);
+  });
 
   jobs.forEach(job => {
     const card = document.createElement("div");
@@ -3361,13 +3699,31 @@ function renderBOMJobs(jobs) {
     const dateIcon = '<i class="fas fa-calendar-day" style="margin-right: 8px;"></i>';
 
     let boostBadge = "";
+    let topCornerTag = "";
+
     if (job.isBoosted && job.boostExpiry) {
       const daysLeft = Math.ceil((job.boostExpiry - new Date()) / (1000 * 60 * 60 * 24));
       boostBadge = `
         <span style="background: orange; color: white; font-size: 0.75em; padding: 2px 6px; border-radius: 6px;">
-          🔥 Boosted
+          🔥 Trending Now
         </span>
         <span style="color: gray; font-size: 0.75em;">(${daysLeft} day${daysLeft !== 1 ? "s" : ""} left)</span>
+      `;
+      topCornerTag = `
+        <div style="
+          position: absolute;
+          top: 8px;
+          right: 8px;
+          background: #f44336;
+          color: white;
+          font-size: 0.75em;
+          padding: 4px 8px;
+          border-radius: 6px;
+          font-weight: bold;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        ">
+          🔥 TRENDING
+        </div>
       `;
     }
 
@@ -3415,17 +3771,24 @@ function renderBOMJobs(jobs) {
           style="background:#dc3545; color:white; border:none; border-radius:5px; padding:6px 12px; cursor:pointer;">
           🗑️ Delete
         </button>` : ''}
-      <button onclick="showPaymentModalFor('job', 1000, '${job.id}', '${job.jobType}')"
-        style="background:#ff9800; color:white; border:none; border-radius:5px; padding:6px 12px; margin-left:6px; cursor:pointer;">
-        🚀 Boost
-      </button>
+      ${isAdmin ? `
+        <button onclick="boostJobFree('${job.id}')"
+          style="background:#4caf50; color:white; border:none; border-radius:5px; padding:6px 12px; margin-left:6px; cursor:pointer;">
+          🚀 Boost (Free)
+        </button>` : ''}
+      ${(isPoster || isAdmin) && !job.isClosed ? `
+        <button onclick="closeJob('${job.id}')"
+          style="background:#6c757d; color:white; border:none; border-radius:5px; padding:6px 12px; margin-left:6px; cursor:pointer;">
+          🚫 Mark as Closed
+        </button>` : ''}
     `;
 
     card.innerHTML = `
+      ${topCornerTag}
       ${iconHTML}
       <div style="padding: 14px; text-align:left;">
         ${badge}
-        <h3 style="color:#2e7d32;">${job.jobType} ${boostBadge}</h3>
+        <h3 style="color:#2e7d32;">${job.jobType} ${boostBadge} ${job.isClosed ? '<span style="color:red;">(Closed)</span>' : ''}</h3>
 
         <p style="color:#3f51b5;"><strong>Organization:</strong> ${job.organization}</p>
         ${contactSection}
@@ -3450,26 +3813,38 @@ function renderBOMJobs(jobs) {
     updateAverageRating(job.id);
   });
 }
-function renderTrendingSection() {
-  const container = document.getElementById("trendingContainer");
-  if (!container) return;
-  container.innerHTML = "";
 
-  if (!trendingBoostedItems.length) {
-    container.innerHTML = "<p style='text-align:center;'>No trending items found right now.</p>";
-    return;
+
+
+async function closeJob(jobId) {
+  try {
+    await db.collection("bomJobs").doc(jobId).update({
+      isClosed: true
+    });
+    showCustomAlert("✅ Job marked as closed.", "success");
+    loadBOMJobs(); // refresh job list
+  } catch (error) {
+    console.error("❌ Error closing job:", error);
+    showCustomAlert("❌ Failed to close job: " + error.message, "error");
   }
+}
+async function boostJobFree(jobId) {
+  const boostExpiry = new Date();
+  boostExpiry.setDate(boostExpiry.getDate() + 7); // 7-day boost
 
-  trendingBoostedItems.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "job-card";
-    card.innerHTML = `
-      <h3>🔥 ${item.title}</h3>
-      <p>${item.description}</p>
-      <p><strong>Phone:</strong> ${item.phone}</p>
-    `;
-    container.appendChild(card);
-  });
+  try {
+    await db.collection("bomJobs").doc(jobId).update({
+      isBoosted: true,
+      boostExpiry: boostExpiry,
+      timestamp: new Date()  // ✅ Important: force it to go top
+    });
+
+    showCustomAlert("✅ Job boosted for FREE by Admin", "success");
+    loadBOMJobs(); // Refresh list
+  } catch (error) {
+    console.error("❌ Error boosting job:", error);
+    showCustomAlert("❌ Failed to boost job: " + error.message, "error");
+  }
 }
 
 
@@ -3801,9 +4176,17 @@ async function loadSoulmates() {
 
   const sortedProfiles = [...boosted, ...normal];
   sortedProfiles.sort((a, b) => {
-    return sortBy === "likes"
-      ? (b.likes || 0) - (a.likes || 0)
-      : (b.timestamp?.toDate() || 0) - (a.timestamp?.toDate() || 0);
+    const now = new Date();
+    const aBoosted = a.isBoosted && a.boostExpiry > now;
+    const bBoosted = b.isBoosted && b.boostExpiry > now;
+
+    if (aBoosted && bBoosted) {
+      return (b.boostExpiry || 0) - (a.boostExpiry || 0);
+    }
+    if (aBoosted && !bBoosted) return -1;
+    if (!aBoosted && bBoosted) return 1;
+
+    return (b.timestamp?.toDate?.() || 0) - (a.timestamp?.toDate?.() || 0);
   });
 
   if (sortedProfiles.length === 0) {
@@ -3814,7 +4197,6 @@ async function loadSoulmates() {
   sortedProfiles.forEach(d => {
     const id = d.id;
     const isPoster = currentUser && (d.postedBy === currentUser.uid);
-    const isVerified = !!d.postedBy;
     const isAdminUser = isAdmin === true;
     const totalLikes = d.likes || 0;
 
@@ -3848,8 +4230,9 @@ async function loadSoulmates() {
       </div>`;
 
     card.innerHTML = `
-      ${isVerified ? `<div style="position:absolute;top:8px;right:8px;background:#4caf50;color:white;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px;"><i class="fas fa-check"></i></div>` : ""}
-      ${d.isBoosted ? `<div style="position:absolute;top:8px;left:8px;background:#ff9800;color:white;border-radius:4px;padding:2px 8px;font-size:12px;">🚀 Boosted</div>` : ""}
+      ${d.postedBy ? `<div style="position:absolute;top:8px;right:8px;background:#4caf50;color:white;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px;"><i class="fas fa-check"></i></div>` : ""}
+      ${d.isBoosted ? `<div style="position:absolute;top:8px;left:8px;background:#ff9800;color:white;border-radius:4px;padding:2px 8px;font-size:12px;">🔥 Boosted</div>` : ""}
+      ${d.isClosed ? `<div style="position:absolute;bottom:8px;left:8px;background:#f44336;color:white;border-radius:4px;padding:2px 8px;font-size:12px;">🚫 Closed</div>` : ""}
       <div style="margin-top:24px;">
         <i class="fas ${d.sex === 'Male' ? 'fa-user-tie' : 'fa-user-nurse'}" style="font-size:46px; color:${d.sex === 'Male' ? '#3f51b5' : '#e91e63'};"></i>
       </div>
@@ -3869,7 +4252,7 @@ async function loadSoulmates() {
         <button id="likeBtn-${id}" onclick="toggleLike('${id}')" style="background:#e91e63;color:white;border:none;padding:5px 12px;border-radius:50px;cursor:pointer;">
           🤍 Like
         </button>
-        <span id="likeCount-${id}" style="margin-left:6px;font-weight:bold; cursor:pointer;" onclick="showLikes('${id}')">0 Likes</span>
+        <span id="likeCount-${id}" style="margin-left:6px;font-weight:bold; cursor:pointer;" onclick="showLikes('${id}')">${totalLikes} Likes</span>
       </div>
 
       ${(isPoster || isAdminUser) ? `
@@ -3877,18 +4260,90 @@ async function loadSoulmates() {
           <button onclick="deleteSoulmate('${id}')" style="background:#dc3545;color:white;border:none;padding:5px 12px;border-radius:6px;cursor:pointer;">
             🗑️ Delete
           </button>
+          <button onclick="boostSoulmate('${id}')" style="background:#ff9800;color:white;border:none;padding:5px 12px;border-radius:6px;cursor:pointer;">
+            🚀 Boost
+          </button>
+          ${!d.isClosed ? `<button onclick="closeSoulmate('${id}')" style="background:#6c757d;color:white;border:none;padding:5px 12px;border-radius:6px;cursor:pointer;">
+            🚫 Mark as Closed
+          </button>` : ''}
         </div>
       ` : ''}
     `;
 
-    (d.isBoosted && trendingContainer)
-      ? trendingContainer.appendChild(card.cloneNode(true))
-      : container.appendChild(card);
+    container.appendChild(card);
+
+    if (d.isBoosted && trendingContainer) {
+      trendingContainer.appendChild(card.cloneNode(true));
+    }
 
     updateLikeUI(id);
   });
 }
 
+async function boostSoulmate(id) {
+  const userEmail = currentUser?.email || "";
+  const adminEmails = [
+    "mashabiki@teacherswapskenya.com",
+    "sironga1@teacherswapskenya.com",
+    "admin1@teacherswapskenya.com"
+  ];
+
+  const isAdminUser = adminEmails.includes(userEmail);
+
+  if (isAdminUser) {
+    const boostExpiry = new Date();
+    boostExpiry.setDate(boostExpiry.getDate() + 7); // 7 days
+
+    try {
+      await soulmateRef.doc(id).update({
+        boosted: true,
+        boostExpiry: boostExpiry
+      });
+      showCustomAlert("✅ Profile boosted for FREE by Admin", "success");
+      loadSoulmates(); // Refresh
+    } catch (error) {
+      console.error("❌ Error boosting soulmate:", error);
+      showCustomAlert("❌ Failed to boost profile: " + error.message, "error");
+    }
+  } else {
+    // Prompt user to pay before boosting
+    const boostAmount = 250;
+    showPaymentModalFor("soulmate", boostAmount, id, "Your Soulmate Profile");
+  }
+}
+
+
+async function closeSoulmate(id) {
+  try {
+    await soulmateRef.doc(id).update({
+      isClosed: true
+    });
+    showCustomAlert("✅ Profile marked as closed.", "success");
+    loadSoulmates(); // Refresh the view
+  } catch (error) {
+    console.error("❌ Error closing soulmate profile:", error);
+    showCustomAlert("❌ Failed to close profile: " + error.message, "error");
+  }
+}
+
+function showCustomAlert(message, type = "info") {
+  const alertBox = document.createElement("div");
+  alertBox.textContent = message;
+  alertBox.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: ${type === "success" ? "#4caf50" : type === "error" ? "#f44336" : "#2196f3"};
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    z-index: 9999;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    font-size: 14px;
+  `;
+  document.body.appendChild(alertBox);
+  setTimeout(() => alertBox.remove(), 3000);
+}
 
 
 
@@ -4520,7 +4975,7 @@ async function loadServices() {
     return;
   }
 
-  const now = new Date();
+  const nowTime = new Date();
   let hasServiceAccess = false;
 
   const isAdminUser = currentUser?.email && [
@@ -4537,19 +4992,12 @@ async function loadServices() {
     }
   }
 
-  const services = [];
-  snapshot.forEach(doc => {
-    const data = doc.data();
-    data.id = doc.id;
-    services.push(data);
-  });
+  const boosted = [], normal = [];
 
-  // ✅ Separate and sort boosted first
-  const boosted = [];
-  const normal = [];
+  for (const doc of snapshot.docs) {
+    const d = doc.data();
+    d.id = doc.id;
 
-  const nowTime = new Date();
-  for (const d of services) {
     const boostExpiry = d.boostExpiry?.toDate?.();
     const isBoosted = d.boosted && boostExpiry && boostExpiry > nowTime;
 
@@ -4564,33 +5012,29 @@ async function loadServices() {
     }
   }
 
-  const finalServices = [...boosted, ...normal];
+  const finalServices = [...boosted.sort((a, b) => b.boostExpiry?.toDate?.() - a.boostExpiry?.toDate?.()), ...normal];
 
   for (const d of finalServices) {
     const id = d.id;
     const isPoster = currentUser?.uid === d.postedBy;
-    const isVerified = !!d.postedBy;
 
     const boostExpiry = d.boostExpiry?.toDate?.();
     const isBoosted = d.boosted && boostExpiry && boostExpiry > nowTime;
 
-    const verifiedBadge = isVerified
-      ? `<span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>`
-      : "";
+    const verifiedBadge = d.postedBy
+      ? `<span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>` : "";
 
     let boostBadge = "";
-    if (isBoosted && boostExpiry) {
+    if (isBoosted) {
       const daysLeft = Math.ceil((boostExpiry - nowTime) / (1000 * 60 * 60 * 24));
       boostBadge = `
-        <span style="background: orange; color: white; font-size: 0.75em; padding: 2px 6px; border-radius: 6px; margin-left: 6px;">🚀 Boosted</span>
-        <span style="color: gray; font-size: 0.75em;">(${daysLeft} day${daysLeft !== 1 ? "s" : ""} left)</span>
-      `;
+        <span style="background: orange; color: white; font-size: 0.75em; padding: 2px 6px; border-radius: 6px; margin-left: 6px;">
+          🔥 Boosted (${daysLeft} day${daysLeft !== 1 ? "s" : ""} left)
+        </span>`;
     }
 
-    const occupation = d.occupation.toLowerCase();
-    let iconClass = "fa-user-tie";
-    let bgColor = "#607d8b";
-
+    const occupation = d.occupation?.toLowerCase?.() || "";
+    let iconClass = "fa-user-tie", bgColor = "#607d8b";
     if (occupation.includes("lawyer")) iconClass = "fa-balance-scale", bgColor = "#5c6bc0";
     else if (occupation.includes("teacher")) iconClass = "fa-chalkboard-teacher", bgColor = "#42a5f5";
     else if (occupation.includes("driver")) iconClass = "fa-car", bgColor = "#26a69a";
@@ -4601,13 +5045,12 @@ async function loadServices() {
     const iconHTML = `
       <div style="padding: 18px; background: ${bgColor};">
         <i class="fas ${iconClass}" style="font-size: 50px; color: #fff;"></i>
-      </div>
-    `;
+      </div>`;
 
-    const experienceIcon = '<i class="fas fa-briefcase" style="margin-right: 6px;"></i>';
-    const locationIcon = '<i class="fas fa-map-marker-alt" style="margin-right: 6px;"></i>';
     const phoneIcon = '<i class="fas fa-phone-alt" style="margin-right: 6px;"></i>';
     const whatsappIcon = '<i class="fab fa-whatsapp" style="margin-right: 6px;"></i>';
+    const experienceIcon = '<i class="fas fa-briefcase" style="margin-right: 6px;"></i>';
+    const locationIcon = '<i class="fas fa-map-marker-alt" style="margin-right: 6px;"></i>';
 
     const contactHTML = (isPoster || hasServiceAccess || isAdminUser)
       ? `
@@ -4615,12 +5058,7 @@ async function loadServices() {
           <a href="tel:${d.phone}" style="color:green;">📞 Call</a>
         </p>
         <p style="color:#25D366;"><strong>${whatsappIcon}
-          <a href="https://wa.me/254${d.phone.replace(/^0/, '')}" target="_blank">💬 WhatsApp</a></strong></p>
-        <button onclick="openChatModal('${d.phone}', '${d.name}')"
-          style="margin-top:6px; background:#673ab7; color:white; border:none; border-radius:4px; padding:6px 12px; cursor:pointer;">
-          💬 Chat
-        </button>
-      `
+          <a href="https://wa.me/254${d.phone.replace(/^0/, '')}" target="_blank">💬 WhatsApp</a></strong></p>`
       : `
         <div class="blurred">
           <p style="color:gray;">🔒 Contacts Locked – Pay Ksh 200 to Unlock</p>
@@ -4628,32 +5066,37 @@ async function loadServices() {
         <button onclick="unlockServiceContacts()" 
           style="background:crimson; color:white; padding:6px 12px; border:none; border-radius:6px; margin-top:6px;">
           💳 Pay Ksh 200
-        </button>
-      `;
+        </button>`;
 
-    const boostButtonHTML = `
-      <button onclick="${isAdminUser 
-        ? `boostServiceDirectly('${id}')` 
-        : `showPaymentModalFor('serviceBoost', 300, '${id}', '${d.name}')`}"
-        style="background:orange; color:white; border:none; padding:6px 12px; border-radius:6px; margin-top:8px;">
-        🔥 Boost This Service
-      </button>
-    `;
+    const showBoostButton = isPoster || isAdminUser;
+    const boostButtonHTML = showBoostButton
+      ? `<button onclick="${isAdminUser
+          ? `boostServiceDirectly('${id}')`
+          : `showPaymentModalFor('serviceBoost', 300, '${id}', '${d.name}')`}"
+          style="background:orange; color:white; border:none; padding:6px 12px; border-radius:6px; margin-top:8px;">
+          🔥 Boost This Service
+        </button>`
+      : "";
 
     const deleteButtonHTML = (isPoster || isAdminUser)
-      ? `
-        <button onclick="deleteService('${id}')" 
+      ? `<button onclick="deleteService('${id}')"
           style="background:#dc3545; color:white; padding:6px 12px; margin-top:6px; border:none; border-radius:6px;">
           🗑️ Delete
-        </button>
-      `
+        </button>` : "";
+
+    // Chat Button: Only visible to users who are NOT the poster
+    const chatButtonHTML = !isPoster
+      ? `<button onclick="openChatModal('${d.phone}', '${d.name}')"
+          style="margin-top:6px; background:#673ab7; color:white; border:none; border-radius:4px; padding:6px 12px; cursor:pointer;">
+          💬 Chat
+        </button>`
       : "";
 
     const card = document.createElement("div");
     card.className = "service-card";
     card.id = `service-${id}`;
     card.dataset.county = d.county;
-    card.dataset.occupation = d.occupation.toLowerCase();
+    card.dataset.occupation = occupation;
     card.style.cssText = `
       position: relative;
       border: 2px solid ${isBoosted ? 'orange' : '#ddd'};
@@ -4677,34 +5120,37 @@ async function loadServices() {
         ${contactHTML}
         ${boostButtonHTML}
         ${deleteButtonHTML}
-      </div>
-    `;
+        ${chatButtonHTML}
+      </div>`;
 
     container.appendChild(card);
 
-    // ✅ Also render boosted ones to trending
-    if (isBoosted) {
-      const trendingCard = card.cloneNode(true);
-      trendingContainer.appendChild(trendingCard);
+    if (isBoosted && trendingContainer) {
+      trendingContainer.appendChild(card.cloneNode(true));
     }
 
     updateAverageRating(id);
   }
 }
+
+
+
+
 async function boostServiceDirectly(serviceId) {
   try {
     const expiry = new Date();
-    expiry.setDate(expiry.getDate() + 3);
+    expiry.setDate(expiry.getDate() + 3); // 3-day boost
 
     await servicesRef.doc(serviceId).set({
       boosted: true,
       boostExpiry: firebase.firestore.Timestamp.fromDate(expiry)
     }, { merge: true });
 
-    showCustomToast("✅ Service boosted successfully (admin).");
-    loadServices(); // Reload to reflect immediately
+    showCustomAlert("✅ Service boosted successfully by Admin!", "success");
+    loadServices(); // Refresh list immediately
   } catch (err) {
-    showCustomToast("❌ Failed to boost: " + err.message);
+    console.error("❌ Error boosting service:", err);
+    showCustomAlert("❌ Failed to boost service: " + err.message, "error");
   }
 }
 
@@ -4913,99 +5359,15 @@ function filterServices() {
   }
 }
 
-// ✅ Global Submit Handler for Market Form with monetization check
-async function submitMarketHandler(e) {
-  e.preventDefault();
-
-  if (!isLoggedIn || !currentUser) {
-    showPage("login");
-    return alert("You must be logged in.");
-  }
-
-  // ✅ Check if user already posted one or more market items
-  const marketSnap = await marketRef.where("postedBy", "==", currentUser.uid).get();
-  const totalPosted = marketSnap.size;
-
-  if (totalPosted >= 1 && !isAdmin) {
-    showPaymentModalFor("market", 300, currentUser.uid, "Post Extra Market Item");
-    return;
-  }
-
-  // ✅ Collect form values
-  const itemName = document.getElementById("itemName").value.trim();
-  const itemCategory = document.getElementById("itemCategory").value;
-  const itemDescription = document.getElementById("itemDescription").value.trim();
-  const itemPrice = document.getElementById("itemPrice").value.trim();
-  const itemCounty = document.getElementById("itemCounty").value;
-  const itemSubcounty = document.getElementById("itemSubcounty").value.trim();
-  const itemPhone = document.getElementById("itemPhone").value.trim();
-  const itemPhotoFile = document.getElementById("itemPhoto").files[0];
-
-  const itemConditionInput = document.getElementById("itemCondition");
-  const itemCondition = itemConditionInput ? itemConditionInput.value : "New";
-
-  const posterName = currentUser.displayName || currentUser.email || "Anonymous";
-
-  const itemData = {
-    name: itemName,
-    category: itemCategory,
-    description: itemDescription,
-    price: itemPrice,
-    county: itemCounty,
-    subcounty: itemSubcounty,
-    phone: itemPhone,
-    postedBy: currentUser.uid,
-    posterName: posterName,
-    condition: itemCondition,
-    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-  };
-
-  try {
-    // ✅ Upload photo if selected
-    if (itemPhotoFile) {
-      const photoPath = `marketPhotos/${Date.now()}_${itemPhotoFile.name}`;
-      const photoSnap = await storage.ref(photoPath).put(itemPhotoFile);
-      itemData.photoURL = await photoSnap.ref.getDownloadURL();
-    }
-
-    // ✅ Save to Firestore
-    await marketRef.add(itemData);
-    showCustomAlert("✅ Item posted!", "success");
-    document.getElementById("marketForm").reset();
-    loadMarketItems();
-
-    // ✅ Notify Admin
-    await db.collection("adminNotifications").add({
-      type: "Marketplace Post",
-      message: `New item posted: ${itemName} (${itemCategory}), Price: ${itemPrice}, Phone: ${itemPhone}, County: ${itemCounty}`,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      read: false
-    });
-
-  } catch (err) {
-    showCustomAlert("❌ Error: " + err.message, "error");
-  }
-}
-
-
-// ✅ Attach Market Form Handler (safe and reusable)
-function attachMarketFormSubmit() {
-  const oldForm = document.getElementById("marketForm");
-  if (!oldForm) return;
-
-  const newForm = oldForm.cloneNode(true);
-  oldForm.parentNode.replaceChild(newForm, oldForm);
-  newForm.addEventListener("submit", submitMarketHandler);
-}
-
 async function loadMarketItems() {
   const container = document.getElementById("marketContainer");
   container.innerHTML = "";
 
+  // Read filter values
   const minPrice = parseInt(document.getElementById("filterMinPrice").value) || 0;
   const maxPrice = parseInt(document.getElementById("filterMaxPrice").value) || Infinity;
-  const categoryFilter = document.getElementById("filterItemCategory").value.toLowerCase().trim();
-  const countyFilter = document.getElementById("filterItemCounty").value.toLowerCase().trim();
+  const categoryFilter = document.getElementById("filterCategory").value.toLowerCase().trim();
+  const countyFilter = document.getElementById("filterCounty").value.toLowerCase().trim();
 
   try {
     const snapshot = await marketRef.get();
@@ -5014,38 +5376,43 @@ async function loadMarketItems() {
       return;
     }
 
-    let boostedItems = [], normalItems = [], now = new Date();
+    const boostedItems = [], normalItems = [], now = new Date();
 
     snapshot.forEach(doc => {
       const d = doc.data();
       const id = doc.id;
-      const price = parseFloat(d.price) || 0;
 
+      // Apply filters:
+      const price = parseFloat(d.price) || 0;
       if (price < minPrice || price > maxPrice) return;
       if (categoryFilter && (!d.category || !d.category.toLowerCase().includes(categoryFilter))) return;
       if (countyFilter && (!d.county || !d.county.toLowerCase().includes(countyFilter))) return;
 
       const isBoosted = d.boosted && d.boostExpiry?.toDate?.() > now;
-      const item = { ...d, id };
-      (isBoosted ? boostedItems : normalItems).push(item);
+      const isExpired = d.boostExpiry?.toDate?.() <= now;
+
+      // Only add boosted items to boostedItems array if the boost hasn't expired
+      if (isBoosted) {
+        boostedItems.push({ ...d, id });
+      } else {
+        normalItems.push({ ...d, id, isExpired });
+      }
     });
 
-    // ✅ Sort boosted & normal items by timestamp DESC
-    boostedItems.sort((a, b) => (b.timestamp?.toDate?.() || 0) - (a.timestamp?.toDate?.() || 0));
-    normalItems.sort((a, b) => (b.timestamp?.toDate?.() || 0) - (a.timestamp?.toDate?.() || 0));
-
-    const allItems = [...boostedItems, ...normalItems];
-    if (allItems.length === 0) {
+    // If no match:
+    if (boostedItems.length + normalItems.length === 0) {
       container.innerHTML = "<p>No items match your filters.</p>";
       return;
     }
 
-    allItems.forEach(d => {
+    // Render boosted first, followed by normal items
+    [...boostedItems, ...normalItems].forEach(d => {
       const id = d.id;
       const isPoster = currentUser && currentUser.uid === d.postedBy;
-      const isVerified = !!d.postedBy;
       const isBoosted = d.boosted && d.boostExpiry?.toDate?.() > new Date();
+      const isExpired = d.isExpired;
       const canDelete = isPoster || isAdmin;
+      const canBoost = isPoster || isAdmin;
 
       const card = document.createElement("div");
       card.className = "market-card";
@@ -5055,61 +5422,463 @@ async function loadMarketItems() {
       if (isBoosted) card.dataset.boosted = "true";
       card.style.position = "relative";
 
-      const verifiedBadge = isVerified
-        ? `<span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>`
-        : "";
       const boostBadge = isBoosted
         ? `<span style="color:#ff5722; font-weight:bold; font-size:0.85em; margin-left:6px;">🔥 Boosted</span>`
         : "";
 
-      const deleteAndBoostButtons = `
-        <div style="margin-top:10px;">
-          <button onclick="deleteMarketItem('${id}')" 
-            style="background:#dc3545;color:#fff;border:none;border-radius:5px;padding:6px 12px;cursor:pointer;">
-            🗑️ Delete
-          </button>
-          <button onclick="showPaymentModalFor('market', 300, '${id}', '${d.name || "Item"}')" 
-            style="background:#ff9800;color:#fff;border:none;border-radius:5px;padding:6px 12px;margin-left:8px;cursor:pointer;">
-            🚀 Boost
-          </button>
-        </div>`;
-
-      const chatButton = `
-        <div style="margin-top:10px;">
-          <button onclick="openChatModal('${d.phone}','${d.posterName || "Seller"}')" 
-            style="background:#673ab7;color:#fff;border:none;border-radius:5px;padding:6px 12px;cursor:pointer;">
-            <i class="fas fa-comments"></i> Chat
-          </button>
-        </div>`;
-
       card.innerHTML = `
-        ${verifiedBadge}
         <h3 style="margin-bottom:6px; color:#2e7d32;">
-          ${d.posterName || "Seller"} ${boostBadge}
+          ${d.posterName || "Unknown Seller"} ${boostBadge}
         </h3>
         ${d.photoURL
           ? `<img src="${d.photoURL}" style="width:100%;height:180px;object-fit:cover;border-radius:8px;margin-bottom:8px;">`
           : ""}
-        <p style="color:#4caf50;">📦 <strong>Item:</strong> ${d.name || "-"}</p>
+        <p style="color:#4caf50;">📦 <strong>Item name:</strong> ${d.name || "-"}</p>
+        <p style="color:#2196f3;">📝 <strong>Status:</strong> ${d.description || "-"}</p>
         <p style="color:#e91e63;">🏷️ <strong>Category:</strong> ${d.category || "-"}</p>
         <p style="color:#ff9800;">💰 <strong>Price:</strong> KES ${d.price ? parseInt(d.price).toLocaleString() : "N/A"}</p>
-        <p style="color:#3f51b5;">📍 <strong>Location:</strong> ${d.county || "-"}</p>
-        <div style="margin-top:8px;">
-          <a href="tel:${d.phone}" style="color:green;">📞 Call</a> |
-          <a href="https://wa.me/254${d.phone?.replace(/^0/, '')}" target="_blank" style="color:#25D366;">💬 WhatsApp</a>
-        </div>
-        ${canDelete ? deleteAndBoostButtons : chatButton}
+        <p style="color:#9c27b0;">🧰 <strong>Condition:</strong> ${d.condition || "New"}</p>
+        <p style="color:#3f51b5;">📍 <strong>Location:</strong> ${d.county || "Unknown"}, ${d.subcounty || "Unknown"}</p>
+        
+        <!-- New: Phone Number Display -->
+        <p style="color:#673ab7;">📞 <strong>Contact:</strong> ${d.phone || "N/A"}</p> <!-- Added Phone -->
+
+        <!-- New Buttons Section -->
+        ${(!isPoster && !isAdmin) ? `  
+          <!-- Show Interest Button -->
+          <div style="margin-top:10px;">
+            <button onclick="showMarketInterest('${id}')" 
+              style="background:#f44336;color:#fff;border:none;border-radius:5px;padding:6px 12px;cursor:pointer;">
+              ❤️ Show Interest <span id="marketInterestCount-${id}">0</span>
+            </button>
+          </div>` : ""}
+
+        ${(!isPoster && !isAdmin) ? `  
+          <!-- Report Item Button -->
+          <div style="margin-top:10px;">
+            <button onclick="reportMarketItem('${id}')" 
+              style="background:#ff1744;color:#fff;border:none;border-radius:5px;padding:6px 12px;cursor:pointer;">
+              🚩 Report Item
+            </button>
+          </div>` : ""}
+
+        ${(!isPoster && !isAdmin) ? `  
+          <!-- Chat Button -->
+          <div style="margin-top:10px;">
+            <button onclick="openChatModal('${d.phone}','${d.posterName || "Seller"}')" 
+              style="background:#673ab7;color:#fff;border:none;border-radius:5px;padding:6px 12px;cursor:pointer;">
+              💬 Chat
+            </button>
+          </div>` : ""}
+
+        ${isPoster ? `  
+          <!-- Mark as Sold Out Button -->
+          <div style="margin-top:10px;">
+            <button id="soldOutBtn-${id}" onclick="toggleSoldStatus('${id}')" 
+              style="background:#9e9e9e;color:#fff;border:none;border-radius:5px;padding:6px 12px;cursor:pointer;">
+              ${d.isSold ? "❌ Sold Out" : "✅ Mark as Sold"}
+            </button>
+          </div>` : ""}
+
+        <!-- Delete and Boost options for Admins or the Poster -->
+        ${canDelete || canBoost ? `  
+          <!-- 🗑️ Delete + 🚀 Boost -->
+          <div style="margin-top:10px;">
+            <button onclick="deleteMarketItem('${id}')" 
+              style="background:#dc3545;color:#fff;border:none;border-radius:5px;padding:6px 12px;cursor:pointer;">
+              🗑️ Delete
+            </button>
+            ${canBoost && !isBoosted ? `
+              <button onclick="boostMarketItem('${id}')" 
+                style="background:#ff9800;color:#fff;border:none;border-radius:5px;padding:6px 12px;margin-left:8px;cursor:pointer;">
+                🚀 Boost
+              </button>` : ""}
+            ${isPoster && isExpired ? ` 
+              <button onclick="renewBoost('${id}')" 
+                style="background:#ff9800;color:#fff;border:none;border-radius:5px;padding:6px 12px;margin-left:8px;cursor:pointer;">
+                🚀 Renew Boost
+              </button>` : ""}
+          </div>` : ""}
       `;
 
       container.appendChild(card);
-      updateAverageRating(id);
+      updateAverageRating(id); // Recalculate average after rating
     });
-
   } catch (err) {
     console.error("❌ Error loading market items:", err);
     showCustomAlert("❌ Failed to load items: " + err.message, "error");
   }
 }
+
+
+async function renewBoost(id) {
+  const itemRef = marketRef.doc(id);
+  const doc = await itemRef.get();
+  const itemData = doc.data();
+
+  if (!itemData) {
+    showCustomAlert("❌ Item not found.", "error");
+    return;
+  }
+
+  // Prompt user for payment
+  showPaymentModalFor('renewBoost', 250, id, itemData.name); // Assuming 250 is the cost
+
+  // After payment is complete (we assume you have a payment handler in place):
+  // - Update boost expiry
+  // - Mark the item as boosted again
+  const now = new Date();
+  const boostExpiry = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000); // Add 7 days
+  await itemRef.update({
+    boosted: true,
+    boostExpiry: firebase.firestore.Timestamp.fromDate(boostExpiry)
+  });
+
+  showCustomAlert("✅ Boost renewed successfully!", "success");
+  loadMarketItems(); // Refresh the items list to reflect the change
+}
+
+
+async function boostMarketItem(id) {
+  try {
+    const itemRef = marketRef.doc(id);
+    const doc = await itemRef.get();
+    if (!doc.exists) {
+      return showCustomAlert("❌ Item not found.", "error");
+    }
+
+    const data = doc.data();
+    const postedBy = data.postedBy; // Access postedBy from the Firestore document
+
+    const currentUser = firebase.auth().currentUser;
+    if (!currentUser) {
+      return showCustomAlert("❌ You need to be logged in to boost an item.", "error");
+    }
+
+    // If the current user is the poster, prompt for payment
+    if (currentUser.uid === postedBy) {
+      // Show the payment modal for the poster
+      showPaymentModalFor('boost', 250, id, data.name);
+      return; // Stop the boosting process until payment is completed
+    }
+
+    // For admin or others, boost the item directly (free for admin)
+    const boostExpiry = new Date();
+    boostExpiry.setDate(boostExpiry.getDate() + 7);
+
+    // Update the item to set it as boosted with an expiry date
+    await itemRef.update({
+      boosted: true,
+      boostExpiry: firebase.firestore.Timestamp.fromDate(boostExpiry)
+    });
+
+    showCustomAlert("✅ Item boosted successfully (admin).", "success");
+    loadMarketItems(); // Refresh the list to reflect the change
+  } catch (err) {
+    console.error("❌ Boost error:", err);
+    showCustomAlert("❌ Failed to boost: " + err.message, "error");
+  }
+}
+
+// Function to open the edit form and render the item data
+async function openEditForm(itemId) {
+  const itemRef = db.collection("marketItems").doc(itemId);
+
+  try {
+    const doc = await itemRef.get();
+    if (!doc.exists) {
+      console.error("Item not found");
+      return;
+    }
+
+    const itemData = doc.data();
+
+    // Populate the existing form with item data
+    document.getElementById("itemName").value = itemData.name || '';
+    document.getElementById("itemPrice").value = itemData.price || '';
+    document.getElementById("itemDescription").value = itemData.description || '';
+    document.getElementById("itemCategory").value = itemData.category || '';
+    document.getElementById("itemLocation").value = itemData.county || '';
+
+    // Change the button text to 'Update Item'
+    const submitButton = document.querySelector("#captureMarketItemForm button");
+    submitButton.innerHTML = "Update Item";
+
+    // Add an event listener to handle form submission for saving changes
+    document.getElementById("captureMarketItemForm").onsubmit = function(event) {
+      event.preventDefault(); // Prevent form submission
+      saveItemChanges(itemId); // Save changes
+    };
+
+    console.log('Form is ready to be edited.');
+  } catch (error) {
+    console.error("Error fetching item data:", error);
+  }
+}
+// Function to save edited item details
+async function saveItemChanges(itemId) {
+  // Get updated values from the form
+  const updatedItem = {
+    name: document.getElementById("itemName").value,
+    price: parseFloat(document.getElementById("itemPrice").value),
+    description: document.getElementById("itemDescription").value,
+    category: document.getElementById("itemCategory").value,
+    county: document.getElementById("itemLocation").value,
+  };
+
+  try {
+    // Update the Firestore document with the new values
+    const itemRef = db.collection("marketItems").doc(itemId);
+    await itemRef.update(updatedItem);
+
+    console.log("Item successfully updated!");
+    showCustomAlert("✅ Item updated successfully!", "success");
+
+    // Optionally, refresh the item display (e.g., re-render the item details)
+    loadMarketItems();
+
+  } catch (error) {
+    console.error("Error updating item: ", error);
+    showCustomAlert("❌ Failed to update item. Try again later.", "error");
+  }
+}
+async function showMarketInterest(itemId) {
+  const user = firebase.auth().currentUser;
+
+  if (!user) {
+    showCustomAlert("🔐 You need to be logged in to show interest.", "info");
+    return;
+  }
+
+  console.log("User is logged in:", user.uid);
+
+  const interestRef = db.collection("marketItems").doc(itemId).collection("interests").doc(user.uid);
+  const interestDoc = await interestRef.get();
+
+  if (interestDoc.exists) {
+    showCustomAlert("❌ You have already shown interest in this item.", "info");
+    return;
+  }
+
+  console.log("User has not shown interest yet.");
+
+  const interestCountElement = document.getElementById(`marketInterestCount-${itemId}`);
+  if (interestCountElement) {
+    let interestCount = parseInt(interestCountElement.innerText) || 0;
+    interestCount += 1;
+    interestCountElement.innerText = interestCount;
+    console.log("Updated interest count:", interestCount);
+  } else {
+    console.log("Interest count element not found.");
+  }
+
+  try {
+    await interestRef.set({
+      userId: user.uid,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    showCustomAlert("✅ Your interest has been recorded!", "success");
+  } catch (err) {
+    console.error("Error recording interest:", err);
+    showCustomAlert("❌ Failed to record your interest. Please try again later.", "error");
+  }
+}
+
+
+
+
+async function viewInterestedUsers(itemId) {
+  const user = firebase.auth().currentUser;
+  if (!user) return showCustomAlert("⚠️ Login required to view interested users.", "warning");
+
+  const itemSnap = await db.collection("marketItems").doc(itemId).get();
+  const itemData = itemSnap.data();
+
+  if (!itemData || itemData.postedBy !== user.uid) {
+    return showCustomAlert("🚫 Only the poster can view interested users.", "error");
+  }
+
+  const interestSnap = await db.collection("marketItems").doc(itemId).collection("interests").get();
+  if (interestSnap.empty) return showCustomAlert("ℹ️ No one has shown interest yet.", "info");
+
+  const names = [];
+  // Loop through each interested user
+  for (const doc of interestSnap.docs) {
+    const userId = doc.id;  // Assuming the document ID is the user ID
+    try {
+      // Fetch the user's details from the 'users' collection
+      const userSnap = await db.collection("users").doc(userId).get();
+      const userName = userSnap.exists ? userSnap.data().name || "Unknown" : "Unknown";
+      names.push(userName);
+    } catch (err) {
+      console.error("Error fetching user details:", err);
+      names.push("Unknown User");
+    }
+  }
+
+  // Display the list of interested users
+  showCustomAlert("❤️ Interested Users:\n\n" + names.join("\n"), "info");
+}
+
+async function reportMarketItem(itemId) {
+  showReportConfirmModal(async () => {
+    const user = firebase.auth().currentUser;
+    if (!user) return showCustomAlert("⚠️ You must be logged in to report an item.", "warning");
+
+    try {
+      const reportRef = db.collection("marketReports").doc();
+      const notifRef = db.collection("adminNotifications").doc();
+      const itemSnap = await marketRef.doc(itemId).get();
+      const item = itemSnap.data();
+
+      await reportRef.set({
+        itemId,
+        reportedBy: user.uid,
+        reporterName: user.displayName || user.email,
+        itemName: item?.name || "Item",
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+      await notifRef.set({
+        type: "marketReport",
+        itemId,
+        itemName: item?.name || "Item",
+        reportedBy: user.displayName || user.email,
+        time: firebase.firestore.FieldValue.serverTimestamp(),
+        message: `🚩 Market item "${item?.name}" was reported.`
+      });
+
+      showCustomAlert("✅ Report submitted. Admin will review it shortly.", "success");
+    } catch (error) {
+      console.error("❌ Report failed:", error);
+      showCustomAlert("❌ Could not report the item. Try again.", "error");
+    }
+  });
+}
+function showReportConfirmModal(onConfirm) {
+  const overlay = document.createElement("div");
+  overlay.style.cssText = `
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.5); z-index: 9998; display: flex;
+    align-items: center; justify-content: center;
+  `;
+
+  const box = document.createElement("div");
+  box.style.cssText = `
+    background: white; padding: 20px 30px; border-radius: 12px;
+    text-align: center; max-width: 360px; font-size: 1.1em;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  `;
+  box.innerHTML = `
+    <p style="margin-bottom: 20px;">🚩 Are you sure you want to report this item?</p>
+    <button id="reportConfirmYes" style="margin-right: 10px; padding: 8px 16px; border: none; border-radius: 5px; background: #f44336; color: white; cursor: pointer;">Yes, Report</button>
+    <button id="reportConfirmCancel" style="padding: 8px 16px; border: none; border-radius: 5px; background: #ccc; color: black; cursor: pointer;">Cancel</button>
+  `;
+
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+
+  document.getElementById("reportConfirmYes").onclick = () => {
+    document.body.removeChild(overlay);
+    onConfirm();
+  };
+
+  document.getElementById("reportConfirmCancel").onclick = () => {
+    document.body.removeChild(overlay);
+  };
+}
+
+function showCustomAlert(message, type = "info") {
+  const colors = {
+    success: "#4caf50",
+    error: "#f44336",
+    warning: "#ff9800",
+    info: "#2196f3"
+  };
+
+  const alertBox = document.createElement("div");
+  alertBox.innerText = message;
+
+  Object.assign(alertBox.style, {
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: colors[type] || "#333",
+    color: "#fff",
+    padding: "16px 28px",
+    fontSize: "1.1em",
+    borderRadius: "10px",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+    zIndex: "9999",
+    textAlign: "center",
+    opacity: "0",
+    whiteSpace: "pre-line",
+    transition: "opacity 0.3s ease, transform 0.3s ease",
+  });
+
+  document.body.appendChild(alertBox);
+
+  setTimeout(() => {
+    alertBox.style.opacity = "1";
+    alertBox.style.transform = "translate(-50%, -50%) scale(1.05)";
+  }, 10);
+
+  setTimeout(() => {
+    alertBox.style.opacity = "0";
+    alertBox.style.transform = "translate(-50%, -50%) scale(0.95)";
+    setTimeout(() => alertBox.remove(), 400);
+  }, 3500);
+}
+
+
+// ✅ ADD THIS FUNCTION BELOW
+async function toggleSoldStatus(itemId) {
+  try {
+    const doc = await marketRef.doc(itemId).get();
+    if (!doc.exists) {
+      return showCustomAlert("❌ Item not found.", "error");
+    }
+
+    const data = doc.data();
+    if (!currentUser || currentUser.uid !== data.postedBy) {
+      return showCustomAlert("❌ You are not authorized to update this item.", "error");
+    }
+
+    const newStatus = !data.isSold;
+    await marketRef.doc(itemId).update({ isSold: newStatus });
+
+    showCustomAlert(`✔️ Item marked as ${newStatus ? "Sold Out" : "Available"}`, "success");
+    loadMarketItems(); // Refresh the list
+  } catch (error) {
+    console.error("❌ Error updating item status:", error);
+    showCustomAlert("❌ Failed to update item status: " + error.message, "error");
+  }
+}
+
+// Function to update the button state when the item status changes in Firestore
+function updateSoldOutButtonState(id) {
+  const soldOutButton = document.getElementById(`soldOutBtn-${id}`);
+  const itemRef = marketRef.doc(id);
+
+  // Listen for updates to the isSold field in real-time
+  itemRef.onSnapshot(doc => {
+    const isSold = doc.data().isSold;
+
+    // Update button text and disable accordingly
+    if (isSold) {
+      soldOutButton.innerText = "❌ Sold Out";
+      soldOutButton.style.backgroundColor = "#f44336";
+      soldOutButton.disabled = true;
+    } else {
+      soldOutButton.innerText = "✅ Mark as Sold";
+      soldOutButton.style.backgroundColor = "#9e9e9e";
+      soldOutButton.disabled = false;
+    }
+  });
+}
+
 
 
 // ✅ Ensure this runs after login
@@ -5220,7 +5989,7 @@ function closeUniversalModal() {
   if (modal) modal.remove();
 }
 
-// ✅ Unified STK Push Handler with unlock logic
+// ✅ Unified STK Push Handler with unlock logic and soulmate boost integration
 async function initiateStkPayment(type, amount, itemId, itemName) {
   const phone = document.getElementById("universalPhone").value.trim();
   const statusEl = document.getElementById("universalPaymentStatus");
@@ -5251,19 +6020,26 @@ async function initiateStkPayment(type, amount, itemId, itemName) {
     if (data.success) {
       statusEl.innerText = "✅ STK Push sent. Please complete payment on your phone.";
 
-      const now = new Date().toISOString();
+      const now = new Date();
+      const isoNow = now.toISOString();
 
       if (currentUser?.uid) {
         const userRef = firebase.firestore().collection("users").doc(currentUser.uid);
 
         if (type === "soulmate") {
-          await userRef.set({ paidForSoulmates: true }, { merge: true });
-          localStorage.setItem("paidForSoulmates", "yes");
+          const boostExpiry = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+          await firebase.firestore().collection("soulmates").doc(itemId).update({
+            boosted: true,
+            boostExpiry: boostExpiry
+          });
+
+          showCustomAlert("✅ Soulmate profile boosted successfully!", "success");
+          loadSoulmates(); // Refresh list
         }
 
         if (type === "bomjobs") {
-          await userRef.set({ paidForBomJobs: now }, { merge: true });
-          localStorage.setItem("paidForBomJobs", now);
+          await userRef.set({ paidForBomJobs: isoNow }, { merge: true });
+          localStorage.setItem("paidForBomJobs", isoNow);
         }
 
         if (type === "market") {
@@ -5278,13 +6054,15 @@ async function initiateStkPayment(type, amount, itemId, itemName) {
 
         if (type === "boost") {
           await firebase.firestore().collection("boostedItems").doc(itemId).set({
-            boostedAt: now,
+            boostedAt: isoNow,
             itemName,
             userId: currentUser?.uid
           }, { merge: true });
 
-          localStorage.setItem(`boosted_${itemId}`, now);
+          localStorage.setItem(`boosted_${itemId}`, isoNow);
         }
+
+        closeUniversalModal();
       }
 
     } else {
@@ -5486,7 +6264,6 @@ function showToast(message, type = "info") {
     setTimeout(() => container.removeChild(toast), 400);
   }, 3000);
 }
-
 
 function confirmDeleteSwap(callback) {
   const modal = document.getElementById("confirmDeleteModal");
@@ -6348,8 +7125,229 @@ async function deleteSoulmate(id) {
     notes.style.display = notes.style.display === "none" ? "block" : "none";
   }
 
+function deleteMarketItem(id) { 
+  showCustomConfirm("Are you sure you want to delete this market item?", () => {
+    marketRef.doc(id).delete()
+      .then(() => {
+        showCustomAlert("🗑️ Item deleted successfully.", "success");
+        loadMarketItems(); // refresh
+      })
+      .catch(err => {
+        console.error("❌ Error deleting item:", err);
+        showCustomAlert("❌ Error deleting item: " + err.message, "error");
+      });
+  });
+}
+async function loadTrendingItems() {
+  const trendingContainer = document.getElementById("trendingContainer");
+  
+  // Show loading spinner before fetching content
+  trendingContainer.innerHTML = `
+    <div style="width: 100%; text-align: center; padding: 30px;">
+      <i class="fas fa-spinner fa-spin" style="font-size: 36px; color: #ff5722;"></i>
+      <p style="color:#666; font-weight: bold; margin-top: 10px;">Fetching trending content...</p>
+    </div>
+  `;
+
+  // Create an array of async loaders for each section
+  const loaders = [];
+
+  if (typeof loadSwaps === "function") loaders.push(loadSwaps());
+  if (typeof loadServices === "function") loaders.push(loadServices());
+  if (typeof loadSoulmates === "function") loaders.push(loadSoulmates());
+  if (typeof loadBOMJobs === "function") loaders.push(loadBOMJobs());
+  if (typeof loadMarketItems === "function") loaders.push(loadMarketItems());
+
+  // Wait for all sections to load
+  await Promise.allSettled(loaders);
+
+  // After loading is complete, continue with the trending section logic
+  const allSections = [
+    { id: "swapCardContainer", className: "swap-card", label: "Swaps" },
+    { id: "jobContainer", className: "job-card", label: "Jobs" },
+    { id: "soulmateContainer", className: "soulmate-card", label: "Soulmate" },
+    { id: "servicesContainer", className: "service-card", label: "Service" },
+    { id: "marketContainer", className: "market-card", label: "Market" },
+    { id: "resourcesTable", tag: "tr", hasBoostedText: true, label: "Resources" }
+  ];
+
+  let foundItems = [];
+
+  // Loop through each section to find trending items
+  allSections.forEach(({ id, className, tag, hasBoostedText, label }) => {
+    const container = document.getElementById(id);
+    if (!container) return;
+
+    let items = className
+      ? Array.from(container.getElementsByClassName(className))
+      : tag
+      ? Array.from(container.getElementsByTagName(tag))
+      : [];
+
+    items.forEach(item => {
+      const text = item.innerText.toLowerCase();
+      if (
+        text.includes("boost") ||
+        text.includes("🔥") ||
+        (hasBoostedText && text.includes("trending"))
+      ) {
+        const wrapper = document.createElement("div");
+        wrapper.className = "trending-highlight"; // Add animation class
+
+        // Add trending label
+        const labelTag = document.createElement("div");
+        labelTag.innerHTML = `<span style="font-size:13px; background:#ff5722; color:white; padding:3px 8px; border-radius:4px; font-weight:bold;">🔥 Trending from ${label}</span>`;
+        labelTag.style.marginBottom = "8px";
+
+        wrapper.appendChild(labelTag);
+        wrapper.appendChild(item.cloneNode(true));
+        foundItems.push(wrapper);
+      }
+    });
+  });
+
+  // Sort by most recently added (newer elements are later in DOM)
+  foundItems.reverse(); // Simple reversal to show newest first
+
+  // If no items are found, display message
+  if (foundItems.length === 0) {
+    trendingContainer.innerHTML = `<p style="text-align:center; color:#999;">No trending items found at the moment.</p>`;
+    return;
+  }
+
+  // Clear the loading spinner and insert the found trending items
+  trendingContainer.innerHTML = "";
+  foundItems.forEach(card => trendingContainer.appendChild(card));
+}
+
+ let currentPhotoName = ''; // To store the name or ID of the photo
+  let currentImageSrc = ''; // To store the source of the image for download
+
+  // Function to open the modal and display the clicked image with its details
+  function openModal(imageSrc, photoName, grade, term, subject, strand, substrand) {
+    document.getElementById('imageModal').style.display = 'flex'; // Show the modal
+    document.getElementById('modalImage').src = imageSrc; // Set the image source to clicked image
+    currentPhotoName = photoName; // Store the photo name or ID for the purchase
+    currentImageSrc = imageSrc; // Store the image source for download
+
+    // Display the details for the image in the modal
+    document.getElementById('imageTitle').innerText = 'Title: ' + photoName;
+    document.getElementById('imageGrade').innerText = 'Grade: ' + grade;
+    document.getElementById('imageTerm').innerText = 'Term: ' + term;
+    document.getElementById('imageSubject').innerText = 'Subject: ' + subject;
+    document.getElementById('imageStrand').innerText = 'Strand: ' + strand;
+    document.getElementById('imageSubstrand').innerText = 'Substrand: ' + substrand;
+
+    document.getElementById('buyNowButton').style.display = 'block'; // Show the Buy Now button inside the modal
+    document.getElementById('downloadButton').style.display = 'none'; // Hide the Download button until after payment
+  }
+
+  // Function to close the modal
+  function closeModal() {
+    document.getElementById('imageModal').style.display = 'none'; // Hide the modal
+  }
+
+  // Function to show the payment modal for image purchase
+  function showPaymentModalFor(type, amount, itemId, itemName) {
+    const modalHTML = `
+      <div id="universalPayModal" class="modal" style="display:block; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999;">
+        <div class="modal-content" style="margin:10% auto; padding:20px; background:#f9f9ff; border:2px solid #4CAF50; width:80%; max-width:400px; border-radius:10px; text-align:center; box-shadow: 0 0 10px rgba(0,0,0,0.3);">
+          <h3 style="color:#2c3e50;">Pay to Unlock: <span style="color:#4CAF50;">${itemName}</span></h3>
+          <p style="font-size:16px;">Amount: <strong style="color:#388e3c;">Ksh ${amount}</strong></p>
+          <input type="tel" id="universalPhone" placeholder="Enter your MPESA number (e.g. 0712345678)"
+                 style="padding: 10px; width:100%; margin-bottom:10px; border:1px solid #ccc; border-radius:6px;" />
+          <button onclick="initiateStkPayment('${type}', ${amount}, '${itemId}', '${itemName}')"
+                  style="background:#4CAF50; color:white; border:none; padding:10px 20px; border-radius:6px; font-weight:bold;">
+            📲 Pay with MPESA
+          </button>
+          <br/>
+          <button onclick="closeUniversalModal()" 
+                  style="margin-top:10px; background:#e53935; color:white; border:none; padding:8px 16px; border-radius:6px;">
+            ❌ Cancel
+          </button>
+          <p id="universalPaymentStatus" style="margin-top:10px; color:#555;"></p>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML("beforeend", modalHTML);
+  }
+
+  // Function to close the universal payment modal
+  function closeUniversalModal() {
+    const modal = document.getElementById("universalPayModal");
+    if (modal) modal.remove();
+  }
+
+  // ✅ Unified STK Push Handler with unlock logic
+  async function initiateStkPayment(type, amount, itemId, itemName) {
+    const phone = document.getElementById("universalPhone").value.trim();
+    const statusEl = document.getElementById("universalPaymentStatus");
+
+    if (!/^07\d{8}$/.test(phone)) {
+      statusEl.innerText = "⚠️ Please enter a valid Safaricom number";
+      return;
+    }
+
+    statusEl.innerText = "⏳ Sending STK Push...";
+
+    try {
+      const response = await fetch("http://localhost:3000/stkpush", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          phone,
+          amount,
+          accountReference: type,
+          itemId,
+          itemName,
+          userId: currentUser?.uid || "anonymous"
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        statusEl.innerText = "✅ STK Push sent. Please complete payment on your phone.";
+        
+        // After successful payment, allow the user to download the image
+        document.getElementById('downloadButton').style.display = 'block';
+        document.getElementById('downloadLink').href = currentImageSrc; // Set the download link to the image source
+        closeUniversalModal();
+      } else {
+        statusEl.innerText = `❌ Error: ${data.errorMessage || "Unknown failure"}`;
+      }
+    } catch (err) {
+      statusEl.innerText = "❌ Network error: " + err.message;
+    }
+  }
+// Filter the gallery based on selected grade, subject, and term
+function filterGallery() {
+  const grade = document.getElementById("filterGrade").value;
+  const subject = document.getElementById("filterSubject").value;
+  const term = document.getElementById("filterTerm").value;
+
+  const photos = document.querySelectorAll(".photo-container");
+
+  photos.forEach(photo => {
+    const photoGrade = photo.getAttribute("data-grade");
+    const photoSubject = photo.getAttribute("data-subject");
+    const photoTerm = photo.getAttribute("data-term");
+
+    if ((grade && photoGrade !== grade) || 
+        (subject && photoSubject !== subject) || 
+        (term && photoTerm !== term)) {
+      photo.style.display = "none";
+    } else {
+      photo.style.display = "flex";
+    }
+  });
+}
 
 </script>
+
+
+
+
 
 
 
