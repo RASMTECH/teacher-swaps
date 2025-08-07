@@ -6299,10 +6299,9 @@ async function toggleServiceStatus(serviceId) {
   }
 }
 async function showInterest(serviceId) {
-  // ✅ Ensure user is logged in
   const currentUserUid = currentUser?.uid;
   if (!currentUserUid) {
-    alert("Please log in to show interest.");
+    showCustomAlert("⚠️ Please log in to show interest.");
     return;
   }
 
@@ -6318,17 +6317,14 @@ async function showInterest(serviceId) {
     const serviceData = serviceDoc.data();
     const interestedUsers = serviceData.interestedUsers || [];
 
-    // ✅ Prevent duplicate interest
     if (interestedUsers.includes(currentUserUid)) {
-      alert("You've already shown interest in this service.");
+      showCustomAlert("✅ You've already shown interest in this service.");
       return;
     }
 
-    // ✅ Add user to interest list
     interestedUsers.push(currentUserUid);
     await serviceRef.update({ interestedUsers });
 
-    // ✅ Notify poster if not the same user
     const posterId = serviceData.postedBy;
     if (posterId && posterId !== currentUserUid) {
       await db.collection("alerts").add({
@@ -6336,23 +6332,52 @@ async function showInterest(serviceId) {
         message: `${currentUser.displayName || "Someone"} is interested in your service: ${serviceData.name || "Unnamed Service"}`,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         targetUserId: posterId,
-        section: "services", // 👈 optional section tag
-        relatedId: serviceId   // 👈 optional related ID
+        section: "services",
+        relatedId: serviceId
       });
     }
 
-    // ✅ Update interest count visually
     const updatedInterestCount = interestedUsers.length;
     const interestCountElement = document.getElementById(`interest-count-${serviceId}`);
     if (interestCountElement) {
       interestCountElement.textContent = `${updatedInterestCount} ${updatedInterestCount === 1 ? "person" : "people"} interested`;
     }
 
+    showCustomAlert("🎉 Your interest has been registered successfully!");
+
   } catch (error) {
-    console.error("Error showing interest:", error);
-    alert("Something went wrong. Please try again.");
+    console.error("❌ Error showing interest:", error.message || error);
+    showCustomAlert("Something went wrong. Please try again.");
   }
 }
+
+// ✅ Reusable inlined custom alert function
+function showCustomAlert(message) {
+  const alertBox = document.createElement("div");
+  alertBox.textContent = message;
+  alertBox.style = `
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: palegreen;
+    color: black;
+    padding: 15px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    border: 2px solid green;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    z-index: 9999;
+    text-align: center;
+  `;
+
+  document.body.appendChild(alertBox);
+  setTimeout(() => {
+    alertBox.remove();
+  }, 3000);
+}
+
 
 
 
