@@ -754,32 +754,92 @@
 }
 #soulmateContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Larger cards */
   gap: 20px;
   padding: 20px;
   box-sizing: border-box;
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 1200px;           /* ✅ Limits width to center content */
+  margin: 0 auto;              /* ✅ Centers grid on screen */
   overflow-y: auto;
+  max-height: 90vh;            /* ✅ Scrolls inside container */
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: 20px;    /* Smooth snap spacing */
 }
 
 body {
   overflow-y: scroll;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
 }
-
 
 .soulmate-card {
- scroll-snap-align: start;
+  scroll-snap-align: start;
   padding: 20px;
-  background: #f0f8ff; /* Light blue background */
+  background: #f0f8ff;         /* Light blue background */
   border: 1px solid #ccc;
   border-radius: 10px;
-  min-height: 200px;
-  width: 100%; /* ✅ Makes it fill available grid column */
-  box-sizing: border-box; /* ✅ Includes padding in width */
+  min-height: 170px;
+  width: 100%;                 /* Fills grid column */
+  box-sizing: border-box;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease; /* Optional: smooth hover effect */
+  transition: transform 0.2s ease;
 }
+
+.soulmate-card:hover {
+  transform: scale(1.02);      /* Optional: subtle hover zoom */
+}
+
+
+@media (max-width: 768px) {
+  /* Adjust the layout for mobile */
+  #soulmateContainer {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Ensures smaller screens still look good */
+  }
+
+  .soulmate-card {
+    padding: 15px; /* Slightly reduced padding for mobile */
+  }
+}
+/* Style for headers */
+header h1 {
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  padding: 10px 20px;
+  border: 2px solid #4CAF50; /* Green border */
+  border-radius: 10px; /* Rounded corners */
+  margin: 10px 0;
+  background-color: rgba(0, 0, 0, 0.2); /* Semi-transparent background */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+}
+
+/* Apply border to other headers, like h2 */
+h2 {
+  color: #2196f3;
+  padding: 8px 15px;
+  border: 2px solid #2196f3; /* Blue border */
+  border-radius: 8px;
+  margin-bottom: 15px;
+  background-color: #f1f8ff; /* Light background for contrast */
+}
+
+/* For smaller screens, adjust the header for better visibility */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.2rem; /* Slightly smaller font size */
+    padding: 8px 15px; /* Adjust padding for mobile */
+  }
+
+  h2 {
+    font-size: 1.1rem;
+    padding: 6px 12px; /* Adjust padding for smaller screens */
+  }
+}
+
 
 .verified-badge {
   position: absolute;
@@ -1385,18 +1445,130 @@ nav ul li {
   #downloadButton {
     display: none; /* Hidden until after payment */
   }
+/* Style for the logged-in user display */
+#loggedInUser {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#loggedInUser button {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 5px;
+  background: red;
+  color: white;
+  cursor: pointer;
+}
+
+#loggedInUser button:hover {
+  background: darkred; /* Darker color on hover */
+}
+
+/* Additional Header Styling */
+header {
+  background-color: #4CAF50;
+  padding: 15px;
+  text-align: center;
+  position: relative;
+}
+/* Header container style */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+/* Left and Right Image Style */
+header img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%; /* Circular images */
+}
+
+/* Logged-in user section styling */
+#loggedInUser {
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  margin-top: 10px;
+}
+
+/* Advertisement styling inside the header */
+header p {
+  font-size: 14px;
+  color: white;
+  margin-top: 10px;
+}
+
+/* Sponsored ad link style */
+header a {
+  color: #007bff;
+  font-weight: bold;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column; /* Stack header items vertically on smaller screens */
+    align-items: center;
+  }
+
+  header img {
+    width: 40px;
+    height: 40px;
+  }
+
+  #loggedInUser {
+    font-size: 14px;
+  }
+
+  header p {
+    font-size: 12px;
+  }
+
+  header a {
+    font-size: 12px;
+  }
+}
+
 </style>
 
 </head>
 <body>
-<header>
-<h1 style="color: white; font-weight: bold; display: flex; align-items: center; gap: 10px;">
-  <i class="fas fa-star"></i>
-  Nyota Mtaani – Teacher Swaps & Daily Hustles
-</h1>
-<div class="sponsored-ad">
-  <p>📢 Advertise your service here! Call 0792755676</p>
-</div>
+<header style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background-image: url('https://i.imgur.com/6kuZECC.jpeg'); background-size: cover; background-position: center;">
+
+  <!-- Left Image -->
+  <img src="https://i.imgur.com/pdTgJX3.jpeg" alt="Left Image" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
+
+  <!-- Header Content -->
+  <div style="flex-grow: 1; text-align: center;">
+    <h1 style="color: white; font-weight: bold; display: flex; align-items: center; gap: 10px; justify-content: center;">
+      <i class="fas fa-star"></i>
+      Nyota Mtaani – Teacher Swaps & Daily Hustles
+    </h1>
+
+    <!-- Display logged-in user and logout button inside the header -->
+    <div id="loggedInUser" style="text-align:center; margin-top:10px; color: white;"></div>
+
+    <!-- Advertisement inside the header -->
+    <p style="font-size: 14px; color: white; margin-top: 10px;">
+      📢 Advertise your service here! 
+      <a href="https://wa.me/254792755676" target="_blank" style="color: #007bff; font-weight: bold;">Call 0792755676</a>
+    </p>
+  </div>
+
+  <!-- Right Image -->
+  <img src="https://i.imgur.com/ZubSv7f.jpeg" alt="Right Image" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
+
+
+
+</header>
+
+
 
 <div class="scrolling-banner">
   <div class="scrolling-banner-content">
@@ -1404,7 +1576,8 @@ nav ul li {
   </div>
 </div>
 <div id="loggedInUser" style="position:absolute; top:15px; right:20px; color:white; font-weight:bold;"></div>
-<nav>
+<nav style="background-image: url('https://i.imgur.com/JCxt71v.jpeg'); background-size: cover; background-position: center; padding: 20px 20px;">
+
   <ul>
     <li><a class="menu-box" href="#" onclick="showPage('home')">
       <img src="https://i.imgur.com/lek58ah.jpeg" alt="Home">
@@ -1483,6 +1656,14 @@ nav ul li {
       <img src="https://i.imgur.com/SPqGvz9.jpeg" alt="Contact">
       <span>Contact Us</span></a>
     </li>
+
+<li>
+  <a class="menu-box" href="#" onclick="loadAlerts()">
+    <img src="https://i.imgur.com/QyvcpQ7.jpeg" alt="Alerts"> <!-- Replace with your preferred alert icon -->
+    <span>Alerts</span>
+  </a>
+</li>
+
   </ul>
 </nav>
 
@@ -1603,7 +1784,7 @@ nav ul li {
     
     <!-- Buy Now Button inside the Modal -->
     <div id="buyNowButton" style="margin-top: 20px; display: block;">
-      <button onclick="showPaymentModalFor('photo', 25, 'image123', 'Photo 1')" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; font-size: 16px;">
+      <button onclick="showPaymentModalFor('photo', 25, 'image123', 'Lesson-plan ')" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; font-size: 16px;">
         Pay Ksh 25 to Buy
       </button>
     </div>
@@ -1625,6 +1806,7 @@ nav ul li {
     </div>
   </div>
   </div>
+
 <!-- ✅ How to Use the System Section -->
 <div id="usageHelp" class="page" style="display:none; padding: 20px;">
   <h2 style="color:#2196f3; text-align:center;">📘 How to Use the System</h2>
@@ -1642,6 +1824,34 @@ nav ul li {
   </div>
 </div>
 
+
+<div id="alertsContainer" style="display:none;"></div>
+  </div>
+  
+<!-- 🔲 Review Modal -->
+<div id="reviewModal" style="display:none; position:fixed;top:0;left:0;width:100%;height:100%;background:#00000080;z-index:999;justify-content:center;align-items:center;">
+  <div style="background:white;padding:20px;border-radius:8px;max-width:400px;width:90%;position:relative;">
+    <h3 style="margin-top:0;">📝 Leave a Review</h3>
+    <input type="email" id="reviewEmail" placeholder="Your Email" style="width:100%;margin-bottom:10px;padding:8px;border-radius:5px;border:1px solid #ccc;">
+    <textarea id="reviewComment" placeholder="Write your review..." style="width:100%;padding:8px;border-radius:5px;border:1px solid #ccc;"></textarea>
+    
+    <button onclick="submitReviewFromModal()" style="margin-top:10px;background:#4CAF50;color:#fff;padding:8px 14px;border:none;border-radius:5px;">Submit</button>
+    
+    <!-- ✅ New Close Button -->
+    <button onclick="closeReviewModal()" style="margin-top:10px;background:#f44336;color:#fff;padding:8px 14px;border:none;border-radius:5px;">Close</button>
+
+    <!-- ❌ Top-right corner close icon -->
+    <button onclick="closeReviewModal()" style="position:absolute;top:10px;right:10px;background:none;border:none;font-size:18px;">❌</button>
+  </div>
+</div>
+
+<div id="allReviewsModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:1000;">
+  <div style="background:#fff; padding:20px; width:90%; max-width:600px; max-height:80%; overflow:auto; border-radius:10px; position:relative;">
+    <span onclick="closeAllReviewsModal()" style="position:absolute; top:10px; right:20px; cursor:pointer; font-weight:bold; font-size:18px;">✖</span>
+    <h3>💬 All Reviews</h3>
+    <div id="allReviewsContainer" style="margin-top:10px;"></div>
+  </div>
+</div>
 
 <!-- ✅ Unified Confirm Delete Modal -->
 <div id="confirmDeleteModal" style="display:none; position: fixed; top: 0; left: 0;
@@ -1712,22 +1922,20 @@ nav ul li {
 <div id="home" class="page" style="display: none;">
 <h2>
   <i class="fas fa-users" style="color:#3f51b5; margin-right: 8px;"></i>
-  Connect with Other Employers
+  📢 Advertise your service here! 
+  <a href="https://wa.me/254792755676" target="_blank" style="text-decoration: none;">Click Here To Chat 0792755676</a>
 </h2>
-<div class="sponsored-ad">
-  <p>📢 Advertise your service here! Call 0792755676</p>
-</div>
+
 
 <div class="scrolling-banner">
   <div class="scrolling-banner-content">
-    🌟 Try Mary's Salon in Kisumu | 📦 Order from Speedy Courier Services | 📱 Fix your phone at TechHub Eldoret | 🍔 Order lunch from Mama John's Kitchen | 📸 Book events with StarPix Photography | 🛠️ Car repairs at QuickFix Nairobi | 💻 Affordable Web Design by PixelStorm | 📷 Wedding shoots by EliteLens Studios
+    🌟 Catch Harambee Stars play DRC Live on SuperSport 3  channel 56 at 5:00 pm  | 📦 Order from Speedy Courier Services | 📱 Fix your phone at TechHub Eldoret | 🍔 Order lunch from Mama John's Kitchen | 📸 Book events with StarPix Photography | 🛠️ Car repairs at QuickFix Nairobi | 💻 Affordable Web Design by PixelStorm | 📷 Wedding shoots by EliteLens Studios
   </div>
 </div>
   <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 20px 0;">
-  <img src="https://i.imgur.com/jixmLF9.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/bbHniIi.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
-  <img src="https://i.imgur.com/qnmK7CR.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
 
+  <img src="https://i.imgur.com/ld8vrze.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
+  <img src="https://i.imgur.com/JTvf2AF.jpeg" alt="Rasm" class="logo-img" style="width: 200px;">
 </div>
 <!-- Open Graph Meta Tags for social sharing -->
 <meta property="og:title" content="Teacher Swaps Kenya" />
@@ -2189,7 +2397,6 @@ Register To Connect With  Available Soulmates
     <select id="smStatus" required>
       <option value="">Select Status</option>
       <option value="Single">Single</option>
-      <option value="Married">Married</option>
       <option value="Divorced">Divorced</option>
       <option value="Widowed">Widowed</option>
     </select>
@@ -2290,29 +2497,37 @@ Register To Connect With  Available Soulmates
   </div>
 </div>
 
-<h3 style="margin-top: 0;">
-  <i class="fas fa-venus-mars" style="color:#e91e63; margin-right: 8px;"></i>
-  <i class="fas fa-heart" style="color:#00796b; margin-right: 8px;"></i>
-  Available Soulmates
-</h3>
-
-<div id="soulmateContainer"></div>
 <div id="soulmateContainer" style="
-   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
-  width: 100%;               /* Fill full width of screen */
-  padding: 10px 20px;        /* Optional horizontal padding */
-  margin-top: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  max-height: 600px;
   overflow-y: auto;
-  max-height: 600px;         /* Increase height to show more rows */
-  scroll-snap-type: y mandatory;
   box-sizing: border-box;
+  background: #f9f9f9;
+  border-radius: 10px;
+">
+  <!-- Cards will be dynamically added here -->
 </div>
 
-  <div class="soulmate-card">That is all for today </div>
+<div id="endOfListMessage" style="
+  display: none;
+  text-align: center;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #555;
+  font-size: 16px;
+">
+  That's all for now!
 </div>
-</div>
+
+  </div>
+
+
 <div id="soulmateModal" class="modal" style="display:none;">
   <div class="modal-content">
     <span class="close" onclick="closeSoulmateModal()">&times;</span>
@@ -3144,24 +3359,44 @@ if (pageId === "market") {
 
 
 
-  // ✅ Register
-  document.getElementById("registerForm").addEventListener("submit", async e => {
-    e.preventDefault();
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
+ // ✅ Register
+document.getElementById("registerForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
 
-    try {
-      const userCred = await auth.createUserWithEmailAndPassword(email, password);
-      currentUser = userCred.user;
-      await currentUser.updateProfile({ displayName: name });
-      showCustomAlert("Registration successful! Please login.", "success");
-      showPage("login");
-      e.target.reset();
-    } catch (err) {
-      showCustomAlert("Error: " + err.message, "error");
-    }
+  try {
+    const userCred = await auth.createUserWithEmailAndPassword(email, password);
+    currentUser = userCred.user;
+    await currentUser.updateProfile({ displayName: name });
+
+    // Send admin notification on new user registration
+    await sendRegistrationAdminNotification(currentUser);
+
+    showCustomAlert("Registration successful! Please login.", "success");
+    showPage("login");
+    e.target.reset();
+  } catch (err) {
+    showCustomAlert("Error: " + err.message, "error");
+  }
+});
+
+// Function to send admin notification on user registration
+async function sendRegistrationAdminNotification(user) {
+  const notifRef = db.collection("adminNotifications").doc();
+
+  await notifRef.set({
+    type: "New User Registration",
+    userId: user.uid,
+    userEmail: user.email,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    message: `🔔 New user ${user.email} has registered successfully.`
   });
+
+  console.log("Admin notification sent for new user registration.");
+}
+
 // ✅ Login with Firebase
 document.getElementById("loginForm").addEventListener("submit", async e => {
   e.preventDefault();
@@ -3196,12 +3431,17 @@ function displayLoggedInUser() {
   const user = localStorage.getItem("loggedInUser");
   const userDiv = document.getElementById("loggedInUser");
   if (user) {
-    userDiv.innerHTML = `<i class="fas fa-user-circle"></i> ${user}
-      <button onclick="logoutUser()" style="margin-left:10px; padding:4px 8px; border:none; border-radius:5px; background:red; color:white;">Logout</button>`;
+    userDiv.innerHTML = `
+      <i class="fas fa-user-circle"></i> ${user}
+      <button onclick="logoutUser()" style="margin-left:10px; padding:4px 8px; border:none; border-radius:5px; background:red; color:white;">
+        Logout
+      </button>
+    `;
   } else {
     userDiv.innerHTML = "";
   }
 }
+
 
 // ✅ Logout function
 function logoutUser() {
@@ -3217,231 +3457,357 @@ window.onload = function () {
 };
 
 
-  // ✅ Swap Form Submit
-  document.getElementById("swapForm").addEventListener("submit", e => {
-    e.preventDefault();
-    if (!isLoggedIn || !currentUser) {
-      showPage("login");
-      return alert("You must be logged in.");
-    }
+// ✅ Swap Form Submit Handler
+document.getElementById("swapForm").addEventListener("submit", e => {
+  e.preventDefault();
 
- const data = {
-  teacherName: document.getElementById("teacherName").value.trim(),
-  phone: document.getElementById("phone").value.trim(),
-  subjectCombination: document.getElementById("subjectCombination").value.trim(),
-  county: document.getElementById("county").value,
-  subCounty: document.getElementById("subCounty").value,
-  swapCounty: document.getElementById("swapCounty").value,
-  swapSubCounty: document.getElementById("swapSubCounty")?.value || "", // Optional
-  category: document.getElementById("category").value,
-  hardship: document.getElementById("hardship").value
-};
+  if (!isLoggedIn || !currentUser) {
+    showPage("login");
+    return alert("You must be logged in.");
+  }
 
-// Validate only required fields
-const requiredFields = ['teacherName', 'phone', 'subjectCombination', 'county', 'subCounty', 'swapCounty', 'category', 'hardship'];
+  const data = {
+    teacherName: document.getElementById("teacherName").value.trim(),
+    phone: document.getElementById("phone").value.trim(),
+    subjectCombination: document.getElementById("subjectCombination").value.trim(),
+    county: document.getElementById("county").value,
+    subCounty: document.getElementById("subCounty").value,
+    swapCounty: document.getElementById("swapCounty").value,
+    swapSubCounty: document.getElementById("swapSubCounty")?.value || "", // Optional
+    category: document.getElementById("category").value,
+    hardship: document.getElementById("hardship").value
+  };
 
-const missing = requiredFields.some(key => !data[key]);
-if (missing) {
-  return alert("Please fill all fields.");
+  // Validate only required fields
+  const requiredFields = ['teacherName', 'phone', 'subjectCombination', 'county', 'subCounty', 'swapCounty', 'category', 'hardship'];
+  const missing = requiredFields.some(key => !data[key]);
+
+  if (missing) {
+    return alert("Please fill all required fields.");
+  }
+
+  saveSwap(data);
+});
+
+
+// ✅ Save Swap and Notify
+async function saveSwap(swap) {
+  try {
+    // Save the swap to the 'teacherSwaps' collection
+    const swapDoc = await db.collection("teacherSwaps").add({
+      ...swap,
+      userId: currentUser.uid,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    // Show confirmation alert for user
+    showCustomAlert("Swap added successfully!", "success");
+
+    // 🔔 Admin notification
+    const notification = {
+      type: "Swap Added",
+      message: `A new swap has been posted by ${swap.teacherName} for ${swap.subjectCombination}.`,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      read: false,
+      itemId: swapDoc.id,
+    };
+
+    await db.collection("adminNotifications").add(notification);
+
+    // 🔔 Global alert to all users
+    await db.collection("alerts").add({
+      title: "🔁 New Swap Posted",
+      message: `${swap.teacherName} just posted a swap for ${swap.subjectCombination}.`,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      targetUserId: null  // public
+    });
+
+    // Reset form and reload swaps
+    document.getElementById("swapForm").reset();
+    loadSwaps();
+
+  } catch (err) {
+    showCustomAlert("Error saving swap: " + err.message, "error");
+  }
 }
 
-
-    saveSwap(data);
-  });
-
-  async function saveSwap(swap) {
-    try {
-      await db.collection("teacherSwaps").add({
-        ...swap,
-        userId: currentUser.uid,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-      });
-      showCustomAlert("Swap added successfully!", "success");
-      document.getElementById("swapForm").reset();
-      loadSwaps();
-    } catch (err) {
-      showCustomAlert("Error saving swap: " + err.message, "error");
-    }
-}
 async function loadSwaps() {
   const container = document.querySelector("#swapCardContainer");
   container.innerHTML = "";
-  trendingBoostedSwaps = []; // reset trending list
+  trendingBoostedSwaps = [];
 
   try {
-    const snapshot = await db.collection("teacherSwaps").orderBy("timestamp", "desc").get();
+    const swapRef = db.collection("teacherSwaps").orderBy("timestamp", "desc");
 
-    if (snapshot.empty) {
-      container.innerHTML = `<div style="text-align:center;padding:20px;color:#999;">💔 No swap requests found</div>`;
-      return;
-    }
-
-    const now = new Date();
-    const boostedSwaps = [];
-    const normalSwaps = [];
-    const hasPaid = localStorage.getItem("paidForSwaps") === "yes";
-
-    for (const doc of snapshot.docs) {
-      const s = doc.data();
-      const id = doc.id;
-      const boostExpiry = s.boostExpiry?.toDate?.();
-      const isBoosted = s.boosted && boostExpiry && boostExpiry > now;
-
-      if (s.boosted && (!boostExpiry || boostExpiry <= now)) {
-        await db.collection("teacherSwaps").doc(id).update({ boosted: false, boostExpiry: null });
+    swapRef.onSnapshot(snapshot => {
+      if (snapshot.empty) {
+        container.innerHTML = `<div style="text-align:center;padding:20px;color:#999;">💔 No swap requests found</div>`;
+        return;
       }
 
-      const swap = { id, ...s, isBoosted, boostExpiry };
-      (isBoosted ? boostedSwaps : normalSwaps).push(swap);
+      const now = new Date();
+      const boostedSwaps = [];
+      const normalSwaps = [];
+      const hasPaid = localStorage.getItem("paidForSwaps") === "yes";
 
-      // ✅ Add boosted swaps to Trending section
-      if (isBoosted) trendingBoostedSwaps.push({
-        title: s.teacherName,
-        description: `${s.county} ➡️ ${s.swapCounty} (${s.subjectCombination})`,
-        phone: s.phone,
-        type: "swap"
+      snapshot.docs.forEach(doc => {
+        const s = doc.data();
+        const id = doc.id;
+        const boostExpiry = s.boostExpiry?.toDate?.();
+        const isBoosted = s.boosted && boostExpiry && boostExpiry > now;
+
+        if (s.boosted && (!boostExpiry || boostExpiry <= now)) {
+          db.collection("teacherSwaps").doc(id).update({ boosted: false, boostExpiry: null });
+        }
+
+        const swap = { id, ...s, isBoosted, boostExpiry };
+        (isBoosted ? boostedSwaps : normalSwaps).push(swap);
+
+        if (isBoosted) {
+          trendingBoostedSwaps.push({
+            title: s.teacherName,
+            description: `${s.county} ➡️ ${s.swapCounty} (${s.subjectCombination})`,
+            phone: s.phone,
+            type: "swap"
+          });
+        }
       });
-    }
 
-    // Sort swaps to show boosted ones first
-    const orderedSwaps = [...boostedSwaps, ...normalSwaps];
+      const orderedSwaps = [...boostedSwaps, ...normalSwaps];
 
-    for (const s of orderedSwaps) {
-      const isPoster = currentUser && s.userId === currentUser.uid;
-      const isAdminUser = isAdmin === true;
-      const blur = !hasPaid && !isPoster && !isAdminUser;
+      orderedSwaps.forEach(s => {
+        const isPoster = currentUser && s.userId === currentUser.uid;
+        const isAdminUser = isAdmin === true;
+        const blur = !hasPaid && !isPoster && !isAdminUser;
 
-      const isHotCounty = vipHotCounties.includes(s.county) || vipHotCounties.includes(s.swapCounty);
-      const vipBtn = isAdminUser && isHotCounty && !s.isVIP
-        ? `<button onclick="markAsVIPSwap('${s.id}')">🔥 Sell VIP</button>`
-        : s.isVIP ? `<span style="color:crimson;font-weight:bold;">🔥 VIP</span>` : "-";
+        const isHotCounty = vipHotCounties.includes(s.county) || vipHotCounties.includes(s.swapCounty);
 
-      const isVerified = !!s.userId;
-      const showVerifiedBadge = isVerified ? `<span class="verified-badge"><i class="fas fa-check-circle"></i></span>` : "";
-      const showVIPBadge = s.isVIP ? `<span class="vip-badge">🔥 VIP</span>` : "";
-      const showBoostedBadge = s.isBoosted && s.boostExpiry
-        ? `<span class="boosted-badge">🚀 Boosted (${Math.ceil((s.boostExpiry - now) / (1000 * 60 * 60 * 24))} day${Math.ceil((s.boostExpiry - now) / (1000 * 60 * 60 * 24)) !== 1 ? 's' : ''} left)</span>`
-        : "";
+        const vipBtn = isAdminUser && isHotCounty && !s.isVIP
+          ? `<button onclick="markAsVIPSwap('${s.id}')" style="background:#6a1b9a;color:white;padding:6px 12px;font-size:13px;border:none;border-radius:6px;cursor:pointer;">🔥 Sell VIP</button>`
+          : s.isVIP ? `<span style="color:crimson;font-weight:bold;font-size:13px;">🔥 VIP</span>` : "-";
 
-      const contactHTML = `
-        <div style="margin:4px 0;">
-          📞 <a href="tel:${s.phone}" style="color:green;">${s.phone}</a><br>
-          💬 <a href="https://wa.me/254${s.phone.replace(/^0/, '')}" target="_blank" style="color:#25D366;">WhatsApp</a>
-        </div>`;
+        const isVerified = !!s.userId;
+        const showVerifiedBadge = isVerified ? `<span class="verified-badge"><i class="fas fa-check-circle"></i></span>` : "";
+        const showVIPBadge = s.isVIP ? `<span class="vip-badge">🔥 VIP</span>` : "";
+        const showBoostedBadge = s.isBoosted && s.boostExpiry
+          ? `<span class="boosted-badge">🚀 Boosted (${Math.ceil((s.boostExpiry - now) / (1000 * 60 * 60 * 24))} day${Math.ceil((s.boostExpiry - now) / (1000 * 60 * 60 * 24)) !== 1 ? 's' : ''} left)</span>`
+          : "";
 
-      const blurredContactHTML = `
-        <div style="margin:6px 0; text-align:left;">
-          <span style="color:crimson; font-size:13px; font-weight:bold;">
-            🔒 Contacts locked. Pay Ksh 250 to unlock
-          </span><br>
-          <button onclick="showPaymentModalFor('swap', 250, '${s.id}', 'Unlock VIP Swaps')"
-                  style="margin-top:4px;background:crimson;color:white;border:none;padding:5px 10px;border-radius:4px;">
-            💳 Pay Now
-          </button>
-        </div>`;
+        const contactHTML = `
+          <div style="margin:4px 0;">
+            📞 <a href="tel:${s.phone}" style="color:green;">${s.phone}</a><br>
+            💬 <a href="https://wa.me/254${s.phone.replace(/^0/, '')}" target="_blank" style="color:#25D366;">WhatsApp</a>
+          </div>`;
 
-      const card = document.createElement("div");
-      card.className = "swap-card";
-      card.style = `
-        background: #f9f9f9;
-        border-radius: 8px;
-        padding: 12px;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-        margin: 8px;
-        width: 280px;
-        display: inline-block;
-        vertical-align: top;
-        position: relative;
-      `;
+        const blurredContactHTML = `
+          <div style="margin:6px 0; text-align:left;">
+            <span style="color:crimson; font-size:13px; font-weight:bold;">
+              🔒 Contacts locked. Pay Ksh 250 to unlock
+            </span><br>
+            <button onclick="showPaymentModalFor('swap', 250, '${s.id}', 'Unlock VIP Swaps')"
+                    style="margin-top:4px;background:crimson;color:white;border:none;padding:5px 10px;border-radius:4px;">
+              💳 Pay Now
+            </button>
+          </div>`;
 
-      card.setAttribute("data-category", s.category || "-");
-      card.setAttribute("data-swapcounty", s.swapCounty || "-");
-      card.setAttribute("data-swapsubcounty", s.swapSubCounty || "-");
-      card.setAttribute("data-hardship", s.hardship || "-");
-      card.setAttribute("data-subject", (s.subjectCombination || "-").toLowerCase());
+        const card = document.createElement("div");
+        card.className = "swap-card";
+        card.style = `
+          background: #f9f9f9;
+          border-radius: 8px;
+          padding: 12px;
+          box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+          margin: 8px;
+          width: 280px;
+          display: inline-block;
+          vertical-align: top;
+          position: relative;
+        `;
 
-      // Boost Button for the poster or admin
-      const boostButton = `
-        <div style="margin-top:10px;">
-          ${isPoster || isAdminUser ? `
+        const boostButton = (isPoster || isAdminUser) ? `
+          <div style="margin-top:10px;">
             <button id="boostSwapBtn-${s.id}" onclick="boostSwap('${s.id}')"
-              style="background:#ff9800;color:white;border:none;border-radius:5px;padding:6px 12px;cursor:pointer;">
+              style="background:#ff9800;color:white;border:none;border-radius:6px;padding:6px 12px;font-size:13px;cursor:pointer;">
               🚀 Boost Swap ${isAdminUser ? "(Free)" : "(Ksh 250)"}
             </button>
-          ` : ""}
-        </div>
-      `;
+          </div>` : "";
 
-      // Swap Closed Button for the poster or admin
-      const closedButton = `
-        ${isPoster || isAdminUser ? `
+        const closedButton = (isPoster || isAdminUser) ? `
           <div style="margin-top:10px;">
             <button id="closeSwapBtn-${s.id}" onclick="closeSwap('${s.id}')"
-              style="background:#e53935;color:white;border:none;border-radius:5px;padding:6px 12px;cursor:pointer;">
+              style="background:#9e9e9e;color:white;border:none;border-radius:6px;padding:6px 12px;font-size:13px;cursor:pointer;">
               ${s.isClosed ? "Swap Closed" : "Mark as Closed"}
             </button>
-          </div>
-        ` : ""}
-      `;
+          </div>` : "";
 
-      // Delete Button for admins only
-      const deleteButton = `
-        ${isAdminUser ? `
+        const deleteButton = isAdminUser ? `
           <button onclick="deleteSwap('${s.id}')"
-            style="background:#e53935;color:white;padding:4px 8px;border:none;border-radius:4px;">🗑️ Delete</button>
-        ` : ""}
-      `;
+            style="background:#f44336;color:white;padding:6px 12px;font-size:13px;border:none;border-radius:6px;cursor:pointer;">
+            🗑️ Delete
+          </button>` : "";
 
-      // Show Interest Button (Visible to all users)
-      const interestButton = `
-        <button onclick="sendSwapInterest('${s.id}', '${s.teacherName}')"
-          style="background:#1976d2;color:white;border:none;padding:4px 8px;border-radius:4px;flex-grow:1;">
-          💌 Show Interest
-        </button>
-      `;
+        const interestButton = `
+          <button onclick="sendSwapInterest('${s.id}', '${s.teacherName}')"
+            style="background:#2196f3;color:white;padding:6px 12px;font-size:13px;border:none;border-radius:6px;cursor:pointer;">
+            💌 Show Interest
+          </button>`;
 
-      card.innerHTML = `
-        <h3 style="margin:0; color:#1a237e;">${s.teacherName} ${showVerifiedBadge}</h3>
-        <div style="margin:4px 0;">${showVIPBadge} ${showBoostedBadge}</div>
-        <p style="margin:4px 0;color:#3f51b5;"><strong>From:</strong> ${s.county} / ${s.subCounty || "-"}</p>
-        <p style="margin:4px 0;color:#ef6c00;"><strong>Wants:</strong> ${s.swapCounty} / ${s.swapSubCounty || "-"}</p>
-        <p style="margin:4px 0;color:#6a1b9a;"><strong>Subjects:</strong> ${s.subjectCombination || '-'}</p>
-        <p style="margin:4px 0;color:#3e2723;"><strong>Category:</strong> ${s.category || '-'}</p>
-        <p style="margin:4px 0;color:#d81b60;"><strong>Hardship:</strong> ${s.hardship || '-'}</p>
+        const followButton = `
+          <button onclick="followSwap('${s.id}')"
+            style="background:#e91e63;color:white;padding:6px 12px;font-size:13px;border:none;border-radius:6px;cursor:pointer;">
+            🧑‍🤝‍🧑 Follow Swap
+          </button>`;
 
-        <div style="margin-top:6px;">
-          ${blur ? blurredContactHTML : contactHTML}
-        </div>
+        const interestCount = s.interestedUsers ? s.interestedUsers.length : 0;
+        const followerCount = s.followers ? s.followers.length : 0;
 
-        <div class="rating" data-id="${s.id}">
-          <span class="avg-rating" id="avgRating-${s.id}">Loading...</span><br>
-          ${[1, 2, 3, 4, 5].map(star => `
-            <i class="fas fa-star" onclick="rateService('${s.id}', ${star})"
-               style="cursor:pointer; color:#ccc;" id="star-${s.id}-${star}"></i>
-          `).join('')}
-        </div>
+        card.innerHTML = `
+          <h3 style="margin:0; color:#1a237e;">${s.teacherName} ${showVerifiedBadge}</h3>
+          <div style="margin:4px 0;">${showVIPBadge} ${showBoostedBadge}</div>
+          <p style="margin:4px 0;color:#3f51b5;"><strong>From:</strong> ${s.county} / ${s.subCounty || "-"}</p>
+          <p style="margin:4px 0;color:#ef6c00;"><strong>Wants:</strong> ${s.swapCounty} / ${s.swapSubCounty || "-"}</p>
+          <p style="margin:4px 0;color:#6a1b9a;"><strong>Subjects:</strong> ${s.subjectCombination || '-'}</p>
+          <p style="margin:4px 0;color:#3e2723;"><strong>Category:</strong> ${s.category || '-'}</p>
+          <p style="margin:4px 0;color:#d81b60;"><strong>Hardship:</strong> ${s.hardship || '-'}</p>
 
-        <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:8px;">
-          ${deleteButton}  <!-- Only visible to Admin -->
-          ${vipBtn}        <!-- Only visible to Admin in hot counties -->
-          ${interestButton} <!-- Visible to all users -->
-        </div>
+          <div style="margin-top:6px;">
+            ${blur ? blurredContactHTML : contactHTML}
+          </div>
 
-        ${closedButton} <!-- Swap Closed Button -->
-        ${boostButton}  <!-- Boost Swap Button -->
-      `;
-      
-      container.appendChild(card);
-      updateAverageRating(s.id);
-    }
+          <div class="rating" data-id="${s.id}">
+            <span class="avg-rating" id="avgRating-${s.id}">Loading...</span><br>
+            ${[1, 2, 3, 4, 5].map(star => `
+              <i class="fas fa-star" onclick="rateService('${s.id}', ${star})"
+                 style="cursor:pointer; color:#ccc;" id="star-${s.id}-${star}"></i>
+            `).join('')}
+          </div>
 
-    // ✅ Render trending swaps after all are processed
-    renderTrendingSectionFromSwapsOnly();
+          <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:8px;">
+            ${deleteButton}
+            ${vipBtn}
+            ${interestButton}
+            ${followButton}
+          </div>
+
+          <p id="follower-count-${s.id}" style="font-size: 0.9em; color: #ff4081;" onclick="showFollowers('${s.id}')">
+            ${followerCount} people following
+          </p>
+
+          ${closedButton}
+          ${boostButton}
+        `;
+
+        container.appendChild(card);
+        updateAverageRating(s.id);
+      });
+
+      renderTrendingSectionFromSwapsOnly();
+    });
 
   } catch (err) {
     console.error("Error loading swaps:", err);
     showCustomAlert("Error loading swaps: " + err.message, "error");
   }
+}
+
+// Function to show followers' first names (from email)
+async function showFollowers(swapId) {
+  const swapRef = db.collection("teacherSwaps").doc(swapId);
+  const swapDoc = await swapRef.get();
+
+  if (!swapDoc.exists) {
+    console.log("No such swap!");
+    return;
+  }
+
+  const followers = swapDoc.data().followers || [];
+  const followerNames = followers.map(f => {
+    // Extract the first name from email (before @)
+    const firstName = f.email ? f.email.split('@')[0] : 'Anonymous';
+    return firstName;
+  }).join(", ");
+
+  alert(`Followers: ${followerNames}`);
+}
+
+// Function to follow a swap
+async function followSwap(swapId) {
+  const currentUser = firebase.auth().currentUser;
+  if (!currentUser) {
+    alert("Please log in to follow this swap.");
+    return;
+  }
+
+  const swapRef = db.collection("teacherSwaps").doc(swapId);
+  const swapDoc = await swapRef.get();
+  if (!swapDoc.exists) {
+    alert("Swap not found.");
+    return;
+  }
+
+  const swapData = swapDoc.data();
+  const followers = swapData.followers || [];
+
+  // Check if the user is already following
+  if (!followers.some(f => f.uid === currentUser.uid)) {
+    const user = {
+      uid: currentUser.uid,
+      email: currentUser.email, // Store email for reference
+    };
+
+    // Add user to followers list
+    await swapRef.update({
+      followers: firebase.firestore.FieldValue.arrayUnion(user)
+    });
+
+    // Update follower count in UI
+    const followerCount = followers.length + 1;
+    const countEl = document.getElementById(`follower-count-${swapId}`);
+    if (countEl) {
+      countEl.innerText = `${followerCount} people following`;
+    }
+
+    // Send admin notification
+    await sendFollowAdminNotification(swapId, currentUser);
+
+    // ✅ Notify the swap poster (if not same user)
+    const posterId = swapData.postedBy;
+    if (posterId && posterId !== currentUser.uid) {
+      await db.collection("alerts").add({
+        title: "👀 New Follower",
+        message: `${currentUser.email || "Someone"} followed your swap: ${swapData.name || "Unnamed Swap"}`,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        targetUserId: posterId
+      });
+    }
+  }
+}
+
+// Function to send an admin notification when a user follows a swap
+async function sendFollowAdminNotification(swapId, currentUser) {
+  const swapRef = db.collection("teacherSwaps").doc(swapId);
+  const swapDoc = await swapRef.get();
+
+  if (!swapDoc.exists) {
+    console.error("Swap not found!");
+    return;
+  }
+
+  const swapData = swapDoc.data();
+  const swapName = swapData.name || "Swap";
+
+  const notifRef = db.collection("adminNotifications").doc();
+  await notifRef.set({
+    type: "Swap Follow",
+    swapId: swapId,
+    swapName: swapName,
+    userId: currentUser.uid,
+    userEmail: currentUser.email,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    message: `📍 User ${currentUser.email} has followed swap "${swapName}".`,
+  });
+
+  console.log("Admin notification sent for swap follow.");
 }
 
 
@@ -3450,16 +3816,52 @@ async function loadSwaps() {
 async function closeSwap(swapId) {
   const swapRef = db.collection("teacherSwaps").doc(swapId);
 
-  // Update Firestore document to mark the swap as closed
-  await swapRef.update({
-    isClosed: true
+  try {
+    // Update Firestore document to mark the swap as closed
+    await swapRef.update({
+      isClosed: true
+    });
+
+    // Send admin notification about swap closure
+    await sendSwapClosedAdminNotification(swapId);
+
+    // Update button text and disable it
+    const closeButton = document.getElementById(`closeSwapBtn-${swapId}`);
+    closeButton.innerText = "Swap Closed";
+    closeButton.disabled = true;
+
+    showCustomAlert("✅ Swap has been successfully closed!", "success");
+  } catch (error) {
+    console.error("❌ Error closing swap:", error);
+    showCustomAlert("❌ Failed to close the swap: " + error.message, "error");
+  }
+}
+
+// Function to send an admin notification when a swap is closed
+async function sendSwapClosedAdminNotification(swapId) {
+  const swapRef = db.collection("teacherSwaps").doc(swapId);
+  const swapDoc = await swapRef.get();
+
+  if (!swapDoc.exists) {
+    console.error("Swap not found!");
+    return;
+  }
+
+  const swapData = swapDoc.data();
+  const swapName = swapData.name || "Swap";
+
+  const notifRef = db.collection("adminNotifications").doc();
+  await notifRef.set({
+    type: "Swap Closure",
+    swapId: swapId,
+    swapName: swapName,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    message: `🔒 Swap "${swapName}" (ID: ${swapId}) has been closed.`,
   });
 
-  // Update button text and disable it
-  const closeButton = document.getElementById(`closeSwapBtn-${swapId}`);
-  closeButton.innerText = "Swap Closed";
-  closeButton.disabled = true;
+  console.log("Admin notification sent for swap closure.");
 }
+
 
 // Function to boost the swap
 async function boostSwap(swapId) {
@@ -3473,15 +3875,64 @@ async function boostSwap(swapId) {
   // Check if the current user is an admin
   const isAdminUser = isAdmin === true;
 
-  if (isAdminUser) {
-    // Admins boost the swap for free
-    await updateSwapBoostStatus(swapId, true);
-    showCustomAlert("✅ The swap has been boosted for free!", "success");
-  } else {
-    // Show the payment modal for boosting (non-admin)
-    showPaymentModalFor('boost', 250, swapId, 'Boost Swap');
+  try {
+    if (isAdminUser) {
+      // Admins boost the swap for free
+      await updateSwapBoostStatus(swapId, true);
+      showCustomAlert("✅ The swap has been boosted for free!", "success");
+
+      // Send an admin notification
+      await sendBoostAdminNotification(swapId, currentUser.uid, "admin");
+
+    } else {
+      // Show the payment modal for boosting (non-admin)
+      showPaymentModalFor('boost', 250, swapId, 'Boost Swap');
+
+      // Send an admin notification (non-admin boosting)
+      await sendBoostAdminNotification(swapId, currentUser.uid, "user");
+    }
+  } catch (error) {
+    console.error("❌ Error boosting swap:", error);
+    showCustomAlert("❌ Failed to boost swap: " + error.message, "error");
   }
 }
+
+// Function to update the swap boost status in Firestore
+async function updateSwapBoostStatus(swapId, boostStatus) {
+  const swapRef = firebase.firestore().doc(`swaps/${swapId}`);
+  await swapRef.update({
+    boosted: boostStatus,
+    boostTimestamp: firebase.firestore.FieldValue.serverTimestamp()
+  });
+}
+
+// Function to send an admin notification when a swap is boosted
+async function sendBoostAdminNotification(swapId, userId, userType) {
+  const swapRef = firebase.firestore().doc(`swaps/${swapId}`);
+  const swapDoc = await swapRef.get();
+
+  if (!swapDoc.exists) {
+    console.error("Swap not found!");
+    return;
+  }
+
+  const swapData = swapDoc.data();
+  const swapName = swapData.name || "Swap";
+
+  const notifRef = firebase.firestore().collection("adminNotifications").doc();
+  await notifRef.set({
+    type: "Swap Boost",
+    swapId: swapId,
+    userId: userId,
+    swapName: swapName,
+    userType: userType, // either 'admin' or 'user'
+    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    message: `🚀 ${userType === "admin" ? "Admin" : "User"} boosted the swap "${swapName}" (ID: ${swapId}).`,
+  });
+
+  console.log("Admin notification sent for swap boost.");
+}
+
 
 // Helper function to update the swap boost status in Firestore
 async function updateSwapBoostStatus(swapId, isBoosted) {
@@ -3520,8 +3971,8 @@ async function sendSwapInterest(swapId, teacherName) {
     return;
   }
 
-  const interestRef = db.collection("swapInterests").doc(); // You can use a composite key too
-
+  // Save the interest
+  const interestRef = db.collection("swapInterests").doc(); // You can use a composite key if needed
   await interestRef.set({
     swapId,
     teacherName,
@@ -3530,13 +3981,41 @@ async function sendSwapInterest(swapId, teacherName) {
     timestamp: firebase.firestore.FieldValue.serverTimestamp()
   });
 
+  // Send admin notification
+  await sendAdminNotification(swapId, teacherName, currentUser.displayName || currentUser.email);
+
+  // 🔔 Notify swap poster
+  const swapDoc = await db.collection("teacherSwaps").doc(swapId).get();
+  if (swapDoc.exists) {
+    const swapData = swapDoc.data();
+    const posterId = swapData.userId;
+
+    // Only notify if not the same user
+    if (posterId && posterId !== currentUser.uid) {
+      await db.collection("alerts").add({
+        title: "📬 Swap Interest",
+        message: `${currentUser.displayName || "Someone"} is interested in your swap for ${swapData.subjectCombination}.`,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        targetUserId: posterId
+      });
+    }
+  }
+
   showCustomAlert(`✅ Your interest in ${teacherName}'s swap has been sent!`, "success");
 }
 
 
-
-
-// ✅ BOM Job Submit (Updated Format + Notifications)
+// Create a notification for admins when a user expresses interest
+async function sendAdminNotification(swapId, teacherName, userName) {
+  await db.collection("adminNotifications").add({
+    type: "Swap Interest",
+    message: `${userName} has shown interest in ${teacherName}'s swap.`,
+    itemId: swapId,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    read: false
+  });
+}
+// ✅ BOM Job Submit (with Public & Admin Notifications)
 document.getElementById("bomJobForm").addEventListener("submit", async e => {
   e.preventDefault();
 
@@ -3565,26 +4044,41 @@ document.getElementById("bomJobForm").addEventListener("submit", async e => {
   };
 
   try {
+    // ✅ Save job to Firestore
     await bomRef.add(job);
+
     showCustomAlert("✅ Job posted successfully!", "success");
     document.getElementById("bomJobForm").reset();
     loadBOMJobs();
 
-    // 🔔 Notify matching service providers
+    // ✅ Optional: Notify relevant users (matching services logic)
     notifyMatchingServiceProviders(job);
 
-    // Notify Admin about the new job posting
+    // ✅ Admin Notification
     await db.collection("adminNotifications").add({
       type: "BOM Job Post",
       message: `New BOM job posted: ${job.jobType} by ${job.organization}, Salary: ${job.salaryRange}, Phone: ${job.phone}, County: ${job.county}`,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      read: false // ✅ Mark as unread for badge tracking
+      read: false
     });
+
+    // ✅ Public Alert (visible to all users)
+    const alertDoc = await db.collection("alerts").add({
+      title: "📢 New BOM Job",
+      message: `${job.organization} just posted a ${job.jobType} job in ${job.county}, ${job.subCounty}. 💰 Salary: ${job.salaryRange}`,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      targetUserId: null,
+      category: "bom",  // helpful for filtering by type
+      county: job.county
+    });
+
+    console.log("✅ BOM alert created with ID:", alertDoc.id);
 
   } catch (err) {
     showCustomAlert("❌ Error posting job: " + err.message, "error");
   }
 });
+
 
 // ✅ Notify Matching Service Providers
 function notifyMatchingServiceProviders(job) {
@@ -3645,7 +4139,6 @@ async function loadBOMJobs() {
     showCustomAlert("❌ Failed to load jobs: " + err.message, "error");
   }
 }
-
 // ✅ Render BOM Jobs (with Boost Logic and Trending Integration)
 function renderBOMJobs(jobs) {
   const container = document.getElementById("jobContainer");
@@ -3732,10 +4225,103 @@ function renderBOMJobs(jobs) {
     let bgColor = "#607d8b";
 
     if (jobType.includes("teacher")) iconClass = "fa-chalkboard-teacher", bgColor = "#42a5f5";
-    else if (jobType.includes("driver")) iconClass = "fa-car", bgColor = "#26a69a";
-    else if (jobType.includes("nurse")) iconClass = "fa-user-nurse", bgColor = "#ec407a";
-    else if (jobType.includes("accountant")) iconClass = "fa-calculator", bgColor = "#ffa726";
-    else if (jobType.includes("lawyer")) iconClass = "fa-balance-scale", bgColor = "#5c6bc0";
+  else if (jobType.includes("developer")) iconClass = "fa-laptop-code", bgColor = "#42a5f5";  // Software Developer
+else if (jobType.includes("designer")) iconClass = "fa-paint-brush", bgColor = "#9c27b0";  // Designer (e.g., UI/UX)
+else if (jobType.includes("engineer")) iconClass = "fa-cogs", bgColor = "#0288d1";  // Engineer
+else if (jobType.includes("manager")) iconClass = "fa-users-cog", bgColor = "#8e24aa";  // Manager
+else if (jobType.includes("doctor")) iconClass = "fa-stethoscope", bgColor = "#f44336";  // Doctor
+else if (jobType.includes("scientist")) iconClass = "fa-flask", bgColor = "#9e9e9e";  // Scientist
+else if (jobType.includes("architect")) iconClass = "fa-building", bgColor = "#5f6368";  // Architect
+else if (jobType.includes("photographer")) iconClass = "fa-camera", bgColor = "#607d8b";  // Photographer
+else if (jobType.includes("plumber")) iconClass = "fa-wrench", bgColor = "#3f51b5";  // Plumber
+else if (jobType.includes("electrician")) iconClass = "fa-bolt", bgColor = "#ffc107";  // Electrician
+else if (jobType.includes("social worker")) iconClass = "fa-users", bgColor = "#673ab7";  // Social Worker
+else if (jobType.includes("cleaner")) iconClass = "fa-broom", bgColor = "#00bcd4";  // Cleaner
+else if (jobType.includes("counselor")) iconClass = "fa-headset", bgColor = "#f06292";  // Counselor
+else if (jobType.includes("bartender")) iconClass = "fa-glass-cheers", bgColor = "#795548";  // Bartender
+else if (jobType.includes("waiter")) iconClass = "fa-utensils", bgColor = "#ff5722";  // Waiter
+else if (jobType.includes("dancer")) iconClass = "fa-dance", bgColor = "#f06292";  // Dancer
+else if (jobType.includes("editor")) iconClass = "fa-pen", bgColor = "#4caf50";  // Editor
+else if (jobType.includes("receptionist")) iconClass = "fa-address-book", bgColor = "#2196f3";  // Receptionist
+else if (jobType.includes("real estate agent")) iconClass = "fa-building", bgColor = "#8bc34a";  // Real Estate Agent
+else if (jobType.includes("sales manager")) iconClass = "fa-users", bgColor = "#9c27b0";  // Sales Manager
+else if (jobType.includes("mechanic")) iconClass = "fa-cogs", bgColor = "#ff9800";  // Mechanic
+else if (jobType.includes("construction worker")) iconClass = "fa-hard-hat", bgColor = "#795548";  // Construction Worker
+else if (jobType.includes("bus driver")) iconClass = "fa-bus", bgColor = "#0288d1";  // Bus Driver
+else if (jobType.includes("web designer")) iconClass = "fa-laptop-code", bgColor = "#42a5f5";  // Web Designer
+else if (jobType.includes("hr manager")) iconClass = "fa-users-cog", bgColor = "#8bc34a";  // HR Manager
+else if (jobType.includes("programmer")) iconClass = "fa-code", bgColor = "#4caf50";  // Programmer
+else if (jobType.includes("event planner")) iconClass = "fa-calendar-alt", bgColor = "#ff9800";  // Event Planner
+else if (jobType.includes("translator")) iconClass = "fa-language", bgColor = "#9c27b0";  // Translator
+else if (jobType.includes("marketer")) iconClass = "fa-bullhorn", bgColor = "#ff5722";  // Marketer
+else if (jobType.includes("business analyst")) iconClass = "fa-chart-line", bgColor = "#673ab7";  // Business Analyst
+else if (jobType.includes("pharmacist")) iconClass = "fa-capsules", bgColor = "#f44336";  // Pharmacist
+else if (jobType.includes("social media manager")) iconClass = "fa-share-alt", bgColor = "#00bcd4";  // Social Media Manager
+else if (jobType.includes("customer support")) iconClass = "fa-headphones", bgColor = "#9e9e9e";  // Customer Support
+else if (jobType.includes("journalist")) iconClass = "fa-newspaper", bgColor = "#607d8b";  // Journalist
+else if (jobType.includes("chemist")) iconClass = "fa-flask", bgColor = "#9e9e9e";  // Chemist
+else if (jobType.includes("fitness trainer")) iconClass = "fa-dumbbell", bgColor = "#ff5722";  // Fitness Trainer
+else if (jobType.includes("veterinarian")) iconClass = "fa-paw", bgColor = "#ff9800";  // Veterinarian
+else if (jobType.includes("barber")) iconClass = "fa-scissors", bgColor = "#2196f3";  // Barber
+else if (jobType.includes("hair stylist")) iconClass = "fa-cut", bgColor = "#e91e63";  // Hair Stylist
+else if (jobType.includes("teacher assistant")) iconClass = "fa-chalkboard", bgColor = "#42a5f5";  // Teacher Assistant
+else if (jobType.includes("biologist")) iconClass = "fa-leaf", bgColor = "#4caf50";  // Biologist
+else if (jobType.includes("editor-in-chief")) iconClass = "fa-pencil-alt", bgColor = "#673ab7";  // Editor-in-Chief
+else if (jobType.includes("author")) iconClass = "fa-book", bgColor = "#9e9e9e";  // Author
+else if (jobType.includes("librarian")) iconClass = "fa-book-reader", bgColor = "#3f51b5";  // Librarian
+else if (jobType.includes("geologist")) iconClass = "fa-globe", bgColor = "#0288d1";  // Geologist
+else if (jobType.includes("actuary")) iconClass = "fa-calculator", bgColor = "#f44336";  // Actuary
+else if (jobType.includes("public relations")) iconClass = "fa-users", bgColor = "#e91e63";  // Public Relations
+else if (jobType.includes("yoga instructor")) iconClass = "fa-spa", bgColor = "#8bc34a";  // Yoga Instructor
+else if (jobType.includes("paramedic")) iconClass = "fa-ambulance", bgColor = "#f44336";  // Paramedic
+else if (jobType.includes("tour guide")) iconClass = "fa-map-marked-alt", bgColor = "#9c27b0";  // Tour Guide
+else if (jobType.includes("lumberjack")) iconClass = "fa-tree", bgColor = "#4caf50";  // Lumberjack
+else if (jobType.includes("firefighter")) iconClass = "fa-fire", bgColor = "#f44336";  // Firefighter
+else if (jobType.includes("flight attendant")) iconClass = "fa-plane", bgColor = "#2196f3";  // Flight Attendant
+else if (jobType.includes("civil engineer")) iconClass = "fa-hard-hat", bgColor = "#8bc34a";  // Civil Engineer
+else if (jobType.includes("real estate broker")) iconClass = "fa-home", bgColor = "#607d8b";  // Real Estate Broker
+else if (jobType.includes("tax consultant")) iconClass = "fa-calculator", bgColor = "#ff5722";  // Tax Consultant
+else if (jobType.includes("business consultant")) iconClass = "fa-briefcase", bgColor = "#673ab7";  // Business Consultant
+else if (jobType.includes("data scientist")) iconClass = "fa-database", bgColor = "#0288d1";  // Data Scientist
+else if (jobType.includes("security analyst")) iconClass = "fa-shield-alt", bgColor = "#4caf50";  // Security Analyst
+else if (jobType.includes("event coordinator")) iconClass = "fa-calendar-alt", bgColor = "#ff9800";  // Event Coordinator
+else if (jobType.includes("copywriter")) iconClass = "fa-pencil-alt", bgColor = "#607d8b";  // Copywriter
+else if (jobType.includes("marketing manager")) iconClass = "fa-bullhorn", bgColor = "#ff5722";  // Marketing Manager
+else if (jobType.includes("web developer")) iconClass = "fa-laptop-code", bgColor = "#42a5f5";  // Web Developer
+else if (jobType.includes("music teacher")) iconClass = "fa-music", bgColor = "#9c27b0";  // Music Teacher
+else if (jobType.includes("IT support")) iconClass = "fa-headphones", bgColor = "#4caf50";  // IT Support
+else if (jobType.includes("consultant")) iconClass = "fa-user-tie", bgColor = "#8bc34a";  // Consultant
+else if (jobType.includes("dance instructor")) iconClass = "fa-dance", bgColor = "#e91e63";  // Dance Instructor
+else if (jobType.includes("carpenter")) iconClass = "fa-hammer", bgColor = "#795548";  // Carpenter
+else if (jobType.includes("florist")) iconClass = "fa-leaf", bgColor = "#9c27b0";  // Florist
+else if (jobType.includes("interior designer")) iconClass = "fa-couch", bgColor = "#9e9e9e";  // Interior Designer
+else if (jobType.includes("tailor")) iconClass = "fa-tshirt", bgColor = "#4caf50";  // Tailor
+else if (jobType.includes("hairdresser")) iconClass = "fa-cut", bgColor = "#e91e63";  // Hairdresser
+else if (jobType.includes("barista")) iconClass = "fa-coffee", bgColor = "#795548";  // Barista
+else if (jobType.includes("waitstaff")) iconClass = "fa-utensils", bgColor = "#ff5722";  // Waitstaff
+else if (jobType.includes("massage therapist")) iconClass = "fa-hand-paper", bgColor = "#673ab7";  // Massage Therapist
+else if (jobType.includes("personal trainer")) iconClass = "fa-dumbbell", bgColor = "#ff5722";  // Personal Trainer
+else if (jobType.includes("tutor")) iconClass = "fa-chalkboard-teacher", bgColor = "#42a5f5";  // Tutor
+else if (jobType.includes("chauffeur")) iconClass = "fa-car", bgColor = "#3f51b5";  // Chauffeur
+else if (jobType.includes("bartender")) iconClass = "fa-glass-cheers", bgColor = "#8d6e63";  // Bartender
+else if (jobType.includes("auctioneer")) iconClass = "fa-gavel", bgColor = "#4caf50";  // Auctioneer
+else if (jobType.includes("farming")) iconClass = "fa-seedling", bgColor = "#8bc34a";  // Farmer
+else if (jobType.includes("travel agent")) iconClass = "fa-plane", bgColor = "#673ab7";  // Travel Agent
+else if (jobType.includes("SEO specialist")) iconClass = "fa-search", bgColor = "#ff5722";  // SEO Specialist
+else if (jobType.includes("logistics manager")) iconClass = "fa-truck", bgColor = "#ff9800";  // Logistics Manager
+else if (jobType.includes("financial analyst")) iconClass = "fa-chart-line", bgColor = "#0288d1";  // Financial Analyst
+else if (jobType.includes("product manager")) iconClass = "fa-cogs", bgColor = "#9e9e9e";  // Product Manager
+else if (jobType.includes("nutritionist")) iconClass = "fa-apple-alt", bgColor = "#4caf50";  // Nutritionist
+else if (jobType.includes("nurse")) iconClass = "fa-user-nurse", bgColor = "#ec407a";  // Nurse
+else if (jobType.includes("teacher")) iconClass = "fa-chalkboard-teacher", bgColor = "#42a5f5";  // Teacher
+else if (jobType.includes("driver")) iconClass = "fa-car", bgColor = "#26a69a";  // Driver
+else if (jobType.includes("saloonist")) iconClass = "fa-cut", bgColor = "#e91e63";  // Saloonist
+else if (jobType.includes("uber driver")) iconClass = "fa-car", bgColor = "#26a69a";  // Uber Driver
+else if (jobType.includes("trainer")) iconClass = "fa-dumbbell", bgColor = "#ff5722";  // Trainer
+else if (jobType.includes("security")) iconClass = "fa-shield-alt", bgColor = "#607d8b";  // Security Guard
+else if (jobType.includes("shamba boy")) iconClass = "fa-seedling", bgColor = "#388e3c";  // Shamba Boy
+else if (jobType.includes("maid")) iconClass = "fa-broom", bgColor = "#8bc34a";  // Maid
+
     else if (jobType.includes("chef")) iconClass = "fa-utensils", bgColor = "#8d6e63";
 
     const iconHTML = `
@@ -3745,7 +4331,7 @@ function renderBOMJobs(jobs) {
     `;
 
     const contactSection = (isPoster || hasAccess || isAdmin)
-      ? `
+      ? ` 
         <p style="color:#009688;">
           <strong>${phoneIcon}Phone:</strong><br>
           <a href="tel:${job.phone}" style="color:green;">📞 Call</a><br>
@@ -3754,8 +4340,8 @@ function renderBOMJobs(jobs) {
         <button onclick="openChatModal('${job.phone}', '${job.organization}')"
           style="background:#673ab7; color:white; border:none; border-radius:5px; padding:6px 12px; cursor:pointer;">
           💬 Chat
-        </button>`
-      : `
+        </button>` 
+      : ` 
         <div class="blurred">
           <p style="color:gray;">🔒 Contacts Locked – Pay Ksh 350 to Unlock for 2 Weeks</p>
         </div>
@@ -3765,23 +4351,52 @@ function renderBOMJobs(jobs) {
         </button>
       `;
 
-    const actionButtons = `
-      ${(isPoster || isAdmin) ? `
-        <button onclick="confirmDeleteBOMJob('${job.id}')"
-          style="background:#dc3545; color:white; border:none; border-radius:5px; padding:6px 12px; cursor:pointer;">
-          🗑️ Delete
-        </button>` : ''}
-      ${isAdmin ? `
-        <button onclick="boostJobFree('${job.id}')"
-          style="background:#4caf50; color:white; border:none; border-radius:5px; padding:6px 12px; margin-left:6px; cursor:pointer;">
-          🚀 Boost (Free)
-        </button>` : ''}
-      ${(isPoster || isAdmin) && !job.isClosed ? `
-        <button onclick="closeJob('${job.id}')"
-          style="background:#6c757d; color:white; border:none; border-radius:5px; padding:6px 12px; margin-left:6px; cursor:pointer;">
-          🚫 Mark as Closed
-        </button>` : ''}
-    `;
+ const actionButtons = `
+  <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+
+    ${(isPoster || isAdmin) ? ` 
+      <button onclick="confirmDeleteBOMJob('${job.id}')"
+        style="background:#dc3545; color:white; border:none; border-radius:5px; padding:6px 12px; cursor:pointer;">
+        🗑️ Delete
+      </button>` : ''} 
+
+    ${isAdmin ? ` 
+      <button onclick="boostJobFree('${job.id}')"
+        style="background:#4caf50; color:white; border:none; border-radius:5px; padding:6px 12px; cursor:pointer;">
+        🚀 Boost (Free)
+      </button>` : ''}
+
+    ${(isPoster || isAdmin) && !job.isClosed ? `
+      <button onclick="closeJob('${job.id}')"
+        style="background:#6c757d; color:white; border:none; border-radius:5px; padding:6px 12px; cursor:pointer;">
+        🚫 Mark as Closed
+      </button>` : ''}
+
+    ${(isPoster || !isPoster) ? `
+      <button onclick="showInterest('${job.id}')"
+        style="background:#ff9800; color:white; border:none; border-radius:5px; padding:6px 12px; cursor:pointer;">
+        💼 Show Interest
+      </button>` : ''}
+
+    ${(isPoster || !isPoster) ? `
+      <button onclick="followJob('${job.id}')"
+        style="background:#2196f3; color:white; border:none; border-radius:5px; padding:6px 12px; cursor:pointer;">
+        👀 Follow Job
+      </button>` : ''}
+
+  </div>
+
+  ${(isPoster || !isPoster) ? `
+    <p id="interest-count-${job.id}" style="font-size:0.8em; color: #8e24aa; margin-top:6px;">
+      ${job.interestCount || 0} people interested
+    </p>` : ''}
+
+  ${(isPoster || !isPoster) ? `
+    <p id="followed-count-${job.id}" style="font-size:0.8em; color: #2196f3; margin-top:4px;">
+      0 people following
+    </p>` : ''}
+`;
+
 
     card.innerHTML = `
       ${topCornerTag}
@@ -3810,29 +4425,258 @@ function renderBOMJobs(jobs) {
     `;
 
     container.appendChild(card);
-    updateAverageRating(job.id);
+    updateFollowedCount(job.id);  // To update the follow count in real time
+    updateInterestCount(job.id);  // To update the interest count in real time
+  });
+}
+
+// Function to handle following a job
+function followJob(jobId) {
+  const followButton = document.querySelector(`button[onclick="followJob('${jobId}')"]`);
+  const followedCountElement = document.getElementById(`followed-count-${jobId}`);
+  const user = firebase.auth().currentUser;
+
+  if (!user) {
+    alert("Please log in to follow this job.");
+    return;
+  }
+
+  const userId = user.uid;
+  const jobRef = firebase.firestore().doc(`bomJobs/${jobId}`);
+
+  jobRef.get().then(async docSnapshot => {
+    if (!docSnapshot.exists) {
+      console.error("Job not found!");
+      return;
+    }
+
+    const jobData = docSnapshot.data();
+    const alreadyFollowing = jobData.followedUsers && jobData.followedUsers.includes(userId);
+
+    if (alreadyFollowing) {
+      // 👎 Unfollow
+      followButton.innerText = "👀 Follow Job";
+      followButton.classList.remove('followed');
+
+      await jobRef.update({
+        followedUsers: firebase.firestore.FieldValue.arrayRemove(userId),
+        followedCount: firebase.firestore.FieldValue.increment(-1)
+      });
+
+      if (followedCountElement) {
+        let currentCount = parseInt(followedCountElement.textContent) || 1;
+        followedCountElement.textContent = `${currentCount - 1} following`;
+      }
+
+      console.log("Unfollowed the job successfully.");
+    } else {
+      // 👍 Follow
+      followButton.innerText = "👀 Following Job";
+      followButton.classList.add('followed');
+
+      await jobRef.update({
+        followedUsers: firebase.firestore.FieldValue.arrayUnion(userId),
+        followedCount: firebase.firestore.FieldValue.increment(1)
+      });
+
+      if (followedCountElement) {
+        let currentCount = parseInt(followedCountElement.textContent) || 0;
+        followedCountElement.textContent = `${currentCount + 1} following`;
+      }
+
+      console.log("Followed the job successfully.");
+
+      // ✅ Notify the poster if not self
+      const posterName = jobData.postedBy || "Poster";
+      const posterId = jobData.userId || null;
+
+      if (posterId && posterId !== userId) {
+        await db.collection("alerts").add({
+          title: "👥 Job Followed",
+          message: `${user.displayName || user.email || "Someone"} followed your BOM job for ${jobData.jobType} at ${jobData.organization}.`,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          targetUserId: posterId
+        });
+      }
+    }
+  }).catch((error) => {
+    console.error("Error handling job follow: ", error);
   });
 }
 
 
+// Function to update the followed count on page load (in case of page refresh)
+function updateFollowedCount(jobId) {
+  const followedCountElement = document.getElementById(`followed-count-${jobId}`);
+
+  // Reference to the Firestore document for the job
+  const jobRef = firebase.firestore().doc(`bomJobs/${jobId}`);
+
+  // Listen for real-time updates to the job document
+  jobRef.onSnapshot(docSnapshot => {
+    if (docSnapshot.exists) {
+      const jobData = docSnapshot.data();
+      const followedCount = jobData.followedCount || 0;
+
+      // Update the UI with the current followed count from Firestore
+      followedCountElement.innerText = `${followedCount} people following`;
+    }
+  });
+}
+
+
+// Function to handle showing interest and updating followed count
+function showInterest(jobId) {
+  const user = firebase.auth().currentUser;
+  const userId = user?.uid;
+
+  if (!userId) {
+    alert("Please log in to show interest.");
+    return;
+  }
+
+  const followedCountElement = document.getElementById(`followed-count-${jobId}`);
+  const jobRef = firebase.firestore().doc(`bomJobs/${jobId}`);
+
+  jobRef.get().then(async docSnapshot => {
+    if (!docSnapshot.exists) {
+      console.error("Job not found!");
+      return;
+    }
+
+    const jobData = docSnapshot.data();
+    const alreadyFollowed = jobData.followedUsers && jobData.followedUsers.includes(userId);
+
+    if (alreadyFollowed) {
+      // ✅ Show custom alert
+      const alertBox = document.createElement("div");
+      alertBox.innerText = "⚠️ You’ve already shown interest in this job!";
+      alertBox.style.position = "fixed";
+      alertBox.style.top = "20px";
+      alertBox.style.right = "20px";
+      alertBox.style.backgroundColor = "#ffdddd";
+      alertBox.style.color = "#a94442";
+      alertBox.style.padding = "15px 20px";
+      alertBox.style.border = "1px solid #ebccd1";
+      alertBox.style.borderRadius = "8px";
+      alertBox.style.boxShadow = "0 2px 6px rgba(0,0,0,0.2)";
+      alertBox.style.zIndex = 9999;
+      alertBox.style.fontFamily = "Arial, sans-serif";
+      alertBox.style.fontSize = "14px";
+
+      document.body.appendChild(alertBox);
+      setTimeout(() => {
+        document.body.removeChild(alertBox);
+      }, 3000);
+
+      return;
+    }
+
+    // Add interest
+    const followedCount = (jobData.followedCount || 0) + 1;
+    const updatedFollowedUsers = jobData.followedUsers || [];
+    updatedFollowedUsers.push(userId);
+
+    await jobRef.update({
+      followedCount: followedCount,
+      followedUsers: updatedFollowedUsers
+    });
+
+    // Update UI
+    if (followedCountElement) {
+      followedCountElement.innerText = `${followedCount} people following`;
+    }
+
+    console.log("Followed count updated successfully.");
+
+    // ✅ Notify Admin
+    await firebase.firestore().collection("adminNotifications").add({
+      type: "Job Interest",
+      jobId: jobId,
+      userId: userId,
+      message: `📌 User with ID ${userId} has shown interest in job ${jobId}.`,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+
+    // ✅ Notify Poster
+    const posterId = jobData.userId;
+    const jobTitle = jobData.jobType || "a job";
+    const organization = jobData.organization || "an organization";
+
+    if (posterId && posterId !== userId) {
+      await firebase.firestore().collection("alerts").add({
+        title: "📌 New Job Interest",
+        message: `${user.displayName || user.email || "Someone"} is interested in your job: ${jobTitle} at ${organization}.`,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        targetUserId: posterId
+      });
+    }
+
+    console.log("Admin and poster notified.");
+
+  }).catch((error) => {
+    console.error("Error fetching job data: ", error);
+  });
+}
+
+
+// Function to update the interest count on page load (in case of page refresh)
+function updateInterestCount(jobId) {
+  const interestCountElement = document.getElementById(`interest-count-${jobId}`);
+
+  // Reference to the Firestore document for the job
+  const jobRef = firebase.firestore().doc(`bomJobs/${jobId}`);
+
+  // Listen for real-time updates to the job document
+  jobRef.onSnapshot(docSnapshot => {
+    if (docSnapshot.exists) {
+      const jobData = docSnapshot.data();
+      const interestCount = jobData.interestCount || 0;
+
+      // Update the UI with the current interest count from Firestore
+      interestCountElement.innerText = `${interestCount} people interested`;
+    }
+  });
+}
+
+// Call this function when the page is loaded or refreshed to sync the interest count
+function onPageLoad(jobId) {
+  updateInterestCount(jobId);
+}
 
 async function closeJob(jobId) {
   try {
+    // Close the job in the database
     await db.collection("bomJobs").doc(jobId).update({
       isClosed: true
     });
+
     showCustomAlert("✅ Job marked as closed.", "success");
-    loadBOMJobs(); // refresh job list
+    loadBOMJobs(); // Refresh job list
+
+    // Send admin notification about the job closure
+    const notifRef = db.collection("adminNotifications").doc();
+    await notifRef.set({
+      type: "Job Closed",
+      jobId: jobId,
+      message: `🔒 A BOM Job with ID ${jobId} has been marked as closed.`,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+
+    console.log("Admin notification sent for job closure.");
+
   } catch (error) {
     console.error("❌ Error closing job:", error);
     showCustomAlert("❌ Failed to close job: " + error.message, "error");
   }
 }
+
 async function boostJobFree(jobId) {
   const boostExpiry = new Date();
   boostExpiry.setDate(boostExpiry.getDate() + 7); // 7-day boost
 
   try {
+    // Update the job status with boosted details
     await db.collection("bomJobs").doc(jobId).update({
       isBoosted: true,
       boostExpiry: boostExpiry,
@@ -3840,7 +4684,19 @@ async function boostJobFree(jobId) {
     });
 
     showCustomAlert("✅ Job boosted for FREE by Admin", "success");
-    loadBOMJobs(); // Refresh list
+    loadBOMJobs(); // Refresh the list
+
+    // Send admin notification about the free boost
+    const notifRef = db.collection("adminNotifications").doc();
+    await notifRef.set({
+      type: "Job Boosted Free",
+      jobId: jobId,
+      message: `💥 A BOM Job with ID ${jobId} has been boosted for FREE by Admin.`,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+
+    console.log("Admin notification sent for job boost.");
+
   } catch (error) {
     console.error("❌ Error boosting job:", error);
     showCustomAlert("❌ Failed to boost job: " + error.message, "error");
@@ -3859,7 +4715,8 @@ function hasBomJobAccess() {
   return diffDays <= 14; // valid for 2 weeks
 }
 
-function unlockBomJobs() {
+// Function to unlock BOM Job contacts and send admin notification
+async function unlockBomJobs() {
   if (!currentUser || !currentUser.uid) {
     showCustomAlert("Please login to unlock job contacts.", "error");
     return;
@@ -3867,28 +4724,68 @@ function unlockBomJobs() {
 
   showPaymentModalFor("bomjobs", 350, currentUser.uid, "BOM Job Contacts");
 
-  const checkPaid = setInterval(() => {
-    if (localStorage.getItem("paidForBomJobs")) {
+  const checkPaid = setInterval(async () => {
+    if (localStorage.getItem("paidForBomJobs") === "yes") {
       clearInterval(checkPaid);
-      showCustomAlert(" Job contacts unlocked for 2 weeks!", "success");
+      showCustomAlert("Job contacts unlocked for 2 weeks!", "success");
       closeUniversalModal();
       loadBOMJobs(); // re-render if function exists
+
+      // Send admin notification for unlocked BOM job contacts
+      try {
+        const notifRef = db.collection("adminNotifications").doc();
+        await notifRef.set({
+          type: "BOM Job Contact Unlock",
+          userId: currentUser.uid,
+          message: `🔓 ${currentUser.email} has unlocked BOM Job contacts for 2 weeks.`,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        });
+
+        console.log("Admin notification sent for unlocked BOM job contacts.");
+      } catch (error) {
+        console.error("Failed to send admin notification:", error);
+      }
     }
   }, 3000);
 }
 
-// ✅ Delete BOM Job
+
+// ✅ Delete BOM Job and send admin notification
 async function confirmDeleteBOMJob(jobId) {
   if (confirm("Are you sure you want to delete this job posting?")) {
     try {
-      await bomRef.doc(jobId).delete();
-      showCustomAlert("✅  job deleted successfully!", "success");
-      loadBOMJobs(); // Refresh the job listings
+      const jobRef = bomRef.doc(jobId);
+      const jobSnap = await jobRef.get();
+      if (!jobSnap.exists) {
+        showCustomAlert("❌ Job not found.", "error");
+        return;
+      }
+
+      const jobData = jobSnap.data();
+      const jobTitle = jobData.title || "Unknown Job";
+
+      // Delete the job posting
+      await jobRef.delete();
+      showCustomAlert("✅ Job deleted successfully!", "success");
+
+      // Send an admin notification
+      const notifRef = db.collection("adminNotifications").doc();
+      await notifRef.set({
+        type: "Job Deletion",
+        itemId: jobId,
+        itemTitle: jobTitle,
+        message: `🚨 BOM job titled "${jobTitle}" was deleted.`,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+      // Refresh the job listings
+      loadBOMJobs(); 
     } catch (err) {
       showCustomAlert("❌ Failed to delete job: " + err.message, "error");
     }
   }
 }
+
 
 // ✅ Update Average Rating
 async function updateAverageRating(jobId) {
@@ -4115,6 +5012,7 @@ document.getElementById("soulmateForm").addEventListener("submit", async (e) => 
     document.getElementById("soulmateForm").reset();
     loadSoulmates();
 
+    // ✅ Notify Admin
     await db.collection("adminNotifications").add({
       type: "Soulmate Profile",
       message: `New soulmate profile posted: ${data.name}, Age: ${data.age}, Phone: ${data.phone}`,
@@ -4122,11 +5020,145 @@ document.getElementById("soulmateForm").addEventListener("submit", async (e) => 
       read: false
     });
 
+    // ✅ Notify All Users via Global Alert
+    await db.collection("alerts").add({
+      title: "💘 New Soulmate Profile",
+      message: `${data.name} (${data.sex}, ${data.age} yrs) just posted a profile.`,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      targetUserId: null // public to all users
+    });
+
   } catch (err) {
     console.error("Error saving profile:", err);
     showCustomAlert("❌ Error saving profile: " + err.message, "error");
   }
 });
+
+// Real-time listener for like changes on the profile
+function listenForLikeChanges(profileId) {
+  soulmateRef.doc(profileId).collection("likes").onSnapshot(snapshot => {
+    const count = snapshot.size; // The number of likes for this profile
+    const likeCountSpan = document.getElementById(`likeCount-${profileId}`);
+    
+    if (likeCountSpan) {
+      likeCountSpan.textContent = `${count} Like${count !== 1 ? 's' : ''}`;
+    }
+  });
+}
+
+// Function to toggle like (like/unlike)
+async function toggleLike(profileId) {
+  const user = firebase.auth().currentUser;
+  if (!user) {
+    alert("Please login to like profiles.");
+    return;
+  }
+
+  const likeRef = soulmateRef.doc(profileId).collection("likes").doc(user.uid);
+  const likeDoc = await likeRef.get();
+
+  const profileDoc = await soulmateRef.doc(profileId).get();
+  const profileData = profileDoc.data();
+  const theirUid = profileData?.postedBy;
+
+  if (likeDoc.exists) {
+    // 👎 Unlike
+    await likeRef.delete();
+  } else {
+    // 👍 Like
+    await likeRef.set({
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      user: user.displayName || user.email || user.uid
+    });
+
+    // ✅ Match check
+    if (theirUid && theirUid !== user.uid) {
+      const reverseLikeDoc = await soulmateRef.doc(profileId).collection("likes").doc(theirUid).get();
+      if (reverseLikeDoc.exists) {
+        showMatchCelebration(); // 🎉 trigger match effect
+      }
+    }
+
+    // ✅ Send Alert to Profile Owner
+    if (theirUid && theirUid !== user.uid) {
+      await db.collection("alerts").add({
+        title: "💖 New Like",
+        message: `${user.displayName || "Someone"} liked your soulmate profile.`,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        targetUserId: theirUid
+      });
+    }
+  }
+
+  updateLikeUI(profileId); // Update the UI after liking/unliking
+}
+
+
+// Function to update like count and button status
+async function updateLikeUI(profileId) {
+  const user = firebase.auth().currentUser;
+  const likeSnap = await soulmateRef.doc(profileId).collection("likes").get();
+  const count = likeSnap.size; // The number of likes for this profile
+
+  const likeCountSpan = document.getElementById(`likeCount-${profileId}`);
+  const likeBtn = document.getElementById(`likeBtn-${profileId}`);
+
+  if (likeCountSpan) likeCountSpan.textContent = `${count} Like${count !== 1 ? 's' : ''}`;
+
+  if (user && likeBtn) {
+    const liked = await soulmateRef.doc(profileId).collection("likes").doc(user.uid).get();
+    likeBtn.innerHTML = liked.exists ? "❤️ Liked" : "🤍 Like";
+  }
+}
+
+// Function to show the list of users who liked the profile
+async function showLikes(profileId) {
+  const likesRef = soulmateRef.doc(profileId).collection("likes");
+  const snapshot = await likesRef.get();
+
+  if (snapshot.empty) {
+    alert("No likes yet.");
+    return;
+  }
+
+  let names = [];
+  for (const doc of snapshot.docs) {
+    const userName = doc.data().user || `User ID: ${doc.id}`;
+    names.push(userName);
+  }
+
+  alert(`❤️ Liked by:\n\n${names.join("\n")}`);
+
+  // Send admin notification about the likes being viewed
+  sendAdminNotification(
+    "Soulmate Profile Likes Viewed",
+    currentUser.uid, 
+    `The likes for soulmate profile ID ${profileId} were viewed.`
+  );
+}
+
+// Helper function to send admin notification
+async function sendAdminNotification(type, userId, message) {
+  try {
+    // Get user details (name/email) based on the userId
+    const userSnap = await db.collection("users").doc(userId).get();
+    const user = userSnap.data();
+
+    const notifRef = db.collection("adminNotifications").doc();
+    await notifRef.set({
+      type: type,
+      userId: userId,
+      userName: user ? user.displayName || user.email : "Unknown User",
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      message: message
+    });
+
+    console.log("Admin notification created: " + message);
+  } catch (error) {
+    console.error("Error sending admin notification:", error);
+  }
+}
+
 async function loadSoulmates() {
   const container = document.querySelector("#soulmateContainer");
   const trendingContainer = document.querySelector("#trendingContainer");
@@ -4247,38 +5279,41 @@ async function loadSoulmates() {
       <div style="margin-top:6px;">
         ${hasPaid || isPoster || isAdminUser ? contactHTML : blurredContactHTML}
       </div>
+<div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+  <button id="likeBtn-${id}" onclick="toggleLike('${id}')" 
+    style="background:#e91e63; color:white; border:none; padding:5px 12px; border-radius:50px; cursor:pointer;">
+    🤍 Like
+  </button>
+  <span id="likeCount-${id}" style="font-weight:bold; cursor:pointer;" onclick="showLikes('${id}')">
+    ${totalLikes} Likes
+  </span>
+</div>
 
-      <div style="margin-top:6px;">
-        <button id="likeBtn-${id}" onclick="toggleLike('${id}')" style="background:#e91e63;color:white;border:none;padding:5px 12px;border-radius:50px;cursor:pointer;">
-          🤍 Like
-        </button>
-        <span id="likeCount-${id}" style="margin-left:6px;font-weight:bold; cursor:pointer;" onclick="showLikes('${id}')">${totalLikes} Likes</span>
-      </div>
-
-      ${(isPoster || isAdminUser) ? `
-        <div style="margin-top:6px;">
-          <button onclick="deleteSoulmate('${id}')" style="background:#dc3545;color:white;border:none;padding:5px 12px;border-radius:6px;cursor:pointer;">
-            🗑️ Delete
-          </button>
-          <button onclick="boostSoulmate('${id}')" style="background:#ff9800;color:white;border:none;padding:5px 12px;border-radius:6px;cursor:pointer;">
-            🚀 Boost
-          </button>
-          ${!d.isClosed ? `<button onclick="closeSoulmate('${id}')" style="background:#6c757d;color:white;border:none;padding:5px 12px;border-radius:6px;cursor:pointer;">
-            🚫 Mark as Closed
-          </button>` : ''}
-        </div>
+${(isPoster || isAdminUser) ? `
+  <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:10px;">
+    <button onclick="deleteSoulmate('${id}')" 
+      style="background:#dc3545; color:white; border:none; padding:5px 12px; border-radius:6px; cursor:pointer;">
+      🗑️ Delete
+    </button>
+    <button onclick="boostSoulmate('${id}')" 
+      style="background:#ff9800; color:white; border:none; padding:5px 12px; border-radius:6px; cursor:pointer;">
+      🚀 Boost
+    </button>
+    ${!d.isClosed ? `
+      <button onclick="closeSoulmate('${id}')" 
+        style="background:#6c757d; color:white; border:none; padding:5px 12px; border-radius:6px; cursor:pointer;">
+        🚫 Mark as Closed
+      </button>` : ''}
+  </div>
       ` : ''}
     `;
 
     container.appendChild(card);
-
-    if (d.isBoosted && trendingContainer) {
-      trendingContainer.appendChild(card.cloneNode(true));
-    }
-
-    updateLikeUI(id);
+    updateLikeUI(id);  // Update the like UI immediately
+    listenForLikeChanges(id);  // Start listening for like changes in real-time
   });
 }
+
 
 async function boostSoulmate(id) {
   const userEmail = currentUser?.email || "";
@@ -4295,12 +5330,25 @@ async function boostSoulmate(id) {
     boostExpiry.setDate(boostExpiry.getDate() + 7); // 7 days
 
     try {
+      // Update the soulmate profile as boosted
       await soulmateRef.doc(id).update({
         boosted: true,
         boostExpiry: boostExpiry
       });
+
+      // Admin boost success message
       showCustomAlert("✅ Profile boosted for FREE by Admin", "success");
-      loadSoulmates(); // Refresh
+
+      // Send admin notification for boosting the profile
+      const soulmateDoc = await soulmateRef.doc(id).get();
+      const soulmateData = soulmateDoc.data();
+      sendAdminNotification(
+        "Soulmate Profile Boosted (Admin)", 
+        soulmateData.postedBy, 
+        `The soulmate profile "${soulmateData.name}" was boosted for FREE by Admin. Boost expires in 7 days.`
+      );
+
+      loadSoulmates(); // Refresh the list
     } catch (error) {
       console.error("❌ Error boosting soulmate:", error);
       showCustomAlert("❌ Failed to boost profile: " + error.message, "error");
@@ -4312,19 +5360,86 @@ async function boostSoulmate(id) {
   }
 }
 
+// Helper function to send an admin notification
+async function sendAdminNotification(type, userId, message) {
+  try {
+    // Get user details (name/email) based on the userId
+    const userSnap = await db.collection("users").doc(userId).get();
+    const user = userSnap.data();
+
+    const notifRef = db.collection("adminNotifications").doc();
+    await notifRef.set({
+      type: type,
+      userId: userId,
+      userName: user ? user.displayName || user.email : "Unknown User",
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      message: message
+    });
+
+    console.log("Admin notification created: " + message);
+  } catch (error) {
+    console.error("Error sending admin notification:", error);
+  }
+}
+
+
 
 async function closeSoulmate(id) {
   try {
+    // Fetch the soulmate profile data before updating it
+    const soulmateDoc = await soulmateRef.doc(id).get();
+    const soulmateData = soulmateDoc.data();
+    
+    if (!soulmateData) {
+      showCustomAlert("❌ Soulmate profile not found.", "error");
+      return;
+    }
+
+    // Update the profile to mark it as closed
     await soulmateRef.doc(id).update({
       isClosed: true
     });
+
+    // Show success message
     showCustomAlert("✅ Profile marked as closed.", "success");
-    loadSoulmates(); // Refresh the view
+
+    // Send admin notification
+    sendAdminNotification(
+      "Soulmate Profile Closed", 
+      soulmateData.postedBy, 
+      `The soulmate profile of ${soulmateData.name} has been marked as closed.`
+    );
+
+    // Refresh the view
+    loadSoulmates();
   } catch (error) {
     console.error("❌ Error closing soulmate profile:", error);
     showCustomAlert("❌ Failed to close profile: " + error.message, "error");
   }
 }
+
+// Helper function to send an admin notification
+async function sendAdminNotification(type, userId, message) {
+  try {
+    // Get user details (name/email) based on the userId
+    const userSnap = await db.collection("users").doc(userId).get();
+    const user = userSnap.data();
+
+    const notifRef = db.collection("adminNotifications").doc();
+    await notifRef.set({
+      type: type,
+      userId: userId,
+      userName: user ? user.displayName || user.email : "Unknown User",
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      message: message
+    });
+
+    console.log("Admin notification created: " + message);
+  } catch (error) {
+    console.error("Error sending admin notification:", error);
+  }
+}
+
 
 function showCustomAlert(message, type = "info") {
   const alertBox = document.createElement("div");
@@ -4344,87 +5459,6 @@ function showCustomAlert(message, type = "info") {
   document.body.appendChild(alertBox);
   setTimeout(() => alertBox.remove(), 3000);
 }
-
-
-
-// LIKE & MATCH functions
-
-async function toggleLike(profileId) {
-  const user = firebase.auth().currentUser;
-  if (!user) {
-    alert("Please login to like profiles.");
-    return;
-  }
-
-  const likeRef = soulmateRef.doc(profileId).collection("likes").doc(user.uid);
-  const likeDoc = await likeRef.get();
-
-  if (likeDoc.exists) {
-    await likeRef.delete();
-  } else {
-    await likeRef.set({
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      user: user.displayName || user.email || user.uid
-    });
-
-    // Match check
-    const profileDoc = await soulmateRef.doc(profileId).get();
-    const theirUid = profileDoc.data()?.postedBy;
-    if (theirUid && theirUid !== user.uid) {
-      const reverseLikeDoc = await soulmateRef.doc(profileId).collection("likes").doc(theirUid).get();
-      if (reverseLikeDoc.exists) showMatchCelebration();
-    }
-  }
-
-  updateLikeUI(profileId);
-}
-
-async function updateLikeUI(profileId) {
-  const user = firebase.auth().currentUser;
-  const likeSnap = await soulmateRef.doc(profileId).collection("likes").get();
-  const count = likeSnap.size;
-
-  const likeCountSpan = document.getElementById(`likeCount-${profileId}`);
-  const likeBtn = document.getElementById(`likeBtn-${profileId}`);
-
-  if (likeCountSpan) likeCountSpan.textContent = `${count} Like${count !== 1 ? 's' : ''}`;
-
-  if (user && likeBtn) {
-    const liked = await soulmateRef.doc(profileId).collection("likes").doc(user.uid).get();
-    likeBtn.innerHTML = liked.exists ? "❤️ Liked" : "🤍 Like";
-  }
-}
-
-async function showLikes(profileId) {
-  const likesRef = soulmateRef.doc(profileId).collection("likes");
-  const snapshot = await likesRef.get();
-
-  if (snapshot.empty) {
-    return showCustomAlert("🌝🌝🌝🌝🌝No likes for this profile yet.", "info");
-  }
-
-  let listItems = "";
-  snapshot.forEach(doc => {
-    const data = doc.data();
-    const userName = data.user || `User ID: ${doc.id}`;
-    listItems += `<li style="padding:6px 0; border-bottom:1px solid #eee;">${userName}</li>`;
-  });
-
-  const modalHTML = `
-    <div id="likesModal" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;display:flex;align-items:center;justify-content:center;">
-      <div style="background:white;max-width:350px;width:90%;padding:20px;border-radius:8px;text-align:left;position:relative;">
-        <h3 style="margin-top:0;color:#e91e63;">❤️ Likes for This Profile</h3>
-        <ul style="list-style:none;padding:0;margin:15px 0;max-height:300px;overflow-y:auto;">${listItems}</ul>
-        <button onclick="document.getElementById('likesModal').remove()" style="margin-top:10px;background:#333;color:white;padding:8px 16px;border:none;border-radius:4px;">Close</button>
-      </div>
-    </div>
-  `;
-
-  document.body.insertAdjacentHTML("beforeend", modalHTML);
-}
-
-
-
 
 function showMatchCelebration() {
   // 🎊 Confetti (if available)
@@ -4487,38 +5521,48 @@ function unlockSoulmateContacts() {
     return;
   }
 
+  // Show the payment modal for unlocking soulmate contacts
   showPaymentModalFor("soulmate", 200, currentUser.uid, "Soulmate Contacts");
 
   const checkPaid = setInterval(() => {
     if (localStorage.getItem("paidForSoulmates") === "yes") {
       clearInterval(checkPaid);
+
+      // Show success message
       showCustomAlert("Contacts unlocked! Reloading...", "success");
+
+      // Close any open modal
       closeUniversalModal();
+
+      // Reload soulmates
       loadSoulmates();
+
+      // ✅ Send admin notification about contact unlocking
+      sendAdminNotification("Soulmate Contacts Unlocked", currentUser.uid, "Soulmate contacts have been unlocked.");
     }
   }, 3000);
 }
 
+// Helper function to send an admin notification
+async function sendAdminNotification(type, userId, message) {
+  try {
+    // Get user details (name/email) based on the userId
+    const userSnap = await db.collection("users").doc(userId).get();
+    const user = userSnap.data();
 
+    const notifRef = db.collection("adminNotifications").doc();
+    await notifRef.set({
+      type: type,
+      userId: userId,
+      userName: user ? user.displayName || user.email : "Unknown User",
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      message: message
+    });
 
-function boostMarketItem(itemId) {
-  const confirmBoost = confirm("Boost this item for Ksh 100? Your item will be promoted for 7 days.");
-  if (!confirmBoost) return;
-
-  alert("✅ Payment simulated. Boosting now...");
-
-  const boostExpiry = new Date();
-  boostExpiry.setDate(boostExpiry.getDate() + 7);
-
-  marketRef.doc(itemId).update({
-    boosted: true,
-    boostExpiry: firebase.firestore.Timestamp.fromDate(boostExpiry)
-  }).then(() => {
-    showCustomAlert("🚀 Item boosted successfully!", "success");
-    loadMarketItems();
-  }).catch(err => {
-    showCustomAlert("❌ Boost failed: " + err.message, "error");
-  });
+    console.log("Admin notification created: " + message);
+  } catch (error) {
+    console.error("Error sending admin notification:", error);
+  }
 }
 
 
@@ -4920,17 +5964,17 @@ async function submitServiceHandler(e) {
     return alert("You must be logged in.");
   }
 
-  // Check how many services this user has already posted
+  // ✅ Check how many services this user has already posted
   const serviceCountSnap = await servicesRef.where("postedBy", "==", currentUser.uid).get();
   const totalServices = serviceCountSnap.size;
 
-  // If already posted 1 service, require payment — unless admin
+  // ✅ If already posted 1 service, require payment — unless admin
   if (totalServices >= 1 && !isAdmin) {
     showPaymentModalFor("service", 200, currentUser.uid, "Post Extra Service");
     return;
   }
 
-  // Collect form input values
+  // ✅ Collect form input values
   const data = {
     name: document.getElementById("svcName").value.trim(),
     county: document.getElementById("svcCounty").value,
@@ -4942,16 +5986,19 @@ async function submitServiceHandler(e) {
     timestamp: firebase.firestore.FieldValue.serverTimestamp()
   };
 
+  // ✅ Validate all fields
   if (Object.values(data).some(v => !v)) {
     return alert("Please fill all fields.");
   }
 
   try {
+    // ✅ Save to Firestore
     await servicesRef.add(data);
     showCustomAlert("✅ Service posted!", "success");
     document.getElementById("serviceForm").reset();
     loadServices();
 
+    // ✅ Admin Notification
     await db.collection("adminNotifications").add({
       type: "Marketplace Post",
       message: `New service posted: ${data.name} (${data.occupation}), County: ${data.county}, Phone: ${data.phone}`,
@@ -4959,10 +6006,21 @@ async function submitServiceHandler(e) {
       read: false
     });
 
+    // ✅ Public Alert for All Users
+    await db.collection("alerts").add({
+      title: "🛠️ New Service",
+      message: `${data.name} offers ${data.occupation} services in ${data.county}, ${data.subcounty}.`,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      targetUserId: null,
+      category: "service",
+      county: data.county
+    });
+
   } catch (err) {
     showCustomAlert("❌ Error: " + err.message, "error");
   }
 }
+
 async function loadServices() {
   const container = document.getElementById("servicesContainer");
   const trendingContainer = document.getElementById("trendingContainer");
@@ -5033,6 +6091,10 @@ async function loadServices() {
         </span>`;
     }
 
+    // Interest Count
+    const interestCount = d.interestedUsers ? d.interestedUsers.length : 0;
+    const interestCountText = `${interestCount} ${interestCount === 1 ? "person" : "people"} interested`;
+
     const occupation = d.occupation?.toLowerCase?.() || "";
     let iconClass = "fa-user-tie", bgColor = "#607d8b";
     if (occupation.includes("lawyer")) iconClass = "fa-balance-scale", bgColor = "#5c6bc0";
@@ -5068,29 +6130,40 @@ async function loadServices() {
           💳 Pay Ksh 200
         </button>`;
 
-    const showBoostButton = isPoster || isAdminUser;
-    const boostButtonHTML = showBoostButton
-      ? `<button onclick="${isAdminUser
-          ? `boostServiceDirectly('${id}')`
-          : `showPaymentModalFor('serviceBoost', 300, '${id}', '${d.name}')`}"
+    // Action Buttons: Boost, Edit, Delete, and Activate/Deactivate
+    const actionButtonsHTML = `
+      ${isPoster || isAdminUser ? `
+        <button onclick="${isAdminUser ? `boostServiceDirectly('${id}')` : `showPaymentModalFor('serviceBoost', 300, '${id}', '${d.name}')`}"
           style="background:orange; color:white; border:none; padding:6px 12px; border-radius:6px; margin-top:8px;">
           🔥 Boost This Service
-        </button>`
-      : "";
+        </button>` : ''}
+    
+      <button onclick="editService('${id}')" 
+        style="background:#ff9800; color:white; padding:6px 12px; border:none; border-radius:6px; margin-top:6px;">
+        ✏️ Edit Service
+      </button>
 
-    const deleteButtonHTML = (isPoster || isAdminUser)
-      ? `<button onclick="deleteService('${id}')"
+      <button onclick="showReviewModal('${id}')" 
+        style="background:#4caf50; color:white; padding:6px 12px; border:none; border-radius:6px; margin-top:6px;">
+        📝 Leave a Review
+      </button>
+
+      <button onclick="showInterest('${id}')" 
+        style="background:#ff5722; color:white; padding:6px 12px; border:none; border-radius:6px; margin-top:6px;">
+        ❤️ Show Interest
+      </button>
+
+      ${isPoster || isAdminUser ? `
+        <button onclick="deleteService('${id}')"
           style="background:#dc3545; color:white; padding:6px 12px; margin-top:6px; border:none; border-radius:6px;">
           🗑️ Delete
-        </button>` : "";
+        </button>` : ''}
 
-    // Chat Button: Only visible to users who are NOT the poster
-    const chatButtonHTML = !isPoster
-      ? `<button onclick="openChatModal('${d.phone}', '${d.name}')"
-          style="margin-top:6px; background:#673ab7; color:white; border:none; border-radius:4px; padding:6px 12px; cursor:pointer;">
-          💬 Chat
-        </button>`
-      : "";
+      ${isPoster || isAdminUser ? `
+        <button onclick="toggleServiceStatus('${id}')"
+          style="background:#2196F3; color:white; padding:6px 12px; border:none; border-radius:6px; margin-top:6px;">
+          🔄 Activate/Deactivate Service
+        </button>` : ''}`;
 
     const card = document.createElement("div");
     card.className = "service-card";
@@ -5117,11 +6190,33 @@ async function loadServices() {
         <p style="color:#3f51b5;"><strong>${locationIcon}County:</strong> ${d.county}</p>
         <p style="color:#d32f2f;"><strong>Occupation:</strong> <span class="highlight-occupation">${d.occupation}</span></p>
         <p style="color:#6a1b9a;"><strong>${experienceIcon}Experience:</strong> ${d.experience} years</p>
-        ${contactHTML}
-        ${boostButtonHTML}
-        ${deleteButtonHTML}
-        ${chatButtonHTML}
-      </div>`;
+
+        <!-- Service Activation Status -->
+        <p style="color: ${d.isActive ? '#4caf50' : '#f44336'}; font-weight: bold;">
+          ${d.isActive ? '✅ Service Active' : '❌ Service Inactive'}
+        </p>
+
+        <div style="margin-top:10px;">
+          ${contactHTML}
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:12px;">
+          ${actionButtonsHTML}
+        </div>
+
+        <!-- Interest Count -->
+        <p id="interest-count-${id}" style="color: #f44336; font-size: 1em; margin-top: 10px;">${interestCountText}</p>
+
+        <!-- Customer Reviews Section -->
+        <div style="margin-top:10px;">
+          <h4 style="color:#4CAF50;">📢 Customer Reviews</h4>
+          <div id="marketReviews-${id}" style="margin-top:10px;font-size:14px;"></div>
+          <div style="margin-top:10px;">
+            <button onclick="openAllReviewsModal('${id}')" style="background:#03a9f4;color:#fff;border:none;border-radius:5px;padding:6px 12px;">💬 View All Reviews</button>
+          </div>
+        </div>
+      </div>
+    `;
 
     container.appendChild(card);
 
@@ -5134,6 +6229,130 @@ async function loadServices() {
 }
 
 
+async function toggleServiceStatus(serviceId) {
+  const serviceDoc = await servicesRef.doc(serviceId).get();
+  const isActive = serviceDoc.data().isActive;
+
+  try {
+    // Toggle service activation status
+    await servicesRef.doc(serviceId).update({
+      isActive: !isActive // Toggle between true/false
+    });
+
+    // Show a custom toast or notification for all users
+    const message = isActive ? "Service Deactivated" : "Service Activated";
+    showToast(message, isActive ? "warning" : "info");
+
+    // Optionally, show a message on the card itself to indicate the status change
+    const serviceCard = document.getElementById(`service-${serviceId}`);
+    const statusElement = serviceCard.querySelector(".service-status");
+
+    if (statusElement) {
+      statusElement.textContent = isActive ? "Status: Inactive" : "Status: Active";
+      statusElement.style.color = isActive ? "gray" : "green"; // Gray for inactive, Green for active
+    }
+
+    loadServices(); // Reload to reflect changes
+  } catch (error) {
+    console.error("Error toggling service status:", error);
+    alert("Error updating service status.");
+  }
+}
+async function showInterest(serviceId) {
+  // ✅ Ensure user is logged in
+  const currentUserUid = currentUser?.uid;
+  if (!currentUserUid) {
+    alert("Please log in to show interest.");
+    return;
+  }
+
+  try {
+    const serviceRef = servicesRef.doc(serviceId);
+    const serviceDoc = await serviceRef.get();
+
+    if (!serviceDoc.exists) {
+      console.error("Service not found.");
+      return;
+    }
+
+    const serviceData = serviceDoc.data();
+    const interestedUsers = serviceData.interestedUsers || [];
+
+    // ✅ Prevent duplicate interest
+    if (interestedUsers.includes(currentUserUid)) {
+      alert("You've already shown interest in this service.");
+      return;
+    }
+
+    // ✅ Add user to interest list
+    interestedUsers.push(currentUserUid);
+    await serviceRef.update({ interestedUsers });
+
+    // ✅ Notify poster if not the same user
+    const posterId = serviceData.postedBy;
+    if (posterId && posterId !== currentUserUid) {
+      await db.collection("alerts").add({
+        title: "📌 New Interest in Your Service",
+        message: `${currentUser.displayName || "Someone"} is interested in your service: ${serviceData.name || "Unnamed Service"}`,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        targetUserId: posterId,
+        section: "services", // 👈 optional section tag
+        relatedId: serviceId   // 👈 optional related ID
+      });
+    }
+
+    // ✅ Update interest count visually
+    const updatedInterestCount = interestedUsers.length;
+    const interestCountElement = document.getElementById(`interest-count-${serviceId}`);
+    if (interestCountElement) {
+      interestCountElement.textContent = `${updatedInterestCount} ${updatedInterestCount === 1 ? "person" : "people"} interested`;
+    }
+
+  } catch (error) {
+    console.error("Error showing interest:", error);
+    alert("Something went wrong. Please try again.");
+  }
+}
+
+
+
+
+// Show Review Modal
+function showReviewModal(serviceId) {
+  const reviewModal = document.getElementById("reviewModal");
+  reviewModal.style.display = 'block'; // Show the modal
+
+  // Handle review submission
+  document.getElementById("reviewForm").onsubmit = async (e) => {
+    e.preventDefault();
+    const rating = document.getElementById("reviewRating").value;
+    const comment = document.getElementById("reviewComment").value;
+
+    // Add review to service document
+    const review = {
+      rating: parseInt(rating),
+      comment,
+      user: currentUser.uid, // Store the user ID who posted the review
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    };
+
+    try {
+      await servicesRef.doc(serviceId).collection("reviews").add(review);
+      alert("Review added!");
+      reviewModal.style.display = 'none'; // Close the modal
+      loadServices(); // Reload to reflect changes
+    } catch (error) {
+      console.error("Error adding review:", error);
+      alert("Error adding review.");
+    }
+  };
+}
+
+// Close Review Modal
+function closeReviewModal() {
+  const reviewModal = document.getElementById("reviewModal");
+  reviewModal.style.display = 'none'; // Close the modal
+}
 
 
 async function boostServiceDirectly(serviceId) {
@@ -5153,7 +6372,6 @@ async function boostServiceDirectly(serviceId) {
     showCustomAlert("❌ Failed to boost service: " + err.message, "error");
   }
 }
-
 async function postService() {
   if (!currentUser) {
     showCustomAlert("Please login first.", "error");
@@ -5188,7 +6406,7 @@ async function postService() {
     }
 
     // ✅ Post service to Firestore
-    await servicesRef.add({
+    const serviceRef = await servicesRef.add({
       name,
       phone,
       county,
@@ -5202,6 +6420,27 @@ async function postService() {
 
     showCustomAlert("Service posted successfully!", "success");
 
+    // ✅ Send admin notification about the new service post
+    const notifRef = db.collection("adminNotifications").doc();
+    await notifRef.set({
+      type: "New Service Posted",
+      itemId: serviceRef.id,
+      itemName: name,
+      postedBy: currentUser.displayName || currentUser.email,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      message: `${currentUser.displayName || currentUser.email} has posted a new service: "${name}".`
+    });
+
+    console.log("Admin notification created for new service");
+
+    // ✅ Notify all users via global alert
+    await db.collection("alerts").add({
+      title: "🛠️ New Service Available",
+      message: `${currentUser.displayName || "Someone"} just posted a service: ${occupation} in ${county}.`,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      targetUserId: null // visible to everyone
+    });
+
     // Clear form fields
     document.getElementById("serviceForm").reset();
 
@@ -5214,7 +6453,9 @@ async function postService() {
   }
 }
 
-function unlockServiceContacts() {
+
+
+async function unlockServiceContacts() {
   if (!currentUser || !currentUser.uid) {
     showCustomAlert("Please login to unlock service contacts.", "error");
     return;
@@ -5222,15 +6463,27 @@ function unlockServiceContacts() {
 
   showPaymentModalFor("service", 200, currentUser.uid, "Service Provider Contacts");
 
-  const checkPaid = setInterval(() => {
+  const checkPaid = setInterval(async () => {
     if (localStorage.getItem("paidForService") === "yes") {
       clearInterval(checkPaid);
+      
+      // Create Admin Notification when the service contacts are unlocked
+      const notifRef = db.collection("adminNotifications").doc();
+      await notifRef.set({
+        type: "Service Contacts Unlocked",
+        userId: currentUser.uid,
+        userName: currentUser.displayName || currentUser.email,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        message: `${currentUser.displayName || currentUser.email} has unlocked service provider contacts after making a payment.`
+      });
+
       showCustomAlert("Service provider contacts unlocked!", "success");
       closeUniversalModal();
-      loadServices(); // reload services to show contacts
+      loadServices(); // Reload services to show contacts
     }
   }, 3000);
 }
+
 
 // ✅ Show toast message (success or error)
 function showToast(message, type = "success") {
@@ -5275,16 +6528,41 @@ function promptToast(message, onConfirm) {
 }
 
 
-// ✅ Delete service using promptToast + showToast
 async function deleteService(id) {
   promptToast("Are you sure you want to delete this service?", async (confirmed) => {
     if (confirmed) {
       try {
+        const serviceDoc = await servicesRef.doc(id).get();
+        if (!serviceDoc.exists) {
+          showToast("Service not found.", "error");
+          return;
+        }
+
+        const serviceData = serviceDoc.data();
+        const serviceName = serviceData.name || "Unknown Service";
+        const deletedBy = currentUser.displayName || currentUser.email;
+
+        // Delete the service
         await servicesRef.doc(id).delete();
         showToast("Service deleted successfully.", "success");
-        loadServices();
+        loadServices(); // Refresh the list
+
+        // Create Admin Notification about Service Deletion
+        const notifRef = db.collection("adminNotifications").doc();
+        await notifRef.set({
+          type: "Service Deleted",
+          itemId: id,
+          itemName: serviceName,
+          deletedBy: deletedBy,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          message: `❌ Service "${serviceName}" has been deleted by ${deletedBy}.`
+        });
+
+        console.log("Admin notification created for service deletion");
+
       } catch (err) {
         showToast("Error deleting: " + err.message, "error");
+        console.error("Error deleting service:", err);
       }
     } else {
       showToast("Deletion cancelled.", "error");
@@ -5358,12 +6636,90 @@ function filterServices() {
     showCustomAlert("😞 No services match your filters.", "info");
   }
 }
+// ✅ Global Submit Handler for Market Form
+async function submitMarketHandler(e) {
+  e.preventDefault();
 
+  if (!isLoggedIn || !currentUser) {
+    showPage("login");
+    return alert("You must be logged in.");
+  }
+
+  const itemName = document.getElementById("itemName").value.trim();
+  const itemCategory = document.getElementById("itemCategory").value;
+  const itemDescription = document.getElementById("itemDescription").value.trim();
+  const itemPrice = document.getElementById("itemPrice").value.trim();
+  const itemCounty = document.getElementById("itemCounty").value;
+  const itemSubcounty = document.getElementById("itemSubcounty").value.trim();
+  const itemPhone = document.getElementById("itemPhone").value.trim();
+  const itemPhotoFile = document.getElementById("itemPhoto").files[0];
+
+  // ✅ Add this if you add a dropdown for condition
+  const itemConditionInput = document.getElementById("itemCondition");
+  const itemCondition = itemConditionInput ? itemConditionInput.value : "New";
+
+  const posterName = currentUser.displayName || currentUser.email || "Anonymous";
+
+  const itemData = {
+    name: itemName,
+    category: itemCategory,
+    description: itemDescription, // this will appear as "Status"
+    price: itemPrice,
+    county: itemCounty,
+    subcounty: itemSubcounty,
+    phone: itemPhone,
+    postedBy: currentUser.uid,
+    posterName: posterName,
+    condition: itemCondition,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+  };
+
+  try {
+    if (itemPhotoFile) {
+      const photoPath = `marketPhotos/${Date.now()}_${itemPhotoFile.name}`;
+      const photoSnap = await storage.ref(photoPath).put(itemPhotoFile);
+      itemData.photoURL = await photoSnap.ref.getDownloadURL();
+    }
+
+    await marketRef.add(itemData);
+    showCustomAlert("✅ Item posted!", "success");
+    document.getElementById("marketForm").reset();
+    loadMarketItems();
+
+    // ✅ Notify Admin
+    await db.collection("adminNotifications").add({
+      type: "Marketplace Post",
+      message: `New item posted: ${itemName} (${itemCategory}), Price: ${itemPrice}, Phone: ${itemPhone}, County: ${itemCounty}`,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      read: false
+    });
+
+    // ✅ Create Alert for All Users
+    await db.collection("alerts").add({
+      title: "🆕 New Market Item",
+      message: `${posterName} just posted: ${itemName} (${itemCategory}) @ ${itemPrice}`,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      targetUserId: null  // visible to all
+    });
+
+  } catch (err) {
+    showCustomAlert("❌ Error: " + err.message, "error");
+  }
+}
+
+// ✅ Attach Market Form Handler (safe and reusable)
+function attachMarketFormSubmit() {
+  const oldForm = document.getElementById("marketForm");
+  if (!oldForm) return;
+
+  const newForm = oldForm.cloneNode(true);
+  oldForm.parentNode.replaceChild(newForm, oldForm);
+  newForm.addEventListener("submit", submitMarketHandler);
+}
 async function loadMarketItems() {
   const container = document.getElementById("marketContainer");
   container.innerHTML = "";
 
-  // Read filter values
   const minPrice = parseInt(document.getElementById("filterMinPrice").value) || 0;
   const maxPrice = parseInt(document.getElementById("filterMaxPrice").value) || Infinity;
   const categoryFilter = document.getElementById("filterCategory").value.toLowerCase().trim();
@@ -5382,7 +6738,6 @@ async function loadMarketItems() {
       const d = doc.data();
       const id = doc.id;
 
-      // Apply filters:
       const price = parseFloat(d.price) || 0;
       if (price < minPrice || price > maxPrice) return;
       if (categoryFilter && (!d.category || !d.category.toLowerCase().includes(categoryFilter))) return;
@@ -5391,7 +6746,6 @@ async function loadMarketItems() {
       const isBoosted = d.boosted && d.boostExpiry?.toDate?.() > now;
       const isExpired = d.boostExpiry?.toDate?.() <= now;
 
-      // Only add boosted items to boostedItems array if the boost hasn't expired
       if (isBoosted) {
         boostedItems.push({ ...d, id });
       } else {
@@ -5399,13 +6753,11 @@ async function loadMarketItems() {
       }
     });
 
-    // If no match:
     if (boostedItems.length + normalItems.length === 0) {
       container.innerHTML = "<p>No items match your filters.</p>";
       return;
     }
 
-    // Render boosted first, followed by normal items
     [...boostedItems, ...normalItems].forEach(d => {
       const id = d.id;
       const isPoster = currentUser && currentUser.uid === d.postedBy;
@@ -5422,167 +6774,471 @@ async function loadMarketItems() {
       if (isBoosted) card.dataset.boosted = "true";
       card.style.position = "relative";
 
-      const boostBadge = isBoosted
-        ? `<span style="color:#ff5722; font-weight:bold; font-size:0.85em; margin-left:6px;">🔥 Boosted</span>`
-        : "";
+      const boostBadge = isBoosted ? `<span style="color:#ff5722; font-weight:bold; font-size:0.85em; margin-left:6px;">🔥 Boosted</span>` : "";
 
       card.innerHTML = `
-        <h3 style="margin-bottom:6px; color:#2e7d32;">
-          ${d.posterName || "Unknown Seller"} ${boostBadge}
-        </h3>
-        ${d.photoURL
-          ? `<img src="${d.photoURL}" style="width:100%;height:180px;object-fit:cover;border-radius:8px;margin-bottom:8px;">`
-          : ""}
+        <h3 style="margin-bottom:6px; color:#2e7d32;">${d.posterName || "Unknown Seller"} ${boostBadge}</h3>
+        ${d.photoURL ? `<img src="${d.photoURL}" style="width:100%;height:180px;object-fit:cover;border-radius:8px;margin-bottom:8px;">` : ""}
         <p style="color:#4caf50;">📦 <strong>Item name:</strong> ${d.name || "-"}</p>
         <p style="color:#2196f3;">📝 <strong>Status:</strong> ${d.description || "-"}</p>
         <p style="color:#e91e63;">🏷️ <strong>Category:</strong> ${d.category || "-"}</p>
         <p style="color:#ff9800;">💰 <strong>Price:</strong> KES ${d.price ? parseInt(d.price).toLocaleString() : "N/A"}</p>
         <p style="color:#9c27b0;">🧰 <strong>Condition:</strong> ${d.condition || "New"}</p>
         <p style="color:#3f51b5;">📍 <strong>Location:</strong> ${d.county || "Unknown"}, ${d.subcounty || "Unknown"}</p>
-        
-        <!-- New: Phone Number Display -->
-        <p style="color:#673ab7;">📞 <strong>Contact:</strong> ${d.phone || "N/A"}</p> <!-- Added Phone -->
+        <p style="color:#673ab7;">📞 <strong>Contact:</strong> ${d.phone || "N/A"}</p>
 
-        <!-- New Buttons Section -->
-        ${(!isPoster && !isAdmin) ? `  
-          <!-- Show Interest Button -->
-          <div style="margin-top:10px;">
-            <button onclick="showMarketInterest('${id}')" 
-              style="background:#f44336;color:#fff;border:none;border-radius:5px;padding:6px 12px;cursor:pointer;">
-              ❤️ Show Interest <span id="marketInterestCount-${id}">0</span>
-            </button>
-          </div>` : ""}
+        ${(!isPoster && currentUser) ? `
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;">
+            <button onclick="showMarketInterest('${id}')" style="background:#f44336;color:#fff;border:none;border-radius:5px;padding:6px 12px;">💬 Interest <span id="marketInterestCount-${id}">0</span></button>
+            <button onclick="reportMarketItem('${id}')" style="background:#ff1744;color:#fff;border:none;border-radius:5px;padding:6px 12px;">🚩 Report</button>
+            <button onclick="openChatModal('${d.phone}','${d.posterName || "Seller"}')" style="background:#673ab7;color:#fff;border:none;border-radius:5px;padding:6px 12px;">💬 Chat</button>
+            <button onclick="openReviewModal('${id}')" style="background:#4CAF50;color:#fff;border:none;border-radius:5px;padding:6px 12px;">📝 Review</button>
+          </div>
+        ` : ""}
 
-        ${(!isPoster && !isAdmin) ? `  
-          <!-- Report Item Button -->
+        ${isPoster ? `
           <div style="margin-top:10px;">
-            <button onclick="reportMarketItem('${id}')" 
-              style="background:#ff1744;color:#fff;border:none;border-radius:5px;padding:6px 12px;cursor:pointer;">
-              🚩 Report Item
-            </button>
-          </div>` : ""}
+            <button id="soldOutBtn-${id}" onclick="toggleSoldStatus('${id}')" style="background:#9e9e9e;color:#fff;border:none;border-radius:5px;padding:6px 12px;">${d.isSold ? "❌ Sold Out" : "✅ Mark as Sold"}</button>
+          </div>
+        ` : ""}
 
-        ${(!isPoster && !isAdmin) ? `  
-          <!-- Chat Button -->
+        <div style="margin-top:10px;">
+          <h4 style="color:#4CAF50;">📢 Customer Reviews</h4>
+          <div id="marketReviews-${id}" style="margin-top:10px;font-size:14px;"></div>
           <div style="margin-top:10px;">
-            <button onclick="openChatModal('${d.phone}','${d.posterName || "Seller"}')" 
-              style="background:#673ab7;color:#fff;border:none;border-radius:5px;padding:6px 12px;cursor:pointer;">
-              💬 Chat
-            </button>
-          </div>` : ""}
+            <button onclick="openAllReviewsModal('${id}')" style="background:#03a9f4;color:#fff;border:none;border-radius:5px;padding:6px 12px;">💬 View All Reviews</button>
+          </div>
+        </div>
 
-        ${isPoster ? `  
-          <!-- Mark as Sold Out Button -->
-          <div style="margin-top:10px;">
-            <button id="soldOutBtn-${id}" onclick="toggleSoldStatus('${id}')" 
-              style="background:#9e9e9e;color:#fff;border:none;border-radius:5px;padding:6px 12px;cursor:pointer;">
-              ${d.isSold ? "❌ Sold Out" : "✅ Mark as Sold"}
-            </button>
-          </div>` : ""}
+        ${(canDelete || canBoost) ? `
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;">
+            ${canDelete ? `<button onclick="deleteMarketItem('${id}')" style="background:#dc3545;color:#fff;border:none;border-radius:5px;padding:6px 12px;">🗑️ Delete</button>` : ""}
+            ${canBoost && !isBoosted ? `<button onclick="boostMarketItem('${id}')" style="background:#ff9800;color:#fff;border:none;border-radius:5px;padding:6px 12px;">🚀 Boost</button>` : ""}
+            ${isPoster && isExpired ? `<button onclick="renewBoost('${id}')" style="background:#ff9800;color:#fff;border:none;border-radius:5px;padding:6px 12px;">🔄 Renew Boost</button>` : ""}
+          </div>
+        ` : ""}
 
-        <!-- Delete and Boost options for Admins or the Poster -->
-        ${canDelete || canBoost ? `  
-          <!-- 🗑️ Delete + 🚀 Boost -->
+        ${(isPoster || isAdmin) ? `
           <div style="margin-top:10px;">
-            <button onclick="deleteMarketItem('${id}')" 
-              style="background:#dc3545;color:#fff;border:none;border-radius:5px;padding:6px 12px;cursor:pointer;">
-              🗑️ Delete
-            </button>
-            ${canBoost && !isBoosted ? `
-              <button onclick="boostMarketItem('${id}')" 
-                style="background:#ff9800;color:#fff;border:none;border-radius:5px;padding:6px 12px;margin-left:8px;cursor:pointer;">
-                🚀 Boost
-              </button>` : ""}
-            ${isPoster && isExpired ? ` 
-              <button onclick="renewBoost('${id}')" 
-                style="background:#ff9800;color:#fff;border:none;border-radius:5px;padding:6px 12px;margin-left:8px;cursor:pointer;">
-                🚀 Renew Boost
-              </button>` : ""}
-          </div>` : ""}
+            <button onclick="openEditForm('${id}')" style="background:#673ab7;color:#fff;border:none;border-radius:5px;padding:6px 12px;">✏️ Edit Item</button>
+          </div>
+        ` : ""}
       `;
 
       container.appendChild(card);
-      updateAverageRating(id); // Recalculate average after rating
+      updateAverageRating(id);
+      loadReviews("market", id);       // Load reviews
+      loadInterestCount(id);           // ✅ Load actual interest count
     });
+
   } catch (err) {
     console.error("❌ Error loading market items:", err);
-    showCustomAlert("❌ Failed to load items: " + err.message, "error");
   }
 }
 
+async function loadAlerts() {
+  const container = document.getElementById("alertsContainer");
+  container.style.display = "block";
+  container.innerHTML = "<h3>🔔 Alerts</h3><ul>";
 
-async function renewBoost(id) {
-  const itemRef = marketRef.doc(id);
-  const doc = await itemRef.get();
-  const itemData = doc.data();
-
-  if (!itemData) {
-    showCustomAlert("❌ Item not found.", "error");
+  const snapshot = await db.collection("alerts").orderBy("timestamp", "desc").limit(50).get();
+  if (snapshot.empty) {
+    container.innerHTML += "<li>No alerts yet.</li></ul>";
     return;
   }
 
-  // Prompt user for payment
-  showPaymentModalFor('renewBoost', 250, id, itemData.name); // Assuming 250 is the cost
-
-  // After payment is complete (we assume you have a payment handler in place):
-  // - Update boost expiry
-  // - Mark the item as boosted again
-  const now = new Date();
-  const boostExpiry = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000); // Add 7 days
-  await itemRef.update({
-    boosted: true,
-    boostExpiry: firebase.firestore.Timestamp.fromDate(boostExpiry)
+  snapshot.forEach(doc => {
+    const data = doc.data();
+    container.innerHTML += `<li><strong>${data.title}</strong>: ${data.message} <br><small>${new Date(data.timestamp.toDate()).toLocaleString()}</small></li>`;
   });
-
-  showCustomAlert("✅ Boost renewed successfully!", "success");
-  loadMarketItems(); // Refresh the items list to reflect the change
+  container.innerHTML += "</ul>";
 }
 
-
-async function boostMarketItem(id) {
+async function loadInterestCount(itemId) {
   try {
-    const itemRef = marketRef.doc(id);
-    const doc = await itemRef.get();
-    if (!doc.exists) {
-      return showCustomAlert("❌ Item not found.", "error");
-    }
-
-    const data = doc.data();
-    const postedBy = data.postedBy; // Access postedBy from the Firestore document
-
-    const currentUser = firebase.auth().currentUser;
-    if (!currentUser) {
-      return showCustomAlert("❌ You need to be logged in to boost an item.", "error");
-    }
-
-    // If the current user is the poster, prompt for payment
-    if (currentUser.uid === postedBy) {
-      // Show the payment modal for the poster
-      showPaymentModalFor('boost', 250, id, data.name);
-      return; // Stop the boosting process until payment is completed
-    }
-
-    // For admin or others, boost the item directly (free for admin)
-    const boostExpiry = new Date();
-    boostExpiry.setDate(boostExpiry.getDate() + 7);
-
-    // Update the item to set it as boosted with an expiry date
-    await itemRef.update({
-      boosted: true,
-      boostExpiry: firebase.firestore.Timestamp.fromDate(boostExpiry)
-    });
-
-    showCustomAlert("✅ Item boosted successfully (admin).", "success");
-    loadMarketItems(); // Refresh the list to reflect the change
+    const snapshot = await db.collection("marketItems").doc(itemId).collection("interests").get();
+    const count = snapshot.size;
+    const el = document.getElementById(`marketInterestCount-${itemId}`);
+    if (el) el.innerText = count;
   } catch (err) {
-    console.error("❌ Boost error:", err);
-    showCustomAlert("❌ Failed to boost: " + err.message, "error");
+    console.error(`Failed to load interest count for ${itemId}`, err);
   }
 }
 
-// Function to open the edit form and render the item data
-async function openEditForm(itemId) {
+function openAllReviewsModal(itemId) {
+  document.getElementById("allReviewsModal").style.display = "flex";
+  loadReviews("market", itemId, true); // ✅ Fixed: use "market" as section name
+}
+
+function closeAllReviewsModal() {
+  document.getElementById("allReviewsModal").style.display = "none";
+  document.getElementById("allReviewsContainer").innerHTML = "";
+}
+
+let currentReviewingItemId = null;
+let currentReviewingType = "market"; // "market" or "service"
+
+function openReviewModal(itemId, type = "market") {
+  currentReviewingItemId = itemId;
+  currentReviewingType = type;
+  document.getElementById("reviewModal").style.display = "flex";
+}
+
+function closeReviewModal() {
+  document.getElementById("reviewModal").style.display = "none";
+  document.getElementById("reviewEmail").value = "";
+  document.getElementById("reviewComment").value = "";
+  currentReviewingItemId = null;
+  currentReviewingType = "market";
+}
+
+async function submitReviewFromModal() {
+  const email = document.getElementById("reviewEmail").value.trim();
+  const comment = document.getElementById("reviewComment").value.trim();
+
+  if (!email || !comment) {
+    alert("Please fill in both email and comment.");
+    return;
+  }
+
+  const review = {
+    email,
+    comment,
+    timestamp: new Date(),
+    userId: currentUser?.uid || null
+  };
+
+  try {
+    const ref = (currentReviewingType === "service" ? servicesRef : marketRef)
+      .doc(currentReviewingItemId)
+      .collection("reviews");
+
+    await ref.add(review);
+
+    closeReviewModal();
+    showCustomAlert("✅ Review submitted!", "success");
+
+    // Reload reviews depending on type
+    if (currentReviewingType === "service") {
+      loadServiceReviews(currentReviewingItemId);
+    } else {
+      loadReviews("market", currentReviewingItemId); // ✅ fixed call
+    }
+  } catch (err) {
+    console.error("❌ Failed to submit review:", err);
+    showCustomAlert("❌ Failed to submit review", "error");
+  }
+}
+async function loadReviews(section, itemId, intoModal = false) {
+  let ref;
+  if (section === "market") ref = marketRef.doc(itemId);
+  else if (section === "service") ref = serviceRef.doc(itemId);
+  else return;
+
+  const container = intoModal
+    ? document.getElementById("allReviewsContainer")
+    : null;
+
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  try {
+    const snapshot = await ref.collection("reviews").orderBy("timestamp", "desc").get();
+    if (snapshot.empty) {
+      container.innerHTML = "<p style='padding:10px;color:#999;'>No reviews yet.</p>";
+      return;
+    }
+
+    const currentUser = auth.currentUser;
+    const currentEmail = currentUser?.email || "";
+    const isAdmin = [
+      "mashabiki@teacherswapskenya.com",
+      "sironga1@teacherswapskenya.com",
+      "admin1@teacherswapskenya.com"
+    ].includes(currentEmail);
+
+    snapshot.forEach(doc => {
+      const review = doc.data();
+      const reviewId = doc.id;
+      const isOwner = currentEmail === review.email;
+
+      const div = document.createElement("div");
+      div.className = "review";
+      div.style.border = "1px solid #ddd";
+      div.style.margin = "5px 0";
+      div.style.padding = "10px";
+      div.style.borderRadius = "5px";
+
+      div.innerHTML = `
+        <p style="margin: 5px 0;"><strong>${review.email || "Anonymous"}:</strong></p>
+        <p style="margin: 0;">${review.comment}</p>
+      `;
+
+      // ✅ Show delete button if admin or owner
+      if (isAdmin || isOwner) {
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "🗑️ Delete";
+        delBtn.style.cssText = `
+          margin-top: 5px;
+          background: red;
+          color: white;
+          border: none;
+          padding: 4px 8px;
+          border-radius: 4px;
+          cursor: pointer;
+        `;
+
+        delBtn.onclick = () => {
+          showDeleteModal(async () => {
+            try {
+              await ref.collection("reviews").doc(reviewId).delete();
+              showCustomAlert("Review deleted successfully.", "success");
+              loadReviews(section, itemId, intoModal); // Reload after delete
+            } catch (err) {
+              console.error("Failed to delete review:", err);
+              showCustomAlert("Failed to delete review.", "error");
+            }
+          });
+        };
+
+        div.appendChild(delBtn);
+      }
+
+      container.appendChild(div);
+    });
+  } catch (error) {
+    console.error("Error loading reviews:", error);
+    container.innerHTML = "<p style='color:red;padding:10px;'>Failed to load reviews.</p>";
+  }
+}
+
+function showDeleteModal(onConfirm) {
+  const modal = document.createElement("div");
+  modal.innerHTML = `
+    <div style="
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6); display: flex;
+      align-items: center; justify-content: center; z-index: 9999;">
+      <div style="
+        background: white; padding: 20px; border-radius: 10px;
+        max-width: 400px; text-align: center; font-family: sans-serif;">
+        <h3 style="margin-bottom: 10px;">⚠️ Confirm Deletion</h3>
+        <p style="margin-bottom: 20px;">Are you sure you want to delete this review?</p>
+        <button id="confirmDelete" style="
+          background: red; color: white; border: none;
+          padding: 10px 20px; border-radius: 5px; margin-right: 10px;
+          cursor: pointer;">Yes, Delete</button>
+        <button id="cancelDelete" style="
+          background: gray; color: white; border: none;
+          padding: 10px 20px; border-radius: 5px;
+          cursor: pointer;">Cancel</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  modal.querySelector("#cancelDelete").onclick = () => modal.remove();
+  modal.querySelector("#confirmDelete").onclick = () => {
+    onConfirm();
+    modal.remove();
+  };
+}
+
+
+async function submitReviewReply(section, itemId, reviewId) {
+  const input = document.getElementById(`replyInput-${reviewId}`);
+  const replyText = input?.value.trim();
+
+  if (!replyText) {
+    alert("Please write a reply before submitting.");
+    return;
+  }
+
+  const reply = {
+    comment: replyText,
+    timestamp: new Date(),
+    userId: currentUser?.uid || null
+  };
+
+  try {
+    let ref;
+    if (section === "market" || section === "marketItems") {
+      ref = db.collection("marketItems").doc(itemId).collection("reviews").doc(reviewId);
+    } else if (section === "service") {
+      ref = db.collection("services").doc(itemId).collection("reviews").doc(reviewId);
+    } else {
+      return;
+    }
+
+    await ref.collection("replies").add(reply);
+    showCustomAlert("✅ Reply posted!", "success");
+
+    // Reload reviews
+    loadReviews(section, itemId, true);
+
+  } catch (err) {
+    console.error("❌ Failed to submit reply:", err);
+    showCustomAlert("❌ Failed to submit reply", "error");
+  }
+}
+
+async function reportMarketItem(itemId) {
+  showReportConfirmModal(async () => {
+    const user = firebase.auth().currentUser;
+    if (!user) return showCustomAlert("⚠️ You must be logged in to report an item.", "warning");
+
+    try {
+      const itemSnap = await marketRef.doc(itemId).get();
+      const item = itemSnap.data();
+      const itemOwnerId = item?.userId;
+
+      if (!item) throw new Error("Item not found");
+
+      // Save the report to Firestore
+      await db.collection("marketReports").add({
+        itemId,
+        reportedBy: user.uid,
+        reporterName: user.displayName || user.email,
+        itemName: item.name || "Unnamed Item",
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+      // Notify Admins
+      await db.collection("adminNotifications").add({
+        type: "Market Report",
+        itemId,
+        itemName: item.name || "Unnamed Item",
+        reportedBy: user.displayName || user.email,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        message: `🚩 Market item "${item.name}" was reported by ${user.displayName || user.email}.`
+      });
+
+      // Notify Item Owner
+      if (itemOwnerId && itemOwnerId !== user.uid) {
+        await db
+          .collection("userNotifications")
+          .doc(itemOwnerId)
+          .collection("notifications")
+          .add({
+            type: "Item Reported",
+            itemId,
+            itemName: item.name,
+            from: user.displayName || user.email,
+            message: `⚠️ Your market item "${item.name}" has been reported by a user.`,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            read: false
+          });
+      }
+
+      showCustomAlert("✅ Report submitted. Admin will review it shortly.", "success");
+    } catch (error) {
+      console.error("❌ Report failed:", error);
+      showCustomAlert("❌ Could not report the item. Try again.", "error");
+    }
+  });
+}
+async function loadUserNotifications() {
+  const user = firebase.auth().currentUser;
+  if (!user) return;
+
+  const snapshot = await db
+    .collection("userNotifications")
+    .doc(user.uid)
+    .collection("notifications")
+    .orderBy("timestamp", "desc")
+    .get();
+
+  snapshot.forEach((doc) => {
+    const notif = doc.data();
+    // Display in your preferred HTML section
+    console.log("🔔", notif.message);
+  });
+}
+
+
+async function showMarketInterest(itemId) {
+  const user = firebase.auth().currentUser;
+
+  if (!user) {
+    showCustomAlert("🔐 You need to be logged in to express interest.", "info");
+    return;
+  }
+
   const itemRef = db.collection("marketItems").doc(itemId);
+  const interestRef = itemRef.collection("interests").doc(user.uid);
+  const interestDoc = await interestRef.get();
+
+  if (interestDoc.exists) {
+    showCustomAlert("❌ You have already expressed interest in this item.", "info");
+    return;
+  }
+
+  const interestCountElement = document.getElementById(`marketInterestCount-${itemId}`);
+  if (interestCountElement) {
+    let interestCount = parseInt(interestCountElement.innerText) || 0;
+    interestCount += 1;
+    interestCountElement.innerText = interestCount;
+  }
+
+  try {
+    // Save user's interest
+    await interestRef.set({
+      userId: user.uid,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    // Get item details
+    const itemSnap = await itemRef.get();
+    const item = itemSnap.data();
+    const posterId = item?.postedBy;
+    const itemName = item?.name || "this item";
+
+    // Get current user's name and phone number from users collection
+    const userSnap = await db.collection("users").doc(user.uid).get();
+    const userInfo = userSnap.data();
+    const userName = userInfo?.fullName || user.displayName || user.email || "Someone";
+    const userPhone = userInfo?.phone || "No phone provided";
+
+    // Notify Admin (optional)
+    await sendMarketInterestNotification(itemId, userName, itemName);
+
+    // Notify poster if it's not the same person
+    if (posterId && posterId !== user.uid) {
+      await db.collection("alerts").add({
+        title: "❤️ New Interest",
+        message: `${userName} is interested in your item: "${itemName}". 📞 Contact: ${userPhone}`,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        targetUserId: posterId
+      });
+    }
+
+    showCustomAlert("✅ Your interest has been recorded!", "success");
+
+  } catch (err) {
+    console.error("Error recording interest:", err);
+    showCustomAlert("❌ Failed to record your interest. Please try again later.", "error");
+  }
+}
+
+
+// Create a notification for admins when a user expresses interest
+async function sendMarketInterestNotification(itemId, userName, itemName) {
+  const notificationRef = db.collection("adminNotifications").doc(); // New notification for admin
+
+  await notificationRef.set({
+    type: "Market Interest",
+    message: `${userName} has expressed interest in "${itemName}".`,
+    itemId: itemId,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    read: false // Initially marked as unread
+  });
+}
+
+
+async function openEditForm(itemId) {
+  const itemRef = marketRef.doc(itemId);
 
   try {
     const doc = await itemRef.get();
@@ -5592,22 +7248,23 @@ async function openEditForm(itemId) {
     }
 
     const itemData = doc.data();
+    console.log("Item data fetched:", itemData);
 
-    // Populate the existing form with item data
+    // Populate the form with the current data
     document.getElementById("itemName").value = itemData.name || '';
     document.getElementById("itemPrice").value = itemData.price || '';
     document.getElementById("itemDescription").value = itemData.description || '';
     document.getElementById("itemCategory").value = itemData.category || '';
     document.getElementById("itemLocation").value = itemData.county || '';
 
-    // Change the button text to 'Update Item'
+    // Change button text to 'Update Item'
     const submitButton = document.querySelector("#captureMarketItemForm button");
     submitButton.innerHTML = "Update Item";
 
-    // Add an event listener to handle form submission for saving changes
+    // Handle form submission
     document.getElementById("captureMarketItemForm").onsubmit = function(event) {
       event.preventDefault(); // Prevent form submission
-      saveItemChanges(itemId); // Save changes
+      saveItemChanges(itemId); // Save the changes
     };
 
     console.log('Form is ready to be edited.');
@@ -5615,9 +7272,9 @@ async function openEditForm(itemId) {
     console.error("Error fetching item data:", error);
   }
 }
-// Function to save edited item details
+
+// Save the changes made in the form
 async function saveItemChanges(itemId) {
-  // Get updated values from the form
   const updatedItem = {
     name: document.getElementById("itemName").value,
     price: parseFloat(document.getElementById("itemPrice").value),
@@ -5626,136 +7283,22 @@ async function saveItemChanges(itemId) {
     county: document.getElementById("itemLocation").value,
   };
 
+  console.log("Saving updated item:", updatedItem);
+
   try {
-    // Update the Firestore document with the new values
-    const itemRef = db.collection("marketItems").doc(itemId);
+    const itemRef = marketRef.doc(itemId);
     await itemRef.update(updatedItem);
 
     console.log("Item successfully updated!");
     showCustomAlert("✅ Item updated successfully!", "success");
 
-    // Optionally, refresh the item display (e.g., re-render the item details)
-    loadMarketItems();
-
+    loadMarketItems(); // Refresh the market items to reflect changes
   } catch (error) {
-    console.error("Error updating item: ", error);
+    console.error("Error updating item:", error);
     showCustomAlert("❌ Failed to update item. Try again later.", "error");
   }
 }
-async function showMarketInterest(itemId) {
-  const user = firebase.auth().currentUser;
 
-  if (!user) {
-    showCustomAlert("🔐 You need to be logged in to show interest.", "info");
-    return;
-  }
-
-  console.log("User is logged in:", user.uid);
-
-  const interestRef = db.collection("marketItems").doc(itemId).collection("interests").doc(user.uid);
-  const interestDoc = await interestRef.get();
-
-  if (interestDoc.exists) {
-    showCustomAlert("❌ You have already shown interest in this item.", "info");
-    return;
-  }
-
-  console.log("User has not shown interest yet.");
-
-  const interestCountElement = document.getElementById(`marketInterestCount-${itemId}`);
-  if (interestCountElement) {
-    let interestCount = parseInt(interestCountElement.innerText) || 0;
-    interestCount += 1;
-    interestCountElement.innerText = interestCount;
-    console.log("Updated interest count:", interestCount);
-  } else {
-    console.log("Interest count element not found.");
-  }
-
-  try {
-    await interestRef.set({
-      userId: user.uid,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    });
-
-    showCustomAlert("✅ Your interest has been recorded!", "success");
-  } catch (err) {
-    console.error("Error recording interest:", err);
-    showCustomAlert("❌ Failed to record your interest. Please try again later.", "error");
-  }
-}
-
-
-
-
-async function viewInterestedUsers(itemId) {
-  const user = firebase.auth().currentUser;
-  if (!user) return showCustomAlert("⚠️ Login required to view interested users.", "warning");
-
-  const itemSnap = await db.collection("marketItems").doc(itemId).get();
-  const itemData = itemSnap.data();
-
-  if (!itemData || itemData.postedBy !== user.uid) {
-    return showCustomAlert("🚫 Only the poster can view interested users.", "error");
-  }
-
-  const interestSnap = await db.collection("marketItems").doc(itemId).collection("interests").get();
-  if (interestSnap.empty) return showCustomAlert("ℹ️ No one has shown interest yet.", "info");
-
-  const names = [];
-  // Loop through each interested user
-  for (const doc of interestSnap.docs) {
-    const userId = doc.id;  // Assuming the document ID is the user ID
-    try {
-      // Fetch the user's details from the 'users' collection
-      const userSnap = await db.collection("users").doc(userId).get();
-      const userName = userSnap.exists ? userSnap.data().name || "Unknown" : "Unknown";
-      names.push(userName);
-    } catch (err) {
-      console.error("Error fetching user details:", err);
-      names.push("Unknown User");
-    }
-  }
-
-  // Display the list of interested users
-  showCustomAlert("❤️ Interested Users:\n\n" + names.join("\n"), "info");
-}
-
-async function reportMarketItem(itemId) {
-  showReportConfirmModal(async () => {
-    const user = firebase.auth().currentUser;
-    if (!user) return showCustomAlert("⚠️ You must be logged in to report an item.", "warning");
-
-    try {
-      const reportRef = db.collection("marketReports").doc();
-      const notifRef = db.collection("adminNotifications").doc();
-      const itemSnap = await marketRef.doc(itemId).get();
-      const item = itemSnap.data();
-
-      await reportRef.set({
-        itemId,
-        reportedBy: user.uid,
-        reporterName: user.displayName || user.email,
-        itemName: item?.name || "Item",
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-      });
-
-      await notifRef.set({
-        type: "marketReport",
-        itemId,
-        itemName: item?.name || "Item",
-        reportedBy: user.displayName || user.email,
-        time: firebase.firestore.FieldValue.serverTimestamp(),
-        message: `🚩 Market item "${item?.name}" was reported.`
-      });
-
-      showCustomAlert("✅ Report submitted. Admin will review it shortly.", "success");
-    } catch (error) {
-      console.error("❌ Report failed:", error);
-      showCustomAlert("❌ Could not report the item. Try again.", "error");
-    }
-  });
-}
 function showReportConfirmModal(onConfirm) {
   const overlay = document.createElement("div");
   overlay.style.cssText = `
@@ -5832,8 +7375,61 @@ function showCustomAlert(message, type = "info") {
   }, 3500);
 }
 
+async function boostMarketItem(id) {
+  try {
+    const itemRef = marketRef.doc(id);
+    const doc = await itemRef.get();
+    if (!doc.exists) {
+      return showCustomAlert("❌ Item not found.", "error");
+    }
 
-// ✅ ADD THIS FUNCTION BELOW
+    const data = doc.data();
+    const postedBy = data.postedBy; // Access postedBy from the Firestore document
+
+    const currentUser = firebase.auth().currentUser;
+    if (!currentUser) {
+      return showCustomAlert("❌ You need to be logged in to boost an item.", "error");
+    }
+
+    // If the current user is the poster, prompt for payment
+    if (currentUser.uid === postedBy) {
+      // Show the payment modal for the poster
+      showPaymentModalFor('boost', 250, id, data.name);
+      return; // Stop the boosting process until payment is completed
+    }
+
+    // For admin or others, boost the item directly (free for admin)
+    const boostExpiry = new Date();
+    boostExpiry.setDate(boostExpiry.getDate() + 7);
+
+    // Update the item to set it as boosted with an expiry date
+    await itemRef.update({
+      boosted: true,
+      boostExpiry: firebase.firestore.Timestamp.fromDate(boostExpiry)
+    });
+
+    showCustomAlert("✅ Item boosted successfully (admin).", "success");
+    loadMarketItems(); // Refresh the list to reflect the change
+
+    // Create Admin Notification about Boost (Even for Admin boost)
+    const notifRef = db.collection("adminNotifications").doc();
+    await notifRef.set({
+      type: "Item Boosted",
+      itemId: id,
+      itemName: data.name,
+      boostedBy: currentUser.displayName || currentUser.email,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      message: `🚀 Item "${data.name}" has been boosted by ${currentUser.displayName || currentUser.email} (Admin).`
+    });
+
+    console.log("Admin notification created for item boost");
+
+  } catch (err) {
+    console.error("❌ Boost error:", err);
+    showCustomAlert("❌ Failed to boost: " + err.message, "error");
+  }
+}
+
 async function toggleSoldStatus(itemId) {
   try {
     const doc = await marketRef.doc(itemId).get();
@@ -5851,11 +7447,26 @@ async function toggleSoldStatus(itemId) {
 
     showCustomAlert(`✔️ Item marked as ${newStatus ? "Sold Out" : "Available"}`, "success");
     loadMarketItems(); // Refresh the list
+
+    // Create Admin Notification about Sold Out Status
+    const notifRef = db.collection("adminNotifications").doc();
+    await notifRef.set({
+      type: newStatus ? "Item Sold Out" : "Item Available",
+      itemId: itemId,
+      itemName: data.name,
+      postedBy: data.postedBy,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      message: `🛒 Item "${data.name}" has been marked as ${newStatus ? "Sold Out" : "Available"} by ${data.postedBy}.`
+    });
+
+    console.log("Admin notification created for item sold out status");
+
   } catch (error) {
     console.error("❌ Error updating item status:", error);
     showCustomAlert("❌ Failed to update item status: " + error.message, "error");
   }
 }
+
 
 // Function to update the button state when the item status changes in Firestore
 function updateSoldOutButtonState(id) {
@@ -6645,7 +8256,7 @@ async function loadAdminNotifications() {
 
     const li = document.createElement("li");
     li.style.cssText = "margin-bottom:10px;padding:10px;border:1px solid #ccc;border-radius:8px;background:#f9f9f9;cursor:pointer;";
-    
+
     // ✅ Handle click to scroll to item
     li.onclick = () => openPostedItem(d.type?.toLowerCase(), d.itemId);
 
@@ -6662,14 +8273,67 @@ async function loadAdminNotifications() {
   await batch.commit(); // ✅ Apply read updates
   updateAdminNotifBadge(); // 🔄 Refresh badge
 }
+async function updateAdminNotifBadge() {
+  const badge = document.getElementById("notifBadge");
+  if (!isAdmin || !badge) return;
 
+  try {
+    const snapshot = await db.collection("adminNotifications")
+      .where("read", "==", false)
+      .get();
 
+    const count = snapshot.size;
+
+    if (count > 0) {
+      badge.style.display = "inline-block";
+      badge.textContent = count;
+    } else {
+      badge.style.display = "none";
+    }
+  } catch (err) {
+    console.error("Failed to load notification badge:", err);
+  }
+}
+let currentToastTimeout = null;
+
+function showCustomToast(message) {
+  // Remove any existing toast
+  const existingToast = document.getElementById("customToast");
+  if (existingToast) {
+    existingToast.remove();
+    clearTimeout(currentToastTimeout);
+  }
+
+  // Create new toast
+  const toast = document.createElement("div");
+  toast.id = "customToast";
+  toast.style.cssText = `
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #323232;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    z-index: 9999;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    animation: fadeIn 0.3s ease;
+  `;
+  toast.textContent = message;
+
+  document.body.appendChild(toast);
+
+  // Auto-remove after 3 seconds
+  currentToastTimeout = setTimeout(() => {
+    toast.remove();
+  }, 3000);
+}
 async function deleteNotification(id) {
-  // Remove any existing confirmation box
   const existingBox = document.getElementById("inlineNotifConfirmBox");
   if (existingBox) existingBox.remove();
 
-  // Create confirmation box
   const box = document.createElement("div");
   box.id = "inlineNotifConfirmBox";
   box.style.cssText = `
@@ -6694,35 +8358,27 @@ async function deleteNotification(id) {
       Are you sure you want to delete this notification?
     </p>
     <div style="display: flex; justify-content: center; gap: 10px;">
-      <button id="notifConfirmYesBtn" style="
-        background: #d32f2f;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        padding: 8px 16px;
-        cursor: pointer;
-      ">🗑️ Yes</button>
-      <button id="notifConfirmNoBtn" style="
-        background: #607d8b;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        padding: 8px 16px;
-        cursor: pointer;
-      ">Cancel</button>
+      <button id="notifConfirmYesBtn" style="background: #d32f2f; color: white; border: none; border-radius: 6px; padding: 8px 16px; cursor: pointer;">🗑️ Yes</button>
+      <button id="notifConfirmNoBtn" style="background: #607d8b; color: white; border: none; border-radius: 6px; padding: 8px 16px; cursor: pointer;">Cancel</button>
     </div>
   `;
 
   document.body.appendChild(box);
 
-  // Handle buttons
   document.getElementById("notifConfirmYesBtn").onclick = async () => {
     box.remove();
     try {
       await db.collection("adminNotifications").doc(id).delete();
       loadAdminNotifications();
       updateAdminNotifBadge();
-      showCustomToast("✅ Notification deleted.");
+
+      // ✅ Safe toast usage
+      try {
+        showCustomToast("✅ Notification deleted.");
+      } catch (toastErr) {
+        console.warn("Toast not initialized. Skipping toast.");
+      }
+
     } catch (err) {
       console.error("Error deleting notification:", err);
       showCustomAlert("❌ Failed to delete: " + err.message, "error");
@@ -6734,27 +8390,8 @@ async function deleteNotification(id) {
   };
 }
 
-async function updateAdminNotifBadge() {
-  const badge = document.getElementById("notifBadge");
-  if (!isAdmin || !badge) return;
 
-  try {
-    const snapshot = await db.collection("adminNotifications")
-      .where("read", "==", false)
-      .get();
 
-    const count = snapshot.size;
-
-    if (count > 0) {
-      badge.style.display = "inline-block";
-      badge.textContent = count;
-    } else {
-      badge.style.display = "none";
-    }
-  } catch (err) {
-    console.error("Failed to load notification badge:", err);
-  }
-}
 async function viewConversation(userA, userB) {
   const chatId = [userA, userB].sort().join("_");
   const container = document.getElementById("chatMessages");
@@ -6858,27 +8495,6 @@ function openPostedItem(type, itemId) {
   tryScroll();
 }
 
-function renderNotifications(notifications) {
-  const container = document.getElementById("notificationsContainer");
-  container.innerHTML = "";
-
-  if (!notifications.length) {
-    container.innerHTML = `<p>No notifications yet.</p>`;
-    return;
-  }
-
-  notifications.forEach(n => {
-    const card = document.createElement("div");
-    card.className = "notif-card";
-    card.innerHTML = `
-      <div onclick="openPostedItem('${n.type}', '${n.itemId}')"
-        style="cursor:pointer; background:#f1f8e9; padding:10px; margin-bottom:6px; border-radius:6px;">
-        🔔 ${n.message}
-      </div>
-    `;
-    container.appendChild(card);
-  });
-}
 function toggleEmojiPicker() {
   const picker = document.getElementById("emojiPicker");
   picker.style.display = picker.style.display === "block" ? "none" : "block";
@@ -7342,8 +8958,25 @@ function filterGallery() {
     }
   });
 }
+function closeReviewModal() {
+  document.getElementById("reviewModal").style.display = "none";
+}
+// Listen to scroll event on the container
+const container = document.getElementById("soulmateContainer");
+const endMessage = document.getElementById("endOfListMessage");
 
+container.addEventListener("scroll", function () {
+  const isAtBottom = container.scrollTop + container.clientHeight >= container.scrollHeight - 2;
+
+  if (isAtBottom) {
+    endMessage.style.display = "block";
+  } else {
+    endMessage.style.display = "none";
+  }
+});
 </script>
+
+
 
 
 
