@@ -1680,7 +1680,249 @@ header a {
     font-weight: bold;
     margin-top: 10px;
   }
+.chat-msg {
+  margin: 6px 0;
+  padding: 8px;
+  border-radius: 6px;
+  max-width: 75%;
+  word-wrap: break-word;
+}
+.chat-out {
+  background: #4CAF50;
+  color: #fff;
+  align-self: flex-end;
+}
+.chat-in {
+  background: #ccc;
+  color: #000;
+  align-self: flex-start;
+}
+.chat-loading {
+  text-align: center;
+  color: gray;
+}
+.chat-alert {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #fff;
+  z-index: 9999;
+}
+/* Incoming message */
+.chat-msg.chat-in {
+  background: #f1f1f1;
+  color: #333;
+  padding: 6px 10px;
+  border-radius: 10px;
+  max-width: 70%;
+  margin: 4px 0;
+  font-size: 14px;
+  line-height: 1.4;
+  align-self: flex-start;
+}
+
+/* Outgoing message */
+.chat-msg.chat-out {
+  background: #dcf8c6; /* WhatsApp-like green */
+  color: #000;
+  padding: 6px 10px;
+  border-radius: 10px;
+  max-width: 70%;
+  margin: 4px 0;
+  font-size: 14px;
+  line-height: 1.4;
+  align-self: flex-start; /* Changed from flex-end */
+}
+
+/* Delete button inside outgoing */
+.msg-del-btn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  margin-right: 5px;
+  cursor: pointer;
+  color: #888;
+}
+
+.msg-del-btn:hover {
+  color: red;
+}
+
+/* Chat container flex column */
+#marketChatMessages {
+  display: flex;
+  flex-direction: column;
+}
+.msg-username {
+  font-size: 12px;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 2px;
+}
+/* Style for Sent Chats Section */
+.chat-item {
+  display: flex;
+  align-items: center;
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.chat-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #bbb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  margin-right: 14px;
+}
+
+.chat-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.chat-last-message {
+  font-size: 14px;
+  color: #666;
+}
+
+.chat-timestamp {
+  font-size: 12px;
+  color: #999;
+}
+
+#marketChatModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+#marketChatMessages {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.chat-msg {
+  padding: 8px;
+  border-radius: 6px;
+  max-width: 70%;
+}
+
+.chat-out {
+  background: #4CAF50;
+  color: #fff;
+  align-self: flex-end;
+}
+
+.chat-in {
+  background: #ccc;
+  color: #000;
+  align-self: flex-start;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+<style>
+  /* Styling for Sent Chats Section */
+  #sentChatsSection {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+  }
+
+  /* Header styling */
+  #sentChatsSection h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  /* Styling for chat items */
+  .chat-item {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+
+  .chat-item:hover {
+    background-color: #f1f1f1;
+    transform: translateY(-5px);
+  }
+
+  .chat-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #007bff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    margin-right: 15px;
+    font-size: 18px;
+  }
+
+  .chat-item-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chat-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .chat-last-message {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+  }
+
+  .chat-timestamp {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 5px;
+  }
 </style>
+
 
 
 </head>
@@ -1725,7 +1967,7 @@ header a {
 <nav style="background-image: url('https://i.imgur.com/JCxt71v.jpeg'); background-size: cover; background-position: center; padding: 20px 20px;">
 
   
-  <ul>
+ <ul>
   <!-- Core Navigation -->
   <li><a class="menu-box" href="#" onclick="showPage('home')">
     <img src="https://i.imgur.com/lek58ah.jpeg" alt="Home">
@@ -1755,20 +1997,7 @@ header a {
     <a class="menu-box" href="#" onclick="loadAlerts()" style="position: relative;">
       <img src="https://i.imgur.com/IvZc6We.jpeg" alt="Alerts">
       <span>Alerts</span>
-      <span id="alertsBadge" style="
-        display:none;
-        background:#f44336;
-        color:white;
-        font-size:12px;
-        padding:2px 6px;
-        border-radius:50%;
-        position:absolute;
-        top:0;
-        right:0;
-        font-weight:bold;
-        min-width:18px;
-        text-align:center;
-      ">0</span>
+      <span id="alertsBadge" style="display:none;background:#f44336;color:white;font-size:12px;padding:2px 6px;border-radius:50%;position:absolute;top:0;right:0;font-weight:bold;">0</span>
     </a>
   </li>
 
@@ -1776,7 +2005,7 @@ header a {
     <a class="menu-box" href="#" onclick="openMessagesPage()" style="position:relative;">
       <img src="https://i.imgur.com/XBAeDCN.jpeg" alt="Messages">
       <span>Messages</span>
-      <span id="messagesUnreadBadge" style="display:none; background:red; color:white; border-radius:50%; padding:2px 6px; font-size:11px; position:absolute; top:0; right:0;"></span>
+      <span id="messagesUnreadBadge" style="display:none;background:red;color:white;border-radius:50%;padding:2px 6px;font-size:11px;position:absolute;top:0;right:0;"></span>
     </a>
   </li>
 
@@ -1811,7 +2040,13 @@ header a {
     <span>Resources</span></a>
   </li>
 
-
+  <!-- Sent Chats Section -->
+  <li>
+    <a class="menu-box" href="#" onclick="openSentChatsSection()">
+      <img src="https://i.imgur.com/XBAeDCN.jpeg" alt="Sent Chats" style="width: 60px; height: 85px; border-radius: 50%; margin-right: 10px;">
+      <span>View Sent Chats</span>
+    </a>
+  </li>
 
   <li><a class="menu-box" href="#" onclick="showPage('trendingSection'); loadTrendingItems();">
     <img src="https://i.imgur.com/SjtDlJi.jpeg" alt="Trending">
@@ -1830,16 +2065,20 @@ header a {
   </li>
 </ul>
 
+
 </nav>
 
 
 </header>
 
+
+
 <!-- Loading Spinner Container -->
 <div id="loadingSpinner" style="display: none;">
   <div class="spinner-container">
     <i class="fas fa-spinner fa-spin spinner"></i>
-    <p class="spinner-text">Fetching trending content...</p>
+<p class="spinner-text" style="color: red;">Nyota</p>
+
   </div>
 </div>
 
@@ -1883,6 +2122,58 @@ header a {
 ">
   ✅ You have been logged out successfully see you again .
 </div>
+<!-- Modal Structure -->
+<div id="followersModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:1000;">
+  <div style="background-color: #f7f7f7; padding:20px; width:30%; max-width:400px; max-height:80%; overflow:auto; border-radius:8px; text-align:center; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);">
+    <h2 style="color: #333; font-size: 1.5em; margin-bottom: 15px;">Followers</h2>
+    <ul id="followersList" style="list-style-type:none; padding:0; margin:0; height:200px; overflow-y:auto; text-align:left; color: #555;">
+      <!-- Followers will be listed here -->
+    </ul>
+    <button onclick="closeFollowersModal()" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 15px;">Close</button>
+  </div>
+</div>
+<!-- 🔹 Market Chat Modal -->
+<div id="marketChatModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:9999;">
+  <div style="background:white; width:90%; max-width:500px; border-radius:8px; padding:15px; display:flex; flex-direction:column; height:80%;">
+    
+    <!-- Header -->
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <h3 id="marketChatName" style="margin:0;"></h3>
+      <button onclick="closeMarketChat()" style="background:red; color:white; border:none; padding:5px 10px; border-radius:4px;">Close</button>
+    </div>
+
+    <!-- Messages container -->
+    <div id="marketChatMessages" style="flex:1; overflow-y:auto; border:1px solid #ccc; border-radius:6px; padding:10px; margin:10px 0;">
+      <p style="text-align:center; color:gray;">Loading messages...</p>
+    </div>
+
+    <!-- Input area -->
+    <div style="display:flex; gap:5px;">
+      <input id="marketChatInput" type="text" placeholder="Type your message..." style="flex:1; padding:8px; border:1px solid #ccc; border-radius:4px;">
+      <button id="marketSendBtn" style="background:#4CAF50; color:white; border:none; padding:8px 15px; border-radius:4px;">Send</button>
+    </div>
+
+ <!-- Quick message buttons -->
+<div style="margin-top:8px; display:flex; gap:5px; flex-wrap:wrap;">
+  <button onclick="sendMarketQuick('Hello 👋')" style="padding:6px; border:1px solid #ccc; border-radius:4px;">Hello 👋</button>
+  <button onclick="sendMarketQuick('I am interested!')" style="padding:6px; border:1px solid #ccc; border-radius:4px;">I am interested!</button>
+  <button onclick="sendMarketQuick('Can you provide more details?')" style="padding:6px; border:1px solid #ccc; border-radius:4px;">Can you provide more details?</button>
+  <button onclick="sendMarketQuick('How much is this?')" style="padding:6px; border:1px solid #ccc; border-radius:4px;">How much is this?</button>
+  <button onclick="sendMarketQuick('Is it still available?')" style="padding:6px; border:1px solid #ccc; border-radius:4px;">Is it still available?</button>
+  <button onclick="sendMarketQuick('I’d like to negotiate the price!')" style="padding:6px; border:1px solid #ccc; border-radius:4px;">I’d like to negotiate the price!</button>
+  <button onclick="sendMarketQuick('When is the best time to contact you?')" style="padding:6px; border:1px solid #ccc; border-radius:4px;">When is the best time to contact you?</button>
+</div>
+
+
+  </div>
+</div>
+
+
+
+
+
+
+
 
 <!-- ✅ How to Use the System Section -->
 <div id="usageHelp" class="page" style="display:none; padding: 20px;">
@@ -1929,20 +2220,7 @@ header a {
 </div>
 
 
-<div id="alertsContainer" class="page" style="display: none; padding: 20px;">
-  <h2>📢 Market Alerts</h2>
-  <div id="alertsContainer" style="
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 15px;
-    max-height: 400px;
-    overflow-y: auto;
-    background-color: #e8f5e9;
-    border: 2px solid #4CAF50;
-    border-radius: 10px;
-  "></div>
-</div>
+
 
   
 <!-- 🔲 Review Modal -->
@@ -2007,6 +2285,9 @@ header a {
 
 </div>
 </div>
+
+
+
   <main id="content">
 <div id="home" class="page" style="display: none;">
   <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 20px 0;">
@@ -2651,66 +2932,27 @@ Register To Connect With  Available Soulmates
     </div>
   </div>
 </div>
-<div id="messages" class="page" style="
-  display: none;
-  padding: 16px;
-  max-width: 400px;           /* ✅ Limit width */
-  margin: 20px auto;          /* ✅ Center horizontally and add top spacing */
-  background: #fff;           /* ✅ Light background */
-  border-radius: 10px;        /* ✅ Rounded corners */
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08); /* ✅ Subtle shadow */
-">
 
-  <button onclick="showPage('market')" style="margin-bottom: 12px;">← Back to Market</button>
-
- <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 15px;">💬 Messages</h2>
-
-<!-- Notification Message: Avoid Paying in advance, even for delivery -->
-<div style="background-color: #ffeb3b; color: #d32f2f; padding: 12px; border-radius: 5px; margin-bottom: 20px; font-weight: 500; text-align: center; font-size: 14px;">
- 🔺  <strong>Avoid Paying in advance, even for delivery!</strong> 🚫
-</div>
-
-<div id="chatWith" style="font-weight: bold; margin-bottom: 12px; font-size: 18px;"></div>
-
-<!-- Chat messages -->
-<div id="chatMessages" style="max-height: 300px; overflow-y: auto; background: #f9f9f9; padding: 12px; border-radius: 8px; border: 1px solid #ccc; margin-bottom: 15px; font-size: 14px; line-height: 1.6;"></div>
-
-<!-- Quick chat buttons -->
-<div style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 12px;">
-  <button onclick="sendQuickMessage('Make an offer')" class="quick-chat-btn" style="background-color: #4caf50; color: white; padding: 8px 16px; border-radius: 20px; border: none; cursor: pointer; font-size: 14px; font-weight: 500; transition: background-color 0.3s;">
-    💰 Make an offer
-  </button>
-  <button onclick="sendQuickMessage('Is this available?')" class="quick-chat-btn" style="background-color: #2196F3; color: white; padding: 8px 16px; border-radius: 20px; border: none; cursor: pointer; font-size: 14px; font-weight: 500; transition: background-color 0.3s;">
-     Is this available?
-  </button>
-  <button onclick="sendQuickMessage('Last price?')" class="quick-chat-btn" style="background-color: #f44336; color: white; padding: 8px 16px; border-radius: 20px; border: none; cursor: pointer; font-size: 14px; font-weight: 500; transition: background-color 0.3s;">
-    💸 Last price?
-  </button>
-  <button onclick="sendQuickMessage('Please send me your location')" class="quick-chat-btn" style="background-color: #9c27b0; color: white; padding: 8px 16px; border-radius: 20px; border: none; cursor: pointer; font-size: 14px; font-weight: 500; transition: background-color 0.3s;">
-    📍 Ask for location
-  </button>
-  <button onclick="sendQuickMessage('Please call me')" class="quick-chat-btn" style="background-color: #ff9800; color: white; padding: 8px 16px; border-radius: 20px; border: none; cursor: pointer; font-size: 14px; font-weight: 500; transition: background-color 0.3s;">
-    📞 Please call me
-  </button>
-</div>
-
-<!-- Input and Send -->
-<div style="display: flex; gap: 12px; align-items: center;">
-  <input type="text" id="chatInput" placeholder="Type your message..." style="flex: 1; padding: 10px; border-radius: 20px; border: 1px solid #ccc; font-size: 14px; line-height: 1.6; outline: none; transition: border-color 0.3s;">
-  <button onclick="sendChatMessage()" style="padding: 10px 20px; border-radius: 20px; border: none; background-color: #4caf50; color: white; font-size: 14px; font-weight: 500; cursor: pointer; transition: background-color 0.3s;">Send</button>
-</div>
-
-  </div>
-
-<div id="notifications" class="page" style="display:none;">
+<div id="notifications" class="page" style="display:none;"> 
   <h2>🔔 My Notifications</h2>
   <ul id="notificationList"></ul>
 </div>
-<!-- My Chats Page -->
-<div id="chatListPage" style="display:none;">
-  <h2>📂 My Chats</h2>
-  <div id="chatListContainer"></div>
+
+<div id="alertsContainer" class="page" style="display: none; padding: 20px;">
+  <h2>📢 Market Alerts</h2>
+  <ul id="alertsList">
+    <!-- Alerts will be dynamically added here -->
+  </ul>
 </div>
+<!-- Sent Chats Section -->
+<section id="sentChatsSection" style="display:none; padding: 20px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+  <h2 style="font-size: 24px; color: #333; margin-bottom: 20px;">Sent Chats</h2>
+  
+  <div id="sentChatsList" style="display: flex; flex-direction: column; gap: 15px;">
+    <!-- Sent chats will be dynamically inserted here -->
+  </div>
+</section>
+
 
 <!-- Seeking Services Section -->
 <div id="seekingServices" class="page" style="display:none;">
@@ -3210,28 +3452,6 @@ Register To Connect With  Available Soulmates
   </div>
 </div>
 
-
-<!-- ✅ Contact Section -->
-<div id="contact" class="page" style="display:none;">
-  <div>
-    <h2><i class="fas fa-envelope-open-text"></i> Contact Us</h2>
-    <p><i class="fas fa-envelope"></i> Email: support@teacherswapskenya.com</p>
-    <p><i class="fas fa-phone"></i> Phone: +254 700 000 000</p>
-    <p><i class="fas fa-phone"></i> Phone: +254 792 755 676</p>
-    <p><i class="fab fa-facebook"></i> Facebook: <a href="#">Link</a></p>
-    <p><i class="fab fa-youtube"></i> YouTube: <a href="#">Link</a></p>
-    <p><i class="fab fa-telegram"></i> Telegram: <a href="#">Link</a></p>
-  </div>
-
-  <div style="text-align: center; margin-top: 20px;">
-    <a href="https://wa.me/254792755676" target="_blank" style="text-decoration: none;">
-      <button style="background-color: #25D366; color: white; padding: 12px 25px; border: none; border-radius: 6px; font-size: 16px; cursor: pointer;">
-        <i class="fab fa-whatsapp" style="margin-right: 8px;"></i> Chat with Us on WhatsApp
-      </button>
-    </a>
-  </div>
-</div>
-
 <div id="trendingSection" class="page" style="display: none;">
   <h2>
     <i class="fas fa-fire" style="color: crimson; margin-right: 8px;"></i>
@@ -3302,25 +3522,7 @@ Register To Connect With  Available Soulmates
     cursor: pointer;">&times;
   </button>
 </div>
-<!-- 📘 HOW TO USE THE SYSTEM SECTION -->
-<section id="usageHelp" style="display:none; padding: 20px;">
-  <h2 style="color:#2196f3; text-align:center;">📘 How to Use the System</h2>
-  <div style="max-width:800px;margin:auto;background:#f9f9f9;padding:20px;border-radius:10px;">
-    <ul style="line-height:1.7;">
-      <li>✅ <strong>Register</strong> before using any features.</li>
-      <li>🔄 Use the <strong>Swaps</strong> section to find transfer opportunities.</li>
-      <li>❤️ <strong>Soulmate</strong> helps you discover and connect with others.</li>
-      <li>🛍️ <strong>Market</strong> lets you sell or buy items easily.</li>
-      <li>🛠️ <strong>Services</strong> and <strong>Jobs</strong> let you post skills or vacancies.</li>
-      <li>💳 <strong>Boost</strong> your listing to appear in 🔥 Trending for 7 days.</li>
-      <li>🔐 You may need to <strong>pay</strong> via MPESA to unlock contacts.</li>
-    </ul>
-    <p style="color:#888;font-style:italic;">Need help? Contact admin or check the Notifications tab for updates.</p>
-  </div>
-</section>
-<div id="trendingContainer">
-  <div class="spinner">⏳ Loading...</div>
-</div>
+
 
 <!-- ✅ Toast Container -->
 <div id="toastContainer" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;"></div>
@@ -3585,9 +3787,13 @@ if (pageId === "market") {
 
 
 
- // ✅ Register
+// ✅ Register
 document.getElementById("registerForm").addEventListener("submit", async e => {
   e.preventDefault();
+  
+  // Show the loading spinner
+  document.getElementById("loadingSpinner").style.display = "block";
+  
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
@@ -3600,10 +3806,16 @@ document.getElementById("registerForm").addEventListener("submit", async e => {
     // Send admin notification on new user registration
     await sendRegistrationAdminNotification(currentUser);
 
+    // Hide the loading spinner after successful registration
+    document.getElementById("loadingSpinner").style.display = "none";
+
     showCustomAlert("Registration successful! Please login.", "success");
     showPage("login");
     e.target.reset();
   } catch (err) {
+    // Hide the loading spinner if an error occurs
+    document.getElementById("loadingSpinner").style.display = "none";
+
     showCustomAlert("Error: " + err.message, "error");
   }
 });
@@ -3652,6 +3864,7 @@ document.getElementById("loginForm").addEventListener("submit", async e => {
   }
 });
 
+
 // ✅ Display logged-in user
 function displayLoggedInUser() {
   const user = localStorage.getItem("loggedInUser");
@@ -3669,20 +3882,37 @@ function displayLoggedInUser() {
 }
 
 function logoutUser() {
+  // Show the loading spinner when logging out
+  document.getElementById("loadingSpinner").style.display = "flex";
+
   auth.signOut().then(() => {
     localStorage.removeItem("loggedInUser");
 
-    // Show toast message
+    // Show the toast message
     const toast = document.getElementById("logoutToast");
     toast.style.display = "block";
+    toast.textContent = "You have logged out successfully!";
 
-    // Hide and reload after 2.5 seconds
+    // Hide the spinner and toast after 2.5 seconds, then reload the page
     setTimeout(() => {
+      document.getElementById("loadingSpinner").style.display = "none";
       toast.style.display = "none";
       location.reload();
     }, 2500);
+  }).catch((error) => {
+    // In case of an error, hide the spinner and show an error toast
+    document.getElementById("loadingSpinner").style.display = "none";
+    const errorToast = document.getElementById("logoutToast");
+    errorToast.textContent = "Error logging out: " + error.message;
+    errorToast.style.backgroundColor = "red"; // To highlight the error
+    errorToast.style.display = "block";
+
+    setTimeout(() => {
+      errorToast.style.display = "none";
+    }, 2500);
   });
 }
+
 
 
 // ✅ Display user on page load (if logged in)
@@ -3726,6 +3956,9 @@ document.getElementById("swapForm").addEventListener("submit", e => {
 
 // ✅ Save Swap and Notify
 async function saveSwap(swap) {
+  // Show the loading spinner while the swap is being saved
+  document.getElementById("loadingSpinner").style.display = "flex";
+
   try {
     // Save the swap to the 'teacherSwaps' collection
     const swapDoc = await db.collection("teacherSwaps").add({
@@ -3762,8 +3995,12 @@ async function saveSwap(swap) {
 
   } catch (err) {
     showCustomAlert("Error saving swap: " + err.message, "error");
+  } finally {
+    // Hide the spinner once the process is done (success or error)
+    document.getElementById("loadingSpinner").style.display = "none";
   }
 }
+
 async function loadSwaps() {
   const container = document.querySelector("#swapCardContainer");
   container.innerHTML = "";
@@ -3974,6 +4211,72 @@ async function loadSwaps() {
   }
 }
 
+async function deleteSwap(swapId) {
+  // Show spinner when the deletion process starts
+  document.getElementById('loadingSpinner').style.display = 'flex';
+
+  // Show confirmation box
+  const existingBox = document.getElementById("inlineSwapConfirmBox");
+  if (existingBox) existingBox.remove();
+
+  const box = document.createElement("div");
+  box.id = "inlineSwapConfirmBox";
+  box.style.cssText = `
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    padding: 18px 24px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    z-index: 9999;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+    max-width: 90%;
+    width: 320px;
+    animation: fadeIn 0.3s ease;
+  `;
+
+  box.innerHTML = `
+    <p style="margin: 0 0 16px; font-size: 15px; color: #333;">
+      Are you sure you want to delete this swap?
+    </p>
+    <div style="display: flex; justify-content: center; gap: 10px;">
+      <button id="swapConfirmYesBtn" style="background: #d32f2f; color: white; border: none; border-radius: 6px; padding: 8px 16px; cursor: pointer;">🗑️ Yes</button>
+      <button id="swapConfirmNoBtn" style="background: #607d8b; color: white; border: none; border-radius: 6px; padding: 8px 16px; cursor: pointer;">Cancel</button>
+    </div>
+  `;
+
+  document.body.appendChild(box);
+
+  // Handle button actions
+  document.getElementById("swapConfirmYesBtn").onclick = async () => {
+    // Start deleting the swap
+    box.remove();
+    try {
+      // Wait for the deletion to complete
+      await db.collection("teacherSwaps").doc(swapId).delete();
+      showCustomAlert("✅ Swap deleted successfully.", "success");
+
+      // Reload swaps after deletion
+      loadSwaps();
+    } catch (err) {
+      console.error("Error deleting swap:", err);
+      showCustomAlert("❌ Failed to delete swap: " + err.message, "error");
+    } finally {
+      // Hide the spinner after operation completes
+      document.getElementById('loadingSpinner').style.display = 'none';
+    }
+  };
+
+  document.getElementById("swapConfirmNoBtn").onclick = () => {
+    box.remove(); // Close the confirmation box if canceled
+    showCustomAlert("❎ Deletion canceled.", "info");
+    // Hide the spinner if user cancels
+    document.getElementById('loadingSpinner').style.display = 'none';
+  };
+}
 
 // ✅ Admin instant verification handler 
 function adminVerifyItem(type, itemId) {
@@ -4006,8 +4309,6 @@ function adminVerifyItem(type, itemId) {
   }
 }
 
-
-// Function to show followers' first names (from email)
 async function showFollowers(swapId) {
   const swapRef = db.collection("teacherSwaps").doc(swapId);
   const swapDoc = await swapRef.get();
@@ -4018,16 +4319,37 @@ async function showFollowers(swapId) {
   }
 
   const followers = swapDoc.data().followers || [];
-  const followerNames = followers.map(f => {
-    // Extract the first name from email (before @)
-    const firstName = f.email ? f.email.split('@')[0] : 'Anonymous';
-    return firstName;
-  }).join(", ");
+  const followersList = document.getElementById('followersList');
 
-  alert(`Followers: ${followerNames}`);
+  if (followers.length === 0) {
+    // If no followers, display a message
+    followersList.innerHTML = "<li>No followers for now.</li>";
+  } else {
+    // If there are followers, list their names
+    const followerNames = followers.map(f => {
+      const firstName = f.email ? f.email.split('@')[0] : 'Anonymous';
+      return `<li style="padding: 5px; border-bottom: 1px solid #eee;">${firstName}</li>`;
+    }).join("");
+    followersList.innerHTML = followerNames;
+  }
+
+  // Show the modal
+  document.getElementById('followersModal').style.display = 'flex';
 }
 
-/// Function to follow a swap
+// Function to close the modal
+function closeFollowersModal() {
+  document.getElementById('followersModal').style.display = 'none';
+}
+
+
+// Function to close the modal
+function closeFollowersModal() {
+  document.getElementById('followersModal').style.display = 'none';
+}
+
+
+// Function to follow a swap
 async function followSwap(swapId) {
   const currentUser = firebase.auth().currentUser;
   if (!currentUser) {
@@ -4035,10 +4357,14 @@ async function followSwap(swapId) {
     return;
   }
 
+  // Show the loading spinner while following the swap
+  document.getElementById("loadingSpinner").style.display = "flex";
+
   const swapRef = db.collection("teacherSwaps").doc(swapId);
   const swapDoc = await swapRef.get();
   if (!swapDoc.exists) {
     showCustomAlert("Swap not found.", "error");
+    document.getElementById("loadingSpinner").style.display = "none"; // Hide spinner
     return;
   }
 
@@ -4052,39 +4378,48 @@ async function followSwap(swapId) {
       email: currentUser.email,
     };
 
-    // Add user to followers list
-    await swapRef.update({
-      followers: firebase.firestore.FieldValue.arrayUnion(user)
-    });
-
-    // Update follower count in UI
-    const followerCount = followers.length + 1;
-    const countEl = document.getElementById(`follower-count-${swapId}`);
-    if (countEl) {
-      countEl.innerText = `${followerCount} people following`;
-    }
-
-    // Send admin notification
-    await sendFollowAdminNotification(swapId, currentUser);
-
-    // ✅ Notify the swap poster (if not same user)
-    const posterId = swapData.postedBy;
-    if (posterId && posterId !== currentUser.uid) {
-      await db.collection("alerts").add({
-        title: "👀 New Follower",
-        message: `${currentUser.email || "Someone"} followed your swap: ${swapData.name || "Unnamed Swap"}`,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        targetUserId: posterId
+    try {
+      // Add user to followers list
+      await swapRef.update({
+        followers: firebase.firestore.FieldValue.arrayUnion(user)
       });
+
+      // Update follower count in UI
+      const followerCount = followers.length + 1;
+      const countEl = document.getElementById(`follower-count-${swapId}`);
+      if (countEl) {
+        countEl.innerText = `${followerCount} people following`;
+      }
+
+      // Send admin notification
+      await sendFollowAdminNotification(swapId, currentUser);
+
+      // ✅ Notify the swap poster (if not same user)
+      const posterId = swapData.postedBy;
+      if (posterId && posterId !== currentUser.uid) {
+        await db.collection("alerts").add({
+          title: "👀 New Follower",
+          message: `${currentUser.email || "Someone"} followed your swap: ${swapData.name || "Unnamed Swap"}`,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          targetUserId: posterId
+        });
+      }
+
+      // ✅ Show center screen success alert to the follower
+      showCustomAlert("✅ You are now following this swap.", "success");
+
+    } catch (error) {
+      console.error("Error following swap:", error);
+      showCustomAlert("❌ Failed to follow swap: " + error.message, "error");
     }
-
-    // ✅ Show center screen success alert to the follower
-    showCustomAlert("✅ You are now following this swap.", "success");
-
   } else {
     showCustomAlert("⚠ You are already following this swap.", "warning");
   }
+
+  // Hide the loading spinner once the operation is complete
+  document.getElementById("loadingSpinner").style.display = "none";
 }
+
 
 
 // Function to send an admin notification when a user follows a swap
@@ -4114,14 +4449,17 @@ async function sendFollowAdminNotification(swapId, currentUser) {
   console.log("Admin notification sent for swap follow.");
 }
 
-
 async function toggleSwapStatus(swapId) {
+  const spinner = document.getElementById('loadingSpinner'); // Assuming you have a spinner element with this ID
+  spinner.style.display = 'block'; // Show spinner
+  
   try {
     const swapDoc = await db.collection("teacherSwaps").doc(swapId).get();
     const swapData = swapDoc.data();
 
     if (!swapData) {
       showCustomAlert("❌ Swap not found.", "error");
+      spinner.style.display = 'none'; // Hide spinner
       return;
     }
 
@@ -4151,8 +4489,11 @@ async function toggleSwapStatus(swapId) {
   } catch (error) {
     console.error("❌ Error updating swap status:", error);
     showCustomAlert("❌ Failed to update swap: " + error.message, "error");
+  } finally {
+    spinner.style.display = 'none'; // Hide spinner in case of success or error
   }
 }
+
 
 
 // Function to send an admin notification when a swap is closed
@@ -4193,6 +4534,9 @@ async function boostSwap(swapId) {
   // Check if the current user is an admin
   const isAdminUser = isAdmin === true;
 
+  // Show the loading spinner while processing the boost action
+  document.getElementById("loadingSpinner").style.display = "flex";
+
   try {
     if (isAdminUser) {
       // Admins boost the swap for free
@@ -4212,8 +4556,12 @@ async function boostSwap(swapId) {
   } catch (error) {
     console.error("❌ Error boosting swap:", error);
     showCustomAlert("❌ Failed to boost swap: " + error.message, "error");
+  } finally {
+    // Hide the loading spinner once the process is complete (whether successful or failed)
+    document.getElementById("loadingSpinner").style.display = "none";
   }
 }
+
 
 // Function to update the swap boost status in Firestore
 async function updateSwapBoostStatus(swapId, boostStatus) {
@@ -4286,7 +4634,6 @@ function renderTrendingSectionFromSwapsOnly() {
   }
 }
 
-
 async function sendSwapInterest(swapId, teacherName) {
   try {
     const currentUser = firebase.auth().currentUser;
@@ -4294,6 +4641,9 @@ async function sendSwapInterest(swapId, teacherName) {
       showCustomAlert("You must be logged in to express interest.", "error");
       return;
     }
+
+    // Show the loading spinner while the interest is being sent
+    document.getElementById("loadingSpinner").style.display = "flex";
 
     // Save the interest
     await db.collection("swapInterests").add({
@@ -4330,6 +4680,9 @@ async function sendSwapInterest(swapId, teacherName) {
   } catch (error) {
     console.error("Error sending interest:", error);
     showCustomAlert("❌ Failed to send interest: " + error.message, "error");
+  } finally {
+    // ✅ Hide the spinner once the process is complete
+    document.getElementById("loadingSpinner").style.display = "none";
   }
 }
 
@@ -4361,11 +4714,17 @@ document.getElementById("bomJobForm").addEventListener("submit", async e => {
     timestamp: firebase.firestore.FieldValue.serverTimestamp()
   };
 
+  // Show the loading spinner while posting the job
+  document.getElementById("loadingSpinner").style.display = "flex";
+
   try {
     // ✅ Save job to Firestore
     await bomRef.add(job);
 
+    // ✅ Show success message
     showCustomAlert("✅ Job posted successfully!", "success");
+
+    // ✅ Reset the form and reload job listings
     document.getElementById("bomJobForm").reset();
     loadBOMJobs();
 
@@ -4375,14 +4734,14 @@ document.getElementById("bomJobForm").addEventListener("submit", async e => {
     // ✅ Admin Notification
     await db.collection("adminNotifications").add({
       type: "BOM Job Post",
-      message: `New  job posted: ${job.jobType} by ${job.organization}, Salary: ${job.salaryRange}, Phone: ${job.phone}, County: ${job.county}`,
+      message: `New job posted: ${job.jobType} by ${job.organization}, Salary: ${job.salaryRange}, Phone: ${job.phone}, County: ${job.county}`,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       read: false
     });
 
     // ✅ Public Alert (visible to all users)
     const alertDoc = await db.collection("alerts").add({
-      title: "📢 New  Job",
+      title: "📢 New Job",
       message: `${job.organization} just posted a ${job.jobType} job in ${job.county}, ${job.subCounty}. 💰 Salary: ${job.salaryRange}`,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       targetUserId: null,
@@ -4393,9 +4752,14 @@ document.getElementById("bomJobForm").addEventListener("submit", async e => {
     console.log("✅ BOM alert created with ID:", alertDoc.id);
 
   } catch (err) {
+    // ✅ Show error message
     showCustomAlert("❌ Error posting job: " + err.message, "error");
+  } finally {
+    // ✅ Hide the loading spinner once the job is posted or an error occurs
+    document.getElementById("loadingSpinner").style.display = "none";
   }
 });
+
 
 
 // ✅ Notify Matching Service Providers
@@ -4766,7 +5130,6 @@ else if (jobType.includes("volunteer")) iconClass = "fa-hands-helping", bgColor 
   });
 }
 
-
 // Function to handle following a job 
 function followJob(jobId) {
   const followButton = document.querySelector(`button[onclick="followJob('${jobId}')"]`);
@@ -4778,72 +5141,86 @@ function followJob(jobId) {
     return;
   }
 
+  // Show the loading spinner while processing the follow/unfollow action
+  document.getElementById("loadingSpinner").style.display = "flex";
+
   const userId = user.uid;
   const jobRef = firebase.firestore().doc(`bomJobs/${jobId}`);
 
   jobRef.get().then(async docSnapshot => {
     if (!docSnapshot.exists) {
       showCustomAlert("Job not found.", "error");
+      document.getElementById("loadingSpinner").style.display = "none"; // Hide spinner
       return;
     }
 
     const jobData = docSnapshot.data();
     const alreadyFollowing = jobData.followedUsers && jobData.followedUsers.includes(userId);
 
-    if (alreadyFollowing) {
-      // 👎 Unfollow
-      followButton.innerText = "👀 Follow Job";
-      followButton.classList.remove('followed');
+    try {
+      if (alreadyFollowing) {
+        // 👎 Unfollow
+        followButton.innerText = "👀 Follow Job";
+        followButton.classList.remove('followed');
 
-      await jobRef.update({
-        followedUsers: firebase.firestore.FieldValue.arrayRemove(userId),
-        followedCount: firebase.firestore.FieldValue.increment(-1)
-      });
-
-      if (followedCountElement) {
-        let currentCount = parseInt(followedCountElement.textContent) || 1;
-        followedCountElement.textContent = `${currentCount - 1} following`;
-      }
-
-      showCustomAlert("❌ You unfollowed this job.", "warning");
-      console.log("Unfollowed the job successfully.");
-
-    } else {
-      // 👍 Follow
-      followButton.innerText = "👀 Following Job";
-      followButton.classList.add('followed');
-
-      await jobRef.update({
-        followedUsers: firebase.firestore.FieldValue.arrayUnion(userId),
-        followedCount: firebase.firestore.FieldValue.increment(1)
-      });
-
-      if (followedCountElement) {
-        let currentCount = parseInt(followedCountElement.textContent) || 0;
-        followedCountElement.textContent = `${currentCount + 1} following`;
-      }
-
-      showCustomAlert("✅ You are now following this job.", "success");
-      console.log("Followed the job successfully.");
-
-      // ✅ Notify the poster if not self
-      const posterName = jobData.postedBy || "Poster";
-      const posterId = jobData.userId || null;
-
-      if (posterId && posterId !== userId) {
-        await db.collection("alerts").add({
-          title: "👥 Job Followed",
-          message: `${user.displayName || user.email || "Someone"} followed your BOM job for ${jobData.jobType} at ${jobData.organization}.`,
-          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-          targetUserId: posterId
+        await jobRef.update({
+          followedUsers: firebase.firestore.FieldValue.arrayRemove(userId),
+          followedCount: firebase.firestore.FieldValue.increment(-1)
         });
+
+        if (followedCountElement) {
+          let currentCount = parseInt(followedCountElement.textContent) || 1;
+          followedCountElement.textContent = `${currentCount - 1} following`;
+        }
+
+        showCustomAlert("❌ You unfollowed this job.", "warning");
+        console.log("Unfollowed the job successfully.");
+
+      } else {
+        // 👍 Follow
+        followButton.innerText = "👀 Following Job";
+        followButton.classList.add('followed');
+
+        await jobRef.update({
+          followedUsers: firebase.firestore.FieldValue.arrayUnion(userId),
+          followedCount: firebase.firestore.FieldValue.increment(1)
+        });
+
+        if (followedCountElement) {
+          let currentCount = parseInt(followedCountElement.textContent) || 0;
+          followedCountElement.textContent = `${currentCount + 1} following`;
+        }
+
+        showCustomAlert("✅ You are now following this job.", "success");
+        console.log("Followed the job successfully.");
+
+        // ✅ Notify the poster if not self
+        const posterName = jobData.postedBy || "Poster";
+        const posterId = jobData.userId || null;
+
+        if (posterId && posterId !== userId) {
+          await db.collection("alerts").add({
+            title: "👥 Job Followed",
+            message: `${user.displayName || user.email || "Someone"} followed your BOM job for ${jobData.jobType} at ${jobData.organization}.`,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            targetUserId: posterId
+          });
+        }
       }
+    } catch (error) {
+      console.error("Error handling job follow/unfollow: ", error);
+      showCustomAlert("❌ Failed to follow/unfollow job: " + error.message, "error");
+    } finally {
+      // Hide the loading spinner once the operation is complete
+      document.getElementById("loadingSpinner").style.display = "none";
     }
   }).catch((error) => {
     console.error("Error handling job follow: ", error);
     showCustomAlert("❌ Failed to follow/unfollow job: " + error.message, "error");
+    document.getElementById("loadingSpinner").style.display = "none"; // Hide spinner
   });
 }
+
 
 
 
@@ -4866,7 +5243,6 @@ function updateFollowedCount(jobId) {
   });
 }
 
-
 // Function to handle showing interest and updating followed count
 function showInterest(jobId) {
   const user = firebase.auth().currentUser;
@@ -4880,9 +5256,13 @@ function showInterest(jobId) {
   const followedCountElement = document.getElementById(`followed-count-${jobId}`);
   const jobRef = firebase.firestore().doc(`bomJobs/${jobId}`);
 
+  // Show the loading spinner while processing the interest
+  document.getElementById("loadingSpinner").style.display = "flex";
+
   jobRef.get().then(async docSnapshot => {
     if (!docSnapshot.exists) {
       showCustomAlert("Job not found.", "error");
+      document.getElementById("loadingSpinner").style.display = "none"; // Hide spinner
       return;
     }
 
@@ -4891,57 +5271,68 @@ function showInterest(jobId) {
 
     if (alreadyFollowed) {
       showCustomAlert("⚠️ You’ve already shown interest in this job!", "warning");
+      document.getElementById("loadingSpinner").style.display = "none"; // Hide spinner
       return;
     }
 
-    // Add interest
-    const followedCount = (jobData.followedCount || 0) + 1;
-    const updatedFollowedUsers = jobData.followedUsers || [];
-    updatedFollowedUsers.push(userId);
+    try {
+      // Add interest
+      const followedCount = (jobData.followedCount || 0) + 1;
+      const updatedFollowedUsers = jobData.followedUsers || [];
+      updatedFollowedUsers.push(userId);
 
-    await jobRef.update({
-      followedCount: followedCount,
-      followedUsers: updatedFollowedUsers
-    });
-
-    // Update UI
-    if (followedCountElement) {
-      followedCountElement.innerText = `${followedCount} people following`;
-    }
-
-    console.log("Followed count updated successfully.");
-    showCustomAlert("✅ You’ve shown interest in this job.", "success");
-
-    // ✅ Notify Admin
-    await firebase.firestore().collection("adminNotifications").add({
-      type: "Job Interest",
-      jobId: jobId,
-      userId: userId,
-      message: `📌 User with ID ${userId} has shown interest in job ${jobId}.`,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    });
-
-    // ✅ Notify Poster
-    const posterId = jobData.userId;
-    const jobTitle = jobData.jobType || "a job";
-    const organization = jobData.organization || "an organization";
-
-    if (posterId && posterId !== userId) {
-      await firebase.firestore().collection("alerts").add({
-        title: "📌 New Job Interest",
-        message: `${user.displayName || user.email || "Someone"} is interested in your job: ${jobTitle} at ${organization}.`,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        targetUserId: posterId
+      await jobRef.update({
+        followedCount: followedCount,
+        followedUsers: updatedFollowedUsers
       });
-    }
 
-    console.log("Admin and poster notified.");
+      // Update UI
+      if (followedCountElement) {
+        followedCountElement.innerText = `${followedCount} people following`;
+      }
+
+      console.log("Followed count updated successfully.");
+      showCustomAlert("✅ You’ve shown interest in this job.", "success");
+
+      // ✅ Notify Admin
+      await firebase.firestore().collection("adminNotifications").add({
+        type: "Job Interest",
+        jobId: jobId,
+        userId: userId,
+        message: `📌 User with ID ${userId} has shown interest in job ${jobId}.`,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      });
+
+      // ✅ Notify Poster
+      const posterId = jobData.userId;
+      const jobTitle = jobData.jobType || "a job";
+      const organization = jobData.organization || "an organization";
+
+      if (posterId && posterId !== userId) {
+        await firebase.firestore().collection("alerts").add({
+          title: "📌 New Job Interest",
+          message: `${user.displayName || user.email || "Someone"} is interested in your job: ${jobTitle} at ${organization}.`,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          targetUserId: posterId
+        });
+      }
+
+      console.log("Admin and poster notified.");
+    } catch (error) {
+      console.error("Error updating followed count:", error);
+      showCustomAlert("❌ Failed to register interest: " + error.message, "error");
+    } finally {
+      // Hide the spinner once the operation is complete
+      document.getElementById("loadingSpinner").style.display = "none";
+    }
 
   }).catch((error) => {
     console.error("Error fetching job data: ", error);
     showCustomAlert("❌ Failed to register interest: " + error.message, "error");
+    document.getElementById("loadingSpinner").style.display = "none"; // Hide spinner
   });
 }
+
 
 
 // Function to update the interest count on page load (in case of page refresh)
@@ -4970,11 +5361,15 @@ function onPageLoad(jobId) {
 
 async function closeJob(jobId) {
   try {
+    // Show the loading spinner while the operation is being processed
+    document.getElementById("loadingSpinner").style.display = "flex";
+
     const jobRef = db.collection("bomJobs").doc(jobId);
     const jobSnap = await jobRef.get();
 
     if (!jobSnap.exists) {
       showCustomAlert("❌ Job not found.", "error");
+      document.getElementById("loadingSpinner").style.display = "none"; // Hide spinner
       return;
     }
 
@@ -5012,8 +5407,12 @@ async function closeJob(jobId) {
   } catch (error) {
     console.error("❌ Error updating job status:", error);
     showCustomAlert("❌ Failed to update job status: " + error.message, "error");
+  } finally {
+    // Hide the spinner once the operation is complete
+    document.getElementById("loadingSpinner").style.display = "none";
   }
 }
+
 
 
 async function boostJobFree(jobId) {
@@ -5021,6 +5420,9 @@ async function boostJobFree(jobId) {
   boostExpiry.setDate(boostExpiry.getDate() + 7); // 7-day boost
 
   try {
+    // Show the loading spinner while the operation is being processed
+    document.getElementById("loadingSpinner").style.display = "flex";
+
     // Update the job status with boosted details
     await db.collection("bomJobs").doc(jobId).update({
       isBoosted: true,
@@ -5045,8 +5447,12 @@ async function boostJobFree(jobId) {
   } catch (error) {
     console.error("❌ Error boosting job:", error);
     showCustomAlert("❌ Failed to boost job: " + error.message, "error");
+  } finally {
+    // Hide the spinner once the operation is complete
+    document.getElementById("loadingSpinner").style.display = "none";
   }
 }
+
 
 
 function hasBomJobAccess() {
@@ -5093,45 +5499,6 @@ async function unlockBomJobs() {
     }
   }, 3000);
 }
-
-
-// ✅ Delete BOM Job and send admin notification
-async function confirmDeleteBOMJob(jobId) {
-  if (confirm("Are you sure you want to delete this job posting?")) {
-    try {
-      const jobRef = bomRef.doc(jobId);
-      const jobSnap = await jobRef.get();
-      if (!jobSnap.exists) {
-        showCustomAlert("❌ Job not found.", "error");
-        return;
-      }
-
-      const jobData = jobSnap.data();
-      const jobTitle = jobData.title || "Unknown Job";
-
-      // Delete the job posting
-      await jobRef.delete();
-      showCustomAlert("✅ Job deleted successfully!", "success");
-
-      // Send an admin notification
-      const notifRef = db.collection("adminNotifications").doc();
-      await notifRef.set({
-        type: "Job Deletion",
-        itemId: jobId,
-        itemTitle: jobTitle,
-        message: `🚨 BOM job titled "${jobTitle}" was deleted.`,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-      });
-
-      // Refresh the job listings
-      loadBOMJobs(); 
-    } catch (err) {
-      showCustomAlert("❌ Failed to delete job: " + err.message, "error");
-    }
-  }
-}
-
-
 // ✅ Update Average Rating
 async function updateAverageRating(jobId) {
   const ratingRef = db.collection("ratings").where("jobId", "==", jobId);
@@ -5189,28 +5556,49 @@ function handleCountyChange(countyId, subCountyId) {
   }
 }
 
-// ✅ Delete BOM Job
-function confirmDeleteBOMJob(jobId) {
-  jobToDeleteId = jobId;
-  document.getElementById("confirmDeleteModal").style.display = "flex";
-}
-function closeDeleteModal() {
-  jobToDeleteId = null;
-  document.getElementById("confirmDeleteModal").style.display = "none";
-}
+// ✅ Delete BOM Job and send admin notification
+async function confirmDeleteBOMJob(jobId) {
+  if (confirm("Are you sure you want to delete this job posting?")) {
+    // Show loading spinner while the deletion is processing
+    document.getElementById("loadingSpinner").style.display = "flex";
 
-document.getElementById("confirmDeleteBtn").onclick = async () => {
-  if (!jobToDeleteId) return;
+    try {
+      const jobRef = bomRef.doc(jobId);
+      const jobSnap = await jobRef.get();
+      if (!jobSnap.exists) {
+        showCustomAlert("❌ Job not found.", "error");
+        return;
+      }
 
-  try {
-    await bomRef.doc(jobToDeleteId).delete();
-    showCustomAlert("🗑️ job deleted successfully!", "success");
-    closeDeleteModal();
-    loadBOMJobs();
-  } catch (err) {
-    showCustomAlert("❌ Failed to delete: " + err.message, "error");
+      const jobData = jobSnap.data();
+      const jobTitle = jobData.title || "Unknown Job";
+
+      // Delete the job posting
+      await jobRef.delete();
+      showCustomAlert("✅ Job deleted successfully!", "success");
+
+      // Send an admin notification
+      const notifRef = db.collection("adminNotifications").doc();
+      await notifRef.set({
+        type: "Job Deletion",
+        itemId: jobId,
+        itemTitle: jobTitle,
+        message: `🚨 BOM job titled "${jobTitle}" was deleted.`,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+      // Refresh the job listings
+      loadBOMJobs(); 
+
+    } catch (err) {
+      showCustomAlert("❌ Failed to delete job: " + err.message, "error");
+    } finally {
+      // Hide the spinner once the operation is complete
+      document.getElementById("loadingSpinner").style.display = "none";
+    }
   }
-};
+}
+
 
   // ✅ Alert Helper
   function showCustomAlert(msg, type = "info") {
@@ -5289,7 +5677,6 @@ async function loadResources() {
 }
 // ✅ Populate counties for soulmate form
 ["smCounty", "smWorkCounty"].forEach(populateCounties);
-
 document.getElementById("soulmateForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -5326,6 +5713,9 @@ document.getElementById("soulmateForm").addEventListener("submit", async (e) => 
 
   const photoFile = document.getElementById("smPhoto").files[0];
   let photoURL = "";
+
+  // Show the loading spinner while processing
+  document.getElementById("loadingSpinner").style.display = "flex";
 
   try {
     // ✅ Upload photo if available
@@ -5376,6 +5766,9 @@ document.getElementById("soulmateForm").addEventListener("submit", async (e) => 
   } catch (err) {
     console.error("Error saving profile:", err);
     showCustomAlert("❌ Error saving profile: " + err.message, "error");
+  } finally {
+    // Hide the spinner once the process completes
+    document.getElementById("loadingSpinner").style.display = "none";
   }
 });
 
@@ -5615,8 +6008,26 @@ async function loadSoulmates() {
         <button onclick="unlockSoulmateContacts()" style="margin-top:5px;background:crimson;color:white;border:none;padding:4px 10px;border-radius:4px;">💳 Pay</button>
       </div>`;
 
-    card.innerHTML = `
-      ${d.verified ? `<div class="verified-badge" style="position:absolute;top:8px;right:8px;background:#4caf50;color:white;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px;"><i class="fas fa-check"></i></div>` : ""}
+ card.innerHTML = `
+  ${d.verified ? `<div class="verified-badge" style="
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: #1DA1F2;  /* Twitter blue */
+    color: white;
+    border-radius: 25%;
+    width: 13px;
+    height: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+  ">
+    <i class="fas fa-check" style="transform: scale(1.2);"></i>
+  </div>` : ""}
 
       ${!d.verified && isPoster && !isAdminUser ? `
         <button onclick="showPaymentModalFor('soulmateVerification', 200, '${id}', '${d.name || ''}')"
@@ -5697,7 +6108,6 @@ async function verifySoulmateDirectly(soulmateId) {
   }
 }
 
-
 async function boostSoulmate(id) {
   const userEmail = currentUser?.email || "";
   const adminEmails = [
@@ -5707,6 +6117,9 @@ async function boostSoulmate(id) {
   ];
 
   const isAdminUser = adminEmails.includes(userEmail);
+
+  // Show the spinner while processing
+  document.getElementById("loadingSpinner").style.display = "flex";
 
   if (isAdminUser) {
     const boostExpiry = new Date();
@@ -5741,6 +6154,9 @@ async function boostSoulmate(id) {
     const boostAmount = 250;
     showPaymentModalFor("soulmate", boostAmount, id, "Your Soulmate Profile");
   }
+
+  // Hide the spinner once the process is complete
+  document.getElementById("loadingSpinner").style.display = "none";
 }
 
 // Helper function to send an admin notification
@@ -5765,8 +6181,10 @@ async function sendAdminNotification(type, userId, message) {
   }
 }
 
-
 async function toggleSoulmateStatus(id, currentStatus) {
+  // Show the spinner while processing
+  document.getElementById("loadingSpinner").style.display = "flex";
+
   try {
     const newStatus = !currentStatus;
 
@@ -5793,6 +6211,9 @@ async function toggleSoulmateStatus(id, currentStatus) {
   } catch (error) {
     console.error("❌ Error updating soulmate status:", error);
     showCustomAlert("❌ Failed to update status: " + error.message, "error");
+  } finally {
+    // Hide the spinner once the process is complete
+    document.getElementById("loadingSpinner").style.display = "none";
   }
 }
 
@@ -5900,6 +6321,9 @@ function unlockSoulmateContacts() {
     return;
   }
 
+  // Show the spinner while the process is happening
+  document.getElementById("loadingSpinner").style.display = "flex";
+
   // Show the payment modal for unlocking soulmate contacts
   showPaymentModalFor("soulmate", 200, currentUser.uid, "Soulmate Contacts");
 
@@ -5918,9 +6342,13 @@ function unlockSoulmateContacts() {
 
       // ✅ Send admin notification about contact unlocking
       sendAdminNotification("Soulmate Contacts Unlocked", currentUser.uid, "Soulmate contacts have been unlocked.");
+
+      // Hide the spinner after completion
+      document.getElementById("loadingSpinner").style.display = "none";
     }
   }, 3000);
 }
+
 
 // Helper function to send an admin notification
 async function sendAdminNotification(type, userId, message) {
@@ -5990,6 +6418,9 @@ async function sendInterest(toName) {
     return;
   }
 
+  // Show the spinner while the interest is being sent
+  document.getElementById("loadingSpinner").style.display = "flex";
+
   try {
     await db.collection("soulmateInterests").add({
       fromUserId: currentUser.uid,
@@ -5999,10 +6430,15 @@ async function sendInterest(toName) {
     });
 
     showCustomAlert(`❤️ Interest sent to ${toName}!`, "success");
+
   } catch (err) {
     showCustomAlert("Error sending interest: " + err.message, "error");
+  } finally {
+    // Hide the spinner once the process completes
+    document.getElementById("loadingSpinner").style.display = "none";
   }
 }
+
 async function isMutualMatch(name) {
   const myName = currentUser.displayName || currentUser.email;
 
@@ -6031,10 +6467,14 @@ function attachServiceFormSubmit() {
 
 async function submitServiceHandler(e) {
   e.preventDefault();
+
   if (!isLoggedIn || !currentUser) {
     showPage("login");
     return alert("You must be logged in.");
   }
+
+  // Show the spinner while processing
+  document.getElementById("loadingSpinner").style.display = "flex";
 
   // ✅ Check how many services this user has already posted
   const serviceCountSnap = await servicesRef.where("postedBy", "==", currentUser.uid).get();
@@ -6043,6 +6483,7 @@ async function submitServiceHandler(e) {
   // ✅ If already posted 1 service, require payment — unless admin
   if (totalServices >= 1 && !isAdmin) {
     showPaymentModalFor("service", 200, currentUser.uid, "Post Extra Service");
+    document.getElementById("loadingSpinner").style.display = "none"; // Hide spinner if payment modal is shown
     return;
   }
 
@@ -6060,6 +6501,7 @@ async function submitServiceHandler(e) {
 
   // ✅ Validate all fields
   if (Object.values(data).some(v => !v)) {
+    document.getElementById("loadingSpinner").style.display = "none"; // Hide spinner if validation fails
     return alert("Please fill all fields.");
   }
 
@@ -6090,8 +6532,12 @@ async function submitServiceHandler(e) {
 
   } catch (err) {
     showCustomAlert("❌ Error: " + err.message, "error");
+  } finally {
+    // Hide the spinner once the process completes
+    document.getElementById("loadingSpinner").style.display = "none";
   }
 }
+
 async function loadServices() {
   const container = document.getElementById("servicesContainer");
   const trendingContainer = document.getElementById("trendingContainer");
@@ -6410,7 +6856,6 @@ function payForVerification(category, itemId, itemName) {
   showPaymentModalFor(`${category}Verification`, 200, itemId, itemName);
 }
 
-
 async function showInterest(serviceId) {
   const currentUserUid = currentUser?.uid;
   if (!currentUserUid) {
@@ -6418,12 +6863,16 @@ async function showInterest(serviceId) {
     return;
   }
 
+  // Show the loading spinner while processing the request
+  document.getElementById("loadingSpinner").style.display = "flex";
+
   try {
     const serviceRef = servicesRef.doc(serviceId);
     const serviceDoc = await serviceRef.get();
 
     if (!serviceDoc.exists) {
       console.error("Service not found.");
+      showCustomAlert("❌ Service not found.");
       return;
     }
 
@@ -6461,18 +6910,21 @@ async function showInterest(serviceId) {
   } catch (error) {
     console.error("❌ Error showing interest:", error.message || error);
     showCustomAlert("Something went wrong. Please try again.");
+  } finally {
+    // Hide the loading spinner after operation completes
+    document.getElementById("loadingSpinner").style.display = "none";
   }
 }
 async function verifyServiceDirectly(serviceId) {
+  // Show the loading spinner while processing
+  document.getElementById("loadingSpinner").style.display = "flex";
+
   try {
     await servicesRef.doc(serviceId).set({
       verified: true
     }, { merge: true });
 
     showCustomAlert("✅ Service verified successfully!", "success");
-
-    // Optional: refresh list, but we can also just update the DOM
-    // loadServices();
 
     // Instant DOM update without reload
     const card = document.getElementById(`service-${serviceId}`);
@@ -6489,8 +6941,12 @@ async function verifyServiceDirectly(serviceId) {
   } catch (err) {
     console.error("❌ Error verifying service:", err);
     showCustomAlert("❌ Failed to verify service: " + err.message, "error");
+  } finally {
+    // Hide the loading spinner after operation completes
+    document.getElementById("loadingSpinner").style.display = "none";
   }
 }
+
 
 function handlePaymentSuccess(paymentType, itemId) {
   if (paymentType === 'serviceVerification') {
@@ -6599,12 +7055,14 @@ async function updateAverageRating(serviceId) {
 }
 
 
-
 async function toggleServiceStatus(serviceId) {
-  const serviceDoc = await servicesRef.doc(serviceId).get();
-  const isActive = serviceDoc.data().isActive;
+  // Show the loading spinner
+  document.getElementById("loadingSpinner").style.display = "flex";
 
   try {
+    const serviceDoc = await servicesRef.doc(serviceId).get();
+    const isActive = serviceDoc.data().isActive;
+
     // Toggle service activation status
     await servicesRef.doc(serviceId).update({
       isActive: !isActive // Toggle between true/false
@@ -6624,11 +7082,16 @@ async function toggleServiceStatus(serviceId) {
     }
 
     loadServices(); // Reload to reflect changes
+
   } catch (error) {
     console.error("Error toggling service status:", error);
     alert("Error updating service status.");
+  } finally {
+    // Hide the loading spinner
+    document.getElementById("loadingSpinner").style.display = "none";
   }
 }
+
 
 // ✅ Reusable inlined custom alert function
 function showCustomAlert(message) {
@@ -6698,8 +7161,10 @@ function closeReviewModal() {
   reviewModal.style.display = 'none'; // Close the modal
 }
 
-
 async function boostServiceDirectly(serviceId) {
+  // Show the loading spinner
+  document.getElementById("loadingSpinner").style.display = "flex";
+
   try {
     const expiry = new Date();
     expiry.setDate(expiry.getDate() + 3); // 3-day boost
@@ -6714,13 +7179,20 @@ async function boostServiceDirectly(serviceId) {
   } catch (err) {
     console.error("❌ Error boosting service:", err);
     showCustomAlert("❌ Failed to boost service: " + err.message, "error");
+  } finally {
+    // Hide the loading spinner after completion
+    document.getElementById("loadingSpinner").style.display = "none";
   }
 }
+
 async function postService() {
   if (!currentUser) {
     showCustomAlert("Please login first.", "error");
     return;
   }
+
+  // Show the loading spinner while processing the request
+  document.getElementById("loadingSpinner").style.display = "flex";
 
   try {
     // Check how many services this user has already posted
@@ -6794,8 +7266,12 @@ async function postService() {
   } catch (error) {
     console.error("Error posting service:", error);
     showCustomAlert("Failed to post service. Please try again.", "error");
+  } finally {
+    // Hide the loading spinner once the process completes
+    document.getElementById("loadingSpinner").style.display = "none";
   }
 }
+
 
 
 
@@ -6873,6 +7349,9 @@ function promptToast(message, onConfirm) {
 
 
 async function deleteService(id) {
+  // Show the loading spinner when the process begins
+  document.getElementById("loadingSpinner").style.display = "flex";
+
   promptToast("Are you sure you want to delete this service?", async (confirmed) => {
     if (confirmed) {
       try {
@@ -6911,9 +7390,11 @@ async function deleteService(id) {
     } else {
       showToast("Deletion cancelled.", "error");
     }
+
+    // Hide the loading spinner once the process is complete
+    document.getElementById("loadingSpinner").style.display = "none";
   });
 }
-
 
 // ✅ Edit service and rebind default submit
 function editService(data, id) {
@@ -6926,6 +7407,9 @@ function editService(data, id) {
 
   const btn = document.querySelector("#serviceForm button");
   btn.innerHTML = "Update Service";
+
+  // Show loading spinner while updating
+  document.getElementById("loadingSpinner").style.display = "flex";
 
   // Replace the form element to remove previous listeners
   const oldForm = document.getElementById("serviceForm");
@@ -6946,18 +7430,30 @@ function editService(data, id) {
         postedBy: data.postedBy,
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
       };
+
+      // Update the service
       await servicesRef.doc(id).update(updated);
+
+      // Show success message
       showCustomAlert("✅ Service updated.");
       newForm.reset();
-      loadServices();
+      loadServices(); // Refresh service list
 
+      // Reset button text to default
       btn.innerHTML = `<i class="fas fa-concierge-bell" style="margin-right:6px;"></i> Submit Service`;
+
+      // Reattach the default form submit handler
       attachServiceFormSubmit(); // 👈 Reattach default
+
     } catch (err) {
       showCustomAlert("Error updating: " + err.message, "error");
+    } finally {
+      // Hide the loading spinner once the update is complete
+      document.getElementById("loadingSpinner").style.display = "none";
     }
   });
 }
+
 
 function filterServices() {
   const county = document.getElementById("filterServiceCounty").value;
@@ -7018,6 +7514,9 @@ async function submitMarketHandler(e) {
     timestamp: firebase.firestore.FieldValue.serverTimestamp()
   };
 
+  // Show spinner while uploading
+  document.getElementById("loadingSpinner").style.display = "flex";
+
   try {
     // ✅ Upload item photo if available
     if (itemPhotoFile) {
@@ -7050,6 +7549,9 @@ async function submitMarketHandler(e) {
 
   } catch (err) {
     showCustomAlert("❌ Error: " + err.message, "error");
+  } finally {
+    // Hide the spinner once done
+    document.getElementById("loadingSpinner").style.display = "none";
   }
 }
 
@@ -7107,7 +7609,7 @@ async function loadMarketItems() {
 
     [...boostedItems, ...normalItems].forEach(d => {
       const id = d.id;
-      const isPoster = currentUser && currentUser.uid === d.postedBy;
+      const isPoster = currentUser && currentUser.uid === d.postedBy; // Check if the current user is the poster
       const isBoosted = d.boosted && d.boostExpiry?.toDate?.() > new Date();
       const isExpired = d.isExpired;
       const canDelete = isPoster || isAdmin;
@@ -7122,7 +7624,7 @@ async function loadMarketItems() {
       let verifyBtnHTML = "";
       if (!d.verified) {
         if (isPoster && !isAdmin) {
-          verifyBtnHTML = `
+          verifyBtnHTML = ` 
             <button onclick="payForVerification('marketVerification', '${id}', '${d.name || ''}')"
               style="background:#4CAF50; color:white; border:none; padding:6px 12px; border-radius:6px; margin-top:6px;">
               ✅ Get Verified – Ksh 500
@@ -7160,14 +7662,31 @@ async function loadMarketItems() {
         <p style="color:#3f51b5;">📍 <strong>Location:</strong> ${d.county || "Unknown"}, ${d.subcounty || "Unknown"}</p>
         <p style="color:#673ab7;">📞 <strong>Contact:</strong> ${d.phone || "N/A"}</p>
         ${verifyBtnHTML}
+        
+        <!-- Add View Chat Button for Poster -->
+        <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;">
+          ${isPoster ? `
+            <button 
+              onclick="openMarketChat('${d.firebaseUid || d.phone}', '${d.posterName || 'Seller'}')" 
+              style="background:#673ab7;color:#fff;border:none;border-radius:5px;padding:6px 12px;">
+              💬 View Chat
+            </button>
+          ` : ""}
+        </div>
+
         ${(!isPoster && currentUser) ? `
           <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;">
             <button onclick="showMarketInterest('${id}')" style="background:#f44336;color:#fff;border:none;border-radius:5px;padding:6px 12px;">💬 Interest <span id="marketInterestCount-${id}">0</span></button>
             <button onclick="reportMarketItem('${id}')" style="background:#ff1744;color:#fff;border:none;border-radius:5px;padding:6px 12px;">🚩 Report</button>
-            <button onclick="openChatModal('${d.phone}','${d.posterName || "Seller"}')" style="background:#673ab7;color:#fff;border:none;border-radius:5px;padding:6px 12px;">💬 Chat</button>
+            <button 
+              onclick="openMarketChat('${d.firebaseUid || d.phone}', '${d.posterName || 'Seller'}')" 
+              style="background:#673ab7;color:#fff;border:none;border-radius:5px;padding:6px 12px;">
+              💬 Chat
+            </button>
             <button onclick="openReviewModal('${id}')" style="background:#4CAF50;color:#fff;border:none;border-radius:5px;padding:6px 12px;">📝 Review</button>
           </div>
         ` : ""}
+
         ${isPoster ? `
           <div style="margin-top:10px;">
             <button id="soldOutBtn-${id}" onclick="toggleSoldStatus('${id}')" style="background:#9e9e9e;color:#fff;border:none;border-radius:5px;padding:6px 12px;">
@@ -7207,6 +7726,383 @@ async function loadMarketItems() {
   }
 }
 
+// ✅ Global Chat State
+const marketChatState = {
+  currentReceiverUid: null,
+  unsubscribeMessages: null,
+  currentUserId: null
+};
+
+// ✅ Enable Firestore Offline Persistence
+if (firebase.firestore) {
+  firebase.firestore().enablePersistence({ synchronizeTabs: true }).catch(err => {
+    console.warn("Firestore persistence error:", err);
+  });
+}
+
+// ✅ Initialize after Auth
+firebase.auth().onAuthStateChanged(user => {
+  marketChatState.currentUserId = user?.uid || null;
+});
+
+// ✅ Open chat with a market user
+function openMarketChat(receiverUid, posterName) {
+  if (!marketChatState.currentUserId) {
+    alert("Please log in first!");
+    return;
+  }
+
+  marketChatState.currentReceiverUid = receiverUid;
+  document.getElementById("marketChatName").innerText = posterName;
+  document.getElementById("marketChatModal").style.display = "flex"; // Open the chat modal
+
+  loadMessagesFromLocal(receiverUid);  // Load saved messages (for offline use)
+  loadMarketMessagesRealtime(receiverUid); // Listen for real-time messages
+  markMessagesAsRead(receiverUid);  // Mark messages as read when opened
+
+  document.getElementById("marketSendBtn").onclick = sendMarketMessage; // Attach send button event
+}
+
+// ✅ Close chat
+function closeMarketChat() {
+  document.getElementById("marketChatModal").style.display = "none";
+  if (marketChatState.unsubscribeMessages) marketChatState.unsubscribeMessages(); // Unsubscribe from real-time listener
+}
+
+// ✅ Send message (with sender name)
+async function sendMarketMessage() {
+  const input = document.getElementById("marketChatInput");
+  const message = input.value.trim();
+  
+  // Ensure there's a message to send
+  if (!message) return alert("Please enter a message!");
+
+  // ✅ Get sender name from Firebase Auth or fallback
+  const senderName = firebase.auth().currentUser?.displayName || "You";
+
+  // Create a temporary message ID for immediate UI display
+  const tempId = "temp_" + Date.now();
+  
+  // Prepare message data
+  const msgData = {
+    id: tempId,
+    senderId: marketChatState.currentUserId,
+    receiverId: marketChatState.currentReceiverUid,
+    senderName: senderName, // Store sender's name
+    message,
+    participants: [marketChatState.currentUserId, marketChatState.currentReceiverUid].sort(), // Ensure both users are participants
+    status: "sending",  // Initially setting status to sending
+    timestamp: new Date() // Use current timestamp for immediate display
+  };
+
+  // Show the message immediately in the UI (for quick feedback)
+  addMessageToUI(msgData, true);
+  
+  // Save the message locally for offline support
+  saveMessageToLocal(marketChatState.currentReceiverUid, msgData);
+
+  try {
+    // Send the message to Firestore
+    await db.collection("marketChats").add({
+      senderId: msgData.senderId,
+      receiverId: msgData.receiverId,
+      senderName: msgData.senderName, // Save name to Firestore
+      message: msgData.message,
+      participants: msgData.participants, // Ensure both users are included in participants
+      status: "sent", // Update the message status to "sent"
+      timestamp: firebase.firestore.FieldValue.serverTimestamp() // Firestore server timestamp for consistency
+    });
+
+    // Clear input field after sending the message
+    input.value = "";
+    
+    // Show a success message in the chat UI
+    showChatAlert("Message sent ✅", "green");
+  } catch (error) {
+    console.error("Error sending message:", error);
+
+    // Handle the error and update the message status to "failed"
+    msgData.status = "failed";
+    addMessageToUI(msgData); // Re-render message with failed status
+
+    // Save failed message locally for retry logic
+    saveMessageToLocal(marketChatState.currentReceiverUid, msgData);
+
+    // Show an error alert in the UI
+    showChatAlert("Failed to send ❌", "red");
+  }
+}
+
+// ✅ Quick message
+function sendMarketQuick(text) {
+  document.getElementById("marketChatInput").value = text;
+  sendMarketMessage(); // Send the predefined message
+}
+
+// ✅ Realtime messages with sender names & full date/time
+function loadMarketMessagesRealtime(receiverUid) {
+  if (marketChatState.unsubscribeMessages) marketChatState.unsubscribeMessages();
+
+  const messagesContainer = document.getElementById("marketChatMessages");
+  messagesContainer.innerHTML = "<p class='chat-loading'>Loading...</p>"; // Show loading message
+
+  // Firestore query to listen for messages between the current user and receiver (poster)
+  marketChatState.unsubscribeMessages = db.collection("marketChats")
+    .where("participants", "array-contains", marketChatState.currentUserId) // Listen for both users (sender and receiver)
+    .where("participants", "array-contains", receiverUid)  // Ensure it includes both participants
+    .orderBy("timestamp", "asc") // Sort messages by timestamp
+    .onSnapshot(async snapshot => {
+      let messages = JSON.parse(localStorage.getItem(`marketChat_${receiverUid}`) || "[]");
+      const messageMap = new Map(messages.map(m => [m.id, m]));
+
+      // Loop through each message received from Firestore
+      for (let doc of snapshot.docs) {
+        let data = doc.data();
+
+        // ✅ Convert Firestore timestamp to JS Date
+        let msgTimestamp = data.timestamp?.toDate ? data.timestamp.toDate() : new Date();
+
+        // ✅ If senderName missing, fetch from users collection
+        if (!data.senderName) {
+          try {
+            const userDoc = await db.collection("users").doc(data.senderId).get();
+            data.senderName = userDoc.exists && userDoc.data().name ? userDoc.data().name : "Unknown";
+          } catch (err) {
+            console.warn("Name fetch error:", err);
+            data.senderName = "Unknown";
+          }
+        }
+
+        // ✅ Attach formatted date/time
+        data.formattedTime = msgTimestamp.toLocaleString("en-US", {
+          weekday: "long",  // e.g., Monday
+          year: "numeric",
+          month: "long",    // e.g., August
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true
+        });
+
+        // Store the message in the map
+        messageMap.set(doc.id, {
+          id: doc.id,
+          ...data,
+          timestamp: msgTimestamp
+        });
+      }
+
+      // Merge the messages and sort them by timestamp
+      const mergedMessages = Array.from(messageMap.values()).sort((a, b) => {
+        return (a.timestamp?.getTime?.() || 0) - (b.timestamp?.getTime?.() || 0);
+      });
+
+      // Clear the message container
+      messagesContainer.innerHTML = "";
+      
+      // Display all the messages
+      mergedMessages.forEach(msg => addMessageToUI(msg));
+
+      // Save the merged messages to localStorage for offline use
+      localStorage.setItem(`marketChat_${receiverUid}`, JSON.stringify(mergedMessages));
+
+      // Scroll to the latest message
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    });
+}
+
+// ✅ Local storage load
+function loadMessagesFromLocal(receiverUid) {
+  const saved = localStorage.getItem(`marketChat_${receiverUid}`);
+  const messagesContainer = document.getElementById("marketChatMessages");
+  messagesContainer.innerHTML = "";
+
+  if (saved) {
+    const messages = JSON.parse(saved);
+    messages.forEach(msg => addMessageToUI(msg));
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  }
+}
+
+// ✅ Local storage save/update
+function saveMessageToLocal(receiverUid, message) {
+  let messages = JSON.parse(localStorage.getItem(`marketChat_${receiverUid}`) || "[]");
+  const index = messages.findIndex(m => m.id === message.id);
+  if (index > -1) messages[index] = message;
+  else messages.push(message);
+  localStorage.setItem(`marketChat_${receiverUid}`, JSON.stringify(messages));
+}
+
+// ✅ Mark all as read
+function markMessagesAsRead(receiverUid) {
+  const now = firebase.firestore.FieldValue.serverTimestamp();
+
+  db.collection("marketChats")
+    .where("senderId", "==", receiverUid)
+    .where("receiverId", "==", marketChatState.currentUserId)
+    .where("status", "==", "sent")
+    .get()
+    .then(snapshot => {
+      const batch = db.batch();
+      let updatedMessages = JSON.parse(localStorage.getItem(`marketChat_${receiverUid}`) || "[]");
+
+      snapshot.forEach(doc => {
+        batch.update(doc.ref, { status: "read", readAt: now });
+        updatedMessages = updatedMessages.map(m =>
+          m.id === doc.id ? { ...m, status: "read", readAt: { seconds: Date.now() / 1000 } } : m
+        );
+      });
+
+      localStorage.setItem(`marketChat_${receiverUid}`, JSON.stringify(updatedMessages));
+      return batch.commit();
+    });
+}
+
+// ✅ Add message to UI (Messenger style: username + full date-time)
+function addMessageToUI(msgData, isTemporary = false) {
+  const messagesContainer = document.getElementById("marketChatMessages");
+  let existingMsg = messagesContainer.querySelector(`[data-id='${msgData.id}']`);
+
+  // If message exists, just update its text
+  if (existingMsg) {
+    existingMsg.querySelector(".msg-text").textContent = msgData.message;
+    return;
+  }
+
+  const isOwn = msgData.senderId === marketChatState.currentUserId;
+
+  const msgDiv = document.createElement("div");
+  msgDiv.className = isOwn ? "chat-msg chat-out" : "chat-msg chat-in";
+  msgDiv.setAttribute("data-id", msgData.id || Date.now());
+
+  // ✅ Username + Full Date-Time
+  const nameLabel = document.createElement("div");
+  nameLabel.className = "msg-username";
+
+  // Use full date/time format
+  let msgDate = msgData.timestamp instanceof Date
+    ? msgData.timestamp
+    : (msgData.timestamp?.toDate ? msgData.timestamp.toDate() : new Date());
+
+  const formattedTime = msgDate.toLocaleString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true
+  });
+
+  nameLabel.textContent =
+    (msgData.senderName || (isOwn ? "You" : "Other User")) + " • " + formattedTime;
+  msgDiv.appendChild(nameLabel);
+
+  // ✅ Message text
+  const textSpan = document.createElement("span");
+  textSpan.className = "msg-text";
+  textSpan.textContent = msgData.message;
+  msgDiv.appendChild(textSpan);
+
+  if (isTemporary) msgDiv.style.opacity = "0.5";
+
+  messagesContainer.appendChild(msgDiv);
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+// ✅ Show Chat Alert (Success/Failure)
+function showChatAlert(text, color) {
+  let alertBox = document.getElementById("chatAlertBox");
+  if (!alertBox) {
+    alertBox = document.createElement("div");
+    alertBox.id = "chatAlertBox";
+    alertBox.className = "chat-alert";
+    document.body.appendChild(alertBox);
+  }
+  alertBox.textContent = text;
+  alertBox.style.background = color;
+  alertBox.style.display = "block";
+  setTimeout(() => alertBox.style.display = "none", 2000);
+}
+
+// ✅ Sent Chats Section
+async function openSentChatsSection() {
+  // Hide other sections
+  const pages = document.querySelectorAll("section");
+  pages.forEach(page => page.style.display = "none");
+  document.getElementById("sentChatsSection").style.display = "block";  // Show Sent Chats Section
+
+  // Load sent chats
+  await loadSentChats();
+}
+
+// Function to load and display sent chats
+async function loadSentChats() {
+  const userId = marketChatState.currentUserId; // Get the logged-in user's ID
+  if (!userId) {
+    console.warn("No user is logged in.");
+    return; // Exit if no user is logged in
+  }
+
+  const chatsList = document.getElementById("sentChatsList");
+  const loadingSpinner = document.getElementById("loadingSpinner");
+
+  // Show spinner while loading data
+  loadingSpinner.style.display = "block"; 
+
+  chatsList.innerHTML = ''; // Clear the previous chat list
+
+  try {
+    // Query Firestore for chats where the current user is either the sender or receiver
+    const snapshot = await db.collection("marketChats")
+      .where("participants", "array-contains", userId) // Check if the user is part of the chat
+      .orderBy("timestamp", "desc") // Order by timestamp (latest first)
+      .get();
+
+    if (snapshot.empty) {
+      chatsList.innerHTML = "<p>No chats found.</p>";
+      loadingSpinner.style.display = "none"; // Hide spinner when no chats are found
+      return; // No sent chats
+    }
+
+    snapshot.forEach(doc => {
+      const chatData = doc.data();
+
+      // Only show messages where the current user is the sender
+      if (chatData.senderId === userId) {
+        const chatItem = document.createElement("div");
+        chatItem.classList.add("chat-item");
+
+        // Create the chat item with avatar, sender name, and message preview
+        chatItem.innerHTML = `
+          <div class="chat-avatar">${chatData.senderName[0]}</div>
+          <div class="chat-item-content">
+            <div class="chat-name">${chatData.senderName}</div>
+            <div class="chat-last-message">${chatData.message.slice(0, 30)}...</div>
+            <div class="chat-timestamp">${new Date(chatData.timestamp.seconds * 1000).toLocaleString()}</div>
+          </div>
+        `;
+
+        // Open chat modal when the chat item is clicked
+        chatItem.onclick = () => openMarketChat(chatData.receiverId, chatData.senderName);
+
+        chatsList.appendChild(chatItem); // Add the chat item to the list
+      }
+    });
+
+  } catch (error) {
+    console.error("Error loading sent chats:", error);
+  } finally {
+    // Hide spinner when the data has finished loading
+    loadingSpinner.style.display = "none"; 
+  }
+}
+
+
+
+
 
 async function verifyMarketDirectly(marketId) {
   try {
@@ -7236,11 +8132,16 @@ async function verifyMarketDirectly(marketId) {
     showCustomAlert("❌ Failed to verify market item: " + err.message, "error");
   }
 }
-function loadAlerts() {
+// ✅ Global Alerts Loading Handler
+async function loadAlerts() {
   const container = document.getElementById("alertsContainer");
   const badge = document.getElementById("alertsBadge"); // 🔹 Badge element
+  const spinner = document.getElementById("loadingSpinner"); // Loading spinner element
   container.style.display = "block";
   container.innerHTML = "<h3>🔔 Alerts</h3><p>Loading...</p>";
+
+  // Show the spinner while loading
+  spinner.style.display = "flex";
 
   // Inject animation styles (only once)
   if (!document.getElementById("alertsBadgeStyles")) {
@@ -7262,120 +8163,132 @@ function loadAlerts() {
   const currentUserId = auth.currentUser?.uid || null;
   let previousUnreadCount = 0;
 
-  db.collection("alerts")
-    .orderBy("timestamp", "desc")
-    .limit(50)
-    .onSnapshot(snapshot => {
-      if (snapshot.empty) {
-        container.innerHTML = "<h3>🔔 Alerts</h3><p style='color:#777;'>No alerts yet.</p>";
-        if (badge) badge.style.display = "none";
-        previousUnreadCount = 0;
-        return;
-      }
+  try {
+    const snapshot = await db.collection("alerts")
+      .orderBy("timestamp", "desc")
+      .limit(50)
+      .get();
 
-      const alerts = [];
-      snapshot.forEach(doc => {
-        alerts.push({ id: doc.id, ref: doc.ref, ...doc.data() });
-      });
+    // Hide the spinner once data is loaded
+    spinner.style.display = "none";
 
-      // Sort unread first
-      alerts.sort((a, b) => {
-        const aRead = a.readBy?.includes(currentUserId) || false;
-        const bRead = b.readBy?.includes(currentUserId) || false;
-        if (aRead !== bRead) return aRead ? 1 : -1;
-        return (b.timestamp?.toDate?.() || 0) - (a.timestamp?.toDate?.() || 0);
-      });
+    if (snapshot.empty) {
+      container.innerHTML = "<h3>🔔 Alerts</h3><p style='color:#777;'>No alerts yet.</p>";
+      if (badge) badge.style.display = "none";
+      previousUnreadCount = 0;
+      return;
+    }
 
-      const unreadAlerts = alerts.filter(a => !a.readBy?.includes(currentUserId));
+    const alerts = [];
+    snapshot.forEach(doc => {
+      alerts.push({ id: doc.id, ref: doc.ref, ...doc.data() });
+    });
 
-      // 🔹 Update badge with animation if new alerts come in
-      if (badge) {
-        if (unreadAlerts.length > 0) {
-          badge.textContent = unreadAlerts.length;
-          badge.style.display = "inline-block";
+    // Sort unread first
+    alerts.sort((a, b) => {
+      const aRead = a.readBy?.includes(currentUserId) || false;
+      const bRead = b.readBy?.includes(currentUserId) || false;
+      if (aRead !== bRead) return aRead ? 1 : -1;
+      return (b.timestamp?.toDate?.() || 0) - (a.timestamp?.toDate?.() || 0);
+    });
 
-          // Trigger pulse animation only if count increased
-          if (unreadAlerts.length > previousUnreadCount) {
-            badge.classList.remove("pulse");
-            void badge.offsetWidth; // Restart animation
-            badge.classList.add("pulse");
-          }
-        } else {
-          badge.style.display = "none";
+    const unreadAlerts = alerts.filter(a => !a.readBy?.includes(currentUserId));
+
+    // 🔹 Update badge with animation if new alerts come in
+    if (badge) {
+      if (unreadAlerts.length > 0) {
+        badge.textContent = unreadAlerts.length;
+        badge.style.display = "inline-block";
+
+        // Trigger pulse animation only if count increased
+        if (unreadAlerts.length > previousUnreadCount) {
+          badge.classList.remove("pulse");
+          void badge.offsetWidth; // Restart animation
+          badge.classList.add("pulse");
         }
+      } else {
+        badge.style.display = "none";
       }
+    }
 
-      previousUnreadCount = unreadAlerts.length;
+    previousUnreadCount = unreadAlerts.length;
 
-      let alertsHTML = "<h3>🔔 Alerts</h3>";
+    let alertsHTML = "<h3>🔔 Alerts</h3>";
 
-      // Top buttons
-      alertsHTML += `
-        <div style="margin-bottom:10px; display:flex; gap:10px; flex-wrap:wrap;">
-          ${unreadAlerts.length > 0 && currentUserId ? `
-            <button onclick="confirmMarkAllAlertsAsRead(${unreadAlerts.length})"
-              style="background:#4caf50;color:white;border:none;padding:6px 12px;
-              border-radius:6px;cursor:pointer;">
-              ✅ Mark All as Read (${unreadAlerts.length})
-            </button>` : ""}
-          <button onclick="confirmDeleteAllAlerts()"
-            style="background:#f44336;color:white;border:none;padding:6px 12px;
+    // Top buttons
+    alertsHTML += `
+      <div style="margin-bottom:10px; display:flex; gap:10px; flex-wrap:wrap;">
+        ${unreadAlerts.length > 0 && currentUserId ? `
+          <button onclick="confirmMarkAllAlertsAsRead(${unreadAlerts.length})"
+            style="background:#4caf50;color:white;border:none;padding:6px 12px;
             border-radius:6px;cursor:pointer;">
-            🗑️ Delete All
-          </button>
-        </div>
-      `;
+            ✅ Mark All as Read (${unreadAlerts.length})
+          </button>` : ""}
+        <button onclick="confirmDeleteAllAlerts()"
+          style="background:#f44336;color:white;border:none;padding:6px 12px;
+          border-radius:6px;cursor:pointer;">
+          🗑️ Delete All
+        </button>
+      </div>
+    `;
 
-      alerts.forEach(data => {
-        const alertId = data.id;
-        const timestamp = data.timestamp?.toDate
-          ? new Date(data.timestamp.toDate()).toLocaleString()
-          : "Unknown date";
+    alerts.forEach(data => {
+      const alertId = data.id;
+      const timestamp = data.timestamp?.toDate
+        ? new Date(data.timestamp.toDate()).toLocaleString()
+        : "Unknown date";
 
-        const isRead = data.readBy?.includes(currentUserId);
+      const isRead = data.readBy?.includes(currentUserId);
 
-        const readButton = (!isRead && currentUserId)
-          ? `<button onclick="markAlertAsRead('${alertId}')"
-                style="background:#4caf50;color:white;border:none;padding:4px 8px;
-                border-radius:4px;font-size:12px;cursor:pointer;">
-                ✅ Mark as Read
-             </button>`
-          : `<span style="color:${isRead ? 'green' : 'red'}; font-size:12px;">
-              ${isRead ? '✅ Read' : '🆕 Unread'}
-             </span>`;
-
-        const deleteButton = (data.userId === currentUserId)
-          ? `<button onclick="confirmDeleteAlert('${alertId}')"
-              style="background:#f44336;color:white;border:none;padding:4px 8px;
+      const readButton = (!isRead && currentUserId)
+        ? `<button onclick="markAlertAsRead('${alertId}')"
+              style="background:#4caf50;color:white;border:none;padding:4px 8px;
               border-radius:4px;font-size:12px;cursor:pointer;">
-              🗑️ Delete
-             </button>`
-          : "";
+              ✅ Mark as Read
+           </button>`
+        : `<span style="color:${isRead ? 'green' : 'red'}; font-size:12px;">
+            ${isRead ? '✅ Read' : '🆕 Unread'}
+           </span>`;
 
-        alertsHTML += `
-          <div class="alert-card" style="
-            border-left:4px solid ${isRead ? '#4caf50' : '#f44336'};
-            padding:8px;
-            margin-bottom:10px;
-            box-shadow:0 1px 4px rgba(0,0,0,0.08);
-            border-radius:6px;
-            background:${isRead ? '#e0f7fa' : '#fff3e0'};">
-            <div class="alert-content">
-              <strong>${escapeHTML(data.title)}</strong><br>
-              ${escapeHTML(data.message)}<br>
-              <small>${timestamp}</small><br>
-              <div style="margin-top:6px; display:flex; gap:6px; flex-wrap:wrap;">
-                ${readButton}
-                ${deleteButton}
-              </div>
+      const deleteButton = (data.userId === currentUserId)
+        ? `<button onclick="confirmDeleteAlert('${alertId}')"
+            style="background:#f44336;color:white;border:none;padding:4px 8px;
+            border-radius:4px;font-size:12px;cursor:pointer;">
+            🗑️ Delete
+           </button>`
+        : "";
+
+      alertsHTML += `
+        <div class="alert-card" style="
+          border-left:4px solid ${isRead ? '#4caf50' : '#f44336'};
+          padding:8px;
+          margin-bottom:10px;
+          box-shadow:0 1px 4px rgba(0,0,0,0.08);
+          border-radius:6px;
+          background:${isRead ? '#e0f7fa' : '#fff3e0'};">
+          <div class="alert-content">
+            <strong>${escapeHTML(data.title)}</strong><br>
+            ${escapeHTML(data.message)}<br>
+            <small>${timestamp}</small><br>
+            <div style="margin-top:6px; display:flex; gap:6px; flex-wrap:wrap;">
+              ${readButton}
+              ${deleteButton}
             </div>
           </div>
-        `;
-      });
-
-      container.innerHTML = alertsHTML;
+        </div>
+      `;
     });
+
+    container.innerHTML = alertsHTML;
+
+  } catch (err) {
+    console.error("❌ Error loading alerts:", err);
+    // Hide the spinner on error as well
+    spinner.style.display = "none";
+    container.innerHTML = "<h3>🔔 Alerts</h3><p style='color:#777;'>Failed to load alerts. Please try again.</p>";
+  }
 }
+
 
 
 // Escape HTML
@@ -7404,37 +8317,57 @@ function confirmMarkAllAlertsAsRead(unreadCount) {
   showToastConfirm(`Mark all ${unreadCount} alerts as read?`, markAllAlertsAsRead);
 }
 
-// Mark all read
+// ✅ Mark All Alerts as Read
 async function markAllAlertsAsRead() {
   const currentUserId = auth.currentUser?.uid;
   if (!currentUserId) return;
+
+  const spinner = document.getElementById("loadingSpinner"); // Spinner element
+
+  // Show spinner while marking alerts as read
+  spinner.style.display = "flex";
+
   try {
     const snapshot = await db.collection("alerts").get();
     const batch = db.batch();
+
     snapshot.forEach(doc => {
       batch.update(doc.ref, {
         readBy: firebase.firestore.FieldValue.arrayUnion(currentUserId)
       });
     });
+
     await batch.commit();
     showCustomAlert("✅ All alerts marked as read", "success");
   } catch (error) {
     showCustomAlert("❌ Error marking all as read: " + error.message, "error");
+  } finally {
+    // Hide spinner once the operation is complete (either success or error)
+    spinner.style.display = "none";
   }
 }
+
 
 // Confirm delete single
 function confirmDeleteAlert(alertId) {
   showToastConfirm("🗑️ Delete this alert?", () => deleteAlert(alertId));
 }
 
-// Delete single
+// ✅ Delete Single Alert
 async function deleteAlert(alertId) {
+  const spinner = document.getElementById("loadingSpinner"); // Spinner element
+
+  // Show spinner while deleting the alert
+  spinner.style.display = "flex";
+
   try {
     await db.collection("alerts").doc(alertId).delete();
     showCustomAlert("🗑️ Alert deleted", "success");
   } catch (error) {
     showCustomAlert("❌ Error deleting alert: " + error.message, "error");
+  } finally {
+    // Hide spinner once the operation is complete (either success or error)
+    spinner.style.display = "none";
   }
 }
 
@@ -7443,24 +8376,31 @@ function confirmDeleteAllAlerts() {
   showToastConfirm("⚠️ Delete ALL alerts?", deleteAllAlerts);
 }
 
-// Delete all
+// ✅ Delete All Alerts
 async function deleteAllAlerts() {
+  const spinner = document.getElementById("loadingSpinner"); // Spinner element
+
+  // Show spinner while deleting all alerts
+  spinner.style.display = "flex";
+
   try {
     const snapshot = await db.collection("alerts").get();
     if (snapshot.empty) {
       showCustomAlert("ℹ️ No alerts to delete", "info");
       return;
     }
+
     const batch = db.batch();
     snapshot.forEach(doc => batch.delete(doc.ref));
     await batch.commit();
     showCustomAlert("🗑️ All alerts deleted", "success");
   } catch (error) {
     showCustomAlert("❌ Error deleting all alerts: " + error.message, "error");
+  } finally {
+    // Hide spinner once the operation is complete (either success or error)
+    spinner.style.display = "none";
   }
 }
-
-
 
 
 async function loadInterestCount(itemId) {
@@ -7501,6 +8441,7 @@ function closeReviewModal() {
   currentReviewingType = "market";
 }
 
+// ✅ Submit Review from Modal
 async function submitReviewFromModal() {
   const email = document.getElementById("reviewEmail").value.trim();
   const comment = document.getElementById("reviewComment").value.trim();
@@ -7517,14 +8458,17 @@ async function submitReviewFromModal() {
     userId: currentUser?.uid || null
   };
 
+  const spinner = document.getElementById("loadingSpinner"); // Get the spinner element
+  spinner.style.display = "flex"; // Show the spinner before starting the process
+
   try {
     const ref = (currentReviewingType === "service" ? servicesRef : marketRef)
       .doc(currentReviewingItemId)
       .collection("reviews");
 
-    await ref.add(review);
+    await ref.add(review); // Add the review
 
-    closeReviewModal();
+    closeReviewModal(); // Close the modal after submission
     showCustomAlert("✅ Review submitted!", "success");
 
     // Reload reviews depending on type
@@ -7536,6 +8480,8 @@ async function submitReviewFromModal() {
   } catch (err) {
     console.error("❌ Failed to submit review:", err);
     showCustomAlert("❌ Failed to submit review", "error");
+  } finally {
+    spinner.style.display = "none"; // Hide the spinner after the process is done
   }
 }
 async function loadReviews(section, itemId, intoModal = false) {
@@ -7549,6 +8495,10 @@ async function loadReviews(section, itemId, intoModal = false) {
     : null;
 
   if (!container) return;
+
+  // Show loading spinner
+  const spinner = document.getElementById("loadingSpinner");
+  if (spinner) spinner.style.display = "flex"; // Show spinner while loading
 
   container.innerHTML = "";
 
@@ -7619,8 +8569,12 @@ async function loadReviews(section, itemId, intoModal = false) {
   } catch (error) {
     console.error("Error loading reviews:", error);
     container.innerHTML = "<p style='color:red;padding:10px;'>Failed to load reviews.</p>";
+  } finally {
+    // Hide the spinner once done
+    if (spinner) spinner.style.display = "none";
   }
 }
+
 
 function showDeleteModal(onConfirm) {
   const modal = document.createElement("div");
@@ -7671,6 +8625,10 @@ async function submitReviewReply(section, itemId, reviewId) {
     userId: currentUser?.uid || null
   };
 
+  // Show the loading spinner
+  const spinner = document.getElementById("loadingSpinner");
+  if (spinner) spinner.style.display = "flex"; // Show spinner during submission
+
   try {
     let ref;
     if (section === "market" || section === "marketItems") {
@@ -7684,19 +8642,27 @@ async function submitReviewReply(section, itemId, reviewId) {
     await ref.collection("replies").add(reply);
     showCustomAlert("✅ Reply posted!", "success");
 
-    // Reload reviews
+    // Reload reviews to reflect the new reply
     loadReviews(section, itemId, true);
 
   } catch (err) {
     console.error("❌ Failed to submit reply:", err);
     showCustomAlert("❌ Failed to submit reply", "error");
+  } finally {
+    // Hide the spinner once done
+    if (spinner) spinner.style.display = "none";
   }
 }
+
 
 async function reportMarketItem(itemId) {
   showReportConfirmModal(async () => {
     const user = firebase.auth().currentUser;
     if (!user) return showCustomAlert("⚠️ You must be logged in to report an item.", "warning");
+
+    // Show loading spinner while the report is being processed
+    const spinner = document.getElementById("loadingSpinner");
+    if (spinner) spinner.style.display = "flex"; // Show spinner during the report process
 
     try {
       const itemSnap = await marketRef.doc(itemId).get();
@@ -7745,9 +8711,13 @@ async function reportMarketItem(itemId) {
     } catch (error) {
       console.error("❌ Report failed:", error);
       showCustomAlert("❌ Could not report the item. Try again.", "error");
+    } finally {
+      // Hide the spinner once done
+      if (spinner) spinner.style.display = "none";
     }
   });
 }
+
 async function loadUserNotifications() {
   const user = firebase.auth().currentUser;
   if (!user) return;
@@ -7765,7 +8735,6 @@ async function loadUserNotifications() {
     console.log("🔔", notif.message);
   });
 }
-
 async function showMarketInterest(itemId) {
   const user = firebase.auth().currentUser;
 
@@ -7774,12 +8743,17 @@ async function showMarketInterest(itemId) {
     return;
   }
 
+  // Show loading spinner while processing
+  const spinner = document.getElementById("loadingSpinner");
+  if (spinner) spinner.style.display = "flex"; // Show spinner during the process
+
   const itemRef = db.collection("marketItems").doc(itemId);
   const interestRef = itemRef.collection("interests").doc(user.uid);
   const interestDoc = await interestRef.get();
 
   if (interestDoc.exists) {
     showCustomAlert("❌ You have already expressed interest in this item.", "info");
+    if (spinner) spinner.style.display = "none"; // Hide spinner if already interested
     return;
   }
 
@@ -7825,8 +8799,12 @@ async function showMarketInterest(itemId) {
   } catch (err) {
     console.error("Error recording interest:", err);
     showCustomAlert("❌ Failed to record your interest. Please try again later.", "error");
+  } finally {
+    // Hide the spinner once done
+    if (spinner) spinner.style.display = "none";
   }
 }
+
 
 // ✅ Admin notification function
 async function sendMarketInterestNotification(itemId, userName, itemName, phone, location) {
@@ -7891,6 +8869,10 @@ async function saveItemChanges(itemId) {
 
   console.log("Saving updated item:", updatedItem);
 
+  // Show the loading spinner
+  const spinner = document.getElementById("loadingSpinner");
+  if (spinner) spinner.style.display = "flex"; // Show spinner during the process
+
   try {
     const itemRef = marketRef.doc(itemId);
     await itemRef.update(updatedItem);
@@ -7899,11 +8881,17 @@ async function saveItemChanges(itemId) {
     showCustomAlert("✅ Item updated successfully!", "success");
 
     loadMarketItems(); // Refresh the market items to reflect changes
+
   } catch (error) {
     console.error("Error updating item:", error);
     showCustomAlert("❌ Failed to update item. Try again later.", "error");
+
+  } finally {
+    // Hide the loading spinner after the operation completes
+    if (spinner) spinner.style.display = "none";
   }
 }
+
 
 function showReportConfirmModal(onConfirm) {
   const overlay = document.createElement("div");
@@ -7982,11 +8970,15 @@ function showCustomAlert(message, type = "info") {
 }
 
 async function boostMarketItem(id) {
+  const spinner = document.getElementById("loadingSpinner");
+  if (spinner) spinner.style.display = "flex"; // Show the spinner before processing
+
   try {
     const itemRef = marketRef.doc(id);
     const doc = await itemRef.get();
     if (!doc.exists) {
-      return showCustomAlert("❌ Item not found.", "error");
+      showCustomAlert("❌ Item not found.", "error");
+      return;
     }
 
     const data = doc.data();
@@ -7994,7 +8986,8 @@ async function boostMarketItem(id) {
 
     const currentUser = firebase.auth().currentUser;
     if (!currentUser) {
-      return showCustomAlert("❌ You need to be logged in to boost an item.", "error");
+      showCustomAlert("❌ You need to be logged in to boost an item.", "error");
+      return;
     }
 
     // If the current user is the poster, prompt for payment
@@ -8033,19 +9026,26 @@ async function boostMarketItem(id) {
   } catch (err) {
     console.error("❌ Boost error:", err);
     showCustomAlert("❌ Failed to boost: " + err.message, "error");
+  } finally {
+    if (spinner) spinner.style.display = "none"; // Hide the spinner once done
   }
 }
 
 async function toggleSoldStatus(itemId) {
+  const spinner = document.getElementById("loadingSpinner");
+  if (spinner) spinner.style.display = "flex"; // Show the spinner before processing
+
   try {
     const doc = await marketRef.doc(itemId).get();
     if (!doc.exists) {
-      return showCustomAlert("❌ Item not found.", "error");
+      showCustomAlert("❌ Item not found.", "error");
+      return;
     }
 
     const data = doc.data();
     if (!currentUser || currentUser.uid !== data.postedBy) {
-      return showCustomAlert("❌ You are not authorized to update this item.", "error");
+      showCustomAlert("❌ You are not authorized to update this item.", "error");
+      return;
     }
 
     const newStatus = !data.isSold;
@@ -8070,6 +9070,8 @@ async function toggleSoldStatus(itemId) {
   } catch (error) {
     console.error("❌ Error updating item status:", error);
     showCustomAlert("❌ Failed to update item status: " + error.message, "error");
+  } finally {
+    if (spinner) spinner.style.display = "none"; // Hide the spinner once done
   }
 }
 
@@ -8158,25 +9160,33 @@ function filterMarketItems() {
   const county = document.getElementById("filterItemCounty").value;
 
   let anyVisible = false;
+  const allCards = document.querySelectorAll(".market-card");
 
-  document.querySelectorAll(".market-card").forEach(card => {
-    const matchesCategory = !category || card.dataset.category === category;
-    const matchesCounty = !county || card.dataset.county === county;
-    const visible = matchesCategory && matchesCounty;
+  // Start the filtering process
+  const filterItems = () => {
+    allCards.forEach(card => {
+      const matchesCategory = !category || card.dataset.category === category;
+      const matchesCounty = !county || card.dataset.county === county;
+      const visible = matchesCategory && matchesCounty;
 
-    card.style.display = visible ? "" : "none";
+      card.style.display = visible ? "" : "none";
 
-    if (visible) anyVisible = true;
-  });
+      if (visible) anyVisible = true;
+    });
 
-  if (!anyVisible) {
-    showCustomAlert("🚫 No matching items found.", "warning");
-  }
+    if (!anyVisible) {
+      showCustomAlert("🚫 No matching items found.", "warning");
+    }
+  };
+
+  // Using requestAnimationFrame for smooth DOM updates
+  requestAnimationFrame(filterItems);
 }
+
 
 function showPaymentModalFor(type, amount, itemId, itemName) {
   // ✅ Decide modal title dynamically
-  let titleText = "Pay to Unlock Contacts,boost, verified ";
+  let titleText = "Pay to Unlock  ";
 
   // Verification payments
   if (type === "serviceVerification" || type === "marketVerification" || type === "soulmateVerification") {
@@ -8574,25 +9584,6 @@ function confirmDeleteSwap(callback) {
   startCountdown();
 }
 
-async function deleteSwap(id) {
-  confirmDeleteSwap(async (confirmed) => {
-    if (!confirmed) {
-      showToast("Deletion cancelled.", "warning");
-      return;
-    }
-
-    try {
-      await db.collection("teacherSwaps").doc(id).delete();
-      showToast("Swap deleted successfully.", "success");
-      loadSwaps(); // Reload updated list
-    } catch (error) {
-      console.error("Delete failed:", error);
-      showToast(" Failed to delete swap: " + error.message, "error");
-    }
-  });
-}
-
-
 function showCustomAlert(message, type = "info") {
   const alertBox = document.createElement("div");
   alertBox.innerText = message;
@@ -8623,11 +9614,15 @@ function showCustomAlert(message, type = "info") {
   }, 3000);
 }
 
-
 async function loadNotifications() {
   const myName = currentUser.displayName || currentUser.email;
   const ul = document.getElementById("notificationList");
-  ul.innerHTML = "<li>Loading...</li>";
+  ul.innerHTML = "<li>Loading...</li>"; // Initial loading message
+
+  if (!myName) {
+    ul.innerHTML = "<li>Error: User name not available.</li>";
+    return;
+  }
 
   try {
     const snapshot = await db.collection("soulmateInterests")
@@ -8640,16 +9635,25 @@ async function loadNotifications() {
       return;
     }
 
-    ul.innerHTML = "";
+    // Building the list items as a single string
+    let notificationsHTML = "";
     snapshot.forEach(doc => {
       const d = doc.data();
-      ul.innerHTML += `<li>💌 <strong>${d.fromName}</strong> liked you!</li>`;
+      notificationsHTML += `<li>💌 <strong>${d.fromName}</strong> liked you!</li>`;
     });
+
+    ul.innerHTML = notificationsHTML;
   } catch (err) {
     ul.innerHTML = `<li>Error loading notifications: ${err.message}</li>`;
   }
 }
+
 function filterSwaps() {
+  // Show the spinner before processing the filter
+  const container = document.getElementById("swapCardContainer");
+  const spinner = document.getElementById("loadingSpinner");  // Make sure to add a spinner element in your HTML
+  if (spinner) spinner.style.display = "flex";  // Show spinner
+
   const category = document.getElementById("filterCategory").value.toLowerCase();
   const swapCounty = document.getElementById("filterSwapCounty").value.toLowerCase();
   const swapSubCounty = document.getElementById("filterSwapSubCounty").value.toLowerCase();
@@ -8681,7 +9685,6 @@ function filterSwaps() {
   });
 
   // Remove any existing no-results message
-  const container = document.getElementById("swapCardContainer");
   const noResultsMsg = document.getElementById("noResultsMessage");
   if (noResultsMsg) noResultsMsg.remove();
 
@@ -8689,23 +9692,38 @@ function filterSwaps() {
   if (visibleCount === 0) {
     const msg = document.createElement("div");
     msg.id = "noResultsMessage";
- msg.style = "text-align:center;padding:20px;color:white;";
-msg.innerHTML = "💔 No swap requests match your filters.";
-container.appendChild(msg);
+    msg.style = "text-align:center;padding:20px;color:white;";
+    msg.innerHTML = "💔 No swap requests match your filters.";
+    container.appendChild(msg);
   }
+
+  // Hide the spinner after the filtering process is complete
+  if (spinner) spinner.style.display = "none";  // Hide spinner
 
   displayActiveFilters();
 }
 
+
 function resetSwapFilters() {
+  // Show the spinner before processing the reset
+  const container = document.getElementById("swapCardContainer");
+  const spinner = document.getElementById("loadingSpinner");
+  if (spinner) spinner.style.display = "flex";  // Show spinner
+
+  // Reset the filter values
   document.getElementById("filterCategory").value = "";
   document.getElementById("filterSwapCounty").value = "";
   document.getElementById("filterSwapSubCounty").value = "";
   document.getElementById("filterHardship").value = "";
   document.getElementById("filterSubjectCombination").value = "";
 
-  filterSwaps(); // Reshow all after reset
+  // Call filterSwaps to reshow all items
+  filterSwaps();
+
+  // Hide the spinner after resetting and filtering
+  if (spinner) spinner.style.display = "none";  // Hide spinner
 }
+
 
 function displayActiveFilters() {
   const activeFilters = document.getElementById("activeFilters");
@@ -8936,101 +9954,113 @@ function showToastConfirm(message, onConfirm) {
   setTimeout(() => toast.remove(), 8000); // auto-hide
 }
 
-// ✅ Main function
-function loadAdminNotifications() {
+async function loadAdminNotifications() {
   const list = document.getElementById("notificationList");
+  const spinner = document.getElementById("loadingSpinner");
+
+  // Show the spinner before starting the loading process
+  if (spinner) spinner.style.display = "flex"; 
+
   list.innerHTML = "<p>Loading...</p>";
 
-  db.collection("adminNotifications")
-    .orderBy("timestamp", "desc")
-    .onSnapshot(snapshot => {
-      if (snapshot.empty) {
-        list.innerHTML = "<p style='color:#666; font-style: italic;'>No admin notifications yet.</p>";
-        updateAdminNotifBadge(0);
-        return;
-      }
+  try {
+    const snapshot = await db.collection("adminNotifications")
+      .orderBy("timestamp", "desc")
+      .get();
 
-      const notifications = [];
-      snapshot.forEach(doc => {
-        notifications.push({ id: doc.id, ref: doc.ref, ...doc.data() });
-      });
+    if (snapshot.empty) {
+      list.innerHTML = "<p style='color:#666; font-style: italic;'>No admin notifications yet.</p>";
+      updateAdminNotifBadge(0);
+      return;
+    }
 
-      // Sort unread first
-      notifications.sort((a, b) => {
-        if (a.read !== b.read) return a.read ? 1 : -1;
-        return (b.timestamp?.toDate?.() || 0) - (a.timestamp?.toDate?.() || 0);
-      });
+    const notifications = [];
+    snapshot.forEach(doc => {
+      notifications.push({ id: doc.id, ref: doc.ref, ...doc.data() });
+    });
 
-      const unreadCount = notifications.filter(n => !n.read).length;
-      updateAdminNotifBadge(unreadCount);
+    // Sort unread first
+    notifications.sort((a, b) => {
+      if (a.read !== b.read) return a.read ? 1 : -1;
+      return (b.timestamp?.toDate?.() || 0) - (a.timestamp?.toDate?.() || 0);
+    });
 
-      let html = `
-        <li style="margin-bottom:10px; display:flex; gap:10px; flex-wrap:wrap;">
-          ${unreadCount > 0 ? `
-            <button onclick="confirmMarkAllAdminNotificationsAsRead(${unreadCount})"
-              style="background:#4caf50;color:white;border:none;padding:6px 12px;
-              border-radius:6px;cursor:pointer;">
-              ✅ Mark All as Read (${unreadCount})
-            </button>` : ""}
-          <button onclick="confirmDeleteAllAdminNotifications()"
-            style="background:#f44336;color:white;border:none;padding:6px 12px;
+    const unreadCount = notifications.filter(n => !n.read).length;
+    updateAdminNotifBadge(unreadCount);
+
+    let html = `
+      <li style="margin-bottom:10px; display:flex; gap:10px; flex-wrap:wrap;">
+        ${unreadCount > 0 ? `
+          <button onclick="confirmMarkAllAdminNotificationsAsRead(${unreadCount})"
+            style="background:#4caf50;color:white;border:none;padding:6px 12px;
             border-radius:6px;cursor:pointer;">
-            🗑️ Delete All
-          </button>
+            ✅ Mark All as Read (${unreadCount})
+          </button>` : ""}
+        <button onclick="confirmDeleteAllAdminNotifications()"
+          style="background:#f44336;color:white;border:none;padding:6px 12px;
+          border-radius:6px;cursor:pointer;">
+          🗑️ Delete All
+        </button>
+      </li>
+    `;
+
+    notifications.forEach(n => {
+      const color = getNotificationColor(n.type);
+      const timestamp = n.timestamp?.toDate
+        ? new Date(n.timestamp.toDate()).toLocaleString()
+        : "Unknown date";
+
+      html += `
+        <li style="
+          margin-bottom: 12px;
+          padding: 12px 16px;
+          border-radius: 10px;
+          cursor: pointer;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          position: relative;
+          background: ${n.read ? '#e0f7fa' : '#fff3e0'};
+          border-left: 6px solid ${color};
+        "
+        onclick="openPostedItem('${(n.type || '').toLowerCase()}', '${n.itemId || ''}')"
+        onmouseenter="this.style.backgroundColor='#dcedc8'"
+        onmouseleave="this.style.backgroundColor='${n.read ? '#e0f7fa' : '#fff3e0'}'">
+
+          <strong style="font-size: 1.1em; color: ${color};">
+            ${escapeHTML(n.type || "Notification")}
+          </strong>
+          <span style="color:#333; line-height: 1.4;">
+            ${escapeHTML(n.message || "")}
+          </span>
+          <small style="color: #666; font-size: 0.85em;">${timestamp}</small>
+
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            ${!n.read ? `
+              <button onclick="event.stopPropagation(); markAdminNotificationAsRead('${n.id}')"
+                style="background:#4caf50;color:white;border:none;padding:4px 8px;border-radius:4px;cursor:pointer;">
+                Mark as Read
+              </button>` 
+              : `<span style="color:green;font-size:12px;">✅ Read</span>`}
+
+            <button onclick="event.stopPropagation(); confirmDeleteAdminNotification('${n.id}')"
+              style="background:#f44336;color:white;border:none;padding:4px 8px;border-radius:4px;cursor:pointer;">
+              🗑️ Delete
+            </button>
+          </div>
         </li>
       `;
-
-      notifications.forEach(n => {
-        const color = getNotificationColor(n.type);
-        const timestamp = n.timestamp?.toDate
-          ? new Date(n.timestamp.toDate()).toLocaleString()
-          : "Unknown date";
-
-        html += `
-          <li style="
-            margin-bottom: 12px;
-            padding: 12px 16px;
-            border-radius: 10px;
-            cursor: pointer;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            position: relative;
-            background: ${n.read ? '#e0f7fa' : '#fff3e0'};
-            border-left: 6px solid ${color};
-          "
-          onclick="openPostedItem('${(n.type || '').toLowerCase()}', '${n.itemId || ''}')"
-          onmouseenter="this.style.backgroundColor='#dcedc8'"
-          onmouseleave="this.style.backgroundColor='${n.read ? '#e0f7fa' : '#fff3e0'}'">
-
-            <strong style="font-size: 1.1em; color: ${color};">
-              ${escapeHTML(n.type || "Notification")}
-            </strong>
-            <span style="color:#333; line-height: 1.4;">
-              ${escapeHTML(n.message || "")}
-            </span>
-            <small style="color: #666; font-size: 0.85em;">${timestamp}</small>
-
-            <div style="display:flex;gap:6px;flex-wrap:wrap;">
-              ${!n.read ? `
-                <button onclick="event.stopPropagation(); markAdminNotificationAsRead('${n.id}')"
-                  style="background:#4caf50;color:white;border:none;padding:4px 8px;border-radius:4px;cursor:pointer;">
-                  Mark as Read
-                </button>` 
-                : `<span style="color:green;font-size:12px;">✅ Read</span>`}
-
-              <button onclick="event.stopPropagation(); confirmDeleteAdminNotification('${n.id}')"
-                style="background:#f44336;color:white;border:none;padding:4px 8px;border-radius:4px;cursor:pointer;">
-                🗑️ Delete
-              </button>
-            </div>
-          </li>
-        `;
-      });
-
-      list.innerHTML = html;
     });
+
+    list.innerHTML = html;
+
+  } catch (err) {
+    list.innerHTML = `<p style="color:red;">Error loading notifications: ${err.message}</p>`;
+  } finally {
+    // Hide the spinner after the notifications are loaded
+    if (spinner) spinner.style.display = "none";  // Hide spinner
+  }
 
   function escapeHTML(str) {
     return str ? str.replace(/[&<>"']/g, tag =>
@@ -9065,13 +10095,23 @@ function confirmDeleteAdminNotification(notificationId) {
 }
 
 async function deleteAdminNotification(notificationId) {
+  // Show spinner when deletion starts
+  document.getElementById('loadingSpinner').style.display = 'flex';
+
   try {
     await db.collection("adminNotifications").doc(notificationId).delete();
+    // Hide spinner after successful deletion
+    document.getElementById('loadingSpinner').style.display = 'none';
+
     showCustomAlert("🗑️ Notification deleted", "success");
   } catch (error) {
+    // Hide spinner if there is an error
+    document.getElementById('loadingSpinner').style.display = 'none';
+
     showCustomAlert("❌ Error deleting: " + error.message, "error");
   }
 }
+
 
 // ✅ Delete all (toast confirm)
 function confirmDeleteAllAdminNotifications() {
@@ -9100,17 +10140,30 @@ function confirmMarkAllAdminNotificationsAsRead(unreadCount) {
 }
 
 async function markAllAdminNotificationsAsRead() {
+  // Show spinner when the process starts
+  document.getElementById('loadingSpinner').style.display = 'flex';
+
   try {
     const snapshot = await db.collection("adminNotifications").get();
     if (snapshot.empty) {
+      // Hide the spinner if no notifications are found
+      document.getElementById('loadingSpinner').style.display = 'none';
       showCustomAlert("ℹ️ No unread notifications", "info");
       return;
     }
+
     const batch = db.batch();
     snapshot.forEach(doc => batch.update(doc.ref, { read: true }));
+    
+    // Commit the batch
     await batch.commit();
+
+    // Hide the spinner after the operation is successful
+    document.getElementById('loadingSpinner').style.display = 'none';
     showCustomAlert("✅ All marked as read", "success");
   } catch (error) {
+    // Hide the spinner if an error occurs
+    document.getElementById('loadingSpinner').style.display = 'none';
     showCustomAlert("❌ Error marking all as read: " + error.message, "error");
   }
 }
@@ -9209,13 +10262,20 @@ async function deleteNotification(id) {
   document.body.appendChild(box);
 
   document.getElementById("notifConfirmYesBtn").onclick = async () => {
+    // Show spinner when deletion starts
+    document.getElementById('loadingSpinner').style.display = 'flex';
+
     box.remove();
     try {
+      // Attempt to delete the notification
       await db.collection("adminNotifications").doc(id).delete();
       loadAdminNotifications();
       updateAdminNotifBadge();
 
-      // ✅ Safe toast usage
+      // Hide spinner after deletion completes
+      document.getElementById('loadingSpinner').style.display = 'none';
+
+      // Show success toast
       try {
         showCustomToast("✅ Notification deleted.");
       } catch (toastErr) {
@@ -9223,6 +10283,9 @@ async function deleteNotification(id) {
       }
 
     } catch (err) {
+      // Hide spinner in case of error
+      document.getElementById('loadingSpinner').style.display = 'none';
+
       console.error("Error deleting notification:", err);
       showCustomAlert("❌ Failed to delete: " + err.message, "error");
     }
@@ -9233,22 +10296,47 @@ async function deleteNotification(id) {
   };
 }
 
- async function rateService(serviceId, stars) {
-  if (!currentUser) return alert("Please login to rate.");
+async function rateService(serviceId, stars) {
+  if (!currentUser) {
+    showCustomAlert("Error", "Please login to rate.");
+    return;
+  }
   
   const userId = currentUser.uid;
   const ratingRef = db.collection("ratings").doc(serviceId).collection("byUser").doc(userId);
 
   const existing = await ratingRef.get();
-  if (existing.exists) return alert("You already rated this service.");
+  if (existing.exists) {
+    showCustomAlert("Error", "You already rated this service.");
+    return;
+  }
 
-  await ratingRef.set({
-    stars,
-    ratedAt: firebase.firestore.FieldValue.serverTimestamp()
-  });
+  // Show the spinner before the operation begins
+  document.getElementById('loadingSpinner').style.display = 'flex';
 
-  updateAverageRating(serviceId);
+  try {
+    // Perform the rating
+    await ratingRef.set({
+      stars,
+      ratedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    // Update the average rating
+    updateAverageRating(serviceId);
+
+    // Show success alert
+    showCustomAlert("Success", "Your rating has been submitted.");
+  } catch (err) {
+    // Show error alert if the operation fails
+    console.error("Error submitting rating:", err);
+    showCustomAlert("Error", "Failed to submit your rating. Please try again.");
+  } finally {
+    // Hide the spinner after the operation is complete
+    document.getElementById('loadingSpinner').style.display = 'none';
+  }
 }
+
+
 async function updateAverageRating(serviceId) {
   const ratingSnap = await db.collection("ratings").doc(serviceId).collection("byUser").get();
   const total = ratingSnap.docs.reduce((sum, doc) => sum + doc.data().stars, 0);
@@ -9522,12 +10610,22 @@ async function deleteSoulmate(id) {
 
   // Handle button events
   document.getElementById("confirmYesBtn").onclick = async () => {
+    // Show spinner
+    document.getElementById('loadingSpinner').style.display = 'flex';
+
     box.remove();
     try {
       await soulmateRef.doc(id).delete();
+
+      // Hide spinner after deletion
+      document.getElementById('loadingSpinner').style.display = 'none';
+
       showCustomAlert("✅ Profile deleted successfully.", "success");
-      loadSoulmates();
+      loadSoulmates(); // Refresh the soulmates list
     } catch (err) {
+      // Hide spinner if error occurs
+      document.getElementById('loadingSpinner').style.display = 'none';
+
       console.error("Error deleting soulmate:", err);
       showCustomAlert("❌ Failed to delete: " + err.message, "error");
     }
@@ -9544,20 +10642,29 @@ async function deleteSoulmate(id) {
     const notes = document.getElementById("usageNotes");
     notes.style.display = notes.style.display === "none" ? "block" : "none";
   }
+function deleteMarketItem(id) {
+  // Show spinner
+  document.getElementById('loadingSpinner').style.display = 'flex';
 
-function deleteMarketItem(id) { 
   showCustomConfirm("Are you sure you want to delete this market item?", () => {
     marketRef.doc(id).delete()
       .then(() => {
+        // Hide spinner after deletion is successful
+        document.getElementById('loadingSpinner').style.display = 'none';
+
         showCustomAlert("🗑️ Item deleted successfully.", "success");
-        loadMarketItems(); // refresh
+        loadMarketItems(); // refresh the market items
       })
       .catch(err => {
+        // Hide spinner if error occurs
+        document.getElementById('loadingSpinner').style.display = 'none';
+
         console.error("❌ Error deleting item:", err);
         showCustomAlert("❌ Error deleting item: " + err.message, "error");
       });
   });
 }
+
 async function loadTrendingItems() {
   const trendingContainer = document.getElementById("trendingContainer");
 
