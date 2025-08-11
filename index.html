@@ -1680,249 +1680,7 @@ header a {
     font-weight: bold;
     margin-top: 10px;
   }
-.chat-msg {
-  margin: 6px 0;
-  padding: 8px;
-  border-radius: 6px;
-  max-width: 75%;
-  word-wrap: break-word;
-}
-.chat-out {
-  background: #4CAF50;
-  color: #fff;
-  align-self: flex-end;
-}
-.chat-in {
-  background: #ccc;
-  color: #000;
-  align-self: flex-start;
-}
-.chat-loading {
-  text-align: center;
-  color: gray;
-}
-.chat-alert {
-  position: fixed;
-  bottom: 80px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 10px 15px;
-  border-radius: 5px;
-  font-weight: bold;
-  color: #fff;
-  z-index: 9999;
-}
-/* Incoming message */
-.chat-msg.chat-in {
-  background: #f1f1f1;
-  color: #333;
-  padding: 6px 10px;
-  border-radius: 10px;
-  max-width: 70%;
-  margin: 4px 0;
-  font-size: 14px;
-  line-height: 1.4;
-  align-self: flex-start;
-}
-
-/* Outgoing message */
-.chat-msg.chat-out {
-  background: #dcf8c6; /* WhatsApp-like green */
-  color: #000;
-  padding: 6px 10px;
-  border-radius: 10px;
-  max-width: 70%;
-  margin: 4px 0;
-  font-size: 14px;
-  line-height: 1.4;
-  align-self: flex-start; /* Changed from flex-end */
-}
-
-/* Delete button inside outgoing */
-.msg-del-btn {
-  background: none;
-  border: none;
-  font-size: 14px;
-  margin-right: 5px;
-  cursor: pointer;
-  color: #888;
-}
-
-.msg-del-btn:hover {
-  color: red;
-}
-
-/* Chat container flex column */
-#marketChatMessages {
-  display: flex;
-  flex-direction: column;
-}
-.msg-username {
-  font-size: 12px;
-  font-weight: bold;
-  color: #555;
-  margin-bottom: 2px;
-}
-/* Style for Sent Chats Section */
-.chat-item {
-  display: flex;
-  align-items: center;
-  background: #f9f9f9;
-  border-radius: 8px;
-  padding: 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-}
-
-.chat-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: #bbb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: bold;
-  font-size: 20px;
-  margin-right: 14px;
-}
-
-.chat-name {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.chat-last-message {
-  font-size: 14px;
-  color: #666;
-}
-
-.chat-timestamp {
-  font-size: 12px;
-  color: #999;
-}
-
-#marketChatModal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  justify-content: center;
-  align-items: center;
-  display: none;
-}
-
-#marketChatMessages {
-  max-height: 60vh;
-  overflow-y: auto;
-}
-
-.chat-msg {
-  padding: 8px;
-  border-radius: 6px;
-  max-width: 70%;
-}
-
-.chat-out {
-  background: #4CAF50;
-  color: #fff;
-  align-self: flex-end;
-}
-
-.chat-in {
-  background: #ccc;
-  color: #000;
-  align-self: flex-start;
-}
-
-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-<style>
-  /* Styling for Sent Chats Section */
-  #sentChatsSection {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-top: 20px;
-  }
-
-  /* Header styling */
-  #sentChatsSection h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-  }
-
-  /* Styling for chat items */
-  .chat-item {
-    display: flex;
-    align-items: center;
-    background-color: #ffffff;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-  }
-
-  .chat-item:hover {
-    background-color: #f1f1f1;
-    transform: translateY(-5px);
-  }
-
-  .chat-avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background-color: #007bff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-weight: bold;
-    margin-right: 15px;
-    font-size: 18px;
-  }
-
-  .chat-item-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .chat-name {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-  }
-
-  .chat-last-message {
-    font-size: 14px;
-    color: #666;
-    margin-top: 5px;
-  }
-
-  .chat-timestamp {
-    font-size: 12px;
-    color: #aaa;
-    margin-top: 5px;
-  }
 </style>
-
 
 
 </head>
@@ -1967,7 +1725,7 @@ button:hover {
 <nav style="background-image: url('https://i.imgur.com/JCxt71v.jpeg'); background-size: cover; background-position: center; padding: 20px 20px;">
 
   
- <ul>
+  <ul>
   <!-- Core Navigation -->
   <li><a class="menu-box" href="#" onclick="showPage('home')">
     <img src="https://i.imgur.com/lek58ah.jpeg" alt="Home">
@@ -1997,7 +1755,20 @@ button:hover {
     <a class="menu-box" href="#" onclick="loadAlerts()" style="position: relative;">
       <img src="https://i.imgur.com/IvZc6We.jpeg" alt="Alerts">
       <span>Alerts</span>
-      <span id="alertsBadge" style="display:none;background:#f44336;color:white;font-size:12px;padding:2px 6px;border-radius:50%;position:absolute;top:0;right:0;font-weight:bold;">0</span>
+      <span id="alertsBadge" style="
+        display:none;
+        background:#f44336;
+        color:white;
+        font-size:12px;
+        padding:2px 6px;
+        border-radius:50%;
+        position:absolute;
+        top:0;
+        right:0;
+        font-weight:bold;
+        min-width:18px;
+        text-align:center;
+      ">0</span>
     </a>
   </li>
 
@@ -2005,7 +1776,7 @@ button:hover {
     <a class="menu-box" href="#" onclick="openMessagesPage()" style="position:relative;">
       <img src="https://i.imgur.com/XBAeDCN.jpeg" alt="Messages">
       <span>Messages</span>
-      <span id="messagesUnreadBadge" style="display:none;background:red;color:white;border-radius:50%;padding:2px 6px;font-size:11px;position:absolute;top:0;right:0;"></span>
+      <span id="messagesUnreadBadge" style="display:none; background:red; color:white; border-radius:50%; padding:2px 6px; font-size:11px; position:absolute; top:0; right:0;"></span>
     </a>
   </li>
 
@@ -2040,13 +1811,7 @@ button:hover {
     <span>Resources</span></a>
   </li>
 
-  <!-- Sent Chats Section -->
-  <li>
-    <a class="menu-box" href="#" onclick="openSentChatsSection()">
-      <img src="https://i.imgur.com/XBAeDCN.jpeg" alt="Sent Chats" style="width: 60px; height: 85px; border-radius: 50%; margin-right: 10px;">
-      <span>View Sent Chats</span>
-    </a>
-  </li>
+
 
   <li><a class="menu-box" href="#" onclick="showPage('trendingSection'); loadTrendingItems();">
     <img src="https://i.imgur.com/SjtDlJi.jpeg" alt="Trending">
@@ -2065,13 +1830,10 @@ button:hover {
   </li>
 </ul>
 
-
 </nav>
 
 
 </header>
-
-
 
 <!-- Loading Spinner Container -->
 <div id="loadingSpinner" style="display: none;">
@@ -2153,17 +1915,11 @@ button:hover {
       <button id="marketSendBtn" style="background:#4CAF50; color:white; border:none; padding:8px 15px; border-radius:4px;">Send</button>
     </div>
 
- <!-- Quick message buttons -->
-<div style="margin-top:8px; display:flex; gap:5px; flex-wrap:wrap;">
-  <button onclick="sendMarketQuick('Hello 👋')" style="padding:6px; border:1px solid #ccc; border-radius:4px;">Hello 👋</button>
-  <button onclick="sendMarketQuick('I am interested!')" style="padding:6px; border:1px solid #ccc; border-radius:4px;">I am interested!</button>
-  <button onclick="sendMarketQuick('Can you provide more details?')" style="padding:6px; border:1px solid #ccc; border-radius:4px;">Can you provide more details?</button>
-  <button onclick="sendMarketQuick('How much is this?')" style="padding:6px; border:1px solid #ccc; border-radius:4px;">How much is this?</button>
-  <button onclick="sendMarketQuick('Is it still available?')" style="padding:6px; border:1px solid #ccc; border-radius:4px;">Is it still available?</button>
-  <button onclick="sendMarketQuick('I’d like to negotiate the price!')" style="padding:6px; border:1px solid #ccc; border-radius:4px;">I’d like to negotiate the price!</button>
-  <button onclick="sendMarketQuick('When is the best time to contact you?')" style="padding:6px; border:1px solid #ccc; border-radius:4px;">When is the best time to contact you?</button>
-</div>
-
+    <!-- Quick message buttons -->
+    <div style="margin-top:8px; display:flex; gap:5px; flex-wrap:wrap;">
+      <button onclick="sendMarketQuick('Hello 👋')" style="padding:6px; border:1px solid #ccc; border-radius:4px;">Hello 👋</button>
+      <button onclick="sendMarketQuick('I am interested!')" style="padding:6px; border:1px solid #ccc; border-radius:4px;">I am interested!</button>
+    </div>
 
   </div>
 </div>
@@ -2944,14 +2700,6 @@ Register To Connect With  Available Soulmates
     <!-- Alerts will be dynamically added here -->
   </ul>
 </div>
-<!-- Sent Chats Section -->
-<section id="sentChatsSection" style="display:none; padding: 20px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-  <h2 style="font-size: 24px; color: #333; margin-bottom: 20px;">Sent Chats</h2>
-  
-  <div id="sentChatsList" style="display: flex; flex-direction: column; gap: 15px;">
-    <!-- Sent chats will be dynamically inserted here -->
-  </div>
-</section>
 
 
 <!-- Seeking Services Section -->
@@ -7609,7 +7357,7 @@ async function loadMarketItems() {
 
     [...boostedItems, ...normalItems].forEach(d => {
       const id = d.id;
-      const isPoster = currentUser && currentUser.uid === d.postedBy; // Check if the current user is the poster
+      const isPoster = currentUser && currentUser.uid === d.postedBy;
       const isBoosted = d.boosted && d.boostExpiry?.toDate?.() > new Date();
       const isExpired = d.isExpired;
       const canDelete = isPoster || isAdmin;
@@ -7624,7 +7372,7 @@ async function loadMarketItems() {
       let verifyBtnHTML = "";
       if (!d.verified) {
         if (isPoster && !isAdmin) {
-          verifyBtnHTML = ` 
+          verifyBtnHTML = `
             <button onclick="payForVerification('marketVerification', '${id}', '${d.name || ''}')"
               style="background:#4CAF50; color:white; border:none; padding:6px 12px; border-radius:6px; margin-top:6px;">
               ✅ Get Verified – Ksh 500
@@ -7662,31 +7410,19 @@ async function loadMarketItems() {
         <p style="color:#3f51b5;">📍 <strong>Location:</strong> ${d.county || "Unknown"}, ${d.subcounty || "Unknown"}</p>
         <p style="color:#673ab7;">📞 <strong>Contact:</strong> ${d.phone || "N/A"}</p>
         ${verifyBtnHTML}
-        
-        <!-- Add View Chat Button for Poster -->
-        <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;">
-          ${isPoster ? `
-            <button 
-              onclick="openMarketChat('${d.firebaseUid || d.phone}', '${d.posterName || 'Seller'}')" 
-              style="background:#673ab7;color:#fff;border:none;border-radius:5px;padding:6px 12px;">
-              💬 View Chat
-            </button>
-          ` : ""}
-        </div>
-
         ${(!isPoster && currentUser) ? `
           <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;">
             <button onclick="showMarketInterest('${id}')" style="background:#f44336;color:#fff;border:none;border-radius:5px;padding:6px 12px;">💬 Interest <span id="marketInterestCount-${id}">0</span></button>
             <button onclick="reportMarketItem('${id}')" style="background:#ff1744;color:#fff;border:none;border-radius:5px;padding:6px 12px;">🚩 Report</button>
-            <button 
-              onclick="openMarketChat('${d.firebaseUid || d.phone}', '${d.posterName || 'Seller'}')" 
-              style="background:#673ab7;color:#fff;border:none;border-radius:5px;padding:6px 12px;">
-              💬 Chat
-            </button>
-            <button onclick="openReviewModal('${id}')" style="background:#4CAF50;color:#fff;border:none;border-radius:5px;padding:6px 12px;">📝 Review</button>
+<button 
+  onclick="openMarketChat('${d.firebaseUid || d.phone}', '${d.posterName || 'Seller'}')" 
+  style="background:#673ab7;color:#fff;border:none;border-radius:5px;padding:6px 12px;">
+  💬 Chat
+</button>
+
+    <button onclick="openReviewModal('${id}')" style="background:#4CAF50;color:#fff;border:none;border-radius:5px;padding:6px 12px;">📝 Review</button>
           </div>
         ` : ""}
-
         ${isPoster ? `
           <div style="margin-top:10px;">
             <button id="soldOutBtn-${id}" onclick="toggleSoldStatus('${id}')" style="background:#9e9e9e;color:#fff;border:none;border-radius:5px;padding:6px 12px;">
@@ -7725,383 +7461,144 @@ async function loadMarketItems() {
     console.error("❌ Error loading market items:", err);
   }
 }
-
-// ✅ Global Chat State
-const marketChatState = {
-  currentReceiverUid: null,
-  unsubscribeMessages: null,
-  currentUserId: null
-};
-
-// ✅ Enable Firestore Offline Persistence
-if (firebase.firestore) {
-  firebase.firestore().enablePersistence({ synchronizeTabs: true }).catch(err => {
-    console.warn("Firestore persistence error:", err);
-  });
-}
-
-// ✅ Initialize after Auth
-firebase.auth().onAuthStateChanged(user => {
-  marketChatState.currentUserId = user?.uid || null;
-});
+let currentMarketReceiverUid = null;
+let unsubscribeMarketMessages = null;
 
 // ✅ Open chat with a market user
 function openMarketChat(receiverUid, posterName) {
-  if (!marketChatState.currentUserId) {
-    alert("Please log in first!");
-    return;
-  }
-
-  marketChatState.currentReceiverUid = receiverUid;
+  currentMarketReceiverUid = receiverUid;
   document.getElementById("marketChatName").innerText = posterName;
-  document.getElementById("marketChatModal").style.display = "flex"; // Open the chat modal
+  document.getElementById("marketChatModal").style.display = "flex";
 
-  loadMessagesFromLocal(receiverUid);  // Load saved messages (for offline use)
-  loadMarketMessagesRealtime(receiverUid); // Listen for real-time messages
-  markMessagesAsRead(receiverUid);  // Mark messages as read when opened
+  loadMarketMessagesRealtime(receiverUid);
 
-  document.getElementById("marketSendBtn").onclick = sendMarketMessage; // Attach send button event
+  document.getElementById("marketSendBtn").onclick = sendMarketMessage;
 }
 
 // ✅ Close chat
 function closeMarketChat() {
   document.getElementById("marketChatModal").style.display = "none";
-  if (marketChatState.unsubscribeMessages) marketChatState.unsubscribeMessages(); // Unsubscribe from real-time listener
+  if (unsubscribeMarketMessages) unsubscribeMarketMessages();
 }
 
-// ✅ Send message (with sender name)
 async function sendMarketMessage() {
-  const input = document.getElementById("marketChatInput");
-  const message = input.value.trim();
-  
-  // Ensure there's a message to send
+  const message = document.getElementById("marketChatInput").value.trim();
   if (!message) return alert("Please enter a message!");
 
-  // ✅ Get sender name from Firebase Auth or fallback
-  const senderName = firebase.auth().currentUser?.displayName || "You";
+  const currentUserId = firebase.auth().currentUser?.uid;
+  if (!currentUserId) return alert("Please log in first!");
 
-  // Create a temporary message ID for immediate UI display
-  const tempId = "temp_" + Date.now();
-  
-  // Prepare message data
-  const msgData = {
-    id: tempId,
-    senderId: marketChatState.currentUserId,
-    receiverId: marketChatState.currentReceiverUid,
-    senderName: senderName, // Store sender's name
-    message,
-    participants: [marketChatState.currentUserId, marketChatState.currentReceiverUid].sort(), // Ensure both users are participants
-    status: "sending",  // Initially setting status to sending
-    timestamp: new Date() // Use current timestamp for immediate display
-  };
-
-  // Show the message immediately in the UI (for quick feedback)
-  addMessageToUI(msgData, true);
-  
-  // Save the message locally for offline support
-  saveMessageToLocal(marketChatState.currentReceiverUid, msgData);
+  // Show instantly in the chat UI
+  addMessageToUI({
+    senderId: currentUserId,
+    message: message
+  }, true); // true = temporary until Firestore confirms
 
   try {
-    // Send the message to Firestore
     await db.collection("marketChats").add({
-      senderId: msgData.senderId,
-      receiverId: msgData.receiverId,
-      senderName: msgData.senderName, // Save name to Firestore
-      message: msgData.message,
-      participants: msgData.participants, // Ensure both users are included in participants
-      status: "sent", // Update the message status to "sent"
-      timestamp: firebase.firestore.FieldValue.serverTimestamp() // Firestore server timestamp for consistency
+      senderId: currentUserId,
+      receiverId: currentMarketReceiverUid,
+      message: message,
+      participants: [currentUserId, currentMarketReceiverUid],
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
 
-    // Clear input field after sending the message
-    input.value = "";
-    
-    // Show a success message in the chat UI
+    document.getElementById("marketChatInput").value = "";
+
     showChatAlert("Message sent ✅", "green");
   } catch (error) {
     console.error("Error sending message:", error);
-
-    // Handle the error and update the message status to "failed"
-    msgData.status = "failed";
-    addMessageToUI(msgData); // Re-render message with failed status
-
-    // Save failed message locally for retry logic
-    saveMessageToLocal(marketChatState.currentReceiverUid, msgData);
-
-    // Show an error alert in the UI
     showChatAlert("Failed to send ❌", "red");
   }
 }
 
+
 // ✅ Quick message
 function sendMarketQuick(text) {
   document.getElementById("marketChatInput").value = text;
-  sendMarketMessage(); // Send the predefined message
+  sendMarketMessage();
 }
 
-// ✅ Realtime messages with sender names & full date/time
+// ✅ Real-time message loader (fixed query)
 function loadMarketMessagesRealtime(receiverUid) {
-  if (marketChatState.unsubscribeMessages) marketChatState.unsubscribeMessages();
+  const currentUserId = firebase.auth().currentUser?.uid;
+  if (!currentUserId) return;
 
   const messagesContainer = document.getElementById("marketChatMessages");
-  messagesContainer.innerHTML = "<p class='chat-loading'>Loading...</p>"; // Show loading message
+  messagesContainer.innerHTML = "<p style='text-align:center; color:gray;'>Loading...</p>";
 
-  // Firestore query to listen for messages between the current user and receiver (poster)
-  marketChatState.unsubscribeMessages = db.collection("marketChats")
-    .where("participants", "array-contains", marketChatState.currentUserId) // Listen for both users (sender and receiver)
-    .where("participants", "array-contains", receiverUid)  // Ensure it includes both participants
-    .orderBy("timestamp", "asc") // Sort messages by timestamp
-    .onSnapshot(async snapshot => {
-      let messages = JSON.parse(localStorage.getItem(`marketChat_${receiverUid}`) || "[]");
-      const messageMap = new Map(messages.map(m => [m.id, m]));
+  if (unsubscribeMarketMessages) unsubscribeMarketMessages();
 
-      // Loop through each message received from Firestore
-      for (let doc of snapshot.docs) {
-        let data = doc.data();
-
-        // ✅ Convert Firestore timestamp to JS Date
-        let msgTimestamp = data.timestamp?.toDate ? data.timestamp.toDate() : new Date();
-
-        // ✅ If senderName missing, fetch from users collection
-        if (!data.senderName) {
-          try {
-            const userDoc = await db.collection("users").doc(data.senderId).get();
-            data.senderName = userDoc.exists && userDoc.data().name ? userDoc.data().name : "Unknown";
-          } catch (err) {
-            console.warn("Name fetch error:", err);
-            data.senderName = "Unknown";
-          }
-        }
-
-        // ✅ Attach formatted date/time
-        data.formattedTime = msgTimestamp.toLocaleString("en-US", {
-          weekday: "long",  // e.g., Monday
-          year: "numeric",
-          month: "long",    // e.g., August
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: true
-        });
-
-        // Store the message in the map
-        messageMap.set(doc.id, {
-          id: doc.id,
-          ...data,
-          timestamp: msgTimestamp
-        });
-      }
-
-      // Merge the messages and sort them by timestamp
-      const mergedMessages = Array.from(messageMap.values()).sort((a, b) => {
-        return (a.timestamp?.getTime?.() || 0) - (b.timestamp?.getTime?.() || 0);
-      });
-
-      // Clear the message container
+  // ✅ Use participants array instead of two "in" filters
+  unsubscribeMarketMessages = db.collection("marketChats")
+    .where("participants", "array-contains", currentUserId)
+    .orderBy("timestamp", "asc")
+    .onSnapshot(snapshot => {
       messagesContainer.innerHTML = "";
-      
-      // Display all the messages
-      mergedMessages.forEach(msg => addMessageToUI(msg));
+      snapshot.forEach(doc => {
+        const msg = doc.data();
 
-      // Save the merged messages to localStorage for offline use
-      localStorage.setItem(`marketChat_${receiverUid}`, JSON.stringify(mergedMessages));
-
-      // Scroll to the latest message
+        // Only show messages between the two people
+        if (
+          (msg.senderId === currentUserId && msg.receiverId === receiverUid) ||
+          (msg.senderId === receiverUid && msg.receiverId === currentUserId)
+        ) {
+          const msgDiv = document.createElement("div");
+          msgDiv.style.margin = "6px 0";
+          msgDiv.style.padding = "8px";
+          msgDiv.style.borderRadius = "6px";
+          msgDiv.style.maxWidth = "75%";
+          msgDiv.style.background = msg.senderId === currentUserId ? "#4CAF50" : "#ccc";
+          msgDiv.style.color = msg.senderId === currentUserId ? "#fff" : "#000";
+          msgDiv.textContent = msg.message;
+          messagesContainer.appendChild(msgDiv);
+        }
+      });
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
     });
 }
-
-// ✅ Local storage load
-function loadMessagesFromLocal(receiverUid) {
-  const saved = localStorage.getItem(`marketChat_${receiverUid}`);
-  const messagesContainer = document.getElementById("marketChatMessages");
-  messagesContainer.innerHTML = "";
-
-  if (saved) {
-    const messages = JSON.parse(saved);
-    messages.forEach(msg => addMessageToUI(msg));
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-  }
-}
-
-// ✅ Local storage save/update
-function saveMessageToLocal(receiverUid, message) {
-  let messages = JSON.parse(localStorage.getItem(`marketChat_${receiverUid}`) || "[]");
-  const index = messages.findIndex(m => m.id === message.id);
-  if (index > -1) messages[index] = message;
-  else messages.push(message);
-  localStorage.setItem(`marketChat_${receiverUid}`, JSON.stringify(messages));
-}
-
-// ✅ Mark all as read
-function markMessagesAsRead(receiverUid) {
-  const now = firebase.firestore.FieldValue.serverTimestamp();
-
-  db.collection("marketChats")
-    .where("senderId", "==", receiverUid)
-    .where("receiverId", "==", marketChatState.currentUserId)
-    .where("status", "==", "sent")
-    .get()
-    .then(snapshot => {
-      const batch = db.batch();
-      let updatedMessages = JSON.parse(localStorage.getItem(`marketChat_${receiverUid}`) || "[]");
-
-      snapshot.forEach(doc => {
-        batch.update(doc.ref, { status: "read", readAt: now });
-        updatedMessages = updatedMessages.map(m =>
-          m.id === doc.id ? { ...m, status: "read", readAt: { seconds: Date.now() / 1000 } } : m
-        );
-      });
-
-      localStorage.setItem(`marketChat_${receiverUid}`, JSON.stringify(updatedMessages));
-      return batch.commit();
-    });
-}
-
-// ✅ Add message to UI (Messenger style: username + full date-time)
-function addMessageToUI(msgData, isTemporary = false) {
-  const messagesContainer = document.getElementById("marketChatMessages");
-  let existingMsg = messagesContainer.querySelector(`[data-id='${msgData.id}']`);
-
-  // If message exists, just update its text
-  if (existingMsg) {
-    existingMsg.querySelector(".msg-text").textContent = msgData.message;
-    return;
-  }
-
-  const isOwn = msgData.senderId === marketChatState.currentUserId;
-
-  const msgDiv = document.createElement("div");
-  msgDiv.className = isOwn ? "chat-msg chat-out" : "chat-msg chat-in";
-  msgDiv.setAttribute("data-id", msgData.id || Date.now());
-
-  // ✅ Username + Full Date-Time
-  const nameLabel = document.createElement("div");
-  nameLabel.className = "msg-username";
-
-  // Use full date/time format
-  let msgDate = msgData.timestamp instanceof Date
-    ? msgData.timestamp
-    : (msgData.timestamp?.toDate ? msgData.timestamp.toDate() : new Date());
-
-  const formattedTime = msgDate.toLocaleString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true
-  });
-
-  nameLabel.textContent =
-    (msgData.senderName || (isOwn ? "You" : "Other User")) + " • " + formattedTime;
-  msgDiv.appendChild(nameLabel);
-
-  // ✅ Message text
-  const textSpan = document.createElement("span");
-  textSpan.className = "msg-text";
-  textSpan.textContent = msgData.message;
-  msgDiv.appendChild(textSpan);
-
-  if (isTemporary) msgDiv.style.opacity = "0.5";
-
-  messagesContainer.appendChild(msgDiv);
-  messagesContainer.scrollTop = messagesContainer.scrollHeight;
-}
-
-// ✅ Show Chat Alert (Success/Failure)
 function showChatAlert(text, color) {
   let alertBox = document.getElementById("chatAlertBox");
   if (!alertBox) {
     alertBox = document.createElement("div");
     alertBox.id = "chatAlertBox";
-    alertBox.className = "chat-alert";
+    alertBox.style.position = "fixed";
+    alertBox.style.bottom = "80px";
+    alertBox.style.left = "50%";
+    alertBox.style.transform = "translateX(-50%)";
+    alertBox.style.padding = "10px 15px";
+    alertBox.style.borderRadius = "5px";
+    alertBox.style.fontWeight = "bold";
+    alertBox.style.zIndex = "9999";
     document.body.appendChild(alertBox);
   }
   alertBox.textContent = text;
   alertBox.style.background = color;
+  alertBox.style.color = "#fff";
   alertBox.style.display = "block";
-  setTimeout(() => alertBox.style.display = "none", 2000);
+  setTimeout(() => {
+    alertBox.style.display = "none";
+  }, 2000);
 }
 
-// ✅ Sent Chats Section
-async function openSentChatsSection() {
-  // Hide other sections
-  const pages = document.querySelectorAll("section");
-  pages.forEach(page => page.style.display = "none");
-  document.getElementById("sentChatsSection").style.display = "block";  // Show Sent Chats Section
+function addMessageToUI(msgData, isTemporary = false) {
+  const messagesContainer = document.getElementById("marketChatMessages");
+  const msgDiv = document.createElement("div");
+  msgDiv.style.margin = "6px 0";
+  msgDiv.style.padding = "8px";
+  msgDiv.style.borderRadius = "6px";
+  msgDiv.style.maxWidth = "75%";
+  msgDiv.style.background = msgData.senderId === firebase.auth().currentUser?.uid ? "#4CAF50" : "#ccc";
+  msgDiv.style.color = msgData.senderId === firebase.auth().currentUser?.uid ? "#fff" : "#000";
+  msgDiv.textContent = msgData.message;
 
-  // Load sent chats
-  await loadSentChats();
-}
-
-// Function to load and display sent chats
-async function loadSentChats() {
-  const userId = marketChatState.currentUserId; // Get the logged-in user's ID
-  if (!userId) {
-    console.warn("No user is logged in.");
-    return; // Exit if no user is logged in
+  if (isTemporary) {
+    msgDiv.style.opacity = "0.5"; // ghost effect until confirmed
   }
 
-  const chatsList = document.getElementById("sentChatsList");
-  const loadingSpinner = document.getElementById("loadingSpinner");
-
-  // Show spinner while loading data
-  loadingSpinner.style.display = "block"; 
-
-  chatsList.innerHTML = ''; // Clear the previous chat list
-
-  try {
-    // Query Firestore for chats where the current user is either the sender or receiver
-    const snapshot = await db.collection("marketChats")
-      .where("participants", "array-contains", userId) // Check if the user is part of the chat
-      .orderBy("timestamp", "desc") // Order by timestamp (latest first)
-      .get();
-
-    if (snapshot.empty) {
-      chatsList.innerHTML = "<p>No chats found.</p>";
-      loadingSpinner.style.display = "none"; // Hide spinner when no chats are found
-      return; // No sent chats
-    }
-
-    snapshot.forEach(doc => {
-      const chatData = doc.data();
-
-      // Only show messages where the current user is the sender
-      if (chatData.senderId === userId) {
-        const chatItem = document.createElement("div");
-        chatItem.classList.add("chat-item");
-
-        // Create the chat item with avatar, sender name, and message preview
-        chatItem.innerHTML = `
-          <div class="chat-avatar">${chatData.senderName[0]}</div>
-          <div class="chat-item-content">
-            <div class="chat-name">${chatData.senderName}</div>
-            <div class="chat-last-message">${chatData.message.slice(0, 30)}...</div>
-            <div class="chat-timestamp">${new Date(chatData.timestamp.seconds * 1000).toLocaleString()}</div>
-          </div>
-        `;
-
-        // Open chat modal when the chat item is clicked
-        chatItem.onclick = () => openMarketChat(chatData.receiverId, chatData.senderName);
-
-        chatsList.appendChild(chatItem); // Add the chat item to the list
-      }
-    });
-
-  } catch (error) {
-    console.error("Error loading sent chats:", error);
-  } finally {
-    // Hide spinner when the data has finished loading
-    loadingSpinner.style.display = "none"; 
-  }
+  messagesContainer.appendChild(msgDiv);
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
-
-
-
 
 
 async function verifyMarketDirectly(marketId) {
